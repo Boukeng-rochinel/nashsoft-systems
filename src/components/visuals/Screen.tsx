@@ -474,6 +474,67 @@ function ChatLayout({ theme, title }: { theme: ProjectTheme; title?: string }) {
   )
 }
 
+/** Code editor: file tree, syntax-colored lines, terminal. */
+function CodeLayout({ theme, title }: { theme: ProjectTheme; title?: string }) {
+  const tokens = ['#C792EA', '#82AAFF', '#C3E88D', '#F78C6C', '#89DDFF', theme.accent]
+  const lines = [
+    [12, 22, 30],
+    [8, 18],
+    [16, 26, 14, 10],
+    [24, 34],
+    [6, 20, 28],
+    [16, 12, 22],
+    [30, 18],
+    [10, 26, 16],
+    [20, 14],
+    [8, 32, 12],
+    [18, 24],
+    [14, 10, 26],
+    [22, 30],
+    [12, 16],
+  ]
+  return (
+    <div style={{ display: 'flex', height: '100%', background: '#0B1220' }}>
+      <div style={{ width: '18%', background: '#070D18', padding: '1em 0.8em', display: 'flex', flexDirection: 'column', gap: '0.7em', borderRight: '1px solid #ffffff14' }}>
+        {title ? <span style={{ color: '#E6EDF7', fontWeight: 700, fontSize: '0.95em' }}>{title}</span> : null}
+        {[60, 75, 50, 80, 65, 55, 70].map((w, i) => (
+          <div key={i} style={{ display: 'flex', gap: '0.4em', alignItems: 'center', paddingLeft: i > 1 && i < 5 ? '0.8em' : 0 }}>
+            <div style={{ width: '0.7em', height: '0.7em', borderRadius: '0.15em', background: i === 3 ? theme.accent : '#ffffff30' }} />
+            <div style={bar(`${w}%`, i === 3 ? `${theme.accent}cc` : '#ffffff26', '0.4em')} />
+          </div>
+        ))}
+      </div>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+        <div style={{ display: 'flex', gap: '0.2em', background: '#070D18', padding: '0.5em 0.6em 0' }}>
+          {[true, false, false].map((on, i) => (
+            <div key={i} style={{ padding: '0.45em 1em', borderRadius: '0.4em 0.4em 0 0', background: on ? '#0B1220' : 'transparent' }}>
+              <div style={bar('4em', on ? '#ffffffaa' : '#ffffff40', '0.4em')} />
+            </div>
+          ))}
+        </div>
+        <div style={{ flex: 1, padding: '0.9em 1em', display: 'flex', flexDirection: 'column', gap: '0.62em', overflow: 'hidden' }}>
+          {lines.map((segs, i) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+              <span style={{ width: '1.4em', color: '#ffffff40', fontSize: '0.7em', textAlign: 'right' }}>{i + 1}</span>
+              <div style={{ width: `${(i % 4) * 1.2}em` }} />
+              {segs.map((w, j) => (
+                <div key={j} style={bar(`${w / 3}em`, tokens[(i + j * 2) % tokens.length], '0.45em', { opacity: 0.85 })} />
+              ))}
+            </div>
+          ))}
+        </div>
+        <div style={{ borderTop: '1px solid #ffffff14', background: '#070D18', padding: '0.7em 1em', display: 'flex', flexDirection: 'column', gap: '0.45em' }}>
+          <div style={{ display: 'flex', gap: '0.5em', alignItems: 'center' }}>
+            <div style={bar('0.6em', '#22C55E', '0.6em')} />
+            <div style={bar('30%', '#ffffff55', '0.4em')} />
+          </div>
+          <div style={bar('45%', '#ffffff2e', '0.4em')} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
 /* ------------------------------------------------------------------ */
 /* Phone layouts                                                       */
 /* ------------------------------------------------------------------ */
@@ -586,6 +647,7 @@ const laptopLayouts: Record<ScreenVariant, (p: { theme: ProjectTheme; title?: st
   catalog: CatalogLayout,
   learning: LearningLayout,
   chat: ChatLayout,
+  code: CodeLayout,
   mobile: LandingLayout,
 }
 

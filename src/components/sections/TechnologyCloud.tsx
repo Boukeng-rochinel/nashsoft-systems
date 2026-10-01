@@ -10,10 +10,12 @@ interface TechnologyCloudProps {
   /** `tiles`: card grid · `pills`: compact logo + name rows (dark homepage design). */
   variant?: 'tiles' | 'pills'
   captions?: Record<string, string>
+  /** Grid column classes for the `tiles` variant. */
+  cols?: string
   className?: string
 }
 
-export function TechnologyCloud({ items = coreStack, tone = 'light', variant = 'tiles', captions, className }: TechnologyCloudProps) {
+export function TechnologyCloud({ items = coreStack, tone = 'light', variant = 'tiles', captions, cols = 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5', className }: TechnologyCloudProps) {
   if (variant === 'pills') {
     return (
       <RevealGroup gap={0.04} className={cn('flex flex-wrap gap-3', className)}>
@@ -35,7 +37,7 @@ export function TechnologyCloud({ items = coreStack, tone = 'light', variant = '
   }
 
   return (
-    <RevealGroup gap={0.04} className={cn('grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5', className)}>
+    <RevealGroup gap={0.04} className={cn('grid gap-3', cols, className)}>
       {items.map((tech) => (
         <RevealItem key={tech.name}>
           <TechTile tech={tech} tone={tone} caption={captions?.[tech.name]} />

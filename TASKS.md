@@ -28,10 +28,10 @@
 
 - [x] Home
 - [ ] About
-- [ ] Services
-- [ ] Software Development
-- [ ] AI & Data
-- [ ] Cloud
+- [x] Services
+- [x] Software Development
+- [x] AI & Data
+- [x] Cloud
 - [ ] Solutions
 - [ ] Projects
 - [ ] Project Details
@@ -54,10 +54,10 @@
 
 ## Theme
 
-- [ ] Dark sections
+- [x] Dark sections
 - [x] White sections
 - [x] Light cards
-- [ ] Dark cards
+- [x] Dark cards
 - [ ] Theme consistency
 - [ ] Responsive theme
 

@@ -13,14 +13,16 @@ interface ProcessStepsProps {
    * `dark`: numbered circles on navy (services catalogue).
    */
   variant?: 'inline' | 'cards' | 'dark'
+  /** Overrides the large-screen column classes. */
+  cols?: string
   className?: string
 }
 
 /** Delivery methodology: Découverte → … → Évolution. Vertical timeline on mobile. */
-export function ProcessSteps({ steps = processSteps, variant = 'inline', className }: ProcessStepsProps) {
+export function ProcessSteps({ steps = processSteps, variant = 'inline', cols: colsOverride, className }: ProcessStepsProps) {
   const dark = variant === 'dark'
   const cards = variant === 'cards'
-  const cols = steps.length >= 6 ? 'lg:grid-cols-6' : 'lg:grid-cols-5'
+  const cols = colsOverride ?? (steps.length >= 6 ? 'lg:grid-cols-6' : 'lg:grid-cols-5')
 
   return (
     <motion.ol

@@ -125,6 +125,7 @@ export type ScreenVariant =
   | 'catalog'
   | 'learning'
   | 'chat'
+  | 'code'
 
 export interface ProjectTheme {
   /** Screen background. */
