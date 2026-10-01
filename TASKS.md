@@ -33,8 +33,8 @@
 - [x] AI & Data
 - [x] Cloud
 - [ ] Solutions
-- [ ] Projects
-- [ ] Project Details
+- [x] Projects
+- [x] Project Details
 - [ ] Careers
 - [ ] Insights
 - [ ] Start a Project
@@ -42,9 +42,9 @@
 
 ## Interactive Features
 
-- [ ] Project filtering
+- [x] Project filtering
 - [x] Industry selector
-- [ ] Gallery lightbox
+- [x] Gallery lightbox
 - [x] Animated statistics
 - [ ] Project wizard
 - [ ] Form validation

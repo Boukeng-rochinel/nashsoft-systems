@@ -7,6 +7,8 @@ const ServicesPage = lazy(() => import('@/pages/ServicesPage'))
 const ServiceDetailPage = lazy(() => import('@/pages/ServiceDetailPage'))
 const AIDataPage = lazy(() => import('@/pages/AIDataPage'))
 const CloudPage = lazy(() => import('@/pages/CloudPage'))
+const ProjectsPage = lazy(() => import('@/pages/ProjectsPage'))
+const ProjectDetailPage = lazy(() => import('@/pages/ProjectDetailPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 
 export function AppRoutes() {
@@ -19,6 +21,8 @@ export function AppRoutes() {
         <Route path="services/ia-data" element={<AIDataPage />} />
         <Route path="services/cloud-devops" element={<CloudPage />} />
         <Route path="services/:slug" element={<ServiceDetailPage />} />
+        <Route path="projets" element={<ProjectsPage />} />
+        <Route path="projets/:slug" element={<ProjectDetailPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
