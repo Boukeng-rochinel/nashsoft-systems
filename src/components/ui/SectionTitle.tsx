@@ -31,7 +31,7 @@ export function SectionTitle({ eyebrow, title, description, tone = 'light', alig
         </motion.p>
       )}
       <motion.div variants={fadeUp}>
-        <Heading className={cn('text-[1.75rem] leading-[1.15] font-bold sm:text-[2.1rem] lg:text-[2.35rem]', dark && 'text-white')}>{title}</Heading>
+        <Heading className={cn('text-[1.7rem] leading-[1.18] font-bold sm:text-[2rem] lg:text-[2.1rem]', dark && 'text-white')}>{title}</Heading>
       </motion.div>
       {description && (
         <motion.p variants={fadeUp} className={cn('mt-4 text-[0.95rem] leading-relaxed', dark ? 'text-slate-300' : 'text-slate')}>

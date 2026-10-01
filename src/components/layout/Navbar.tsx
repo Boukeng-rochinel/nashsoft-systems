@@ -202,9 +202,12 @@ export function Navbar({ tone }: { tone: NavTone }) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ButtonLink to={START_PROJECT_HREF} size="md" className="hidden sm:inline-flex">
-            Démarrer un projet
-          </ButtonLink>
+          {/* Visibility on a wrapper: the button's own display class would override `hidden`. */}
+          <span className="hidden sm:block">
+            <ButtonLink to={START_PROJECT_HREF} size="md">
+              Démarrer un projet
+            </ButtonLink>
+          </span>
           <button
             type="button"
             onClick={() => setMenuOpen(true)}
