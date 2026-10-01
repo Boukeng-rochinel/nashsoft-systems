@@ -1,0 +1,203 @@
+import {
+  BrainCircuit,
+  ChartLine,
+  Cloud,
+  CodeXml,
+  Compass,
+  Database,
+  Gauge,
+  Globe,
+  KeyRound,
+  Layers,
+  Lightbulb,
+  LockKeyhole,
+  Plug,
+  RefreshCw,
+  Search,
+  ShieldCheck,
+  Smartphone,
+  Sparkles,
+  Workflow,
+} from 'lucide-react'
+import type { Service } from '@/types'
+
+export const services: Service[] = [
+  {
+    slug: 'developpement-logiciel',
+    title: 'Développement logiciel',
+    shortTitle: 'Logiciel sur mesure',
+    tagline: 'Des logiciels sur mesure pour vos ambitions.',
+    description: 'Applications métier, solutions sur mesure et systèmes d’information robustes.',
+    longDescription:
+      'Nous concevons et développons des logiciels personnalisés qui répondent exactement à vos besoins métier. Des applications web aux systèmes d’entreprise, nous transformons vos idées en solutions robustes, sécurisées et évolutives.',
+    icon: CodeXml,
+    technologies: ['React', 'TypeScript', 'Node.js', 'Python', '.NET', 'PostgreSQL'],
+    features: [
+      { title: 'Applications métier', description: 'Outils internes, back-offices et portails qui automatisent vos processus.', icon: Layers },
+      { title: 'Intégrations & API', description: 'Connexion à vos outils existants : ERP, paiement mobile, CRM, services tiers.', icon: Plug },
+      { title: 'Modernisation', description: 'Refonte d’applications existantes vers une architecture moderne et maintenable.', icon: RefreshCw },
+      { title: 'Qualité & sécurité', description: 'Tests automatisés, revues de code et bonnes pratiques de sécurité OWASP.', icon: ShieldCheck },
+    ],
+    deliverables: ['Cahier des charges fonctionnel', 'Maquettes UX/UI', 'Code source documenté', 'Tests automatisés', 'Déploiement & formation'],
+    highlights: ['Code propre et maintenable', 'Scalabilité garantie', 'Sécurité renforcée', 'Support continu'],
+  },
+  {
+    slug: 'developpement-web',
+    title: 'Développement web',
+    shortTitle: 'Web',
+    tagline: 'Des sites et plateformes web rapides, modernes et sécurisés.',
+    description: 'Sites web modernes, rapides et sécurisés, optimisés pour tous les appareils.',
+    longDescription:
+      'Sites vitrines, plateformes SaaS, portails clients ou e-commerce : nous construisons des expériences web performantes, accessibles et optimisées pour le référencement, pensées d’abord pour le mobile.',
+    icon: Globe,
+    technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Node.js', 'PostgreSQL'],
+    features: [
+      { title: 'Sites vitrines premium', description: 'Une image de marque forte et un contenu facile à mettre à jour.', icon: Sparkles },
+      { title: 'Plateformes & SaaS', description: 'Espaces membres, tableaux de bord et applications web complètes.', icon: Layers },
+      { title: 'E-commerce', description: 'Boutiques en ligne avec paiement Mobile Money et carte bancaire.', icon: Globe },
+      { title: 'Performance & SEO', description: 'Core Web Vitals optimisés et référencement technique soigné.', icon: Gauge },
+    ],
+    deliverables: ['Design responsive', 'Intégration CMS si nécessaire', 'Optimisation SEO', 'Analytics', 'Hébergement & nom de domaine'],
+    highlights: ['Responsive par défaut', 'Chargement rapide', 'Accessibilité', 'SEO technique'],
+  },
+  {
+    slug: 'applications-mobiles',
+    title: 'Applications mobiles',
+    shortTitle: 'Mobile',
+    tagline: 'Des applications iOS et Android que vos utilisateurs adorent.',
+    description: 'Apps iOS et Android natives ou hybrides avec une expérience utilisateur optimale.',
+    longDescription:
+      'Nous créons des applications mobiles performantes avec Flutter et React Native : une base de code, deux plateformes, et une expérience fluide même sur des connexions limitées.',
+    icon: Smartphone,
+    technologies: ['Flutter', 'React Native', 'Firebase', 'Node.js', 'TensorFlow Lite'],
+    features: [
+      { title: 'Cross-platform', description: 'Une seule base de code pour iOS et Android, sans compromis sur l’expérience.', icon: Smartphone },
+      { title: 'Mode hors-ligne', description: 'Synchronisation intelligente pour les zones à connectivité limitée.', icon: RefreshCw },
+      { title: 'Paiements mobiles', description: 'Intégration MTN Mobile Money, Orange Money et paiements par carte.', icon: KeyRound },
+      { title: 'Publication stores', description: 'Accompagnement jusqu’à la publication sur Google Play et l’App Store.', icon: Sparkles },
+    ],
+    deliverables: ['Prototype interactif', 'Application iOS & Android', 'Back-office d’administration', 'Publication sur les stores', 'Suivi analytique'],
+    highlights: ['iOS & Android', 'Hors-ligne', 'Notifications push', 'Mobile Money'],
+  },
+  {
+    slug: 'ia-data',
+    title: 'IA & Machine Learning',
+    shortTitle: 'IA & Data',
+    tagline: 'Transformez vos données en intelligence.',
+    description: 'Intelligence artificielle, automatisation et analyse de données.',
+    longDescription:
+      'Vision par ordinateur, analyse prédictive, assistants intelligents : nous appliquons l’IA à des problèmes concrets pour vous aider à décider plus vite et automatiser ce qui peut l’être.',
+    icon: BrainCircuit,
+    technologies: ['Python', 'TensorFlow', 'PyTorch', 'scikit-learn', 'PostgreSQL', 'Docker'],
+    features: [
+      { title: 'Machine Learning', description: 'Modèles de classification, de prévision et de recommandation.', icon: BrainCircuit },
+      { title: 'Analyse prédictive', description: 'Anticipez la demande, les risques et les comportements clients.', icon: ChartLine },
+      { title: 'Automatisation IA', description: 'Extraction de documents, tri et traitement automatique des tâches répétitives.', icon: Workflow },
+      { title: 'Assistants intelligents', description: 'Chatbots et assistants connectés à vos données internes.', icon: Sparkles },
+    ],
+    deliverables: ['Audit des données', 'Preuve de concept', 'Modèle entraîné & évalué', 'API d’inférence', 'Tableau de bord'],
+    highlights: ['Vision par ordinateur', 'Prévisions', 'Automatisation', 'Tableaux de bord'],
+  },
+  {
+    slug: 'cloud-devops',
+    title: 'Cloud & DevOps',
+    shortTitle: 'Cloud & DevOps',
+    tagline: 'Une infrastructure fiable, automatisée et sécurisée.',
+    description: 'Infrastructure cloud, conteneurs, CI/CD et supervision.',
+    longDescription:
+      'Nous déployons et exploitons vos applications sur une infrastructure moderne : conteneurs, pipelines CI/CD, supervision et sauvegardes automatisées pour une disponibilité maximale.',
+    icon: Cloud,
+    technologies: ['Docker', 'AWS', 'GitHub Actions', 'Linux', 'Nginx', 'PostgreSQL'],
+    features: [
+      { title: 'Déploiement cloud', description: 'Migration et hébergement sur AWS, Azure, GCP ou VPS.', icon: Cloud },
+      { title: 'CI/CD', description: 'Pipelines automatisés de test, build et déploiement.', icon: Workflow },
+      { title: 'Supervision', description: 'Monitoring, alertes et journaux centralisés.', icon: Gauge },
+      { title: 'Sauvegardes', description: 'Politique de sauvegarde et plan de reprise d’activité.', icon: Database },
+    ],
+    deliverables: ['Audit d’infrastructure', 'Architecture cible', 'Pipelines CI/CD', 'Monitoring & alertes', 'Documentation d’exploitation'],
+    highlights: ['Haute disponibilité', 'Automatisation', 'Monitoring 24/7', 'Sauvegardes'],
+  },
+  {
+    slug: 'data-engineering',
+    title: 'Bases de données & Data Engineering',
+    shortTitle: 'Bases de données',
+    tagline: 'Des données fiables, structurées et exploitables.',
+    description: 'Conception, optimisation et gestion de vos données pour une meilleure prise de décision.',
+    longDescription:
+      'Modélisation, migration, optimisation de requêtes et pipelines de données : nous structurons votre patrimoine de données pour qu’il soit fiable, rapide et prêt pour l’analyse.',
+    icon: Database,
+    technologies: ['PostgreSQL', 'MongoDB', 'MySQL', 'Firebase', 'Python', 'Power BI'],
+    features: [
+      { title: 'Modélisation', description: 'Schémas relationnels et documentaires adaptés à vos usages.', icon: Database },
+      { title: 'Migration', description: 'Reprise de données depuis Excel, anciens logiciels ou autres bases.', icon: RefreshCw },
+      { title: 'Performance', description: 'Indexation, optimisation de requêtes et mise à l’échelle.', icon: Gauge },
+      { title: 'Reporting', description: 'Tableaux de bord et indicateurs clés pour vos décideurs.', icon: ChartLine },
+    ],
+    deliverables: ['Modèle de données', 'Scripts de migration', 'Plan d’indexation', 'Pipelines ETL', 'Tableaux de bord'],
+    highlights: ['Modélisation', 'Migration', 'Optimisation', 'Reporting'],
+  },
+  {
+    slug: 'cybersecurite',
+    title: 'Cybersécurité',
+    shortTitle: 'Cybersécurité',
+    tagline: 'Protégez vos systèmes, vos données et vos utilisateurs.',
+    description: 'Protection de vos systèmes, audits de sécurité et surveillance.',
+    longDescription:
+      'Audits applicatifs, durcissement des serveurs, gestion des accès et sensibilisation des équipes : nous réduisons votre surface d’attaque et renforçons la confiance de vos clients.',
+    icon: ShieldCheck,
+    technologies: ['OWASP', 'Linux', 'Cloudflare', 'Docker', 'GitHub'],
+    features: [
+      { title: 'Audit de sécurité', description: 'Analyse de vulnérabilités de vos applications et serveurs.', icon: Search },
+      { title: 'Gestion des accès', description: 'Authentification forte, rôles et principes du moindre privilège.', icon: LockKeyhole },
+      { title: 'Durcissement', description: 'Configuration sécurisée des serveurs, pare-feu et certificats.', icon: ShieldCheck },
+      { title: 'Sensibilisation', description: 'Formation de vos équipes aux bonnes pratiques.', icon: Lightbulb },
+    ],
+    deliverables: ['Rapport d’audit', 'Plan de remédiation', 'Politique d’accès', 'Configuration durcie', 'Session de sensibilisation'],
+    highlights: ['Audit', 'Remédiation', 'Contrôle d’accès', 'Formation'],
+  },
+  {
+    slug: 'transformation-digitale',
+    title: 'Transformation digitale',
+    shortTitle: 'Transformation digitale',
+    tagline: 'Modernisez vos processus métiers, étape par étape.',
+    description: 'Stratégie, accompagnement et modernisation de vos processus métiers.',
+    longDescription:
+      'Du papier et des tableurs vers des outils numériques intégrés : nous cartographions vos processus, priorisons les gains rapides et déployons les solutions avec vos équipes.',
+    icon: Workflow,
+    technologies: ['Odoo', 'React', 'Python', 'PostgreSQL', 'Power BI'],
+    features: [
+      { title: 'Cartographie des processus', description: 'Identification des tâches manuelles et des points de friction.', icon: Compass },
+      { title: 'Feuille de route', description: 'Un plan priorisé, chiffré et réaliste.', icon: Workflow },
+      { title: 'ERP & outils métiers', description: 'Déploiement d’Odoo ou de solutions sur mesure.', icon: Layers },
+      { title: 'Conduite du changement', description: 'Formation et accompagnement des utilisateurs.', icon: Sparkles },
+    ],
+    deliverables: ['Diagnostic digital', 'Feuille de route', 'Solutions déployées', 'Formation des équipes', 'Indicateurs de suivi'],
+    highlights: ['Diagnostic', 'Feuille de route', 'ERP', 'Formation'],
+  },
+  {
+    slug: 'conseil-it',
+    title: 'Conseil IT',
+    shortTitle: 'Conseil IT',
+    tagline: 'Des décisions technologiques éclairées.',
+    description: 'Choix technologiques, architecture et accompagnement stratégique.',
+    longDescription:
+      'Choix de stack, architecture logicielle, revue de code, estimation de projet ou recrutement technique : nos experts vous apportent un regard indépendant pour sécuriser vos décisions.',
+    icon: Compass,
+    technologies: ['Architecture', 'Cloud', 'Sécurité', 'Agile'],
+    features: [
+      { title: 'Architecture', description: 'Conception d’architectures logicielles pérennes.', icon: Layers },
+      { title: 'Revue technique', description: 'Audit de code, de performance et de dette technique.', icon: Search },
+      { title: 'Choix technologiques', description: 'Comparatifs objectifs adaptés à votre contexte et budget.', icon: Compass },
+      { title: 'Gestion de projet', description: 'Méthodes agiles, estimation et pilotage.', icon: Workflow },
+    ],
+    deliverables: ['Rapport d’audit', 'Recommandations', 'Schémas d’architecture', 'Estimation chiffrée'],
+    highlights: ['Architecture', 'Audit', 'Stratégie', 'Agilité'],
+  },
+]
+
+export const getServiceBySlug = (slug: string): Service | undefined => services.find((s) => s.slug === slug)
+
+/** Services highlighted on the homepage (reference design shows six). */
+export const featuredServices = services.slice(0, 6)
+
+export const serviceHref = (slug: string) => `/services/${slug}`
