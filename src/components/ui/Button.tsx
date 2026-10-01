@@ -13,7 +13,7 @@ const variants: Record<Variant, string> = {
   primary:
     'bg-brand-gradient text-white shadow-[0_8px_24px_-10px_rgb(8_125_255/0.7)] hover:-translate-y-0.5 hover:shadow-[0_14px_32px_-10px_rgb(8_125_255/0.8)] active:translate-y-0',
   secondary:
-    'border border-line-strong bg-white text-navy shadow-card hover:-translate-y-0.5 hover:border-brand/40 hover:text-brand active:translate-y-0',
+    'border border-line-strong bg-white text-navy shadow-card hover:-translate-y-0.5 hover:border-brand/40 hover:text-brand active:translate-y-0 on-dark:border-white/20 on-dark:bg-white/5 on-dark:text-white on-dark:shadow-none on-dark:backdrop-blur-sm on-dark:hover:border-cyan/60 on-dark:hover:bg-white/10 on-dark:hover:text-white',
   'outline-dark':
     'border border-white/20 bg-white/5 text-white backdrop-blur-sm hover:-translate-y-0.5 hover:border-cyan/60 hover:bg-white/10 active:translate-y-0',
   white: 'bg-white text-navy shadow-float hover:-translate-y-0.5 hover:text-brand active:translate-y-0',

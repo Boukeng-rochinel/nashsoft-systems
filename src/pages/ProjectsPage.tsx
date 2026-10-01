@@ -8,7 +8,7 @@ import { GradientText } from '@/components/ui/GradientText'
 import { ButtonLink } from '@/components/ui/Button'
 import { PageHero } from '@/components/sections/PageHero'
 import { ProjectFilter } from '@/components/sections/ProjectFilter'
-import { ProjectCover } from '@/components/sections/ProjectCover'
+import { HeroImage } from '@/components/sections/HeroImage'
 import { ProcessSteps } from '@/components/sections/ProcessSteps'
 import { CTABand } from '@/components/sections/CTABand'
 import { FloatingCard } from '@/components/visuals/FloatingCard'
@@ -28,7 +28,7 @@ export default function ProjectsPage() {
         eyebrow="Nos réalisations"
         title={
           <>
-            Des projets qui font <GradientText tone="dark">la différence.</GradientText>
+            Des projets qui font <GradientText>la différence.</GradientText>
           </>
         }
         description="Web, mobile, intelligence artificielle, ERP : chaque projet est une réponse concrète à un besoin réel. Découvrez nos études de cas."
@@ -37,7 +37,7 @@ export default function ProjectsPage() {
             <ButtonLink to="#portfolio" size="lg">
               Explorer le portfolio
             </ButtonLink>
-            <ButtonLink to={START_PROJECT_HREF} variant="outline-dark" size="lg">
+            <ButtonLink to={START_PROJECT_HREF} variant="secondary" size="lg">
               Démarrer un projet
             </ButtonLink>
           </>
@@ -48,20 +48,10 @@ export default function ProjectsPage() {
           { title: 'Du MVP', description: 'à la production', icon: Rocket },
         ]}
         visual={
-          <div className="relative mx-auto aspect-[5/4] w-full max-w-[560px]">
-            <div aria-hidden className="absolute inset-[10%] rounded-full bg-brand/30 blur-3xl" />
-            <div className="absolute top-[4%] left-0 w-[72%] -rotate-3 overflow-hidden rounded-2xl border border-white/10 shadow-[0_30px_60px_-20px_rgb(0_0_0/0.7)]">
-              <div className="aspect-[16/10]">
-                <ProjectCover project={a} />
-              </div>
-            </div>
-            <div className="absolute right-0 bottom-[4%] w-[66%] rotate-2 overflow-hidden rounded-2xl border border-cyan/30 shadow-[0_30px_60px_-20px_rgb(0_0_0/0.7)]">
-              <div className="aspect-[16/10]">
-                <ProjectCover project={b} />
-              </div>
-            </div>
-            <FloatingCard tone="dark" icon={FolderKanban} title={a.title} description={a.type} className="bottom-[2%] left-[2%]" delay={0.3} />
-          </div>
+          <HeroImage src="/images/hero-projects.webp" alt="Développeurs collaborant sur un projet logiciel">
+            <FloatingCard icon={FolderKanban} title={a.title} description={a.type} className="-bottom-6 left-[6%]" delay={0.3} />
+            <FloatingCard icon={Rocket} title={b.title} description={b.type} className="top-[8%] -right-2 hidden sm:block lg:-right-8" delay={0.5} />
+          </HeroImage>
         }
       />
 

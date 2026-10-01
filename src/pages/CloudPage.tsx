@@ -16,7 +16,6 @@ import {
   Workflow,
 } from 'lucide-react'
 import { getServiceBySlug } from '@/data/services'
-import { themes } from '@/data/themes'
 import { usePageMeta } from '@/hooks/usePageMeta'
 import type { Feature } from '@/types'
 import { Section } from '@/components/ui/Section'
@@ -24,7 +23,7 @@ import { SectionTitle } from '@/components/ui/SectionTitle'
 import { GradientText } from '@/components/ui/GradientText'
 import { Reveal } from '@/components/ui/Reveal'
 import { ServiceDetailView } from '@/components/sections/ServiceDetailView'
-import { HeroStage } from '@/components/sections/HeroStage'
+import { HeroImage } from '@/components/sections/HeroImage'
 import { FeatureGrid } from '@/components/sections/FeatureGrid'
 import { AnimatedGrid } from '@/components/visuals/AnimatedGrid'
 import { ArchitectureStack } from '@/components/visuals/ArchitectureStack'
@@ -74,11 +73,11 @@ export default function CloudPage() {
       showFeatures={false}
       heroTitle={
         <>
-          Une infrastructure cloud <GradientText tone="dark">fiable et sécurisée.</GradientText>
+          Une infrastructure cloud <GradientText>fiable et sécurisée.</GradientText>
         </>
       }
       heroVisual={
-        <HeroStage laptop="dashboard" theme={themes.nashsoftDark} title="Cloud">
+        <HeroImage src="/images/hero-cloud.webp" alt="Câblage réseau d’une baie de serveurs">
           <GlassPanel
             title="État des services"
             className="top-[2%] right-0 hidden sm:block"
@@ -88,8 +87,8 @@ export default function CloudPage() {
               { label: 'Sauvegarde · quotidienne', icon: HardDrive },
             ]}
           />
-          <FloatingCard tone="dark" icon={Container} title="Conteneurs Docker" description="Du développement à la production." className="bottom-[2%] left-0" delay={0.3} />
-        </HeroStage>
+          <FloatingCard icon={Container} title="Conteneurs Docker" description="Du développement à la production." className="bottom-[2%] left-0" delay={0.3} />
+        </HeroImage>
       }
     >
       {/* Architecture */}
@@ -101,7 +100,7 @@ export default function CloudPage() {
               eyebrow="Architecture technique"
               title={
                 <>
-                  De l’application à la <GradientText tone="dark">supervision</GradientText>
+                  De l’application à la <GradientText>supervision</GradientText>
                 </>
               }
               description="Chaque couche est conçue pour être reproductible, observable et sécurisée. Vos équipes savent ce qui tourne, où, et dans quel état."

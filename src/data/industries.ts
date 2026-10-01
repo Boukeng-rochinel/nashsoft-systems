@@ -20,6 +20,7 @@ import { themes } from './themes'
 export const industries: Industry[] = [
   {
     slug: 'education',
+    image: '/images/industry-education.webp',
     name: 'Éducation',
     icon: GraduationCap,
     headline: 'Modernisez l’éducation avec le numérique',
@@ -32,6 +33,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'finance',
+    image: '/images/industry-finance.webp',
     name: 'Finance',
     icon: Landmark,
     headline: 'Des outils financiers sécurisés et temps réel',
@@ -44,6 +46,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'sante',
+    image: '/images/industry-health.webp',
     name: 'Santé',
     icon: HeartPulse,
     headline: 'Améliorez la qualité des soins',
@@ -56,6 +59,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'retail',
+    image: '/images/industry-retail.webp',
     name: 'Retail',
     icon: ShoppingBag,
     headline: 'Vendez plus, en boutique et en ligne',
@@ -68,6 +72,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'logistique',
+    image: '/images/industry-logistics.webp',
     name: 'Logistique',
     icon: Truck,
     headline: 'Pilotez votre chaîne logistique en temps réel',
@@ -80,6 +85,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'hotellerie',
+    image: '/images/industry-hospitality.webp',
     name: 'Hôtellerie',
     icon: Hotel,
     headline: 'Une expérience client mémorable',
@@ -92,6 +98,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'gouvernement',
+    image: '/images/industry-government.webp',
     name: 'Gouvernement',
     icon: Building,
     headline: 'Des services publics plus efficaces',
@@ -104,6 +111,7 @@ export const industries: Industry[] = [
   },
   {
     slug: 'services-professionnels',
+    image: '/images/industry-services.webp',
     name: 'Services professionnels',
     icon: Briefcase,
     headline: 'Concentrez-vous sur vos clients',

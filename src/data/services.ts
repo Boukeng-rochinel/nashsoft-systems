@@ -24,6 +24,7 @@ import type { Service } from '@/types'
 export const services: Service[] = [
   {
     slug: 'developpement-logiciel',
+    image: '/images/hero-software.webp',
     title: 'Développement logiciel',
     shortTitle: 'Logiciel sur mesure',
     tagline: 'Des logiciels sur mesure pour vos ambitions.',
@@ -43,6 +44,7 @@ export const services: Service[] = [
   },
   {
     slug: 'developpement-web',
+    image: '/images/project-nashsoft.webp',
     title: 'Développement web',
     shortTitle: 'Web',
     tagline: 'Des sites et plateformes web rapides, modernes et sécurisés.',
@@ -62,6 +64,7 @@ export const services: Service[] = [
   },
   {
     slug: 'applications-mobiles',
+    image: '/images/industry-finance.webp',
     title: 'Applications mobiles',
     shortTitle: 'Mobile',
     tagline: 'Des applications iOS et Android que vos utilisateurs adorent.',
@@ -81,6 +84,7 @@ export const services: Service[] = [
   },
   {
     slug: 'ia-data',
+    image: '/images/hero-ai.webp',
     title: 'IA & Machine Learning',
     shortTitle: 'IA & Data',
     tagline: 'Transformez vos données en intelligence.',
@@ -100,6 +104,7 @@ export const services: Service[] = [
   },
   {
     slug: 'cloud-devops',
+    image: '/images/hero-cloud.webp',
     title: 'Cloud & DevOps',
     shortTitle: 'Cloud & DevOps',
     tagline: 'Une infrastructure fiable, automatisée et sécurisée.',
@@ -119,6 +124,7 @@ export const services: Service[] = [
   },
   {
     slug: 'data-engineering',
+    image: '/images/hero-solutions.webp',
     title: 'Bases de données & Data Engineering',
     shortTitle: 'Bases de données',
     tagline: 'Des données fiables, structurées et exploitables.',
@@ -138,6 +144,7 @@ export const services: Service[] = [
   },
   {
     slug: 'cybersecurite',
+    image: '/images/article-backup.webp',
     title: 'Cybersécurité',
     shortTitle: 'Cybersécurité',
     tagline: 'Protégez vos systèmes, vos données et vos utilisateurs.',
@@ -157,6 +164,7 @@ export const services: Service[] = [
   },
   {
     slug: 'transformation-digitale',
+    image: '/images/hero-about.webp',
     title: 'Transformation digitale',
     shortTitle: 'Transformation digitale',
     tagline: 'Modernisez vos processus métiers, étape par étape.',
@@ -176,6 +184,7 @@ export const services: Service[] = [
   },
   {
     slug: 'conseil-it',
+    image: '/images/industry-services.webp',
     title: 'Conseil IT',
     shortTitle: 'Conseil IT',
     tagline: 'Des décisions technologiques éclairées.',

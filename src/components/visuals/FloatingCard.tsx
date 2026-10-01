@@ -2,11 +2,13 @@ import type { ReactNode } from 'react'
 import type { LucideIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/cn'
+import { useTheme } from '@/hooks/useTheme'
 
 interface FloatingCardProps {
   icon?: LucideIcon
   title: string
   description?: string
+  /** Defaults to the site theme. */
   tone?: 'light' | 'dark'
   className?: string
   /** Seconds — offsets the float loop so cards don't move in sync. */
@@ -15,8 +17,9 @@ interface FloatingCardProps {
 }
 
 /** Glass card that floats over hero visuals ("Web & Mobile Apps", "IA & Data"…). */
-export function FloatingCard({ icon: Icon, title, description, tone = 'light', className, delay = 0, children }: FloatingCardProps) {
-  const dark = tone === 'dark'
+export function FloatingCard({ icon: Icon, title, description, tone, className, delay = 0, children }: FloatingCardProps) {
+  const { theme } = useTheme()
+  const dark = (tone ?? theme) === 'dark'
   return (
     <motion.div
       initial={{ opacity: 0, y: 16, scale: 0.96 }}

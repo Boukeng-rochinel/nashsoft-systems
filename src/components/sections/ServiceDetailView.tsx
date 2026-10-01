@@ -6,7 +6,6 @@ import { services, serviceHref } from '@/data/services'
 import { projects } from '@/data/projects'
 import { getTechnology } from '@/data/technologies'
 import { whyNashsoft } from '@/data/site'
-import { themes } from '@/data/themes'
 import { START_PROJECT_HREF } from '@/data/navigation'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
@@ -14,7 +13,7 @@ import { GradientText } from '@/components/ui/GradientText'
 import { ButtonLink } from '@/components/ui/Button'
 import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { PageHero } from './PageHero'
-import { HeroStage } from './HeroStage'
+import { HeroImage } from './HeroImage'
 import { ProcessSteps } from './ProcessSteps'
 import { TechnologyCloud } from './TechnologyCloud'
 import { FeatureGrid } from './FeatureGrid'
@@ -29,12 +28,12 @@ const highlightIcons: LucideIcon[] = [Layers, Gauge, ShieldCheck, Headphones]
 /** Highlights the last two words of a sentence (design: "Des logiciels sur mesure pour vos ambitions."). */
 function splitTitle(text: string): ReactNode {
   const words = text.split(' ')
-  if (words.length < 4) return <GradientText tone="dark">{text}</GradientText>
+  if (words.length < 4) return <GradientText>{text}</GradientText>
   const head = words.slice(0, -2).join(' ')
   const tail = words.slice(-2).join(' ')
   return (
     <>
-      {head} <GradientText tone="dark">{tail}</GradientText>
+      {head} <GradientText>{tail}</GradientText>
     </>
   )
 }
@@ -83,7 +82,7 @@ export function ServiceDetailView({ service, heroTitle, heroVisual, children, sh
             <ButtonLink to={`${START_PROJECT_HREF}?service=${service.slug}`} size="lg">
               Démarrer un projet
             </ButtonLink>
-            <ButtonLink to="#processus" variant="outline-dark" size="lg" icon={CirclePlay} arrow={false}>
+            <ButtonLink to="#processus" variant="secondary" size="lg" icon={CirclePlay} arrow={false}>
               Voir notre processus
             </ButtonLink>
           </>
@@ -91,15 +90,15 @@ export function ServiceDetailView({ service, heroTitle, heroVisual, children, sh
         highlights={service.highlights.map((h, i) => ({ title: h, description: '', icon: highlightIcons[i % highlightIcons.length] }))}
         visual={
           heroVisual ?? (
-            <HeroStage laptop="code" theme={themes.nashsoftDark} title="nashsoft">
+            <HeroImage src={service.image} alt={service.title}>
               <GlassPanel
                 title="Technologies que nous utilisons"
                 columns={2}
                 className="top-[2%] right-0 hidden sm:block"
                 items={techs.slice(0, 6).map((t) => ({ label: t.name, mono: t.mono, color: t.color }))}
               />
-              <FloatingCard tone="dark" icon={service.icon} title="Conçu pour durer" description="Des applications puissantes et évolutives." className="bottom-[2%] left-0" delay={0.3} />
-            </HeroStage>
+              <FloatingCard icon={service.icon} title="Conçu pour durer" description="Des applications puissantes et évolutives." className="bottom-[2%] left-0" delay={0.3} />
+            </HeroImage>
           )
         }
       />
@@ -133,7 +132,7 @@ export function ServiceDetailView({ service, heroTitle, heroVisual, children, sh
             eyebrow="Nos technologies"
             title={
               <>
-                Un stack moderne pour des solutions <GradientText tone="dark">performantes</GradientText>
+                Un stack moderne pour des solutions <GradientText>performantes</GradientText>
               </>
             }
             description="Nous utilisons les technologies les plus fiables et les plus modernes pour construire des applications rapides, sécurisées et évolutives."

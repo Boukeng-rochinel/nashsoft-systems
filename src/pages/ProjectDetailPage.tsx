@@ -13,6 +13,8 @@ import { ButtonLink } from '@/components/ui/Button'
 import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { TechMark } from '@/components/ui/TechTile'
 import { PageHero } from '@/components/sections/PageHero'
+import { HeroImage } from '@/components/sections/HeroImage'
+import { FloatingCard } from '@/components/visuals/FloatingCard'
 import { FeatureGrid } from '@/components/sections/FeatureGrid'
 import { CTABand } from '@/components/sections/CTABand'
 import { Lightbox } from '@/components/sections/Lightbox'
@@ -23,37 +25,28 @@ import { Screen } from '@/components/visuals/Screen'
 
 function splitLast(title: string) {
   const words = title.split(' ')
-  if (words.length === 1) return <GradientText tone="dark">{title}</GradientText>
+  if (words.length === 1) return <GradientText>{title}</GradientText>
   return (
     <>
-      {words.slice(0, -1).join(' ')} <GradientText tone="dark">{words[words.length - 1]}</GradientText>
+      {words.slice(0, -1).join(' ')} <GradientText>{words[words.length - 1]}</GradientText>
     </>
   )
 }
 
-function HeroDevices({ project }: { project: Project }) {
-  const { cover, theme } = project
+function HeroVisual({ project }: { project: Project }) {
+  const phoneFirst = project.cover.device === 'phone'
   return (
-    <div className="relative mx-auto w-full max-w-[580px]">
-      <div aria-hidden className="absolute inset-[8%] rounded-full blur-3xl" style={{ background: `${theme.accent}55` }} />
-      {cover.device === 'phone' ? (
-        <div className="relative flex items-end justify-center gap-4 py-4">
-          <Phone variant="mobile" theme={theme} title={project.title} className="w-[34%] -rotate-6" />
-          <Phone variant="analytics" theme={theme} title={project.title} className="w-[36%] -translate-y-6" />
-        </div>
-      ) : (
-        <div className="relative px-[4%] pt-[4%] pb-[8%]">
-          <div className="[transform:perspective(1400px)_rotateY(-12deg)_rotateX(4deg)]">
-            <Laptop variant={cover.variant} theme={theme} title={project.title} />
-          </div>
-          {cover.device === 'both' && (
-            <div className="absolute right-0 bottom-[4%] w-[22%]">
-              <Phone variant="mobile" theme={theme} title={project.title} />
-            </div>
-          )}
-        </div>
-      )}
-    </div>
+    <HeroImage src={project.image} alt={project.imageAlt}>
+      {/* Product UI layered over the photograph */}
+      <div className={phoneFirst ? 'absolute -bottom-8 -left-4 w-[24%] sm:-left-8' : 'absolute -bottom-8 -left-4 w-[52%] sm:-left-10'}>
+        {phoneFirst ? (
+          <Phone variant="mobile" theme={project.theme} title={project.title} />
+        ) : (
+          <Laptop variant={project.cover.variant} theme={project.theme} title={project.title} />
+        )}
+      </div>
+      <FloatingCard icon={Tag} title={project.type} description={project.industry} className="top-[8%] -right-2 hidden sm:block lg:-right-8" delay={0.3} />
+    </HeroImage>
   )
 }
 
@@ -108,7 +101,7 @@ function ProjectDetail({ project }: { project: Project }) {
             <ButtonLink to={`${START_PROJECT_HREF}?reference=${project.slug}`} size="lg">
               Démarrer un projet similaire
             </ButtonLink>
-            <ButtonLink to="#galerie" variant="outline-dark" size="lg" icon={Images} arrow={false}>
+            <ButtonLink to="#galerie" variant="secondary" size="lg" icon={Images} arrow={false}>
               Voir la galerie
             </ButtonLink>
           </>
@@ -118,7 +111,7 @@ function ProjectDetail({ project }: { project: Project }) {
           { title: String(project.year), description: 'Année', icon: CalendarDays },
           { title: project.categories.join(' · '), description: 'Catégorie', icon: Images },
         ]}
-        visual={<HeroDevices project={project} />}
+        visual={<HeroVisual project={project} />}
       />
 
       {/* Overview — reference design: description | technologies | preview */}
@@ -222,7 +215,7 @@ function ProjectDetail({ project }: { project: Project }) {
               eyebrow="Architecture"
               title={
                 <>
-                  Une architecture <GradientText tone="dark">claire et évolutive</GradientText>
+                  Une architecture <GradientText>claire et évolutive</GradientText>
                 </>
               }
               description="Chaque couche a une responsabilité précise, ce qui rend le produit simple à maintenir et à faire évoluer."

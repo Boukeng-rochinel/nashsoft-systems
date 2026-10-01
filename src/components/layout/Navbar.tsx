@@ -8,6 +8,7 @@ import { cn } from '@/lib/cn'
 import { Logo } from '@/components/ui/Logo'
 import { ButtonLink } from '@/components/ui/Button'
 import { MobileMenu } from './MobileMenu'
+import { ThemeToggle } from './ThemeToggle'
 
 export type NavTone = 'light' | 'dark'
 
@@ -175,7 +176,7 @@ export function Navbar({ tone }: { tone: NavTone }) {
         <Logo tone={dark ? 'dark' : 'light'} />
 
         <nav aria-label="Navigation principale" className="hidden lg:block">
-          <ul className="flex items-center gap-5 xl:gap-7">
+          <ul className="flex items-center gap-4 xl:gap-7">
             {primaryNav.map((item) => {
               const active = isActive(pathname, item)
               return (
@@ -202,6 +203,7 @@ export function Navbar({ tone }: { tone: NavTone }) {
         </nav>
 
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           {/* Visibility on a wrapper: the button's own display class would override `hidden`. */}
           <span className="hidden sm:block">
             <ButtonLink to={START_PROJECT_HREF} size="md">

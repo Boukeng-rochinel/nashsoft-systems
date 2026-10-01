@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 
+/* Styles applied when the nearest themed ancestor is dark (dark sections, dark site theme). */
+@custom-variant on-dark (&:where([data-theme='dark'], [data-theme='dark'] *):not(:where([data-theme='dark'] [data-theme='light'] *)));
+
 /* ============================================================
    Nashsoft Systems — design tokens
    ============================================================ */
@@ -65,6 +68,14 @@
     }
     to {
       transform: translateX(-50%);
+    }
+  }
+  @keyframes shimmer {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100%);
     }
   }
   @keyframes flow-x {
@@ -196,6 +207,30 @@
   @apply font-display text-[0.7rem] font-bold tracking-[0.2em] uppercase;
 }
 
+/*
+ * Skeleton block: soft base tone + a light sweep (shimmer).
+ * The sweep is a pseudo-element moved with transform only (GPU-composited, no layout work),
+ * which keeps it smooth on low-end phones. Reduced motion → static block (see bottom of file).
+ */
+@utility skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--skeleton-base, #e8eef6);
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(90deg, transparent 0%, var(--skeleton-shine, rgb(255 255 255 / 0.65)) 50%, transparent 100%);
+    animation: shimmer 1.6s ease-in-out infinite;
+  }
+}
+
+@utility skeleton-dark {
+  --skeleton-base: rgb(255 255 255 / 0.07);
+  --skeleton-shine: rgb(255 255 255 / 0.08);
+}
+
 @utility scrollbar-none {
   scrollbar-width: none;
   &::-webkit-scrollbar {
@@ -209,6 +244,9 @@
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .skeleton::after {
+    display: none;
   }
   *,
   *::before,

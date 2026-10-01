@@ -130,7 +130,7 @@ export default function HomePage() {
               eyebrow="Notre stack tech"
               title={
                 <>
-                  Des technologies modernes pour des solutions <GradientText tone="dark">durables</GradientText>
+                  Des technologies modernes pour des solutions <GradientText>durables</GradientText>
                 </>
               }
               description="Nous utilisons les meilleures technologies du marché pour garantir des solutions performantes, sécurisées et évolutives."

@@ -36,7 +36,8 @@
       "Bash(node*)",
       "Bash(gh repo*)",
       "Bash(gh pr*)",
-      "Bash(gh issue*)"
+      "Bash(gh issue*)",
+      "WebFetch(domain:unsplash.com)"
     ],
     "deny": [
       "Bash(rm -rf /)",

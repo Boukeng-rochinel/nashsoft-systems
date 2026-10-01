@@ -6,6 +6,7 @@ export const articleCategories = ['Tous', 'Transformation digitale', 'Développe
 export const articles: Article[] = [
   {
     slug: 'digitaliser-processus-pme',
+    image: '/images/article-digital.webp',
     title: 'Digitaliser les processus d’une PME : par où commencer ?',
     excerpt:
       'Tableurs, papier, WhatsApp… Beaucoup d’entreprises fonctionnent encore ainsi. Voici une méthode pragmatique pour prioriser vos premiers chantiers numériques.',
@@ -52,6 +53,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'integrer-mobile-money',
+    image: '/images/article-mobile-money.webp',
     title: 'Intégrer le Mobile Money dans vos applications',
     excerpt:
       'MTN MoMo et Orange Money sont incontournables en Afrique centrale. Architecture, sécurité et expérience utilisateur : les points d’attention pour une intégration fiable.',
@@ -94,6 +96,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'flutter-react-native-web',
+    image: '/images/article-flutter.webp',
     title: 'Flutter, React Native ou web : quelle technologie pour votre application ?',
     excerpt:
       'Le choix technologique influence les coûts, les délais et l’évolutivité. Nous comparons les options selon vos contraintes réelles.',
@@ -135,6 +138,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'ia-cas-usage-entreprises',
+    image: '/images/article-ai.webp',
     title: '5 cas d’usage concrets de l’IA pour les entreprises africaines',
     excerpt:
       'Au-delà du buzz, l’intelligence artificielle apporte déjà des gains mesurables. Cinq applications réalistes à envisager dès aujourd’hui.',
@@ -170,6 +174,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'sauvegardes-cloud-pme',
+    image: '/images/article-backup.webp',
     title: 'Sauvegardes et cloud : protéger les données de votre entreprise',
     excerpt:
       'Panne matérielle, vol, rançongiciel : la perte de données peut paralyser une entreprise. La règle 3-2-1 et une supervision simple suffisent souvent.',
@@ -205,6 +210,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'odoo-erp-pme',
+    image: '/images/article-odoo.webp',
     title: 'Odoo pour les PME : un ERP modulaire et adaptable',
     excerpt:
       'Ventes, stocks, comptabilité, production : Odoo permet de démarrer petit et d’ajouter des modules au fil de la croissance. Retour d’expérience.',

@@ -10,7 +10,7 @@ import { GradientText } from '@/components/ui/GradientText'
 import { ButtonLink } from '@/components/ui/Button'
 import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { PageHero } from '@/components/sections/PageHero'
-import { HeroStage } from '@/components/sections/HeroStage'
+import { HeroImage } from '@/components/sections/HeroImage'
 import { ServiceCard } from '@/components/sections/ServiceCard'
 import { ProcessSteps } from '@/components/sections/ProcessSteps'
 import { TechnologyCloud } from '@/components/sections/TechnologyCloud'
@@ -39,7 +39,7 @@ export default function ServicesPage() {
         eyebrow="Nos services"
         title={
           <>
-            Des solutions technologiques pour un <GradientText tone="dark">avenir meilleur</GradientText>
+            Des solutions technologiques pour un <GradientText>avenir meilleur</GradientText>
           </>
         }
         description="Nous offrons une gamme complète de services technologiques pour aider les entreprises et organisations à innover, se digitaliser et atteindre leurs objectifs."
@@ -48,13 +48,13 @@ export default function ServicesPage() {
             <ButtonLink to="#catalogue" size="lg">
               Découvrir nos services
             </ButtonLink>
-            <ButtonLink to="/contact" variant="outline-dark" size="lg" icon={MessageSquare} arrow={false}>
+            <ButtonLink to="/contact" variant="secondary" size="lg" icon={MessageSquare} arrow={false}>
               Discuter avec notre équipe
             </ButtonLink>
           </>
         }
         visual={
-          <HeroStage laptop="code" theme={themes.nashsoftDark} title="nashsoft">
+          <HeroImage src="/images/hero-services.webp" alt="Développeur travaillant sur du code à son poste">
             <GlassPanel
               className="top-[4%] right-0 hidden sm:block"
               items={[
@@ -64,8 +64,8 @@ export default function ServicesPage() {
                 { label: 'AI & Data', icon: BrainCircuit },
               ]}
             />
-            <FloatingCard tone="dark" icon={Sparkles} title="Build · Innovate · Transform" className="bottom-[4%] left-0" delay={0.3} />
-          </HeroStage>
+            <FloatingCard icon={Sparkles} title="Build · Innovate · Transform" className="bottom-[4%] left-0" delay={0.3} />
+          </HeroImage>
         }
       />
 

@@ -56,6 +56,8 @@ export interface Service {
   description: string
   longDescription: string
   icon: LucideIcon
+  /** Photograph used in the service hero (public/images). */
+  image: string
   technologies: string[]
   features: Feature[]
   deliverables: string[]
@@ -99,6 +101,8 @@ export interface Industry {
   description: string
   solutions: string[]
   challenges: string[]
+  /** Photograph illustrating the sector (public/images). */
+  image: string
   /** Product mockup rendered for the industry. */
   visual: ScreenVariant
   theme: ProjectTheme
@@ -179,6 +183,9 @@ export interface Project {
   architecture: ArchitectureLayer[]
   outcomes: ProjectOutcome[]
   gallery: GalleryItem[]
+  /** Cover photograph (public/images). */
+  image: string
+  imageAlt: string
   theme: ProjectTheme
   cover: { variant: ScreenVariant; device: 'laptop' | 'phone' | 'both' }
   featured: boolean
@@ -218,6 +225,8 @@ export interface Article {
   date: string
   readTime: number
   author: string
+  /** Cover photograph (public/images). */
+  image: string
   cover: { variant: ScreenVariant; theme: ProjectTheme }
   content: ArticleSection[]
 }

@@ -4,7 +4,7 @@ import type { Project } from '@/types'
 import { projectHref } from '@/data/projects'
 import { cn } from '@/lib/cn'
 import { TechChip } from '@/components/ui/TechTile'
-import { ProjectCover } from './ProjectCover'
+import { SmartImage } from '@/components/ui/SmartImage'
 
 export function ProjectCard({ project, tone = 'light', className }: { project: Project; tone?: 'light' | 'dark'; className?: string }) {
   const dark = tone === 'dark'
@@ -19,9 +19,15 @@ export function ProjectCard({ project, tone = 'light', className }: { project: P
       )}
     >
       <div className="relative aspect-[16/10] overflow-hidden">
-        <div className="size-full transition-transform duration-700 ease-out group-hover:scale-[1.06]">
-          <ProjectCover project={project} />
-        </div>
+        <SmartImage
+          src={project.image}
+          alt={project.imageAlt}
+          width={1200}
+          height={750}
+          wrapperClassName="size-full"
+          className="size-full object-cover transition-[opacity,transform] duration-700 ease-out group-hover:scale-[1.06]"
+        />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-transparent" />
         <span className="absolute top-3 left-3 rounded-md bg-brand px-2 py-0.5 font-display text-[0.65rem] font-semibold text-white shadow-[0_4px_12px_-4px_rgb(8_125_255/0.8)]">
           {project.categories[0]}
         </span>

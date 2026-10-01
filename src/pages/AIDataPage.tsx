@@ -15,7 +15,6 @@ import {
 } from 'lucide-react'
 import { getServiceBySlug } from '@/data/services'
 import { getProjectBySlug, projectHref } from '@/data/projects'
-import { themes } from '@/data/themes'
 import { usePageMeta } from '@/hooks/usePageMeta'
 import type { Feature } from '@/types'
 import { Section } from '@/components/ui/Section'
@@ -23,9 +22,8 @@ import { SectionTitle } from '@/components/ui/SectionTitle'
 import { GradientText } from '@/components/ui/GradientText'
 import { Reveal } from '@/components/ui/Reveal'
 import { ServiceDetailView } from '@/components/sections/ServiceDetailView'
-import { HeroStage } from '@/components/sections/HeroStage'
+import { HeroImage } from '@/components/sections/HeroImage'
 import { FeatureGrid } from '@/components/sections/FeatureGrid'
-import { ProjectCover } from '@/components/sections/ProjectCover'
 import { AnimatedGrid } from '@/components/visuals/AnimatedGrid'
 import { FlowDiagram } from '@/components/visuals/FlowDiagram'
 import { FloatingCard } from '@/components/visuals/FloatingCard'
@@ -69,11 +67,11 @@ export default function AIDataPage() {
       showFeatures={false}
       heroTitle={
         <>
-          Transformez vos données <GradientText tone="dark">en intelligence.</GradientText>
+          Transformez vos données <GradientText>en intelligence.</GradientText>
         </>
       }
       heroVisual={
-        <HeroStage laptop="analytics" phone="analytics" theme={themes.nashsoftDark} title="Insights">
+        <HeroImage src="/images/hero-ai.webp" alt="Tableau de bord analytique affiché sur un écran">
           <GlassPanel
             className="top-[2%] right-0 hidden sm:block"
             items={[
@@ -82,8 +80,8 @@ export default function AIDataPage() {
               { label: 'Analyse prédictive', icon: ChartLine },
             ]}
           />
-          <FloatingCard tone="dark" icon={Bot} title="Assistants intelligents" description="Connectés à vos données." className="bottom-[2%] left-0" delay={0.3} />
-        </HeroStage>
+          <FloatingCard icon={Bot} title="Assistants intelligents" description="Connectés à vos données." className="bottom-[2%] left-0" delay={0.3} />
+        </HeroImage>
       }
     >
       {/* Pipeline */}
@@ -94,7 +92,7 @@ export default function AIDataPage() {
           eyebrow="De la donnée à la décision"
           title={
             <>
-              Un pipeline <GradientText tone="dark">intelligent</GradientText>, de bout en bout
+              Un pipeline <GradientText>intelligent</GradientText>, de bout en bout
             </>
           }
           description="Nous construisons toute la chaîne : collecte, préparation, modélisation et restitution des résultats là où vos équipes travaillent."
@@ -134,9 +132,15 @@ export default function AIDataPage() {
                 className="group block overflow-hidden rounded-2xl border border-line bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
               >
                 <div className="aspect-[16/10] overflow-hidden">
-                  <div className="size-full transition-transform duration-700 group-hover:scale-105">
-                    <ProjectCover project={autofix} />
-                  </div>
+                  <img
+                    src={autofix.image}
+                    alt={autofix.imageAlt}
+                    width={1200}
+                    height={750}
+                    loading="lazy"
+                    decoding="async"
+                    className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
                 </div>
                 <div className="p-6">
                   <p className="eyebrow text-brand">Étude de cas · IA embarquée</p>

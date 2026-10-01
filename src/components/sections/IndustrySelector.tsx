@@ -6,7 +6,7 @@ import { industries as allIndustries } from '@/data/industries'
 import { START_PROJECT_HREF } from '@/data/navigation'
 import { cn } from '@/lib/cn'
 import { ButtonLink } from '@/components/ui/Button'
-import { Laptop } from '@/components/visuals/Devices'
+import { SmartImage } from '@/components/ui/SmartImage'
 
 interface IndustrySelectorProps {
   industries?: Industry[]
@@ -130,10 +130,15 @@ export function IndustrySelector({ industries = allIndustries, tone = 'light', c
                 Découvrir la solution
               </ButtonLink>
             </div>
-            <div className="relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-mist via-brand-50 to-[#e6e0ff] p-6 sm:p-8">
-              <div aria-hidden className="absolute -top-10 -right-10 size-48 rounded-full bg-brand/15 blur-3xl" />
-              <div aria-hidden className="absolute inset-0 bg-grid-light opacity-60" />
-              <Laptop variant={active.visual} theme={active.theme} title={active.name} className="relative w-full max-w-md" />
+            <div className="relative min-h-64 overflow-hidden md:min-h-0">
+              <SmartImage src={active.image} alt="" width={1000} height={750} wrapperClassName="absolute inset-0" className="size-full object-cover" />
+              <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-white/30 via-transparent to-navy/30 md:from-white/60" />
+              <div className="absolute right-4 bottom-4 left-4 flex items-center gap-3 rounded-xl border border-white/60 bg-white/85 p-3 shadow-float backdrop-blur-md sm:left-auto sm:max-w-[16rem]">
+                <span aria-hidden className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand-gradient text-white">
+                  <active.icon className="size-[18px]" strokeWidth={1.8} />
+                </span>
+                <p className="text-xs leading-snug font-medium text-navy">{active.solutions[0]}</p>
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>

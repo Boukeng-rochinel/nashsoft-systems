@@ -31,6 +31,8 @@ export const projectCategories: Array<'Tous' | ProjectCategory> = ['Tous', 'Web'
 export const projects: Project[] = [
   {
     slug: 'restaurant-elegance',
+    image: '/images/project-restaurant.webp',
+    imageAlt: 'Assiette gastronomique dressée dans un restaurant',
     title: 'Restaurant Elegance',
     type: 'Application web',
     categories: ['Web'],
@@ -73,6 +75,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'autofix-car',
+    image: '/images/project-autofix.webp',
+    imageAlt: 'Mécanicien inspectant le moteur d’un véhicule',
     title: 'AutoFix Car',
     type: 'Application mobile',
     categories: ['Mobile', 'IA'],
@@ -115,6 +119,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'igwork',
+    image: '/images/project-igwork.webp',
+    imageAlt: 'Freelance travaillant sur un ordinateur portable',
     title: 'IGWork / Hustlers DEV WAR',
     type: 'Plateforme web',
     categories: ['Web', 'Entreprise'],
@@ -157,6 +163,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'eduteklearn',
+    image: '/images/project-eduteklearn.webp',
+    imageAlt: 'Jeune apprenante suivant un cours en ligne',
     title: 'Eduteklearn',
     type: 'Plateforme e-learning',
     categories: ['Web', 'Cloud'],
@@ -199,6 +207,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'nashsoft-systems-website',
+    image: '/images/project-nashsoft.webp',
+    imageAlt: 'Poste de travail avec deux écrans',
     title: 'Nashsoft Systems',
     type: 'Site web corporate',
     categories: ['Web'],
@@ -241,6 +251,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'gestion-boulangerie-odoo',
+    image: '/images/project-bakery.webp',
+    imageAlt: 'Vitrine de boulangerie remplie de viennoiseries',
     title: 'Gestion de Boulangerie (Odoo)',
     type: 'Module ERP Odoo',
     categories: ['Entreprise', 'Cloud'],
