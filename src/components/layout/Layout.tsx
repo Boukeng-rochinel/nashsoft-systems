@@ -5,6 +5,7 @@ import { pageTransition } from '@/lib/motion'
 import { useTheme } from '@/hooks/useTheme'
 import { cn } from '@/lib/cn'
 import { CardSkeletonGrid } from '@/components/ui/CardSkeleton'
+import { ChatLauncher } from '@/components/chat/ChatLauncher'
 import { Navbar } from './Navbar'
 import { Footer } from './Footer'
 
@@ -71,6 +72,7 @@ export function Layout() {
         </AnimatePresence>
       </main>
       <Footer tone={tone} />
+      <ChatLauncher />
     </div>
   )
 }
