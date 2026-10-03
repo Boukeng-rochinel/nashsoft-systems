@@ -3,7 +3,6 @@ import { ArrowRight, CircleCheck, Lightbulb, Mail, MapPin, Phone, ShieldCheck, U
 import { footerNav } from '@/data/navigation'
 import { site } from '@/data/site'
 import { cn } from '@/lib/cn'
-import { openConsentSettings } from '@/lib/consent'
 import { Logo } from '@/components/ui/Logo'
 import { NewsletterForm } from '@/components/forms/NewsletterForm'
 import { SocialIcons } from './SocialIcons'
@@ -51,7 +50,7 @@ export function Footer({ tone }: { tone: 'light' | 'dark' }) {
 
   return (
     <footer data-theme={tone} className={cn('relative', dark ? 'bg-navy-950 text-slate-300' : 'border-t border-line bg-[#f9fbfe] text-ink')}>
-      <div className={cn(wrap, 'grid gap-12 pt-16 pb-14 sm:grid-cols-2 lg:grid-cols-[1.5fr_0.65fr_1fr_1.15fr_1.2fr] lg:gap-8 lg:pt-20 xl:gap-12')}>
+      <div className={cn(wrap, 'grid gap-12 pt-16 pb-14 sm:grid-cols-2 lg:grid-cols-[1.75fr_0.7fr_1.1fr_1.1fr_1.45fr] lg:gap-6 lg:pt-20 xl:gap-10')}>
         {/* Brand */}
         <div className="sm:col-span-2 lg:col-span-1">
           <Logo tone={dark ? 'dark' : 'light'} size="lg" />
@@ -59,11 +58,11 @@ export function Footer({ tone }: { tone: 'light' | 'dark' }) {
             Entreprise technologique basée à {site.foundedIn}. Nous concevons des logiciels, plateformes et solutions digitales pour les entreprises et
             organisations.
           </p>
-          <ul className="mt-8 flex flex-wrap gap-y-4">
+          <ul className="mt-8 flex flex-wrap gap-y-4 sm:flex-nowrap">
             {trust.map((t, i) => (
-              <li key={t.title} className={cn('flex items-start gap-2 pr-3.5', i > 0 && cn('border-l pl-3.5', divider))}>
-                <t.icon aria-hidden className={cn('mt-0.5 size-5 shrink-0', dark ? 'text-cyan' : 'text-brand')} strokeWidth={1.9} />
-                <span className="text-[0.8rem] leading-snug">
+              <li key={t.title} className={cn('flex shrink-0 items-start gap-2 pr-2.5 whitespace-nowrap', i > 0 && cn('border-l pl-2.5', divider))}>
+                <t.icon aria-hidden className={cn('mt-0.5 size-[18px] shrink-0', dark ? 'text-cyan' : 'text-brand')} strokeWidth={1.9} />
+                <span className="text-[0.74rem] leading-snug">
                   <span className={cn('block font-semibold', dark ? 'text-white' : 'text-navy')}>{t.title}</span>
                   <span className={muted}>{t.caption}</span>
                 </span>
@@ -168,30 +167,14 @@ export function Footer({ tone }: { tone: 'light' | 'dark' }) {
 
       {/* Bottom bar */}
       <div className={wrap}>
-        <div className={cn('flex flex-col gap-6 border-t py-8 lg:flex-row lg:items-center lg:justify-between', divider)}>
+        <div className={cn('flex flex-col gap-6 border-t pt-8 pb-28 lg:flex-row lg:items-center lg:justify-between', divider)}>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
             <Link to="/" className="inline-flex items-center gap-3" aria-label="Nashsoft Systems — accueil">
               <img src={site.logo.mark} alt="" width={66} height={66} className="h-10 w-auto" />
               <span className={cn('font-display text-lg font-bold', dark ? 'text-white' : 'text-navy')}>Nashsoft Systems</span>
             </Link>
             <span aria-hidden className={cn('hidden h-10 border-l sm:block', divider)} />
-            <div className={cn('text-[0.82rem]', muted)}>
-              <p>© {year} Nashsoft Systems. Tous droits réservés.</p>
-              <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-[0.75rem]">
-                {footerNav.legal.map((l) => (
-                  <li key={l.href}>
-                    <Link to={l.href} className={cn('transition-colors', linkHover)}>
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-                <li>
-                  <button type="button" onClick={openConsentSettings} className={cn('transition-colors', linkHover)}>
-                    Gérer les cookies
-                  </button>
-                </li>
-              </ul>
-            </div>
+            <p className={cn('text-[0.82rem]', muted)}>© {year} Nashsoft Systems. Tous droits réservés.</p>
           </div>
 
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">

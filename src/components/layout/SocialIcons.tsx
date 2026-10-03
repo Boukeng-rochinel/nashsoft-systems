@@ -49,29 +49,36 @@ const labels: Record<SocialKey, string> = {
   github: 'GitHub',
 }
 
-/** Renders only the profiles configured in `site.social` (empty URL = hidden). */
+/** Footer display order (reference design). GitHub only shows when configured. */
+const always: SocialKey[] = ['linkedin', 'x', 'facebook', 'instagram', 'youtube']
+
+/**
+ * Round social chips. The five design networks always render; one without a URL
+ * in `site.social` shows as an inert chip until the profile exists.
+ */
 export function SocialIcons({ tone = 'light', className }: { tone?: 'light' | 'dark'; className?: string }) {
   const profiles: Partial<Record<SocialKey, string>> = site.social
-  const entries = (Object.keys(icons) as SocialKey[]).filter((k) => profiles[k])
-  if (entries.length === 0) return null
+  const entries = (Object.keys(icons) as SocialKey[]).filter((k) => always.includes(k) || profiles[k])
+  const chip = cn(
+    'inline-flex size-11 items-center justify-center rounded-full transition-all duration-300',
+    tone === 'dark' ? 'bg-white/[0.06] text-slate-200' : 'bg-[#eef2f8] text-navy',
+  )
   return (
     <ul className={cn('flex items-center gap-3', className)}>
       {entries.map((key) => {
         const Icon = icons[key]
+        const href = profiles[key]
         return (
           <li key={key}>
-            <a
-              href={profiles[key]}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`Nashsoft Systems sur ${labels[key]}`}
-              className={cn(
-                'inline-flex size-11 items-center justify-center rounded-full transition-all duration-300 hover:-translate-y-0.5',
-                tone === 'dark' ? 'bg-white/[0.06] text-slate-200 hover:bg-brand hover:text-white' : 'bg-brand-50/80 text-navy hover:bg-brand hover:text-white',
-              )}
-            >
-              <Icon className="size-[17px]" aria-hidden />
-            </a>
+            {href ? (
+              <a href={href} target="_blank" rel="noreferrer" aria-label={`Nashsoft Systems sur ${labels[key]}`} className={cn(chip, 'hover:-translate-y-0.5 hover:bg-brand hover:text-white')}>
+                <Icon className="size-[17px]" aria-hidden />
+              </a>
+            ) : (
+              <span role="img" aria-label={`${labels[key]} — bientôt disponible`} title={`${labels[key]} — bientôt disponible`} className={chip}>
+                <Icon className="size-[17px]" aria-hidden />
+              </span>
+            )}
           </li>
         )
       })}
