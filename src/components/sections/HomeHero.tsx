@@ -31,7 +31,7 @@ export function HomeHero() {
       highlights={heroHighlights}
       visual={
         <HeroImage src="/images/hero-home.webp" alt="Équipe de développeurs collaborant devant un écran de code">
-          <FloatingCard icon={CodeXml} title="Web & Mobile Apps" description="Des applications performantes et sur mesure." className="top-[6%] -left-2 sm:-left-8" />
+          <FloatingCard icon={CodeXml} title="Web & Mobile Apps" description="Des applications performantes et sur mesure." className="top-[5%] -left-2 sm:-left-6" />
           <FloatingCard
             icon={Cloud}
             title="Cloud & Infrastructure"
@@ -39,7 +39,7 @@ export function HomeHero() {
             className="top-[42%] -right-2 hidden sm:block lg:-right-8"
             delay={0.25}
           />
-          <FloatingCard icon={BrainCircuit} title="IA & Data" description="Des données qui créent de la valeur." className="-bottom-6 left-[8%]" delay={0.5} />
+          <FloatingCard icon={BrainCircuit} title="IA & Data" description="Des données qui créent de la valeur." className="bottom-[5%] left-[6%]" delay={0.5} />
         </HeroImage>
       }
     />

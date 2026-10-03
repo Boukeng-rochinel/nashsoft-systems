@@ -4,10 +4,12 @@ import { cn } from '@/lib/cn'
 /**
  * The Nashsoft "N" mark used as a large glowing graphic element
  * (CTA bands, hero backdrops) — the brand file itself, never redrawn.
+ * Callers set the positioning (`relative` / `absolute`): a built-in `relative`
+ * would win over a passed `absolute` and push surrounding content down.
  */
 export function BrandN({ className, glow = true }: { className?: string; glow?: boolean }) {
   return (
-    <div aria-hidden className={cn('pointer-events-none relative select-none', className)}>
+    <div aria-hidden className={cn('pointer-events-none select-none', className)}>
       {glow && <img src={site.logo.mark} alt="" className="absolute inset-0 size-full scale-110 object-contain opacity-70 blur-2xl" />}
       <img src={site.logo.mark} alt="" className="relative size-full object-contain drop-shadow-[0_10px_30px_rgb(8_125_255/0.55)]" draggable={false} />
     </div>

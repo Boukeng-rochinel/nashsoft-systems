@@ -20,14 +20,15 @@ export function HeroImage({ src, alt, children, className, priority = true }: He
   return (
     <div className={cn('relative mx-auto w-full max-w-[600px] lg:max-w-none', className)}>
       <div aria-hidden className={cn('absolute -inset-6 rounded-[2.5rem] blur-3xl', dark ? 'bg-brand/30' : 'bg-brand/15')} />
-      <BrandN className={cn('absolute -top-10 -right-6 w-36 sm:w-44', dark ? 'opacity-40' : 'opacity-25')} />
+      <BrandN className={cn('absolute -top-6 -right-4 w-28 sm:w-36', dark ? 'opacity-40' : 'opacity-25')} />
       <div
         className={cn(
           'relative overflow-hidden rounded-[1.75rem] p-1.5',
           dark ? 'bg-gradient-to-br from-cyan/40 via-brand/20 to-violet/40' : 'bg-gradient-to-br from-white via-brand-100 to-violet-50 shadow-[0_40px_80px_-40px_rgb(6_20_38/0.45)]',
         )}
       >
-        <div className="relative aspect-[4/3] overflow-hidden rounded-[1.4rem]">
+        {/* Desktop: height capped so the whole hero fits in one viewport. */}
+        <div className="relative aspect-[4/3] overflow-hidden rounded-[1.4rem] lg:aspect-auto lg:h-[min(calc(100dvh-11rem),34rem)]">
           <img
             src={src}
             alt={alt}

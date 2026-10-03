@@ -49,7 +49,7 @@ export function Lightbox({ items, theme, title, index, onClose, onNavigate }: Li
     <AnimatePresence>
       {item && (
         <motion.div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-8"
+          className="fixed inset-0 z-[60] flex items-center justify-center overflow-y-auto p-4 sm:p-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -89,7 +89,8 @@ export function Lightbox({ items, theme, title, index, onClose, onNavigate }: Li
                 transition={{ duration: 0.25 }}
                 className="flex w-full flex-col items-center"
               >
-                <div className={item.device === 'phone' ? 'w-[min(60vw,280px)]' : 'w-full max-w-4xl'}>
+                {/* Sized by viewport height as well as width so the device, caption and arrows always fit on screen. */}
+                <div className={item.device === 'phone' ? 'w-[min(60vw,280px,calc((100dvh-15rem)*0.48))]' : 'w-[min(100%,56rem,calc((100dvh-15rem)*1.5))]'}>
                   {item.device === 'phone' ? (
                     <Phone variant={item.variant} theme={theme} title={title} />
                   ) : (

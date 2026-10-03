@@ -27,7 +27,7 @@ export function CTABand({
       <div aria-hidden className="absolute top-1/2 right-[-6%] -z-10 size-80 -translate-y-1/2 rounded-full bg-cyan/20 blur-3xl" />
       <Container className="flex flex-col items-start gap-8 py-12 md:flex-row md:items-center md:justify-between md:py-14">
         <Reveal className="flex items-center gap-5 sm:gap-8">
-          <BrandN className="hidden size-20 shrink-0 sm:block lg:size-24" />
+          <BrandN className="relative hidden size-20 shrink-0 sm:block lg:size-24" />
           <div>
             {eyebrow && <p className="eyebrow mb-2 text-cyan">{eyebrow}</p>}
             <h2 className="text-2xl font-bold text-white sm:text-[1.7rem]">{title}</h2>
