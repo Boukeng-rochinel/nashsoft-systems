@@ -13,14 +13,24 @@ import { CookieConsent } from './CookieConsent'
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
   useEffect(() => {
-    if (hash) {
-      const el = document.getElementById(hash.slice(1))
+    if (!hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+      return
+    }
+    // The target may live in a lazy page that hasn't rendered yet: retry for up to ~1.5 s.
+    let frame = 0
+    let tries = 0
+    const seek = () => {
+      const el = document.getElementById(decodeURIComponent(hash.slice(1)))
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        return
+      } else if (tries++ < 90) {
+        frame = requestAnimationFrame(seek)
       }
     }
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    seek()
+    return () => cancelAnimationFrame(frame)
   }, [pathname, hash])
   return null
 }

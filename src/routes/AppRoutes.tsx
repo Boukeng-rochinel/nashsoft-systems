@@ -9,6 +9,7 @@ const AIDataPage = lazy(() => import('@/pages/AIDataPage'))
 const CloudPage = lazy(() => import('@/pages/CloudPage'))
 const ProjectsPage = lazy(() => import('@/pages/ProjectsPage'))
 const ProjectDetailPage = lazy(() => import('@/pages/ProjectDetailPage'))
+const SolutionsPage = lazy(() => import('@/pages/SolutionsPage'))
 const StartProjectPage = lazy(() => import('@/pages/StartProjectPage'))
 const ContactPage = lazy(() => import('@/pages/ContactPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
@@ -25,6 +26,7 @@ export function AppRoutes() {
         <Route path="services/:slug" element={<ServiceDetailPage />} />
         <Route path="projets" element={<ProjectsPage />} />
         <Route path="projets/:slug" element={<ProjectDetailPage />} />
+        <Route path="solutions" element={<SolutionsPage />} />
         <Route path="demarrer-un-projet" element={<StartProjectPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="*" element={<NotFoundPage />} />

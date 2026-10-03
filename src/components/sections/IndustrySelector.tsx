@@ -12,14 +12,16 @@ interface IndustrySelectorProps {
   industries?: Industry[]
   tone?: 'light' | 'dark'
   className?: string
+  /** Industry selected on first render (e.g. from `?secteur=`). Remount with a `key` to change it later. */
+  initialSlug?: string | null
 }
 
 /**
  * Accessible tabs (WAI-ARIA tablist): arrow keys / Home / End move between
  * industries; the panel content animates on change.
  */
-export function IndustrySelector({ industries = allIndustries, tone = 'light', className }: IndustrySelectorProps) {
-  const [index, setIndex] = useState(0)
+export function IndustrySelector({ industries = allIndustries, tone = 'light', className, initialSlug }: IndustrySelectorProps) {
+  const [index, setIndex] = useState(() => Math.max(0, industries.findIndex((i) => i.slug === initialSlug)))
   const tabs = useRef<Array<HTMLButtonElement | null>>([])
   const baseId = useId()
   const dark = tone === 'dark'
