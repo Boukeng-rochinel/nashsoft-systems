@@ -41,3 +41,9 @@ Each file was cropped, resized and converted to WebP for the web.
 | `article-ai.webp` | https://images.unsplash.com/photo-1526628953301-3e589a6a8b74 |
 | `article-backup.webp` | https://images.unsplash.com/photo-1506399558188-acca6f8cbf41 |
 | `article-odoo.webp` | https://images.unsplash.com/photo-1711672284661-bd70e38f31b2 |
+| `ai-ml.webp` | https://images.unsplash.com/photo-1517245386807-bb43f82c33c4 |
+| `ai-vision.webp` | https://images.unsplash.com/photo-1581091226825-a6a2a5aee158 |
+| `ai-predictive.webp` | https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f |
+| `ai-automation.webp` | https://images.unsplash.com/photo-1551836022-d5d88e9218df |
+| `ai-dashboards.webp` | https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3 |
+| `ai-assistants.webp` | https://images.unsplash.com/photo-1563986768609-322da13575f3 |

@@ -3,10 +3,11 @@ import { getServiceBySlug } from '@/data/services'
 import { usePageMeta } from '@/hooks/usePageMeta'
 import { ServiceDetailView } from '@/components/sections/ServiceDetailView'
 import type { Service } from '@/types'
+import { SoftwareHeroVisual } from '@/components/visuals/SoftwareHeroVisual'
 
 function ServiceDetail({ service }: { service: Service }) {
   usePageMeta({ title: service.title, description: `${service.tagline} ${service.description}` })
-  return <ServiceDetailView service={service} />
+  return <ServiceDetailView service={service} heroVisual={service.slug === 'developpement-logiciel' ? <SoftwareHeroVisual /> : undefined} />
 }
 
 export default function ServiceDetailPage() {

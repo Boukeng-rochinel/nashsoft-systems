@@ -1,11 +1,10 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { Check, CirclePlay, Gauge, Headphones, Layers, ShieldCheck, type LucideIcon } from 'lucide-react'
+import { Check, CirclePlay, CodeXml, Headphones, LockKeyhole, ShieldCheck, type LucideIcon } from 'lucide-react'
 import type { Project, ProjectCategory, Service } from '@/types'
 import { services, serviceHref } from '@/data/services'
 import { projects } from '@/data/projects'
 import { getTechnology } from '@/data/technologies'
-import { whyNashsoft } from '@/data/site'
 import { START_PROJECT_HREF } from '@/data/navigation'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
@@ -19,11 +18,12 @@ import { TechnologyCloud } from './TechnologyCloud'
 import { FeatureGrid } from './FeatureGrid'
 import { ProjectCard } from './ProjectCard'
 import { CTABand } from './CTABand'
+import { WhyUs } from './WhyUs'
 import { AnimatedGrid } from '@/components/visuals/AnimatedGrid'
 import { GlassPanel } from '@/components/visuals/GlassPanel'
 import { FloatingCard } from '@/components/visuals/FloatingCard'
 
-const highlightIcons: LucideIcon[] = [Layers, Gauge, ShieldCheck, Headphones]
+const highlightIcons: LucideIcon[] = [CodeXml, ShieldCheck, LockKeyhole, Headphones]
 
 /** Highlights the last two words of a sentence (design: "Des logiciels sur mesure pour vos ambitions."). */
 function splitTitle(text: string): ReactNode {
@@ -73,8 +73,8 @@ export function ServiceDetailView({ service, heroTitle, heroVisual, children, sh
   return (
     <>
       <PageHero
-        breadcrumbs={[{ label: 'Accueil', href: '/' }, { label: 'Services', href: '/services' }, { label: service.title }]}
         eyebrow={service.title}
+        eyebrowIcon={service.icon}
         title={heroTitle ?? splitTitle(service.tagline)}
         description={service.longDescription}
         actions={
@@ -88,6 +88,7 @@ export function ServiceDetailView({ service, heroTitle, heroVisual, children, sh
           </>
         }
         highlights={service.highlights.map((h, i) => ({ title: h, description: '', icon: highlightIcons[i % highlightIcons.length] }))}
+        highlightStyle="tiles"
         visual={
           heroVisual ?? (
             <HeroImage src={service.image} alt={service.title}>
@@ -121,7 +122,7 @@ export function ServiceDetailView({ service, heroTitle, heroVisual, children, sh
             Parler de votre projet
           </ButtonLink>
         </div>
-        <ProcessSteps variant="cards" cols="lg:grid-cols-6" className="mt-10" />
+        <ProcessSteps variant="cards" className="mt-14" />
       </Section>
 
       {/* Technologies */}
@@ -196,18 +197,7 @@ export function ServiceDetailView({ service, heroTitle, heroVisual, children, sh
 
       {/* Why us */}
       <Section tone="white">
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_2fr] lg:items-center">
-          <SectionTitle
-            eyebrow="Pourquoi nous choisir"
-            title={
-              <>
-                Une expertise qui fait <GradientText>la différence</GradientText>
-              </>
-            }
-            description="Nous ne sommes pas seulement des développeurs. Nous sommes votre partenaire technologique pour la réussite de vos projets."
-          />
-          <FeatureGrid items={whyNashsoft} columns={2} />
-        </div>
+        <WhyUs />
       </Section>
 
       {/* Other services */}

@@ -22,7 +22,7 @@ export function FlowDiagram({ nodes, tone = 'dark', className }: { nodes: FlowNo
       whileInView="show"
       viewport={revealViewport}
       variants={{ hidden: {}, show: { transition: { staggerChildren: 0.15 } } }}
-      className={cn('flex flex-col items-stretch gap-0 lg:flex-row lg:items-center', className)}
+      className={cn('flex flex-col items-stretch gap-0 lg:flex-row', dark ? 'lg:items-start' : 'lg:items-center', className)}
       aria-label="Schéma du processus"
     >
       {nodes.map((node, i) => (
@@ -30,13 +30,11 @@ export function FlowDiagram({ nodes, tone = 'dark', className }: { nodes: FlowNo
           <motion.li
             variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } } }}
             className={cn(
-              'relative flex items-center gap-4 rounded-2xl p-4 lg:flex-1 lg:flex-col lg:p-5 lg:text-center',
-              dark
-                ? 'border border-brand/25 bg-navy-900/80 shadow-[0_0_40px_-18px_rgb(0_198_255/0.6)] backdrop-blur'
-                : 'border border-line bg-white shadow-card',
+              'relative flex items-center gap-4 lg:flex-1 lg:flex-col lg:text-center',
+              dark ? 'py-1' : 'rounded-2xl border border-line bg-white p-4 shadow-card lg:p-5',
             )}
           >
-            <span className="eyebrow absolute top-3 right-4 text-[0.6rem] text-slate-500 lg:top-3 lg:right-3">0{i + 1}</span>
+            {!dark && <span className="eyebrow absolute top-3 right-4 text-[0.6rem] text-slate-500 lg:top-3 lg:right-3">0{i + 1}</span>}
             <span
               aria-hidden
               className={cn(
@@ -48,12 +46,20 @@ export function FlowDiagram({ nodes, tone = 'dark', className }: { nodes: FlowNo
               <node.icon className="size-6" strokeWidth={1.7} />
             </span>
             <div>
+              {dark && <p className="eyebrow mb-1 text-[0.6rem] text-cyan/70">0{i + 1}</p>}
               <p className={cn('font-display font-semibold', dark ? 'text-white' : 'text-navy')}>{node.label}</p>
               <p className={cn('mt-1 text-xs leading-relaxed', dark ? 'text-slate-400' : 'text-slate')}>{node.caption}</p>
             </div>
           </motion.li>
           {i < nodes.length - 1 && (
-            <li aria-hidden className="relative mx-auto flex h-8 w-px items-center justify-center lg:mx-0 lg:h-px lg:w-10 lg:shrink-0">
+            <li
+              aria-hidden
+              className={cn(
+                'relative flex h-8 w-px items-center justify-center lg:mx-0 lg:h-px lg:w-10 lg:shrink-0',
+                // Without cards, connectors line up with the icon centres instead of the card centres.
+                dark ? 'ml-6 lg:mt-7' : 'mx-auto',
+              )}
+            >
               <span className={cn('absolute inset-0', dark ? 'bg-gradient-to-b from-cyan/60 to-brand/40 lg:bg-gradient-to-r' : 'bg-line-strong')} />
               <span className="absolute size-1.5 animate-[flow-y_2s_linear_infinite] rounded-full bg-cyan shadow-[0_0_10px_2px_rgb(0_198_255/0.7)] lg:animate-[flow-x_2s_linear_infinite]" style={{ animationDelay: `${i * 0.3}s` }} />
             </li>

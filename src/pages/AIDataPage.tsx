@@ -1,29 +1,17 @@
 import { Link } from 'react-router-dom'
-import {
-  ArrowRight,
-  Bot,
-  BrainCircuit,
-  ChartColumn,
-  ChartLine,
-  Cpu,
-  Database,
-  Lightbulb,
-  ScanEye,
-  Sparkles,
-  Target,
-  Workflow,
-} from 'lucide-react'
+import { ArrowRight, Bot, BrainCircuit, ChartLine, Cpu, Database, Lightbulb, ScanEye, Sparkles, Target, Workflow } from 'lucide-react'
 import { getServiceBySlug } from '@/data/services'
 import { getProjectBySlug, projectHref } from '@/data/projects'
+import { aiExpertises } from '@/data/expertises'
 import { usePageMeta } from '@/hooks/usePageMeta'
 import type { Feature } from '@/types'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { GradientText } from '@/components/ui/GradientText'
-import { Reveal } from '@/components/ui/Reveal'
+import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { ServiceDetailView } from '@/components/sections/ServiceDetailView'
 import { HeroImage } from '@/components/sections/HeroImage'
-import { FeatureGrid } from '@/components/sections/FeatureGrid'
+import { ExpertiseGrid } from '@/components/sections/ExpertiseGrid'
 import { AnimatedGrid } from '@/components/visuals/AnimatedGrid'
 import { FlowDiagram } from '@/components/visuals/FlowDiagram'
 import { FloatingCard } from '@/components/visuals/FloatingCard'
@@ -35,15 +23,6 @@ const pipeline = [
   { label: 'Modèle IA', caption: 'Entraînement, évaluation et déploiement.', icon: BrainCircuit },
   { label: 'Insights', caption: 'Tableaux de bord, alertes et prévisions.', icon: ChartLine },
   { label: 'Décision', caption: 'Des actions éclairées et mesurables.', icon: Target },
-]
-
-const aiServices: Feature[] = [
-  { title: 'Machine Learning', description: 'Modèles de classification, de prévision et de recommandation entraînés sur vos données.', icon: BrainCircuit },
-  { title: 'Vision par ordinateur', description: 'Reconnaissance d’images, contrôle qualité visuel et lecture de documents.', icon: ScanEye },
-  { title: 'Analyse prédictive', description: 'Anticipez la demande, les risques de défaut ou le départ de clients.', icon: ChartLine },
-  { title: 'Automatisation IA', description: 'Extraction de données de factures et formulaires, tri et routage automatique.', icon: Workflow },
-  { title: 'Tableaux de bord data', description: 'Indicateurs clés en temps réel pour vos décideurs, sur ordinateur et mobile.', icon: ChartColumn },
-  { title: 'Assistants intelligents', description: 'Chatbots et assistants connectés à votre documentation et à vos outils.', icon: Bot },
 ]
 
 const principles: Feature[] = [
@@ -110,28 +89,42 @@ export default function AIDataPage() {
               Des solutions IA <GradientText>concrètes</GradientText> pour votre activité
             </>
           }
-          description="Six domaines d’intervention, toujours au service d’un objectif mesurable."
+          description="Six domaines d’intervention, toujours au service d’un objectif mesurable. Cliquez sur une expertise pour en savoir plus."
           className="max-w-2xl"
         />
-        <FeatureGrid items={aiServices} columns={3} className="mt-12" />
+        <ExpertiseGrid items={aiExpertises} service={service.slug} className="mt-12" />
       </Section>
 
       {/* Approach + case study */}
       <Section tone="light">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div>
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-12">
+          <div className="flex flex-col">
             <SectionTitle eyebrow="Notre approche" title="Une IA pragmatique, utile et responsable" />
-            <div className="mt-8">
-              <FeatureGrid items={principles} variant="compact" columns={1} />
-            </div>
+            <RevealGroup className="mt-8 grid flex-1 gap-4 lg:auto-rows-fr">
+              {principles.map((p) => (
+                <RevealItem key={p.title} className="h-full">
+                  <div className="flex h-full items-center gap-4 rounded-2xl border border-line bg-white p-5 shadow-card">
+                    {p.icon && (
+                      <span aria-hidden className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand">
+                        <p.icon className="size-5" strokeWidth={1.8} />
+                      </span>
+                    )}
+                    <div>
+                      <h3 className="font-display text-base font-semibold text-navy">{p.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-slate">{p.description}</p>
+                    </div>
+                  </div>
+                </RevealItem>
+              ))}
+            </RevealGroup>
           </div>
           {autofix && (
-            <Reveal>
+            <Reveal className="h-full">
               <Link
                 to={projectHref(autofix.slug)}
-                className="group block overflow-hidden rounded-2xl border border-line bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
               >
-                <div className="aspect-[16/10] overflow-hidden">
+                <div className="aspect-[16/10] overflow-hidden lg:aspect-auto lg:min-h-64 lg:flex-1">
                   <img
                     src={autofix.image}
                     alt={autofix.imageAlt}

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import type { LucideIcon } from 'lucide-react'
 import { motion } from 'framer-motion'
 import type { Feature } from '@/types'
 import { cn } from '@/lib/cn'
@@ -11,10 +12,14 @@ import { AnimatedGrid, LightStreaks } from '@/components/visuals/AnimatedGrid'
 interface PageHeroProps {
   breadcrumbs?: Crumb[]
   eyebrow?: string
+  /** Renders the eyebrow as a tinted pill led by this icon. */
+  eyebrowIcon?: LucideIcon
   title: ReactNode
   description?: ReactNode
   actions?: ReactNode
   highlights?: Feature[]
+  /** `icons`: round outlined icons (default) · `tiles`: tinted square tiles separated by dividers. */
+  highlightStyle?: 'icons' | 'tiles'
   visual?: ReactNode
   className?: string
 }
@@ -24,14 +29,39 @@ interface PageHeroProps {
  * light enterprise (default, like the homepage) or dark technology (inner-page designs).
  * Highlighted words should use <GradientText> — it adapts automatically.
  */
-export function PageHero({ breadcrumbs, eyebrow, title, description, actions, highlights, visual, className }: PageHeroProps) {
+/** Tile accents for `highlightStyle="tiles"`: blue · green · violet · orange. */
+const tileTones = [
+  'bg-brand-50 text-brand',
+  'bg-emerald-50 text-emerald-600',
+  'bg-violet-50 text-violet',
+  'bg-orange-50 text-orange-500',
+]
+
+export function PageHero({
+  breadcrumbs,
+  eyebrow,
+  eyebrowIcon: EyebrowIcon,
+  title,
+  description,
+  actions,
+  highlights,
+  highlightStyle = 'icons',
+  visual,
+  className,
+}: PageHeroProps) {
   const { theme } = useTheme()
   const dark = theme === 'dark'
 
   return (
     <section
       data-theme={theme}
-      className={cn('relative isolate overflow-hidden', dark ? 'bg-navy-950 text-slate-300' : 'bg-white text-ink', className)}
+      className={cn(
+        'relative isolate overflow-hidden',
+        // One viewport on desktop: the hero fills the screen below the 80px header, never more.
+        visual && 'lg:flex lg:min-h-[calc(100dvh-5rem)] lg:items-center',
+        dark ? 'bg-navy-950 text-slate-300' : 'bg-white text-ink',
+        className,
+      )}
     >
       {dark ? (
         <>
@@ -45,14 +75,31 @@ export function PageHero({ breadcrumbs, eyebrow, title, description, actions, hi
           <AnimatedGrid tone="light" glow={false} className="-z-10 opacity-70" />
         </>
       )}
-      <Container className={cn('grid items-center gap-12 pt-10 pb-14 md:pt-14 md:pb-20', visual && 'lg:grid-cols-[1.05fr_1fr] lg:gap-12')}>
+      <Container
+        className={cn(
+          'grid w-full items-center gap-12 pt-10 pb-14 md:pt-14 md:pb-20',
+          visual && 'lg:grid-cols-[1.05fr_1fr] lg:items-start lg:gap-12 lg:py-10',
+        )}
+      >
         <motion.div variants={stagger(0.09, 0.05)} initial="hidden" animate="show" className="relative max-w-2xl">
           {breadcrumbs && (
             <motion.div variants={fadeUp} className="mb-5">
               <Breadcrumbs items={breadcrumbs} tone={theme} />
             </motion.div>
           )}
-          {eyebrow && (
+          {eyebrow && EyebrowIcon && (
+            <motion.p
+              variants={fadeUp}
+              className={cn(
+                'eyebrow mb-6 inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5',
+                dark ? 'bg-white/[0.06] text-cyan ring-1 ring-white/10' : 'bg-brand-50 text-brand',
+              )}
+            >
+              <EyebrowIcon aria-hidden className="size-4" strokeWidth={2} />
+              {eyebrow}
+            </motion.p>
+          )}
+          {eyebrow && !EyebrowIcon && (
             <motion.p variants={fadeUp} className={cn('eyebrow mb-4 flex items-center gap-3', dark ? 'text-cyan' : 'text-brand')}>
               {eyebrow}
               <span aria-hidden className={cn('h-px w-8', dark ? 'bg-cyan/60' : 'bg-brand/50')} />
@@ -60,7 +107,7 @@ export function PageHero({ breadcrumbs, eyebrow, title, description, actions, hi
           )}
           <motion.h1
             variants={fadeUp}
-            className={cn('text-[2.15rem] leading-[1.08] font-extrabold sm:text-5xl lg:text-[3.2rem]', dark ? 'text-white' : 'text-navy')}
+            className={cn('text-[2.15rem] leading-[1.08] font-extrabold sm:text-5xl lg:text-[3rem] xl:text-[3.2rem]', dark ? 'text-white' : 'text-navy')}
           >
             {title}
           </motion.h1>
@@ -70,12 +117,32 @@ export function PageHero({ breadcrumbs, eyebrow, title, description, actions, hi
             </motion.p>
           )}
           {actions && (
-            <motion.div variants={fadeUp} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <motion.div variants={fadeUp} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:mt-7">
               {actions}
             </motion.div>
           )}
-          {highlights && highlights.length > 0 && (
-            <motion.ul variants={fadeUp} className="mt-10 grid grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-4 sm:gap-6">
+          {highlights && highlights.length > 0 && highlightStyle === 'tiles' && (
+            <motion.ul variants={fadeUp} className="mt-10 grid grid-cols-2 gap-x-4 gap-y-5 sm:flex sm:gap-0 lg:mt-8">
+              {highlights.map((h, i) => (
+                <li
+                  key={h.title}
+                  className={cn(
+                    'flex items-center gap-3 sm:px-5 sm:first:pl-0',
+                    i > 0 && (dark ? 'sm:border-l sm:border-white/10' : 'sm:border-l sm:border-line'),
+                  )}
+                >
+                  {h.icon && (
+                    <span aria-hidden className={cn('inline-flex size-11 shrink-0 items-center justify-center rounded-xl', tileTones[i % tileTones.length])}>
+                      <h.icon className="size-5" strokeWidth={1.8} />
+                    </span>
+                  )}
+                  <span className={cn('max-w-[7.5rem] text-[0.8rem] leading-snug', dark ? 'text-slate-300' : 'text-slate')}>{h.title}</span>
+                </li>
+              ))}
+            </motion.ul>
+          )}
+          {highlights && highlights.length > 0 && highlightStyle === 'icons' && (
+            <motion.ul variants={fadeUp} className="mt-10 grid grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-4 sm:gap-6 lg:mt-8">
               {highlights.map((h) => (
                 <li key={h.title} className="flex items-center gap-2.5">
                   {h.icon && (

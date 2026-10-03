@@ -1,6 +1,6 @@
 import {
+  MonitorCog,
   Award,
-  Blocks,
   Boxes,
   Cpu,
   Gem,
@@ -19,9 +19,8 @@ import {
   Target,
   Eye,
   Users,
-  Zap,
 } from 'lucide-react'
-import type { Feature, ProcessStep, Stat } from '@/types'
+import type { Feature, LinkFeature, ProcessStep, Stat } from '@/types'
 
 export const site = {
   name: 'Nashsoft Systems',
@@ -81,26 +80,30 @@ export const processSteps: ProcessStep[] = [
   { title: 'Évolution', description: 'Support, maintenance et croissance continue.', icon: TrendingUp },
 ]
 
-export const whyNashsoft: Feature[] = [
+export const whyNashsoft: LinkFeature[] = [
   {
     title: 'Solutions sur mesure',
     description: 'Chaque projet est unique. Nous concevons des solutions adaptées à vos objectifs, à votre secteur et à votre budget.',
-    icon: Blocks,
+    icon: CodeXml,
+    href: '/solutions',
   },
   {
     title: 'Technologies modernes',
     description: 'React, TypeScript, Flutter, Node.js, Python, cloud : un stack éprouvé pour des produits rapides et évolutifs.',
-    icon: Zap,
+    icon: MonitorCog,
+    href: '/services',
   },
   {
     title: 'Ingénierie rigoureuse',
     description: 'Architecture claire, code revu, tests automatisés et documentation : la qualité est intégrée dès le départ.',
     icon: ShieldCheck,
+    href: '/projets',
   },
   {
     title: 'Accompagnement durable',
     description: 'Nous restons à vos côtés après la livraison : maintenance, évolutions et conseils pour faire grandir votre produit.',
     icon: Handshake,
+    href: '/a-propos',
   },
 ]
 
