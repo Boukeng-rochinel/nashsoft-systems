@@ -27,17 +27,17 @@
 ## Pages
 
 - [x] Home
-- [ ] About
+- [x] About
 - [x] Services
 - [x] Software Development
 - [x] AI & Data
 - [x] Cloud
-- [ ] Solutions
+- [x] Solutions
 - [x] Projects
 - [x] Project Details
-- [ ] Careers
-- [ ] Insights
-- [ ] Start a Project
+- [x] Careers
+- [x] Insights
+- [x] Start a Project
 - [x] 404
 
 ## Interactive Features
@@ -76,7 +76,7 @@
 ## Git
 
 - [x] Feature branch
-- [ ] Logical commits
+- [x] Logical commits
 - [ ] Push branch
 - [ ] Create PR
 - [ ] Review PR
