@@ -8,7 +8,7 @@ import { CardSkeletonGrid } from '@/components/ui/CardSkeleton'
 import { ChatLauncher } from '@/components/chat/ChatLauncher'
 import { Navbar } from './Navbar'
 import { Footer } from './Footer'
-
+import { CookieConsent } from './CookieConsent'
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
@@ -73,6 +73,7 @@ export function Layout() {
       </main>
       <Footer tone={tone} />
       <ChatLauncher />
+      <CookieConsent />
     </div>
   )
 }

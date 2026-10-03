@@ -3,6 +3,7 @@ import { Mail, MapPin, Phone } from 'lucide-react'
 import { footerNav } from '@/data/navigation'
 import { site } from '@/data/site'
 import { cn } from '@/lib/cn'
+import { openConsentSettings } from '@/lib/consent'
 import { Container } from '@/components/ui/Container'
 import { Logo } from '@/components/ui/Logo'
 import { NewsletterForm } from '@/components/forms/NewsletterForm'
@@ -87,6 +88,11 @@ export function Footer({ tone }: { tone: 'light' | 'dark' }) {
                 </Link>
               </li>
             ))}
+            <li>
+              <button type="button" onClick={openConsentSettings} className={dark ? 'hover:text-cyan' : 'hover:text-brand'}>
+                Gérer les cookies
+              </button>
+            </li>
           </ul>
         </Container>
       </div>
