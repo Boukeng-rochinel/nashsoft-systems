@@ -19,8 +19,14 @@ export const CONSENT_VERSION = 1
 const STORAGE_KEY = 'nashsoft-consent'
 /** Fired to reopen the banner (e.g. from the footer "Gérer les cookies" link). */
 export const CONSENT_OPEN_EVENT = 'nashsoft:open-consent'
+/** Fired after the visitor makes (or changes) a choice. */
+export const CONSENT_CHANGE_EVENT = 'nashsoft:consent-change'
+
+/** In-memory copy so the choice holds for the visit even when storage is blocked. */
+let sessionChoice: ConsentRecord | null = null
 
 export function readConsent(): ConsentRecord | null {
+  if (sessionChoice) return sessionChoice
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY)
     if (!raw) return null
@@ -41,6 +47,8 @@ export function saveConsent(level: ConsentLevel): ConsentRecord {
   } catch {
     /* storage unavailable (private mode): the choice holds for this visit only */
   }
+  sessionChoice = record
+  window.dispatchEvent(new Event(CONSENT_CHANGE_EVENT))
   return record
 }
 
@@ -48,6 +56,12 @@ export function saveConsent(level: ConsentLevel): ConsentRecord {
 export function hasConsent(purpose: 'essential' | 'analytics' | 'marketing'): boolean {
   if (purpose === 'essential') return true
   return readConsent()?.level === 'all'
+}
+
+/** Subscribes to consent changes; returns the unsubscribe function. */
+export function onConsentChange(listener: () => void): () => void {
+  window.addEventListener(CONSENT_CHANGE_EVENT, listener)
+  return () => window.removeEventListener(CONSENT_CHANGE_EVENT, listener)
 }
 
 export function openConsentSettings() {

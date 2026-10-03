@@ -1,4 +1,4 @@
-import type { ContactRequest, NewsletterRequest } from '@/lib/validation'
+import type { ContactMessage, ContactRequest, NewsletterRequest } from '@/lib/validation'
 import { site } from '@/data/site'
 
 /**
@@ -48,6 +48,18 @@ export function buildContactMailto(data: ContactRequest): string {
 export async function submitContactRequest(data: ContactRequest): Promise<SubmitResult> {
   if (CONTACT_ENDPOINT) return postJson(CONTACT_ENDPOINT, { ...data, source: 'website', submittedAt: new Date().toISOString() })
   return { status: 'mailto', href: buildContactMailto(data) }
+}
+
+export async function submitContactMessage(data: ContactMessage): Promise<SubmitResult> {
+  const { website, ...payload } = data
+  // Bots fill the hidden honeypot field: pretend success, send nothing.
+  if (website) return { status: 'sent' }
+  if (CONTACT_ENDPOINT) return postJson(CONTACT_ENDPOINT, { ...payload, kind: 'message', source: 'website', submittedAt: new Date().toISOString() })
+  const subject = `${payload.subject ?? 'Message'} — ${payload.fullName}`
+  const body = [`Nom : ${payload.fullName}`, `E-mail : ${payload.email}`, payload.phone ? `Téléphone : ${payload.phone}` : null, '', payload.message]
+    .filter((l): l is string => l !== null)
+    .join('\n')
+  return { status: 'mailto', href: `mailto:${site.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}` }
 }
 
 export async function subscribeNewsletter(data: NewsletterRequest): Promise<SubmitResult> {

@@ -36,23 +36,20 @@ export function NewsletterForm({ tone = 'light' }: { tone?: 'light' | 'dark' }) 
       <label htmlFor={`${id}-email`} className="sr-only">
         Votre adresse e-mail
       </label>
-      <div
-        className={cn(
-          'flex items-center rounded-full border p-1 pl-4 transition-colors focus-within:border-brand',
-          dark ? 'border-white/15 bg-white/5' : 'border-line-strong bg-white',
-          errors.email && 'border-red-400',
-        )}
-      >
+      <div className="relative flex items-center">
         <input
           id={`${id}-email`}
           type="email"
           autoComplete="email"
-          placeholder="Votre email"
+          placeholder="Votre adresse email"
           aria-invalid={errors.email ? 'true' : 'false'}
           aria-describedby={errors.email ? `${id}-error` : done ? `${id}-status` : undefined}
           className={cn(
-            'min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-slate',
-            dark ? 'text-white placeholder:text-slate-400' : 'text-navy',
+            'h-14 w-full rounded-full border pr-16 pl-6 text-[0.92rem] transition-[border-color,box-shadow] outline-none focus:ring-4',
+            dark
+              ? 'border-white/15 bg-white/5 text-white placeholder:text-slate-400 focus:border-cyan/60 focus:ring-cyan/10'
+              : 'border-line-strong bg-white text-navy placeholder:text-slate focus:border-brand focus:ring-brand/10',
+            errors.email && 'border-red-400',
           )}
           {...register('email')}
         />
@@ -60,9 +57,9 @@ export function NewsletterForm({ tone = 'light' }: { tone?: 'light' | 'dark' }) 
           type="submit"
           disabled={isSubmitting}
           aria-label="S’inscrire à la newsletter"
-          className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-brand-gradient text-white transition-transform hover:scale-105 disabled:opacity-60"
+          className="absolute -right-1 inline-flex size-[60px] shrink-0 items-center justify-center rounded-full bg-brand text-white shadow-[0_10px_24px_-8px_rgb(8_125_255/0.8)] transition-all hover:scale-105 hover:bg-brand-600 disabled:opacity-60"
         >
-          {isSubmitting ? <LoaderCircle aria-hidden className="size-4 animate-spin" /> : done ? <Check aria-hidden className="size-4" /> : <ArrowRight aria-hidden className="size-4" />}
+          {isSubmitting ? <LoaderCircle aria-hidden className="size-5 animate-spin" /> : done ? <Check aria-hidden className="size-5" /> : <ArrowRight aria-hidden className="size-5" />}
         </button>
       </div>
       {errors.email && (
