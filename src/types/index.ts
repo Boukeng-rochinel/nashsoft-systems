@@ -10,6 +10,24 @@ export interface Feature {
   icon?: LucideIcon
 }
 
+/** Feature card that links to a page. */
+export interface LinkFeature extends Feature {
+  icon: LucideIcon
+  href: string
+}
+
+/** A service capability with photo and detail panel (e.g. "Vision par ordinateur"). */
+export interface Expertise extends Feature {
+  icon: LucideIcon
+  image: string
+  imageAlt: string
+  /** Longer pitch shown in the detail panel. */
+  details: string
+  useCases: string[]
+  /** Technology names, resolved with getTechnology(). */
+  technologies: string[]
+}
+
 export interface Stat {
   value: number
   suffix?: string
@@ -37,10 +55,46 @@ export interface NavChild {
   icon: LucideIcon
 }
 
+export interface NavLinkItem {
+  label: string
+  href: string
+}
+
+/** A titled list of links inside a mega-menu column. */
+export interface NavGroup {
+  title: string
+  links: NavLinkItem[]
+  /** Lay the links out in two sub-columns. */
+  split?: boolean
+}
+
+/** A product showcased in the "Produits" mega menu. */
+export interface NavProduct {
+  title: string
+  summary: string
+  /** Industry and main technologies, e.g. "Restauration · React, Node.js". */
+  meta: string
+  href: string
+  isNew?: boolean
+}
+
+/**
+ * Desktop mega menu.
+ * `links`: columns of groups separated by thin dividers.
+ * `products`: product cards with a "Voir le produit" button.
+ * `brand`: company pitch and contact on the left, link groups on the right.
+ */
+export type NavMenu =
+  | { kind: 'links'; columns: NavGroup[][]; cta: NavLinkItem }
+  | { kind: 'products'; products: NavProduct[]; cta: NavLinkItem }
+  | { kind: 'brand'; groups: NavGroup[]; cta: NavLinkItem }
+
 export interface NavItem {
   label: string
   href: string
+  /** Flat list used by the mobile menu. */
   children?: NavChild[]
+  menu?: NavMenu
 }
 
 /* ------------------------------------------------------------------ */
