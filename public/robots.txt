@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
-Sitemap: https://nashsoft.cm/sitemap.xml
+Sitemap: https://nashsoft.orviat.com/sitemap.xml

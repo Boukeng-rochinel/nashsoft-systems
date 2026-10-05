@@ -1,6 +1,7 @@
 import { Quote, Users } from 'lucide-react'
 import { missionVision, site, stats, teamDisciplines, values } from '@/data/site'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { pageSeo } from '@/data/seo'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { GradientText } from '@/components/ui/GradientText'
@@ -18,11 +19,7 @@ import { BrandN } from '@/components/visuals/BrandN'
 const teamImages = ['/images/team-dev.webp', '/images/team-design.webp', '/images/team-pm.webp', '/images/team-cloud.webp']
 
 export default function AboutPage() {
-  usePageMeta({
-    title: 'À propos',
-    description:
-      'Nashsoft Systems est une entreprise technologique basée à Douala qui conçoit des solutions digitales innovantes pour accompagner les entreprises et organisations dans leur transformation numérique.',
-  })
+  usePageMeta(pageSeo.about)
 
   return (
     <>

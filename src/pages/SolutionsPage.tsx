@@ -5,6 +5,7 @@ import { solutionCategories } from '@/data/industries'
 import { stats } from '@/data/site'
 import { START_PROJECT_HREF } from '@/data/navigation'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { pageSeo } from '@/data/seo'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { GradientText } from '@/components/ui/GradientText'
@@ -44,11 +45,7 @@ const customSteps: ProcessStep[] = [
 ]
 
 export default function SolutionsPage() {
-  usePageMeta({
-    title: 'Solutions',
-    description:
-      'Solutions digitales sur mesure pour l’éducation, la finance, la santé, le retail, la logistique, l’hôtellerie et le secteur public : ERP, e-commerce, gestion d’entreprise et plus.',
-  })
+  usePageMeta(pageSeo.solutions)
   const [params] = useSearchParams()
   const sector = params.get('secteur')
   const projects = stats[0]

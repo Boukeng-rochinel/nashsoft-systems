@@ -2,7 +2,7 @@ import { featuredServices } from '@/data/services'
 import { featuredProjects } from '@/data/projects'
 import { coreStack } from '@/data/technologies'
 import { usePageMeta } from '@/hooks/usePageMeta'
-import { site } from '@/data/site'
+import { pageSeo } from '@/data/seo'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { GradientText } from '@/components/ui/GradientText'
@@ -26,7 +26,7 @@ import { industries } from '@/data/industries'
 const homeIndustries = industries.filter((i) => ['education', 'finance', 'sante', 'retail', 'logistique', 'gouvernement'].includes(i.slug))
 
 export default function HomePage() {
-  usePageMeta({ title: site.name, description: site.description })
+  usePageMeta(pageSeo.home)
 
   return (
     <>

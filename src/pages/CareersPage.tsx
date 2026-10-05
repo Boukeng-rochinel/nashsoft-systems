@@ -5,6 +5,7 @@ import type { Job } from '@/types'
 import { jobs, perks } from '@/data/jobs'
 import { site } from '@/data/site'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { pageSeo } from '@/data/seo'
 import { cn } from '@/lib/cn'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
@@ -106,10 +107,7 @@ function JobItem({ job }: { job: Job }) {
 
 /** Careers: why join, open positions (accordion), hiring process and spontaneous application. */
 export default function CareersPage() {
-  usePageMeta({
-    title: 'Carrières',
-    description: 'Rejoignez Nashsoft Systems à Douala : postes ouverts en développement web, mobile, backend, design UI/UX et stages.',
-  })
+  usePageMeta(pageSeo.careers)
 
   return (
     <>

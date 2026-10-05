@@ -4,6 +4,7 @@ import { getServiceBySlug } from '@/data/services'
 import { getProjectBySlug, projectHref } from '@/data/projects'
 import { aiExpertises } from '@/data/expertises'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { pageSeo } from '@/data/seo'
 import type { Feature } from '@/types'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
@@ -34,11 +35,7 @@ const principles: Feature[] = [
 export default function AIDataPage() {
   const service = getServiceBySlug('ia-data')!
   const autofix = getProjectBySlug('autofix-car')
-  usePageMeta({
-    title: 'IA & Data',
-    description:
-      'Transformez vos données en intelligence : machine learning, vision par ordinateur, analyse prédictive, automatisation et tableaux de bord avec Nashsoft Systems.',
-  })
+  usePageMeta(pageSeo.aiData)
 
   return (
     <ServiceDetailView

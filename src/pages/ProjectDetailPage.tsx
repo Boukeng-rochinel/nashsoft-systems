@@ -6,6 +6,7 @@ import { getProjectBySlug, projectHref, projects } from '@/data/projects'
 import { getTechnology } from '@/data/technologies'
 import { START_PROJECT_HREF } from '@/data/navigation'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { projectSeo } from '@/data/seo'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { GradientText } from '@/components/ui/GradientText'
@@ -83,7 +84,7 @@ function GalleryThumb({ project, index, onOpen, large = false }: { project: Proj
 }
 
 function ProjectDetail({ project }: { project: Project }) {
-  usePageMeta({ title: `${project.title} — Étude de cas`, description: project.summary, type: 'article' })
+  usePageMeta(projectSeo(project))
   const [lightbox, setLightbox] = useState<number | null>(null)
   const idx = projects.findIndex((p) => p.slug === project.slug)
   const prev = projects[(idx - 1 + projects.length) % projects.length]

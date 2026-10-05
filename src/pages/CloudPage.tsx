@@ -17,6 +17,7 @@ import {
 } from 'lucide-react'
 import { getServiceBySlug } from '@/data/services'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { pageSeo } from '@/data/seo'
 import type { Feature } from '@/types'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
@@ -61,11 +62,7 @@ const cloudServices: Feature[] = [
 
 export default function CloudPage() {
   const service = getServiceBySlug('cloud-devops')!
-  usePageMeta({
-    title: 'Cloud & Infrastructure',
-    description:
-      'Déploiement cloud, Docker, CI/CD, supervision, sauvegardes et sécurité : Nashsoft Systems conçoit et exploite une infrastructure fiable pour vos applications.',
-  })
+  usePageMeta(pageSeo.cloud)
 
   return (
     <ServiceDetailView

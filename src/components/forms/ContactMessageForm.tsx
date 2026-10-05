@@ -8,6 +8,9 @@ import { CONTACT_SUBJECTS, contactMessageSchema, type ContactMessage, type Conta
 import { submitContactMessage } from '@/lib/api'
 import { site } from '@/data/site'
 import { cn } from '@/lib/cn'
+import { useCaptcha } from '@/hooks/useCaptcha'
+import { useTheme } from '@/hooks/useTheme'
+import { Turnstile } from './Turnstile'
 
 type Status = { kind: 'sent' } | { kind: 'mailto'; href: string } | null
 
@@ -42,12 +45,14 @@ function Field({ id, label, required, error, children }: { id: string; label: st
   )
 }
 
-/** General enquiry form (Contact page). Spam is filtered with a honeypot instead of a CAPTCHA. */
+/** General enquiry form (Contact page). Spam is filtered with a honeypot plus a Turnstile check when a backend is configured. */
 export function ContactMessageForm() {
   const uid = useId()
   const id = (name: string) => `${uid}-${name}`
   const [status, setStatus] = useState<Status>(null)
   const [serverError, setServerError] = useState<string | null>(null)
+  const captcha = useCaptcha()
+  const { theme } = useTheme()
 
   const {
     register,
@@ -60,7 +65,10 @@ export function ContactMessageForm() {
 
   const onSubmit = async (data: ContactMessage) => {
     setServerError(null)
-    const result = await submitContactMessage(data)
+    const token = captcha.requireToken()
+    if (token === false) return
+    const result = await submitContactMessage(data, token)
+    if (token) captcha.reset()
     if (result.status === 'error') {
       setServerError(result.message)
       return
@@ -185,6 +193,17 @@ export function ContactMessageForm() {
             <label htmlFor={id('website')}>Site web</label>
             <input id={id('website')} tabIndex={-1} autoComplete="off" {...register('website')} />
           </div>
+
+          {captcha.siteKey && (
+            <Turnstile
+              key={captcha.widgetKey}
+              siteKey={captcha.siteKey}
+              onToken={captcha.setToken}
+              tone={theme === 'dark' ? 'dark' : 'light'}
+              error={captcha.error}
+              className="sm:col-span-2"
+            />
+          )}
 
           {serverError && (
             <p role="alert" className="rounded-lg border border-red-300/60 bg-red-50 px-4 py-3 text-sm text-red-700 sm:col-span-2">

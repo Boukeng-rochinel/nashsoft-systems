@@ -16,6 +16,8 @@ import { submitContactRequest } from '@/lib/api'
 import { site } from '@/data/site'
 import { cn } from '@/lib/cn'
 import { Link } from 'react-router-dom'
+import { useCaptcha } from '@/hooks/useCaptcha'
+import { Turnstile } from './Turnstile'
 
 type Tone = 'light' | 'dark'
 
@@ -109,6 +111,7 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
   const dark = tone === 'dark'
   const [status, setStatus] = useState<Status>(null)
   const [serverError, setServerError] = useState<string | null>(null)
+  const captcha = useCaptcha()
 
   const {
     register,
@@ -126,7 +129,10 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
 
   const onSubmit = async (data: ContactRequest) => {
     setServerError(null)
-    const result = await submitContactRequest(data)
+    const token = captcha.requireToken()
+    if (token === false) return
+    const result = await submitContactRequest(data, token)
+    if (token) captcha.reset()
     if (result.status === 'error') {
       setServerError(result.message)
       return
@@ -344,6 +350,10 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
               </p>
             )}
           </div>
+
+          {captcha.siteKey && (
+            <Turnstile key={captcha.widgetKey} siteKey={captcha.siteKey} onToken={captcha.setToken} tone={tone} error={captcha.error} className="sm:col-span-2" />
+          )}
 
           {serverError && (
             <p role="alert" className="rounded-xl border border-red-300/60 bg-red-50 px-4 py-3 text-sm text-red-700 sm:col-span-2">

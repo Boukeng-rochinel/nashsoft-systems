@@ -4,6 +4,7 @@ import { site } from '@/data/site'
 import { faqs, nextSteps, startProjectHighlights, startProjectReasons } from '@/data/contact'
 import { isProjectType } from '@/lib/validation'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { pageSeo } from '@/data/seo'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { GradientText } from '@/components/ui/GradientText'
@@ -17,11 +18,7 @@ import { FloatingCard } from '@/components/visuals/FloatingCard'
 import { AnimatedGrid } from '@/components/visuals/AnimatedGrid'
 
 export default function StartProjectPage() {
-  usePageMeta({
-    title: 'Démarrer un projet',
-    description:
-      'Parlez-nous de votre projet : site web, application mobile, logiciel d’entreprise, IA ou cloud. Réponse sous 24 h ouvrées et devis gratuit par Nashsoft Systems.',
-  })
+  usePageMeta(pageSeo.startProject)
   const [params] = useSearchParams()
   const type = params.get('type')
 
