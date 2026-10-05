@@ -25,7 +25,7 @@ import type { Feature, LinkFeature, ProcessStep, Stat } from '@/types'
 export const site = {
   name: 'Nashsoft Systems',
   tagline: 'IDEAS · CODE · SOLUTIONS',
-  url: 'https://nashsoft.cm',
+  url: 'https://nashsoft.orviat.com',
   description:
     'Nashsoft Systems conçoit et développe des logiciels, plateformes web et mobiles ainsi que des solutions innovantes pour aider les entreprises et organisations à atteindre leurs objectifs.',
   logo: {

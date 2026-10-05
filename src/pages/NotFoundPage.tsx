@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowLeft, ArrowUpRight, Briefcase, FolderKanban, Layers, Mail } from 'lucide-react'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { pageSeo } from '@/data/seo'
 import { Container } from '@/components/ui/Container'
 import { ButtonLink } from '@/components/ui/Button'
 import { AnimatedGrid, LightStreaks } from '@/components/visuals/AnimatedGrid'
@@ -15,7 +16,7 @@ const shortcuts = [
 ]
 
 export default function NotFoundPage() {
-  usePageMeta({ title: 'Page introuvable', description: 'La page demandée n’existe pas ou a été déplacée.', noindex: true })
+  usePageMeta(pageSeo.notFound)
 
   return (
     <section data-theme="dark" className="relative isolate overflow-hidden bg-navy-950 text-slate-300">

@@ -4,6 +4,7 @@ import { site } from '@/data/site'
 import { fadeUp, stagger } from '@/lib/motion'
 import { useTheme } from '@/hooks/useTheme'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { pageSeo } from '@/data/seo'
 import { cn } from '@/lib/cn'
 import { Container } from '@/components/ui/Container'
 import { GradientText } from '@/components/ui/GradientText'
@@ -27,10 +28,7 @@ const info: InfoItem[] = [
 ]
 
 export default function ContactPage() {
-  usePageMeta({
-    title: 'Contact',
-    description: `Contactez Nashsoft Systems à ${site.contact.city} : ${site.contact.email} · ${site.contact.phone}. Une question, un projet ou un partenariat ? Nous vous répondons sous 24 h ouvrées.`,
-  })
+  usePageMeta(pageSeo.contact)
   const { theme } = useTheme()
   const dark = theme === 'dark'
 

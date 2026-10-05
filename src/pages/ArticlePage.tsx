@@ -3,6 +3,7 @@ import { ArrowLeft, Clock } from 'lucide-react'
 import type { Article } from '@/types'
 import { articles, formatDate, getArticleBySlug } from '@/data/articles'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { articleSeo } from '@/data/seo'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
@@ -11,7 +12,7 @@ import { ArticleCard } from '@/components/sections/ArticleCard'
 import { CTABand } from '@/components/sections/CTABand'
 
 function ArticleView({ article }: { article: Article }) {
-  usePageMeta({ title: article.title, description: article.excerpt, type: 'article' })
+  usePageMeta(articleSeo(article))
   const related = articles.filter((a) => a.slug !== article.slug && a.category === article.category)
   const more = (related.length >= 3 ? related : [...related, ...articles.filter((a) => a.slug !== article.slug && a.category !== article.category)]).slice(0, 3)
 

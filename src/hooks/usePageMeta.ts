@@ -1,14 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { site } from '@/data/site'
-
-interface PageMeta {
-  title: string
-  description?: string
-  /** Set to true for pages that should not be indexed (404, legal drafts…). */
-  noindex?: boolean
-  type?: 'website' | 'article'
-}
+import { DEFAULT_OG_IMAGE, formatTitle, type PageSeo } from '@/data/seo'
 
 function setMeta(attr: 'name' | 'property', key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`)
@@ -30,13 +23,18 @@ function setCanonical(href: string) {
   el.href = href
 }
 
-/** Updates document title, description, Open Graph and canonical tags per page. */
-export function usePageMeta({ title, description = site.description, noindex = false, type = 'website' }: PageMeta) {
+/**
+ * Updates document title, description, Open Graph and canonical tags per page.
+ * The build also writes these into each route's HTML (vite.config.ts), so
+ * crawlers and link previews get them without running JavaScript.
+ */
+export function usePageMeta({ title, description = site.description, image = DEFAULT_OG_IMAGE, noindex = false, type = 'website' }: Partial<PageSeo> & { title: string }) {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    const fullTitle = title === site.name ? `${site.name} — Ideas · Code · Solutions` : `${title} | ${site.name}`
-    const url = `${site.url}${pathname === '/' ? '/' : pathname}`
+    const fullTitle = formatTitle(title)
+    const url = `${site.url}${pathname === '/' ? '/' : pathname.replace(/\/$/, '')}`
+    const imageUrl = `${site.url}${image}`
 
     document.title = fullTitle
     setMeta('name', 'description', description)
@@ -45,8 +43,10 @@ export function usePageMeta({ title, description = site.description, noindex = f
     setMeta('property', 'og:description', description)
     setMeta('property', 'og:type', type)
     setMeta('property', 'og:url', url)
+    setMeta('property', 'og:image', imageUrl)
     setMeta('name', 'twitter:title', fullTitle)
     setMeta('name', 'twitter:description', description)
+    setMeta('name', 'twitter:image', imageUrl)
     setCanonical(url)
-  }, [title, description, noindex, type, pathname])
+  }, [title, description, image, noindex, type, pathname])
 }

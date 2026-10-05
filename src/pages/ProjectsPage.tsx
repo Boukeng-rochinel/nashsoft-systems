@@ -2,6 +2,7 @@ import { FolderKanban, Layers, Rocket } from 'lucide-react'
 import { projects } from '@/data/projects'
 import { START_PROJECT_HREF } from '@/data/navigation'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { pageSeo } from '@/data/seo'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { GradientText } from '@/components/ui/GradientText'
@@ -14,11 +15,7 @@ import { CTABand } from '@/components/sections/CTABand'
 import { FloatingCard } from '@/components/visuals/FloatingCard'
 
 export default function ProjectsPage() {
-  usePageMeta({
-    title: 'Projets',
-    description:
-      'Applications web, mobiles, IA et logiciels d’entreprise : découvrez les réalisations de Nashsoft Systems — Restaurant Elegance, AutoFix Car, IGWork, Eduteklearn et plus.',
-  })
+  usePageMeta(pageSeo.projects)
   const [a, b] = projects
 
   return (

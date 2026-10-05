@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { articleCategories, articles } from '@/data/articles'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { pageSeo } from '@/data/seo'
 import { cn } from '@/lib/cn'
 import { Section } from '@/components/ui/Section'
 import { GradientText } from '@/components/ui/GradientText'
@@ -17,10 +18,7 @@ const isCategory = (value: string | null): value is Category => articleCategorie
 
 /** Insights: featured article, category filter (kept in the URL) and article grid. */
 export default function InsightsPage() {
-  usePageMeta({
-    title: 'Insights',
-    description: 'Analyses, guides et retours d’expérience des ingénieurs Nashsoft Systems : transformation digitale, développement, IA, cloud et entreprise.',
-  })
+  usePageMeta(pageSeo.insights)
   const [params, setParams] = useSearchParams()
   const raw = params.get('categorie')
   const category: Category = isCategory(raw) ? raw : 'Tous'

@@ -4,6 +4,7 @@ import { processSteps } from '@/data/site'
 import { technologies, getTechnology } from '@/data/technologies'
 import { themes } from '@/data/themes'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { pageSeo } from '@/data/seo'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
 import { GradientText } from '@/components/ui/GradientText'
@@ -27,11 +28,7 @@ const stack = ['React', 'Next.js', 'Node.js', 'Flutter', 'Python', 'PostgreSQL',
 const deliverySteps = [processSteps[0], processSteps[1], processSteps[2], processSteps[4], { ...processSteps[5], title: 'Suivi' }]
 
 export default function ServicesPage() {
-  usePageMeta({
-    title: 'Services',
-    description:
-      'Développement logiciel, web et mobile, IA, cloud & DevOps, data, cybersécurité, transformation digitale et conseil IT : les expertises de Nashsoft Systems.',
-  })
+  usePageMeta(pageSeo.services)
 
   return (
     <>
