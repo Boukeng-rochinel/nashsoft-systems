@@ -47,8 +47,10 @@
 - [x] Gallery lightbox
 - [x] Animated statistics
 - [ ] Project wizard
-- [ ] Form validation
+- [x] Form validation
+- [x] Contact forms: Turnstile captcha + SMTP API (server/index.ts)
 - [x] Mobile navigation
+- [x] Mobile menu rendered in a portal (was clipped by the header's backdrop-filter)
 - [x] Page transitions
 - [x] Scroll animations
 
@@ -68,7 +70,9 @@
 - [x] Build
 - [ ] Responsive review
 - [ ] Accessibility
-- [ ] SEO
+- [x] SEO: sitemap.xml, per-route HTML heads, Open Graph images, JSON-LD
+- [ ] Submit sitemap in Google Search Console (manual, see README)
+- [ ] Legal pages (/confidentialite, /conditions are linked but not built yet)
 - [ ] Performance
 - [ ] Broken links
 - [ ] Broken images
