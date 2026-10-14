@@ -106,7 +106,7 @@ export function Lightbox({ items, theme, title, index, onClose, onNavigate }: Li
                 type="button"
                 onClick={() => go(-1)}
                 aria-label="Image précédente"
-                className="inline-flex size-11 items-center justify-center rounded-full border border-white/15 text-white transition-colors hover:border-cyan/60 hover:bg-white/10"
+                className="inline-flex size-11 items-center justify-center rounded-full border border-white/15 text-white transition-colors hover:border-brand-300/60 hover:bg-white/10"
               >
                 <ChevronLeft aria-hidden className="size-5" />
               </button>
@@ -114,7 +114,7 @@ export function Lightbox({ items, theme, title, index, onClose, onNavigate }: Li
                 type="button"
                 onClick={() => go(1)}
                 aria-label="Image suivante"
-                className="inline-flex size-11 items-center justify-center rounded-full border border-white/15 text-white transition-colors hover:border-cyan/60 hover:bg-white/10"
+                className="inline-flex size-11 items-center justify-center rounded-full border border-white/15 text-white transition-colors hover:border-brand-300/60 hover:bg-white/10"
               >
                 <ChevronRight aria-hidden className="size-5" />
               </button>

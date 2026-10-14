@@ -45,9 +45,9 @@ export function NewsletterForm({ tone = 'light' }: { tone?: 'light' | 'dark' }) 
           aria-invalid={errors.email ? 'true' : 'false'}
           aria-describedby={errors.email ? `${id}-error` : done ? `${id}-status` : undefined}
           className={cn(
-            'h-14 w-full rounded-full border pr-16 pl-6 text-[0.92rem] transition-[border-color,box-shadow] outline-none focus:ring-4',
+            'h-12 w-full rounded-full border pr-14 pl-5 text-[0.9rem] transition-[border-color,box-shadow] outline-none focus:ring-4',
             dark
-              ? 'border-white/15 bg-white/5 text-white placeholder:text-slate-400 focus:border-cyan/60 focus:ring-cyan/10'
+              ? 'border-white/15 bg-white/5 text-white placeholder:text-slate-400 focus:border-brand-300/60 focus:ring-brand-300/10'
               : 'border-line-strong bg-white text-navy placeholder:text-slate focus:border-brand focus:ring-brand/10',
             errors.email && 'border-red-400',
           )}
@@ -57,9 +57,9 @@ export function NewsletterForm({ tone = 'light' }: { tone?: 'light' | 'dark' }) 
           type="submit"
           disabled={isSubmitting}
           aria-label="S’inscrire à la newsletter"
-          className="absolute -right-1 inline-flex size-[60px] shrink-0 items-center justify-center rounded-full bg-brand text-white shadow-[0_10px_24px_-8px_rgb(8_125_255/0.8)] transition-all hover:scale-105 hover:bg-brand-600 disabled:opacity-60"
+          className="absolute right-1.5 inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-brand text-white transition-colors hover:bg-brand-600 disabled:opacity-60"
         >
-          {isSubmitting ? <LoaderCircle aria-hidden className="size-5 animate-spin" /> : done ? <Check aria-hidden className="size-5" /> : <ArrowRight aria-hidden className="size-5" />}
+          {isSubmitting ? <LoaderCircle aria-hidden className="size-4 animate-spin" /> : done ? <Check aria-hidden className="size-4" /> : <ArrowRight aria-hidden className="size-4" />}
         </button>
       </div>
       {errors.email && (
@@ -68,7 +68,7 @@ export function NewsletterForm({ tone = 'light' }: { tone?: 'light' | 'dark' }) 
         </p>
       )}
       {done && !errors.email && (
-        <p id={`${id}-status`} role="status" className={cn('mt-2 text-xs', dark ? 'text-cyan' : 'text-brand')}>
+        <p id={`${id}-status`} role="status" className={cn('mt-2 text-xs', dark ? 'text-brand-300' : 'text-brand')}>
           {done}
         </p>
       )}

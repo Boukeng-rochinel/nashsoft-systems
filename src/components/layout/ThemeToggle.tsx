@@ -15,7 +15,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       title={dark ? 'Thème clair' : 'Thème sombre'}
       className={cn(
         'relative inline-flex size-10 items-center justify-center overflow-hidden rounded-full transition-colors',
-        dark ? 'text-cyan hover:bg-white/10' : 'text-brand hover:bg-light',
+        dark ? 'text-slate-300 hover:bg-white/10 hover:text-white' : 'text-navy/60 hover:bg-light hover:text-navy',
         className,
       )}
     >

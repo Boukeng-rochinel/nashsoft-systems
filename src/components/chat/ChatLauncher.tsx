@@ -54,7 +54,7 @@ export function ChatLauncher() {
           aria-expanded={open}
           aria-label={open ? 'Fermer l’assistant' : 'Ouvrir l’assistant Nashsoft'}
           className={cn(
-            'relative inline-flex size-14 items-center justify-center rounded-full bg-brand-gradient text-white shadow-[0_14px_34px_-10px_rgb(8_125_255/0.85)] transition-transform hover:scale-105',
+            'relative inline-flex size-14 items-center justify-center rounded-full bg-brand text-white transition-transform hover:scale-105',
             open && 'max-sm:hidden',
           )}
         >

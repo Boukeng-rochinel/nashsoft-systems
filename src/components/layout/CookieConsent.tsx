@@ -51,7 +51,7 @@ export function CookieConsent() {
               aria-hidden
               className={cn(
                 'inline-flex size-10 shrink-0 items-center justify-center rounded-xl',
-                dark ? 'bg-white/5 text-cyan ring-1 ring-white/10' : 'bg-brand-50 text-brand',
+                dark ? 'bg-white/5 text-brand-300 ring-1 ring-white/10' : 'bg-brand-50 text-brand',
               )}
             >
               <Cookie className="size-5" strokeWidth={1.8} />
@@ -63,7 +63,7 @@ export function CookieConsent() {
               <p className="mt-1.5 text-[0.82rem] leading-relaxed">
                 Nous utilisons des cookies essentiels au fonctionnement du site et, avec votre accord, des cookies de mesure d’audience pour
                 l’améliorer.{' '}
-                <Link to="/confidentialite" className={cn('font-medium underline underline-offset-2', dark ? 'text-cyan hover:text-white' : 'text-brand hover:text-violet')}>
+                <Link to="/confidentialite" className={cn('font-medium underline underline-offset-2', dark ? 'text-brand-300 hover:text-white' : 'text-brand hover:text-brand-600')}>
                   En savoir plus
                 </Link>
               </p>

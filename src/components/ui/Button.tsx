@@ -2,23 +2,27 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, type LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/cn'
+import { glassButton } from '@/lib/styles'
 
-type Variant = 'primary' | 'secondary' | 'outline-dark' | 'white' | 'link' | 'link-dark'
+type Variant = 'primary' | 'secondary' | 'glass' | 'outline-dark' | 'white' | 'link' | 'link-dark'
 type Size = 'sm' | 'md' | 'lg'
 
+/** Pill buttons, no gradients or glow. Primary = liquid glass: translucent fill, blur, brand-blue border. */
 const base =
-  'group/btn relative inline-flex items-center justify-center gap-2 rounded-full font-display font-semibold whitespace-nowrap transition-all duration-300 ease-out disabled:pointer-events-none disabled:opacity-60'
+  'group/btn relative inline-flex items-center justify-center gap-2 rounded-full font-display font-medium whitespace-nowrap transition-colors duration-200 ease-out disabled:pointer-events-none disabled:opacity-60'
+
+const glass = glassButton
 
 const variants: Record<Variant, string> = {
-  primary:
-    'bg-brand-gradient text-white shadow-[0_8px_24px_-10px_rgb(8_125_255/0.7)] hover:-translate-y-0.5 hover:shadow-[0_14px_32px_-10px_rgb(8_125_255/0.8)] active:translate-y-0',
+  primary: glass,
   secondary:
-    'border border-line-strong bg-white text-navy shadow-card hover:-translate-y-0.5 hover:border-brand/40 hover:text-brand active:translate-y-0 on-dark:border-white/20 on-dark:bg-white/5 on-dark:text-white on-dark:shadow-none on-dark:backdrop-blur-sm on-dark:hover:border-cyan/60 on-dark:hover:bg-white/10 on-dark:hover:text-white',
-  'outline-dark':
-    'border border-white/20 bg-white/5 text-white backdrop-blur-sm hover:-translate-y-0.5 hover:border-cyan/60 hover:bg-white/10 active:translate-y-0',
-  white: 'bg-white text-navy shadow-float hover:-translate-y-0.5 hover:text-brand active:translate-y-0',
-  link: 'px-0! py-0! text-brand hover:text-violet',
-  'link-dark': 'px-0! py-0! text-cyan hover:text-white',
+    'border-[1.5px] border-brand bg-white text-brand hover:bg-brand-50 on-dark:border-white/70 on-dark:bg-transparent on-dark:text-white on-dark:hover:bg-white/10',
+  /** Liquid-glass: translucent fill, backdrop blur, brand-blue border. */
+  glass,
+  'outline-dark':'border-[1.5px] border-white/70 bg-transparent text-white hover:bg-white/10',
+  white: 'bg-white text-navy hover:bg-brand-50 hover:text-brand',
+  link: 'px-0! py-0! text-brand hover:text-brand-600',
+  'link-dark': 'px-0! py-0! text-brand-300 hover:text-white',
 }
 
 const sizes: Record<Size, string> = {

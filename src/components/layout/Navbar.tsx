@@ -102,7 +102,7 @@ function MegaMenu({ menu }: { menu: NavMenu }) {
               <p className="flex items-center gap-2 font-display text-[0.95rem] font-semibold text-navy">
                 {product.title}
                 {product.isNew && (
-                  <span className="rounded bg-gradient-to-r from-brand to-violet px-1.5 py-0.5 text-[0.6rem] font-bold tracking-wide text-white uppercase">
+                  <span className="rounded bg-brand px-1.5 py-0.5 text-[0.6rem] font-bold tracking-wide text-white uppercase">
                     Nouveau
                   </span>
                 )}
@@ -235,10 +235,7 @@ function Dropdown({ item, tone, active }: { item: NavItem; tone: NavTone; active
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((v) => !v)}
-        className={cn(
-          'relative flex items-center gap-1 px-1 py-2 text-[0.85rem] font-medium transition-colors',
-          active ? (dark ? 'text-cyan' : 'text-brand') : dark ? 'text-slate-200 hover:text-white' : 'text-navy/80 hover:text-brand',
-        )}
+        className={cn(navLinkClass(dark, active), 'flex items-center gap-1')}
       >
         {t(item.label)}
         <ChevronDown aria-hidden className={cn('size-3.5 transition-transform duration-300', open && 'rotate-180')} />
@@ -265,11 +262,21 @@ function Dropdown({ item, tone, active }: { item: NavItem; tone: NavTone; active
   )
 }
 
+/**
+ * Plain text links: muted by default, brand blue when active (with a thin bar underneath).
+ * Keyboard focus shows an underline instead of the boxed outline, to keep the bar minimal.
+ */
+const navLinkClass = (dark: boolean, active: boolean) =>
+  cn(
+    'relative block py-2 text-[0.875rem] font-medium transition-colors focus-visible:underline focus-visible:underline-offset-8 focus-visible:outline-none',
+    active ? (dark ? 'text-brand-300' : 'text-brand') : dark ? 'text-slate-300 hover:text-white' : 'text-navy/70 hover:text-navy',
+  )
+
 function ActiveBar({ tone }: { tone: NavTone }) {
   return (
     <motion.span
       layoutId="nav-active"
-      className={cn('absolute right-1 -bottom-[1px] left-1 h-0.5 rounded-full', tone === 'dark' ? 'bg-cyan' : 'bg-brand')}
+      className={cn('absolute right-0 -bottom-0.5 left-0 h-0.5 rounded-full', tone === 'dark' ? 'bg-brand-300' : 'bg-brand')}
       transition={{ type: 'spring', stiffness: 380, damping: 32 }}
     />
   )
@@ -293,9 +300,8 @@ export function Navbar({ tone }: { tone: NavTone }) {
       data-theme={dark ? 'dark' : 'light'}
       className={cn(
         'sticky top-0 z-40 transition-[background-color,box-shadow,border-color] duration-300',
-        dark ? 'border-b border-white/[0.06] bg-navy-950/90 backdrop-blur-xl' : 'border-b bg-white/85 backdrop-blur-xl',
-        !dark && (scrolled ? 'border-line shadow-[0_6px_24px_-16px_rgb(6_20_38/0.25)]' : 'border-transparent'),
-        dark && scrolled && 'shadow-[0_10px_30px_-16px_rgb(0_0_0/0.6)]',
+        dark ? 'border-b border-white/[0.08] bg-navy-950' : 'border-b border-line bg-white',
+        scrolled && (dark ? 'shadow-[0_8px_24px_-16px_rgb(0_0_0/0.6)]' : 'shadow-[0_6px_20px_-16px_rgb(6_20_38/0.25)]'),
       )}
     >
       <a
@@ -308,7 +314,7 @@ export function Navbar({ tone }: { tone: NavTone }) {
         <Logo tone={dark ? 'dark' : 'light'} />
 
         <nav aria-label="Navigation principale" className="hidden lg:block">
-          <ul className="flex items-center gap-4 xl:gap-7">
+          <ul className="flex items-center gap-4 xl:gap-6">
             {primaryNav.map((item) => {
               const active = isActive(pathname, item)
               return (
@@ -319,10 +325,7 @@ export function Navbar({ tone }: { tone: NavTone }) {
                     <NavLink
                       to={item.href}
                       end={item.href === '/'}
-                      className={cn(
-                        'relative block px-1 py-2 text-[0.85rem] font-medium transition-colors',
-                        active ? (dark ? 'text-cyan' : 'text-brand') : dark ? 'text-slate-200 hover:text-white' : 'text-navy/80 hover:text-brand',
-                      )}
+                      className={navLinkClass(dark, active)}
                     >
                       {t(item.label)}
                       {active && <ActiveBar tone={tone} />}
@@ -334,15 +337,15 @@ export function Navbar({ tone }: { tone: NavTone }) {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1.5 sm:gap-2.5">
+          <LanguageSwitcher tone={tone} className="hidden md:flex" />
           <ThemeToggle />
           {/* Visibility on a wrapper: the button's own display class would override `hidden`. */}
           <span className="hidden sm:block">
-            <ButtonLink to={START_PROJECT_HREF} size="md">
+            <ButtonLink to={START_PROJECT_HREF} variant="glass" size="md" arrow={false}>
               {t('Démarrer un projet')}
             </ButtonLink>
           </span>
-          <LanguageSwitcher tone={tone} />
           <button
             type="button"
             onClick={() => setMenuOpen(true)}
@@ -350,8 +353,8 @@ export function Navbar({ tone }: { tone: NavTone }) {
             aria-controls="mobile-menu"
             aria-label="Ouvrir le menu"
             className={cn(
-              'inline-flex size-11 items-center justify-center rounded-xl border transition-colors lg:hidden',
-              dark ? 'border-white/15 text-white hover:bg-white/10' : 'border-line text-navy hover:bg-light',
+              'inline-flex size-11 items-center justify-center rounded-full transition-colors lg:hidden',
+              dark ? 'text-white hover:bg-white/10' : 'text-navy hover:bg-light',
             )}
           >
             <Menu aria-hidden className="size-5" />

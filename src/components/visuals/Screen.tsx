@@ -1,4 +1,4 @@
-import { memo, useId, type CSSProperties } from 'react'
+import { memo, type CSSProperties } from 'react'
 import type { ProjectTheme, ScreenVariant } from '@/types'
 
 /**
@@ -34,16 +34,9 @@ function Bars({ widths, color, gap = '0.45em', h }: { widths: string[]; color: s
 }
 
 function AreaChart({ theme, points = '0,70 12,58 24,62 36,40 48,46 60,28 72,34 84,18 100,22' }: { theme: ProjectTheme; points?: string }) {
-  const id = useId()
   return (
     <svg viewBox="0 0 100 80" preserveAspectRatio="none" style={{ width: '100%', height: '100%', display: 'block' }} aria-hidden>
-      <defs>
-        <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor={theme.accent} stopOpacity="0.35" />
-          <stop offset="1" stopColor={theme.accent} stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <polygon points={`0,80 ${points} 100,80`} fill={`url(#${id})`} />
+      <polygon points={`0,80 ${points} 100,80`} fill={theme.accent} fillOpacity={0.15} />
       <polyline points={points} fill="none" stroke={theme.accent} strokeWidth="2" vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
       <polyline
         points="0,76 14,70 28,72 42,60 56,64 70,52 84,56 100,44"
@@ -68,7 +61,7 @@ function Columns({ theme, values = [45, 70, 55, 85, 60, 95, 75] }: { theme: Proj
             flex: 1,
             height: `${v}%`,
             borderRadius: '0.3em 0.3em 0.1em 0.1em',
-            background: i === values.length - 2 ? theme.accent : `linear-gradient(to top, ${theme.accent}55, ${theme.accent}aa)`,
+            background: i === values.length - 2 ? theme.accent : `${theme.accent}88`,
           }}
         />
       ))}
@@ -105,7 +98,7 @@ function Header({ theme, title }: { theme: ProjectTheme; title?: string }) {
       )}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.6em', flex: 1, justifyContent: 'flex-end' }}>
         <div style={bar('38%', theme.muted, '1.6em', { maxWidth: '14em', opacity: 0.7 })} />
-        <div style={{ width: '1.7em', height: '1.7em', borderRadius: 999, background: `linear-gradient(135deg, ${theme.accent}, ${theme.accent2})` }} />
+        <div style={{ width: '1.7em', height: '1.7em', borderRadius: 999, background: theme.accent }} />
       </div>
     </div>
   )
@@ -117,7 +110,7 @@ function Sidebar({ theme, active = 1 }: { theme: ProjectTheme; active?: number }
   return (
     <div style={{ width: '17%', background: theme.nav, padding: '1em 0.8em', display: 'flex', flexDirection: 'column', gap: '0.9em', borderRight: `1px solid ${theme.muted}55` }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.4em', marginBottom: '0.6em' }}>
-        <div style={{ width: '1.4em', height: '1.4em', borderRadius: '0.35em', background: `linear-gradient(135deg, ${theme.accent}, ${theme.accent2})` }} />
+        <div style={{ width: '1.4em', height: '1.4em', borderRadius: '0.35em', background: theme.accent }} />
         <div style={bar('55%', onDark ? '#ffffffcc' : theme.text, '0.5em')} />
       </div>
       {Array.from({ length: 7 }).map((_, i) => (
@@ -205,7 +198,7 @@ function LandingLayout({ theme, title }: { theme: ProjectTheme; title?: string }
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.9em 1.4em', borderBottom: `1px solid ${theme.muted}66` }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.45em' }}>
-          <div style={{ width: '1.3em', height: '1.3em', borderRadius: '0.35em', background: `linear-gradient(135deg, ${theme.accent}, ${theme.accent2})` }} />
+          <div style={{ width: '1.3em', height: '1.3em', borderRadius: '0.35em', background: theme.accent }} />
           {title ? (
             <span style={{ fontWeight: 700, color: theme.text, fontSize: '1em', whiteSpace: 'nowrap' }}>{title}</span>
           ) : (
@@ -227,7 +220,7 @@ function LandingLayout({ theme, title }: { theme: ProjectTheme; title?: string }
           <div style={{ height: '0.2em' }} />
           <Bars widths={['95%', '85%', '60%']} color={dark ? `${theme.text}33` : theme.muted} h="0.45em" />
           <div style={{ display: 'flex', gap: '0.6em', marginTop: '0.6em' }}>
-            <div style={bar('7em', `linear-gradient(90deg, ${theme.accent}, ${theme.accent2})`, '2em')} />
+            <div style={bar('7em', theme.accent, '2em')} />
             <div style={bar('6em', 'transparent', '2em', { border: `1px solid ${dark ? `${theme.text}40` : theme.muted}` })} />
           </div>
         </div>
@@ -235,7 +228,7 @@ function LandingLayout({ theme, title }: { theme: ProjectTheme; title?: string }
           style={{
             height: '85%',
             borderRadius: '0.9em',
-            background: `radial-gradient(circle at 30% 30%, ${theme.accent2}cc, transparent 60%), linear-gradient(135deg, ${theme.accent}, ${theme.accent2})`,
+            background: theme.accent,
             position: 'relative',
             overflow: 'hidden',
           }}
@@ -358,7 +351,7 @@ function CatalogLayout({ theme, title }: { theme: ProjectTheme; title?: string }
                 flex: 1,
                 minHeight: '2.5em',
                 borderRadius: '0.45em',
-                background: `radial-gradient(circle at ${30 + ((i * 23) % 50)}% 40%, ${i % 2 ? theme.accent2 : theme.accent}bb, ${i % 2 ? theme.accent : theme.accent2}55 70%)`,
+                background: `${i % 2 ? theme.accent2 : theme.accent}99`,
               }}
             />
             <div style={bar('75%', theme.text, '0.45em', { opacity: 0.75 })} />
@@ -385,7 +378,7 @@ function LearningLayout({ theme, title }: { theme: ProjectTheme; title?: string 
             style={{
               flex: 1,
               borderRadius: '0.8em',
-              background: `linear-gradient(135deg, ${theme.accent}, ${theme.accent2})`,
+              background: theme.accent,
               display: 'grid',
               placeItems: 'center',
               minHeight: '5em',
@@ -456,7 +449,7 @@ function ChatLayout({ theme, title }: { theme: ProjectTheme; title?: string }) {
                 width: m.w,
                 padding: '0.65em 0.8em',
                 borderRadius: m.me ? '0.8em 0.8em 0.2em 0.8em' : '0.8em 0.8em 0.8em 0.2em',
-                background: m.me ? `linear-gradient(135deg, ${theme.accent}, ${theme.accent2})` : theme.surface,
+                background: m.me ? theme.accent : theme.surface,
                 border: m.me ? 'none' : `1px solid ${theme.muted}88`,
               }}
             >
@@ -553,7 +546,7 @@ function PhoneLayout({ theme, variant, title }: { theme: ProjectTheme; variant: 
             <div style={bar('6em', theme.text, '0.7em')} />
           )}
         </div>
-        <div style={{ width: '1.9em', height: '1.9em', borderRadius: 999, background: `linear-gradient(135deg, ${theme.accent}, ${theme.accent2})` }} />
+        <div style={{ width: '1.9em', height: '1.9em', borderRadius: 999, background: theme.accent }} />
       </div>
 
       {variant === 'analytics' ? (
@@ -593,7 +586,7 @@ function PhoneLayout({ theme, variant, title }: { theme: ProjectTheme; variant: 
             style={{
               borderRadius: '0.9em',
               padding: '1em',
-              background: `linear-gradient(135deg, ${theme.accent}, ${theme.accent2})`,
+              background: theme.accent,
               display: 'flex',
               flexDirection: 'column',
               gap: '0.5em',

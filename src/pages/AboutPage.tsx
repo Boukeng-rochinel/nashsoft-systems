@@ -1,18 +1,15 @@
-import { Quote, Users } from 'lucide-react'
-import { missionVision, site, stats, teamDisciplines, values } from '@/data/site'
+import { Quote } from 'lucide-react'
+import { missionVision, stats, teamDisciplines, values } from '@/data/site'
 import { usePageMeta } from '@/hooks/usePageMeta'
 import { pageSeo } from '@/data/seo'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
-import { GradientText } from '@/components/ui/GradientText'
+import { AccentText } from '@/components/ui/AccentText'
 import { ButtonLink } from '@/components/ui/Button'
 import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { PageHero } from '@/components/sections/PageHero'
-import { HeroImage } from '@/components/sections/HeroImage'
 import { Stats } from '@/components/sections/Stats'
 import { CTABand } from '@/components/sections/CTABand'
-import { FloatingCard } from '@/components/visuals/FloatingCard'
-import { AnimatedGrid } from '@/components/visuals/AnimatedGrid'
 import { BrandN } from '@/components/visuals/BrandN'
 
 /** Photographs for each discipline, in the order of `teamDisciplines`. */
@@ -28,7 +25,7 @@ export default function AboutPage() {
         eyebrow="À propos"
         title={
           <>
-            Plus qu’un prestataire, <GradientText>un partenaire.</GradientText>
+            Plus qu’un prestataire, <AccentText>un partenaire.</AccentText>
           </>
         }
         description="Nashsoft Systems est une entreprise technologique camerounaise qui conçoit et développe des solutions digitales innovantes pour accompagner les entreprises et organisations dans leur transformation numérique."
@@ -42,11 +39,7 @@ export default function AboutPage() {
             </ButtonLink>
           </>
         }
-        visual={
-          <HeroImage src="/images/hero-about.webp" alt="Ingénieur Nashsoft Systems travaillant sur plusieurs écrans de code">
-            <FloatingCard icon={Users} title="Une équipe pluridisciplinaire" description={`Basée à ${site.contact.city}`} className="bottom-[6%] left-0" delay={0.3} />
-          </HeroImage>
-        }
+        image="/images/hero-about.webp"
       />
 
       {/* Story */}
@@ -95,7 +88,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Mission & vision */}
-      <Section tone="navy" background={<AnimatedGrid tone="dark" />}>
+      <Section tone="navy">
         <BrandN className="absolute top-10 left-[30%] -z-10 hidden w-56 opacity-20 lg:block" />
         <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.6fr]">
           <SectionTitle
@@ -107,9 +100,9 @@ export default function AboutPage() {
           <RevealGroup className="grid gap-5 sm:grid-cols-2">
             {missionVision.map((m) => (
               <RevealItem key={m.title}>
-                <article className="h-full rounded-2xl border border-white/10 bg-white/[0.04] p-7 backdrop-blur-sm transition-colors hover:border-cyan/40">
+                <article className="h-full rounded-2xl border border-white/10 bg-white/[0.04] p-7 backdrop-blur-sm transition-colors hover:border-brand-300/40">
                   {m.icon && (
-                    <span aria-hidden className="inline-flex size-12 items-center justify-center rounded-full bg-gradient-to-br from-brand to-violet text-white shadow-glow">
+                    <span aria-hidden className="inline-flex size-12 items-center justify-center rounded-full bg-brand text-white">
                       <m.icon className="size-6" strokeWidth={1.8} />
                     </span>
                   )}
@@ -139,7 +132,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Impact */}
-      <Section tone="dark" background={<AnimatedGrid tone="dark" />}>
+      <Section tone="dark">
         <div className="grid items-center gap-10 lg:grid-cols-[0.8fr_2fr]">
           <SectionTitle
             tone="dark"

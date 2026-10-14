@@ -6,7 +6,7 @@ import { usePageMeta } from '@/hooks/usePageMeta'
 import { articleSeo } from '@/data/seo'
 import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
-import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
+import { PageHero } from '@/components/sections/PageHero'
 import { Reveal } from '@/components/ui/Reveal'
 import { ArticleCard } from '@/components/sections/ArticleCard'
 import { CTABand } from '@/components/sections/CTABand'
@@ -19,16 +19,16 @@ function ArticleView({ article }: { article: Article }) {
   return (
     <>
       <article>
-        <header className="relative isolate overflow-hidden bg-white">
-          <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(70%_80%_at_85%_20%,#e3efff_0%,#f3f7fd_45%,#ffffff_75%)]" />
-          <Container className="pt-10 pb-10 md:pt-14">
-            <div className="mx-auto max-w-3xl">
-              <Breadcrumbs tone="light" items={[{ label: 'Accueil', href: '/' }, { label: 'Insights', href: '/insights' }, { label: article.category }]} />
-              <p className="eyebrow mt-6 text-brand">{article.category}</p>
-              <h1 className="mt-3 text-[2rem] leading-[1.12] font-extrabold text-navy sm:text-[2.6rem]">{article.title}</h1>
-              <p className="mt-5 text-lg leading-relaxed text-slate">{article.excerpt}</p>
-              <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate">
-                <span className="font-semibold text-navy">{article.author}</span>
+        <PageHero
+          breadcrumbs={[{ label: 'Accueil', href: '/' }, { label: 'Insights', href: '/insights' }, { label: article.category }]}
+          eyebrow={article.category}
+          image={article.image}
+          title={article.title}
+          description={
+            <>
+              {article.excerpt}
+              <span className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-300">
+                <span className="font-semibold text-white">{article.author}</span>
                 <span aria-hidden>·</span>
                 <time dateTime={article.date}>{formatDate(article.date)}</time>
                 <span aria-hidden>·</span>
@@ -36,22 +36,10 @@ function ArticleView({ article }: { article: Article }) {
                   <Clock aria-hidden className="size-4" />
                   {article.readTime} min de lecture
                 </span>
-              </p>
-            </div>
-          </Container>
-          <Container className="pb-4">
-            <div className="mx-auto max-w-4xl">
-              <img
-                src={article.image}
-                alt=""
-                width={1600}
-                height={900}
-                fetchPriority="high"
-                className="aspect-[16/9] w-full rounded-2xl object-cover shadow-card"
-              />
-            </div>
-          </Container>
-        </header>
+              </span>
+            </>
+          }
+        />
 
         <Container className="py-12 md:py-16">
           <div className="mx-auto max-w-3xl">
@@ -79,7 +67,7 @@ function ArticleView({ article }: { article: Article }) {
                 </section>
               ))}
             </Reveal>
-            <Link to="/insights" className="mt-12 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-violet">
+            <Link to="/insights" className="mt-12 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand-600">
               <ArrowLeft aria-hidden className="size-4" />
               Tous les articles
             </Link>

@@ -24,7 +24,7 @@ export function TechnologyCloud({ items = coreStack, tone = 'light', variant = '
             <div
               className={cn(
                 'flex items-center gap-2.5 rounded-xl py-2 pr-4 pl-2 transition-all duration-300 hover:-translate-y-0.5',
-                tone === 'dark' ? 'border border-white/10 bg-white/[0.04] hover:border-cyan/40' : 'border border-line bg-white shadow-card',
+                tone === 'dark' ? 'border border-white/10 bg-white/[0.04] hover:border-brand-300/40' : 'border border-line bg-white shadow-card',
               )}
             >
               <TechMark tech={tech} size="sm" />

@@ -44,7 +44,7 @@ export function ExpertiseGrid({ items, service, className }: ExpertiseGridProps)
                   decoding="async"
                   className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-navy-950/45 via-transparent to-transparent" />
+                <div aria-hidden className="absolute inset-0 bg-navy-950/15" />
                 <span aria-hidden className="absolute bottom-4 left-5 inline-flex size-11 items-center justify-center rounded-xl bg-white text-brand shadow-card">
                   <item.icon className="size-5" strokeWidth={1.8} />
                 </span>
@@ -96,7 +96,7 @@ function ExpertiseDialog({ item, service, onClose }: { item: Expertise | null; s
           >
             <div className="relative aspect-[21/9] shrink-0 overflow-hidden bg-mist">
               <img src={item.image} alt={item.imageAlt} width={1200} height={800} className="size-full object-cover" />
-              <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-navy-950/10 to-transparent" />
+              <div aria-hidden className="absolute inset-0 bg-navy-950/45" />
               <div className="absolute right-6 bottom-5 left-6 flex items-center gap-3">
                 <span aria-hidden className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-white text-brand">
                   <item.icon className="size-5" strokeWidth={1.8} />

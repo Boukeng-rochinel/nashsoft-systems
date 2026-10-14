@@ -36,14 +36,14 @@ export function ProcessSteps({ steps = processSteps, variant = 'inline', cols: c
       >
         <span
           aria-hidden
-          className="absolute top-8 right-[calc((100%-5rem)/12)] left-[calc((100%-5rem)/12)] hidden h-px bg-gradient-to-r from-brand/50 via-brand/25 to-violet/50 lg:block"
+          className="absolute top-8 right-[calc((100%-5rem)/12)] left-[calc((100%-5rem)/12)] hidden h-px bg-line-strong lg:block"
         />
         {steps.map((step, i) => (
           <motion.li key={step.title} variants={fadeUp} className="group relative flex items-start gap-5 lg:flex-col lg:items-center lg:gap-0 lg:text-center">
             {i < steps.length - 1 && <span aria-hidden className="absolute top-16 -bottom-8 left-8 w-px bg-brand/20 lg:hidden" />}
             <span
               aria-hidden
-              className="relative inline-flex size-16 shrink-0 items-center justify-center rounded-full border border-line bg-white text-brand shadow-card transition-all duration-300 group-hover:border-transparent group-hover:bg-gradient-to-br group-hover:from-brand group-hover:to-violet group-hover:text-white group-hover:shadow-[0_12px_24px_-10px_rgb(8_125_255/0.8)]"
+              className="relative inline-flex size-16 shrink-0 items-center justify-center rounded-full border border-line bg-white text-brand shadow-card transition-all duration-300 group-hover:border-transparent group-hover:bg-brand group-hover:text-white"
             >
               <step.icon className="size-6" strokeWidth={1.6} />
               <span className="absolute -top-1 -right-1 inline-flex size-6 items-center justify-center rounded-full bg-navy font-display text-[0.65rem] font-bold text-white ring-4 ring-light">
@@ -81,14 +81,14 @@ export function ProcessSteps({ steps = processSteps, variant = 'inline', cols: c
               >
                 <div className="flex shrink-0 items-center lg:w-full">
                   {dark ? (
-                    <span className="inline-flex size-11 items-center justify-center rounded-full border border-cyan/40 bg-navy-900 font-display text-sm font-bold text-cyan shadow-[0_0_24px_-6px_rgb(0_198_255/0.7)]">
+                    <span className="inline-flex size-11 items-center justify-center rounded-full border border-brand-300/40 bg-navy-900 font-display text-sm font-bold text-brand-300">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                   ) : (
                     <span
                       aria-hidden
                       className={cn(
-                        'inline-flex size-12 items-center justify-center bg-gradient-to-br from-brand to-[#3a5bff] text-white shadow-[0_10px_20px_-8px_rgb(8_125_255/0.75)]',
+                        'inline-flex size-12 items-center justify-center bg-brand text-white',
                         'rounded-full ring-4 ring-brand-50',
                       )}
                     >
@@ -97,8 +97,8 @@ export function ProcessSteps({ steps = processSteps, variant = 'inline', cols: c
                   )}
                   {!last && (
                     <span aria-hidden className="mx-3 hidden h-px flex-1 items-center lg:flex">
-                      <span className={cn('h-px flex-1', dark ? 'bg-gradient-to-r from-cyan/50 to-cyan/10' : 'bg-gradient-to-r from-brand/40 to-brand/10')} />
-                      <ArrowRight className={cn('-ml-1 size-3.5', dark ? 'text-cyan/60' : 'text-brand/60')} />
+                      <span className={cn('h-px flex-1', dark ? 'bg-brand-300/30' : 'bg-brand/25')} />
+                      <ArrowRight className={cn('-ml-1 size-3.5', dark ? 'text-brand-300/60' : 'text-brand/60')} />
                     </span>
                   )}
                 </div>

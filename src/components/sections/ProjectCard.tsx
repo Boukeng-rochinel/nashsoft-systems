@@ -27,8 +27,8 @@ export function ProjectCard({ project, tone = 'light', className }: { project: P
           wrapperClassName="size-full"
           className="size-full object-cover transition-[opacity,transform] duration-700 ease-out group-hover:scale-[1.06]"
         />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-transparent" />
-        <span className="absolute top-3 left-3 rounded-md bg-brand px-2 py-0.5 font-display text-[0.65rem] font-semibold text-white shadow-[0_4px_12px_-4px_rgb(8_125_255/0.8)]">
+        <div aria-hidden className="absolute inset-0 bg-navy/10" />
+        <span className="absolute top-3 left-3 rounded-md bg-brand px-2 py-0.5 font-display text-[0.65rem] font-semibold text-white">
           {project.categories[0]}
         </span>
       </div>
@@ -47,7 +47,7 @@ export function ProjectCard({ project, tone = 'light', className }: { project: P
         </ul>
         <Link
           to={projectHref(project.slug)}
-          className="mt-5 inline-flex items-center gap-1.5 text-[0.8rem] font-semibold text-brand transition-colors after:absolute after:inset-0 hover:text-violet"
+          className="mt-5 inline-flex items-center gap-1.5 text-[0.8rem] font-semibold text-brand transition-colors after:absolute after:inset-0 hover:text-brand-600"
         >
           Voir le projet <span className="sr-only">{project.title}</span>
           <ArrowRight aria-hidden className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />

@@ -28,7 +28,7 @@ export function ServiceCard({ service, variant = 'stacked', showTech = false }: 
       >
         <span
           aria-hidden
-          className="inline-flex size-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-[#3a5bff] text-white shadow-[0_8px_18px_-8px_rgb(8_125_255/0.8)] transition-transform duration-300 group-hover:scale-105"
+          className="inline-flex size-12 shrink-0 items-center justify-center rounded-xl bg-brand text-white transition-transform duration-300 group-hover:scale-105"
         >
           <Icon className="size-[22px]" strokeWidth={1.8} />
         </span>
@@ -54,14 +54,14 @@ export function ServiceCard({ service, variant = 'stacked', showTech = false }: 
     return (
       <Link
         to={href}
-        className="group relative flex h-full flex-col rounded-2xl border border-brand/25 bg-navy-900/70 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-cyan/50 hover:shadow-[0_0_40px_-12px_rgb(0_198_255/0.45)]"
+        className="group relative flex h-full flex-col rounded-2xl border border-brand/25 bg-navy-900/70 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-brand-300/50"
       >
-        <span aria-hidden className="inline-flex size-10 items-center justify-center rounded-lg bg-gradient-to-br from-brand to-violet text-white ring-1 ring-white/15">
+        <span aria-hidden className="inline-flex size-10 items-center justify-center rounded-lg bg-brand text-white ring-1 ring-white/15">
           <Icon className="size-5" strokeWidth={1.8} />
         </span>
         <h3 className="mt-4 font-display text-[0.95rem] font-semibold text-white">{service.title}</h3>
         <p className="mt-1.5 text-sm leading-relaxed text-slate-400">{service.description}</p>
-        <ArrowUpRight aria-hidden className="absolute top-5 right-5 size-4 text-slate-500 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-cyan" />
+        <ArrowUpRight aria-hidden className="absolute top-5 right-5 size-4 text-slate-500 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-brand-300" />
       </Link>
     )
   }
@@ -88,7 +88,7 @@ export function ServiceCard({ service, variant = 'stacked', showTech = false }: 
       <Link
         to={href}
         className={cn(
-          'mt-5 inline-flex items-center gap-1.5 text-[0.8rem] font-semibold text-brand transition-colors hover:text-violet',
+          'mt-5 inline-flex items-center gap-1.5 text-[0.8rem] font-semibold text-brand transition-colors hover:text-brand-600',
           // Stretch the link over the card for a larger click target.
           'after:absolute after:inset-0 after:rounded-2xl',
         )}

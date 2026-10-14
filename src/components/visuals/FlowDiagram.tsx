@@ -39,14 +39,13 @@ export function FlowDiagram({ nodes, tone = 'dark', className }: { nodes: FlowNo
               aria-hidden
               className={cn(
                 'inline-flex size-12 shrink-0 items-center justify-center rounded-xl text-white',
-                i === nodes.length - 1 ? 'bg-gradient-to-br from-violet to-brand' : 'bg-gradient-to-br from-brand to-cyan/80',
-                dark && 'shadow-[0_0_24px_-4px_rgb(0_198_255/0.6)]',
+                i === nodes.length - 1 ? 'bg-brand-600' : 'bg-brand',
               )}
             >
               <node.icon className="size-6" strokeWidth={1.7} />
             </span>
             <div>
-              {dark && <p className="eyebrow mb-1 text-[0.6rem] text-cyan/70">0{i + 1}</p>}
+              {dark && <p className="eyebrow mb-1 text-[0.6rem] text-brand-300/70">0{i + 1}</p>}
               <p className={cn('font-display font-semibold', dark ? 'text-white' : 'text-navy')}>{node.label}</p>
               <p className={cn('mt-1 text-xs leading-relaxed', dark ? 'text-slate-400' : 'text-slate')}>{node.caption}</p>
             </div>
@@ -60,8 +59,8 @@ export function FlowDiagram({ nodes, tone = 'dark', className }: { nodes: FlowNo
                 dark ? 'ml-6 lg:mt-7' : 'mx-auto',
               )}
             >
-              <span className={cn('absolute inset-0', dark ? 'bg-gradient-to-b from-cyan/60 to-brand/40 lg:bg-gradient-to-r' : 'bg-line-strong')} />
-              <span className="absolute size-1.5 animate-[flow-y_2s_linear_infinite] rounded-full bg-cyan shadow-[0_0_10px_2px_rgb(0_198_255/0.7)] lg:animate-[flow-x_2s_linear_infinite]" style={{ animationDelay: `${i * 0.3}s` }} />
+              <span className={cn('absolute inset-0', dark ? 'bg-brand-300/50' : 'bg-line-strong')} />
+              <span className="absolute size-1.5 animate-[flow-y_2s_linear_infinite] rounded-full bg-brand-300 lg:animate-[flow-x_2s_linear_infinite]" style={{ animationDelay: `${i * 0.3}s` }} />
             </li>
           )}
         </Fragment>

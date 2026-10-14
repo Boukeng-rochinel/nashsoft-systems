@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { Check, CirclePlay, CodeXml, Headphones, LockKeyhole, ShieldCheck, type LucideIcon } from 'lucide-react'
+import { Check, CodeXml, Headphones, LockKeyhole, ShieldCheck, type LucideIcon } from 'lucide-react'
 import type { Project, ProjectCategory, Service } from '@/types'
 import { services, serviceHref } from '@/data/services'
 import { projects } from '@/data/projects'
@@ -8,32 +8,29 @@ import { getTechnology } from '@/data/technologies'
 import { START_PROJECT_HREF } from '@/data/navigation'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
-import { GradientText } from '@/components/ui/GradientText'
+import { AccentText } from '@/components/ui/AccentText'
 import { ButtonLink } from '@/components/ui/Button'
 import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal'
+import { PlayLink } from '@/components/ui/PlayLink'
 import { PageHero } from './PageHero'
-import { HeroImage } from './HeroImage'
 import { ProcessSteps } from './ProcessSteps'
 import { TechnologyCloud } from './TechnologyCloud'
 import { FeatureGrid } from './FeatureGrid'
 import { ProjectCard } from './ProjectCard'
 import { CTABand } from './CTABand'
 import { WhyUs } from './WhyUs'
-import { AnimatedGrid } from '@/components/visuals/AnimatedGrid'
-import { GlassPanel } from '@/components/visuals/GlassPanel'
-import { FloatingCard } from '@/components/visuals/FloatingCard'
 
 const highlightIcons: LucideIcon[] = [CodeXml, ShieldCheck, LockKeyhole, Headphones]
 
 /** Highlights the last two words of a sentence (design: "Des logiciels sur mesure pour vos ambitions."). */
 function splitTitle(text: string): ReactNode {
   const words = text.split(' ')
-  if (words.length < 4) return <GradientText>{text}</GradientText>
+  if (words.length < 4) return <AccentText>{text}</AccentText>
   const head = words.slice(0, -2).join(' ')
   const tail = words.slice(-2).join(' ')
   return (
     <>
-      {head} <GradientText>{tail}</GradientText>
+      {head} <AccentText>{tail}</AccentText>
     </>
   )
 }
@@ -42,7 +39,8 @@ interface ServiceDetailViewProps {
   service: Service
   /** Overrides the default hero headline (service tagline). */
   heroTitle?: ReactNode
-  heroVisual?: ReactNode
+  /** Overrides the hero photograph (defaults to the service image). */
+  heroImage?: string
   /** Service-specific sections inserted right after the hero (diagrams…). */
   children?: ReactNode
   /** Hide the generic "domaines d'intervention" grid when the page provides its own. */
@@ -59,7 +57,7 @@ const serviceCategory: Partial<Record<string, ProjectCategory>> = {
   'developpement-logiciel': 'Entreprise',
 }
 
-export function ServiceDetailView({ service, heroTitle, heroVisual, children, showFeatures = true }: ServiceDetailViewProps) {
+export function ServiceDetailView({ service, heroTitle, heroImage, children, showFeatures = true }: ServiceDetailViewProps) {
   const techs = service.technologies.map(getTechnology)
   const category = serviceCategory[service.slug]
   const score = (p: Project) =>
@@ -79,29 +77,14 @@ export function ServiceDetailView({ service, heroTitle, heroVisual, children, sh
         description={service.longDescription}
         actions={
           <>
-            <ButtonLink to={`${START_PROJECT_HREF}?service=${service.slug}`} size="lg">
+            <ButtonLink to={`${START_PROJECT_HREF}?service=${service.slug}`} size="lg" arrow={false} className="w-full sm:w-auto">
               Démarrer un projet
             </ButtonLink>
-            <ButtonLink to="#processus" variant="secondary" size="lg" icon={CirclePlay} arrow={false}>
-              Voir notre processus
-            </ButtonLink>
+            <PlayLink to="#processus">Voir notre processus</PlayLink>
           </>
         }
         highlights={service.highlights.map((h, i) => ({ title: h, description: '', icon: highlightIcons[i % highlightIcons.length] }))}
-        highlightStyle="tiles"
-        visual={
-          heroVisual ?? (
-            <HeroImage src={service.image} alt={service.title}>
-              <GlassPanel
-                title="Technologies que nous utilisons"
-                columns={2}
-                className="top-[2%] right-0 hidden sm:block"
-                items={techs.slice(0, 6).map((t) => ({ label: t.name, mono: t.mono, color: t.color }))}
-              />
-              <FloatingCard icon={service.icon} title="Conçu pour durer" description="Des applications puissantes et évolutives." className="bottom-[2%] left-0" delay={0.3} />
-            </HeroImage>
-          )
-        }
+        image={heroImage ?? service.image}
       />
 
       {children}
@@ -113,7 +96,7 @@ export function ServiceDetailView({ service, heroTitle, heroVisual, children, sh
             eyebrow="Notre processus"
             title={
               <>
-                De l’idée à la production en <GradientText>6 étapes</GradientText>
+                De l’idée à la production en <AccentText>6 étapes</AccentText>
               </>
             }
             description="Nous adoptons une approche méthodique et agile pour garantir la réussite de chaque projet, de la conception à la maintenance."
@@ -126,14 +109,14 @@ export function ServiceDetailView({ service, heroTitle, heroVisual, children, sh
       </Section>
 
       {/* Technologies */}
-      <Section tone="navy" background={<AnimatedGrid tone="dark" />}>
+      <Section tone="navy">
         <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.6fr]">
           <SectionTitle
             tone="dark"
             eyebrow="Nos technologies"
             title={
               <>
-                Un stack moderne pour des solutions <GradientText>performantes</GradientText>
+                Un stack moderne pour des solutions <AccentText>performantes</AccentText>
               </>
             }
             description="Nous utilisons les technologies les plus fiables et les plus modernes pour construire des applications rapides, sécurisées et évolutives."
@@ -153,7 +136,7 @@ export function ServiceDetailView({ service, heroTitle, heroVisual, children, sh
             <FeatureGrid items={service.features} columns={2} className="mt-10" />
           </div>
           <Reveal className="lg:pt-24">
-            <div className="rounded-2xl border border-brand-100 bg-gradient-to-br from-light to-mist p-6 sm:p-8">
+            <div className="rounded-2xl border border-brand-100 bg-light p-6 sm:p-8">
               <h3 className="font-display text-lg font-semibold text-navy">Livrables</h3>
               <p className="mt-1 text-sm text-slate">Ce que vous recevez à chaque projet.</p>
               <ul className="mt-6 space-y-3.5">

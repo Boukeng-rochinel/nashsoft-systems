@@ -15,6 +15,7 @@ import {
 import { submitContactRequest } from '@/lib/api'
 import { site } from '@/data/site'
 import { cn } from '@/lib/cn'
+import { glassButton } from '@/lib/styles'
 import { Link } from 'react-router-dom'
 import { useCaptcha } from '@/hooks/useCaptcha'
 import { Turnstile } from './Turnstile'
@@ -58,7 +59,7 @@ function Field({
         <label htmlFor={id} className={cn('text-[0.8rem] font-medium', dark ? 'text-slate-200' : 'text-navy')}>
           {label}
           {required ? (
-            <span aria-hidden className={dark ? 'text-cyan' : 'text-brand'}>
+            <span aria-hidden className={dark ? 'text-brand-300' : 'text-brand'}>
               {' '}
               *
             </span>
@@ -82,7 +83,7 @@ const fieldClass = (tone: Tone, invalid: boolean) =>
   cn(
     'w-full rounded-xl border text-sm transition-[border-color,box-shadow] outline-none focus:ring-4',
     tone === 'dark'
-      ? 'border-white/12 bg-white/[0.04] text-white placeholder:text-slate-400 focus:border-cyan/70 focus:ring-cyan/10 [&>option]:bg-white [&>option]:text-navy'
+      ? 'border-white/12 bg-white/[0.04] text-white placeholder:text-slate-400 focus:border-brand-300/70 focus:ring-brand-300/10 [&>option]:bg-white [&>option]:text-navy'
       : 'border-line-strong bg-white text-navy placeholder:text-slate/70 focus:border-brand focus:ring-brand/10',
     invalid && (tone === 'dark' ? 'border-red-400/70' : 'border-red-400'),
   )
@@ -159,7 +160,7 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
           exit={{ opacity: 0 }}
           className="flex flex-col items-center py-10 text-center"
         >
-          <span className={cn('inline-flex size-14 items-center justify-center rounded-full', dark ? 'bg-cyan/10 text-cyan' : 'bg-brand-50 text-brand')}>
+          <span className={cn('inline-flex size-14 items-center justify-center rounded-full', dark ? 'bg-brand-300/10 text-brand-300' : 'bg-brand-50 text-brand')}>
             <CircleCheck aria-hidden className="size-7" />
           </span>
           <h3 className={cn('mt-5 font-display text-xl font-bold', dark ? 'text-white' : 'text-navy')}>
@@ -171,7 +172,7 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
             ) : (
               <>
                 Votre messagerie s’est ouverte avec un e-mail pré-rempli : il vous suffit de l’envoyer. Rien ne s’est ouvert ?{' '}
-                <a href={status.href} className={cn('font-semibold underline underline-offset-2', dark ? 'text-cyan' : 'text-brand')}>
+                <a href={status.href} className={cn('font-semibold underline underline-offset-2', dark ? 'text-brand-300' : 'text-brand')}>
                   Ouvrir l’e-mail
                 </a>{' '}
                 ou écrivez-nous à {site.contact.email}.
@@ -181,7 +182,7 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
           <button
             type="button"
             onClick={() => setStatus(null)}
-            className={cn('mt-6 inline-flex items-center gap-2 text-sm font-semibold', dark ? 'text-cyan hover:text-white' : 'text-brand hover:text-violet')}
+            className={cn('mt-6 inline-flex items-center gap-2 text-sm font-semibold', dark ? 'text-brand-300 hover:text-white' : 'text-brand hover:text-brand-600')}
           >
             <RotateCcw aria-hidden className="size-4" /> Envoyer une autre demande
           </button>
@@ -339,7 +340,7 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
               />
               <span>
                 J’accepte que Nashsoft Systems utilise ces informations pour me recontacter au sujet de mon projet.{' '}
-                <Link to="/confidentialite" className={cn('font-medium underline underline-offset-2', dark ? 'text-cyan' : 'text-brand')}>
+                <Link to="/confidentialite" className={cn('font-medium underline underline-offset-2', dark ? 'text-brand-300' : 'text-brand')}>
                   Politique de confidentialité
                 </Link>
               </span>
@@ -364,7 +365,7 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="group inline-flex h-13 items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-cyan via-brand to-violet font-display text-[0.95rem] font-semibold text-white shadow-[0_14px_34px_-12px_rgb(8_125_255/0.8)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-12px_rgb(8_125_255/0.9)] disabled:pointer-events-none disabled:opacity-70 sm:col-span-2"
+            className={cn('group inline-flex h-13 items-center justify-center gap-2.5 rounded-full font-display text-[0.95rem] font-semibold transition-colors disabled:pointer-events-none disabled:opacity-70 sm:col-span-2', glassButton)}
           >
             {isSubmitting ? <LoaderCircle aria-hidden className="size-4 animate-spin" /> : <Send aria-hidden className="size-4" />}
             {isSubmitting ? 'Envoi en cours…' : submitLabel}

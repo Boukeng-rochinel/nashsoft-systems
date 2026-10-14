@@ -31,7 +31,7 @@ export function Stats({ items = defaultStats, variant = 'panel', className }: { 
       <RevealGroup
         className={cn(
           'grid grid-cols-2 lg:grid-cols-4',
-          variant === 'panel' && 'rounded-2xl border border-brand-100/70 bg-gradient-to-br from-light to-mist p-2 sm:p-3',
+          variant === 'panel' && 'rounded-2xl border border-brand-100/70 bg-light p-2 sm:p-3',
         )}
       >
         {items.map((stat, i) => (
@@ -48,16 +48,16 @@ export function Stats({ items = defaultStats, variant = 'panel', className }: { 
               aria-hidden
               className={cn(
                 'inline-flex size-11 shrink-0 items-center justify-center rounded-full',
-                dark ? 'bg-white/5 text-cyan ring-1 ring-white/10' : 'bg-white text-brand shadow-card ring-1 ring-brand-100',
+                dark ? 'bg-white/5 text-brand-300 ring-1 ring-white/10' : 'bg-white text-brand shadow-card ring-1 ring-brand-100',
               )}
             >
               <stat.icon className="size-5" strokeWidth={1.8} />
             </span>
             <div>
-              <p className={cn('font-display text-3xl font-extrabold tracking-tight tabular-nums sm:text-[2rem]', dark ? 'text-white' : 'text-navy')}>
+              <p className={cn('font-display text-3xl font-semibold tracking-tight tabular-nums sm:text-[2rem]', dark ? 'text-white' : 'text-navy')}>
                 <StatValue stat={stat} start={inView} />
               </p>
-              <p className={cn('mt-0.5 font-display text-sm font-semibold', dark ? 'text-cyan' : 'text-navy')}>{stat.label}</p>
+              <p className={cn('mt-0.5 font-display text-sm font-semibold', dark ? 'text-brand-300' : 'text-navy')}>{stat.label}</p>
               <p className={cn('mt-1 text-xs leading-relaxed', dark ? 'text-slate-400' : 'text-slate')}>{stat.caption}</p>
             </div>
           </RevealItem>

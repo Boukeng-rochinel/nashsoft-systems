@@ -7,11 +7,11 @@ const variants: Record<Variant, string> = {
   /** Light-blue tile with blue icon (light cards). */
   soft: 'rounded-xl bg-brand-50 text-brand ring-1 ring-brand/10',
   /** Gradient tile with white icon (services grid, process). */
-  solid: 'rounded-xl bg-gradient-to-br from-brand to-[#3a5bff] text-white shadow-[0_8px_18px_-8px_rgb(8_125_255/0.8)]',
+  solid: 'rounded-xl bg-brand text-white',
   /** Gradient circle (process steps). */
-  circle: 'rounded-full bg-gradient-to-br from-brand to-[#3a5bff] text-white shadow-[0_8px_18px_-8px_rgb(8_125_255/0.8)]',
+  circle: 'rounded-full bg-brand text-white',
   /** Glowing tile for dark sections. */
-  dark: 'rounded-xl bg-gradient-to-br from-brand/90 to-violet/80 text-white shadow-[0_0_24px_-6px_rgb(0_198_255/0.6)] ring-1 ring-white/15',
+  dark: 'rounded-xl bg-brand text-white ring-1 ring-white/15',
   /** Thin outlined circle (hero highlights). */
   outline: 'rounded-full border border-brand/20 bg-white text-brand',
 }

@@ -4,177 +4,93 @@ import { motion } from 'framer-motion'
 import type { Feature } from '@/types'
 import { cn } from '@/lib/cn'
 import { fadeUp, stagger } from '@/lib/motion'
-import { useTheme } from '@/hooks/useTheme'
 import { Container } from '@/components/ui/Container'
 import { Breadcrumbs, type Crumb } from '@/components/ui/Breadcrumbs'
-import { AnimatedGrid, LightStreaks } from '@/components/visuals/AnimatedGrid'
 
 interface PageHeroProps {
   breadcrumbs?: Crumb[]
   eyebrow?: string
-  /** Renders the eyebrow as a tinted pill led by this icon. */
+  /** Optional icon shown before the eyebrow. */
   eyebrowIcon?: LucideIcon
   title: ReactNode
   description?: ReactNode
   actions?: ReactNode
   highlights?: Feature[]
-  /** `icons`: round outlined icons (default) · `tiles`: tinted square tiles separated by dividers. */
-  highlightStyle?: 'icons' | 'tiles'
-  visual?: ReactNode
+  /** Full-bleed background photograph (public/images). Without one, a flat navy band is used. */
+  image?: string
+  /** `full`: fills the viewport below the header (homepage) · `page`: shorter, for inner pages. */
+  size?: 'full' | 'page'
   className?: string
 }
 
 /**
- * Inner-page hero. Follows the site theme:
- * light enterprise (default, like the homepage) or dark technology (inner-page designs).
- * Highlighted words should use <GradientText> — it adapts automatically.
+ * Hero used on every page: full-bleed photograph under a flat navy veil,
+ * white headline with one accented phrase (<AccentText>), pill CTAs.
+ * Always dark — the photo veil makes it so regardless of the site theme.
  */
-/** Tile accents for `highlightStyle="tiles"`: blue · green · violet · orange. */
-const tileTones = [
-  'bg-brand-50 text-brand',
-  'bg-emerald-50 text-emerald-600',
-  'bg-violet-50 text-violet',
-  'bg-orange-50 text-orange-500',
-]
-
-export function PageHero({
-  breadcrumbs,
-  eyebrow,
-  eyebrowIcon: EyebrowIcon,
-  title,
-  description,
-  actions,
-  highlights,
-  highlightStyle = 'icons',
-  visual,
-  className,
-}: PageHeroProps) {
-  const { theme } = useTheme()
-  const dark = theme === 'dark'
-
+export function PageHero({ breadcrumbs, eyebrow, eyebrowIcon: EyebrowIcon, title, description, actions, highlights, image, size = 'page', className }: PageHeroProps) {
   return (
     <section
-      data-theme={theme}
+      data-theme="dark"
       className={cn(
-        'relative isolate overflow-hidden',
-        // One viewport on desktop: the hero fills the screen below the 80px header, never more.
-        visual && 'lg:flex lg:min-h-[calc(100dvh-5rem)] lg:items-center',
-        dark ? 'bg-navy-950 text-slate-300' : 'bg-white text-ink',
+        'relative isolate flex items-center overflow-hidden bg-navy-950 text-slate-200',
+        size === 'full' ? 'min-h-[calc(100svh-4.5rem)] lg:min-h-[calc(100svh-5rem)]' : 'min-h-[30rem] lg:min-h-[min(40rem,calc(100svh-5rem))]',
         className,
       )}
     >
-      {dark ? (
+      {image && (
         <>
-          <AnimatedGrid tone="dark" className="-z-10" />
-          <LightStreaks className="-z-10 opacity-60" />
-          <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-navy-950 to-transparent" />
-        </>
-      ) : (
-        <>
-          <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(70%_80%_at_85%_30%,#e3efff_0%,#f3f7fd_45%,#ffffff_75%)]" />
-          <AnimatedGrid tone="light" glow={false} className="-z-10 opacity-70" />
+          <img src={image} alt="" width={1600} height={1200} fetchPriority="high" decoding="async" className="absolute inset-0 -z-20 size-full object-cover" />
+          <div aria-hidden className="absolute inset-0 -z-10 bg-navy-950/65" />
         </>
       )}
-      <Container
-        className={cn(
-          'grid w-full items-center gap-12 pt-10 pb-14 md:pt-14 md:pb-20',
-          visual && 'lg:grid-cols-[1.05fr_1fr] lg:items-start lg:gap-12 lg:py-10',
-        )}
-      >
-        <motion.div variants={stagger(0.09, 0.05)} initial="hidden" animate="show" className="relative max-w-2xl">
+
+      <Container className="w-full py-16 sm:py-20">
+        <motion.div variants={stagger(0.09, 0.05)} initial="hidden" animate="show" className="max-w-2xl">
           {breadcrumbs && (
-            <motion.div variants={fadeUp} className="mb-5">
-              <Breadcrumbs items={breadcrumbs} tone={theme} />
+            <motion.div variants={fadeUp} className="mb-6">
+              <Breadcrumbs items={breadcrumbs} tone="dark" />
             </motion.div>
           )}
-          {eyebrow && EyebrowIcon && (
-            <motion.p
-              variants={fadeUp}
-              className={cn(
-                'eyebrow mb-6 inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5',
-                dark ? 'bg-white/[0.06] text-cyan ring-1 ring-white/10' : 'bg-brand-50 text-brand',
-              )}
-            >
-              <EyebrowIcon aria-hidden className="size-4" strokeWidth={2} />
+          {eyebrow && (
+            <motion.p variants={fadeUp} className="eyebrow flex items-center gap-2 text-brand-300">
+              {EyebrowIcon && <EyebrowIcon aria-hidden className="size-4" strokeWidth={2} />}
               {eyebrow}
-            </motion.p>
-          )}
-          {eyebrow && !EyebrowIcon && (
-            <motion.p variants={fadeUp} className={cn('eyebrow mb-4 flex items-center gap-3', dark ? 'text-cyan' : 'text-brand')}>
-              {eyebrow}
-              <span aria-hidden className={cn('h-px w-8', dark ? 'bg-cyan/60' : 'bg-brand/50')} />
             </motion.p>
           )}
           <motion.h1
             variants={fadeUp}
-            className={cn('text-[2.15rem] leading-[1.08] font-extrabold sm:text-5xl lg:text-[3rem] xl:text-[3.2rem]', dark ? 'text-white' : 'text-navy')}
+            className={cn(
+              'mt-5 leading-[1.08] font-semibold text-white',
+              size === 'full' ? 'text-[2.3rem] sm:text-[3.4rem] lg:text-[4rem]' : 'text-[2.1rem] sm:text-5xl lg:text-[3.2rem]',
+            )}
           >
             {title}
           </motion.h1>
           {description && (
-            <motion.p variants={fadeUp} className={cn('mt-5 max-w-xl text-[0.98rem] leading-relaxed sm:text-base', dark ? 'text-slate-300' : 'text-slate')}>
+            <motion.p variants={fadeUp} className="mt-6 max-w-xl text-base leading-relaxed text-slate-200 sm:text-[1.05rem]">
               {description}
             </motion.p>
           )}
           {actions && (
-            <motion.div variants={fadeUp} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:mt-7">
+            <motion.div variants={fadeUp} className="mt-9 flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-8">
               {actions}
             </motion.div>
           )}
-          {highlights && highlights.length > 0 && highlightStyle === 'tiles' && (
-            <motion.ul variants={fadeUp} className="mt-10 grid grid-cols-2 gap-x-4 gap-y-5 sm:flex sm:gap-0 lg:mt-8">
-              {highlights.map((h, i) => (
-                <li
-                  key={h.title}
-                  className={cn(
-                    'flex items-center gap-3 sm:px-5 sm:first:pl-0',
-                    i > 0 && (dark ? 'sm:border-l sm:border-white/10' : 'sm:border-l sm:border-line'),
-                  )}
-                >
-                  {h.icon && (
-                    <span aria-hidden className={cn('inline-flex size-11 shrink-0 items-center justify-center rounded-xl', tileTones[i % tileTones.length])}>
-                      <h.icon className="size-5" strokeWidth={1.8} />
-                    </span>
-                  )}
-                  <span className={cn('max-w-[7.5rem] text-[0.8rem] leading-snug', dark ? 'text-slate-300' : 'text-slate')}>{h.title}</span>
-                </li>
-              ))}
-            </motion.ul>
-          )}
-          {highlights && highlights.length > 0 && highlightStyle === 'icons' && (
-            <motion.ul variants={fadeUp} className="mt-10 grid grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-4 sm:gap-6 lg:mt-8">
+          {highlights && highlights.length > 0 && (
+            <motion.ul variants={fadeUp} className="mt-12 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-white/15 pt-6 sm:grid-cols-4">
               {highlights.map((h) => (
-                <li key={h.title} className="flex items-center gap-2.5">
-                  {h.icon && (
-                    <span
-                      aria-hidden
-                      className={cn(
-                        'inline-flex size-9 shrink-0 items-center justify-center rounded-full border',
-                        dark ? 'border-white/15 bg-white/5 text-cyan' : 'border-brand/15 bg-white text-brand shadow-card',
-                      )}
-                    >
-                      <h.icon className="size-4" strokeWidth={1.8} />
-                    </span>
-                  )}
-                  <span className="text-[0.72rem] leading-tight">
-                    <span className={cn('block font-semibold', dark ? 'text-white' : 'text-navy')}>{h.title}</span>
-                    {h.description && <span className={dark ? 'text-slate-400' : 'text-slate'}>{h.description}</span>}
+                <li key={h.title} className="flex items-center gap-2.5 text-[0.78rem] leading-tight">
+                  {h.icon && <h.icon aria-hidden className="size-5 shrink-0 text-brand-300" strokeWidth={1.8} />}
+                  <span>
+                    <span className="block font-semibold text-white">{h.title}</span>
+                    {h.description && <span className="text-slate-300">{h.description}</span>}
                   </span>
                 </li>
               ))}
             </motion.ul>
           )}
         </motion.div>
-        {visual && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="relative"
-          >
-            {visual}
-          </motion.div>
-        )}
       </Container>
     </section>
   )

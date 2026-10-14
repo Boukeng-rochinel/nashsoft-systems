@@ -1,6 +1,6 @@
 import { useId, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Briefcase, Check, ChevronDown, Clock, FileText, Handshake, Mail, MapPin, MessagesSquare, Search, Sparkles } from 'lucide-react'
+import { Briefcase, Check, ChevronDown, Clock, FileText, Handshake, Mail, MapPin, MessagesSquare, Search } from 'lucide-react'
 import type { Job } from '@/types'
 import { jobs, perks } from '@/data/jobs'
 import { site } from '@/data/site'
@@ -9,15 +9,13 @@ import { pageSeo } from '@/data/seo'
 import { cn } from '@/lib/cn'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
-import { GradientText } from '@/components/ui/GradientText'
+import { AccentText } from '@/components/ui/AccentText'
 import { ButtonLink } from '@/components/ui/Button'
 import { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { PageHero } from '@/components/sections/PageHero'
-import { HeroImage } from '@/components/sections/HeroImage'
 import { FeatureGrid } from '@/components/sections/FeatureGrid'
 import { ProcessSteps } from '@/components/sections/ProcessSteps'
 import { CTABand } from '@/components/sections/CTABand'
-import { FloatingCard } from '@/components/visuals/FloatingCard'
 
 const hiringSteps = [
   { title: 'Candidature', description: 'Envoyez votre CV et quelques mots sur vos projets.', icon: FileText },
@@ -116,7 +114,7 @@ export default function CareersPage() {
         eyebrow="Carrières"
         title={
           <>
-            Construisons ensemble l’avenir <GradientText>numérique.</GradientText>
+            Construisons ensemble l’avenir <AccentText>numérique.</AccentText>
           </>
         }
         description="Nous recherchons des esprits curieux et exigeants pour concevoir des produits utilisés par de vraies entreprises au Cameroun et au-delà."
@@ -130,11 +128,7 @@ export default function CareersPage() {
             </ButtonLink>
           </>
         }
-        visual={
-          <HeroImage src="/images/hero-careers.webp" alt="Membres de l’équipe échangeant autour d’un ordinateur">
-            <FloatingCard icon={Sparkles} title={`${jobs.length} postes ouverts`} description="À Douala, en hybride ou sur site." className="bottom-[6%] left-[5%]" delay={0.3} />
-          </HeroImage>
-        }
+        image="/images/hero-careers.webp"
       />
 
       <Section tone="white">

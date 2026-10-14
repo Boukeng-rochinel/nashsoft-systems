@@ -1,22 +1,18 @@
 import { Link, useSearchParams } from 'react-router-dom'
-import { ArrowRight, Layers, MessageSquare, PencilRuler, CodeXml, LifeBuoy, SearchCheck } from 'lucide-react'
+import { ArrowRight, MessageSquare, PencilRuler, CodeXml, LifeBuoy, SearchCheck } from 'lucide-react'
 import type { ProcessStep } from '@/types'
 import { solutionCategories } from '@/data/industries'
-import { stats } from '@/data/site'
 import { START_PROJECT_HREF } from '@/data/navigation'
 import { usePageMeta } from '@/hooks/usePageMeta'
 import { pageSeo } from '@/data/seo'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
-import { GradientText } from '@/components/ui/GradientText'
+import { AccentText } from '@/components/ui/AccentText'
 import { ButtonLink } from '@/components/ui/Button'
 import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { PageHero } from '@/components/sections/PageHero'
-import { HeroImage } from '@/components/sections/HeroImage'
 import { IndustrySelector } from '@/components/sections/IndustrySelector'
 import { CTABand } from '@/components/sections/CTABand'
-import { FloatingCard } from '@/components/visuals/FloatingCard'
-import { AnimatedGrid } from '@/components/visuals/AnimatedGrid'
 
 /**
  * Where each category card leads: the matching sector tab when there is one,
@@ -48,7 +44,6 @@ export default function SolutionsPage() {
   usePageMeta(pageSeo.solutions)
   const [params] = useSearchParams()
   const sector = params.get('secteur')
-  const projects = stats[0]
 
   return (
     <>
@@ -56,7 +51,7 @@ export default function SolutionsPage() {
         eyebrow="Nos solutions"
         title={
           <>
-            Des solutions digitales pour <GradientText>tous les secteurs.</GradientText>
+            Des solutions digitales pour <AccentText>tous les secteurs.</AccentText>
           </>
         }
         description="Nous concevons des solutions sur mesure adaptées aux besoins spécifiques de chaque secteur d’activité. Des outils modernes, flexibles et évolutifs pour accompagner votre croissance."
@@ -70,17 +65,7 @@ export default function SolutionsPage() {
             </ButtonLink>
           </>
         }
-        visual={
-          <HeroImage src="/images/hero-solutions.webp" alt="Tableaux de bord d’une application de gestion sur ordinateur portable et smartphone">
-            <FloatingCard
-              icon={Layers}
-              title={`${projects.value}${projects.suffix ?? ''} ${projects.label.toLowerCase()}`}
-              description="Dans plus de 5 secteurs"
-              className="top-[6%] right-0"
-              delay={0.3}
-            />
-          </HeroImage>
-        }
+        image="/images/hero-solutions.webp"
       />
 
       {/* Categories */}
@@ -102,7 +87,7 @@ export default function SolutionsPage() {
                 className="group flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-card-hover"
               >
                 <div className="flex items-start gap-3.5">
-                  <span aria-hidden className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-50 to-violet-50 text-brand transition-colors group-hover:from-brand group-hover:to-violet group-hover:text-white">
+                  <span aria-hidden className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand transition-colors group-hover:bg-brand group-hover:text-white">
                     <c.icon className="size-5" strokeWidth={1.8} />
                   </span>
                   <div>
@@ -120,14 +105,14 @@ export default function SolutionsPage() {
       </Section>
 
       {/* Sector focus */}
-      <Section tone="dark" id="secteurs" className="scroll-mt-20" background={<AnimatedGrid tone="dark" />}>
+      <Section tone="dark" id="secteurs" className="scroll-mt-20">
         <div className="grid items-start gap-10 lg:grid-cols-[0.75fr_1.6fr]">
           <SectionTitle
             tone="dark"
             eyebrow="Focus secteurs"
             title={
               <>
-                Des solutions adaptées à chaque <GradientText tone="dark">secteur d’activité</GradientText>
+                Des solutions adaptées à chaque <AccentText tone="dark">secteur d’activité</AccentText>
               </>
             }
             description="Nous comprenons les défis uniques de chaque industrie. C’est pourquoi nous proposons des solutions personnalisées qui répondent aux besoins spécifiques de votre secteur."

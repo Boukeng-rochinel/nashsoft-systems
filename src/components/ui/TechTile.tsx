@@ -27,7 +27,7 @@ export function TechTile({ tech, tone = 'light', caption }: { tech: Technology; 
         'group flex h-full flex-col items-start gap-3 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1',
         tone === 'light'
           ? 'border border-line bg-white shadow-card hover:shadow-card-hover'
-          : 'border border-brand/25 bg-navy-900/80 hover:border-cyan/50 hover:shadow-[0_0_30px_-10px_rgb(0_198_255/0.5)]',
+          : 'border border-brand/25 bg-navy-900/80 hover:border-brand-300/50',
       )}
     >
       <TechMark tech={tech} />
@@ -45,7 +45,7 @@ export function TechChip({ name, tone = 'light' }: { name: string; tone?: 'light
     <span
       className={cn(
         'inline-flex items-center rounded-md px-2 py-0.5 text-[0.7rem] font-medium',
-        tone === 'light' ? 'bg-brand-50 text-brand' : 'bg-white/8 text-cyan ring-1 ring-white/10',
+        tone === 'light' ? 'bg-brand-50 text-brand' : 'bg-white/8 text-brand-300 ring-1 ring-white/10',
       )}
     >
       {name}

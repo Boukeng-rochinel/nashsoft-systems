@@ -5,7 +5,6 @@ import { usePageMeta } from '@/hooks/usePageMeta'
 import { pageSeo } from '@/data/seo'
 import { Container } from '@/components/ui/Container'
 import { ButtonLink } from '@/components/ui/Button'
-import { AnimatedGrid, LightStreaks } from '@/components/visuals/AnimatedGrid'
 import { NOutline } from '@/components/visuals/BrandN'
 
 const shortcuts = [
@@ -20,14 +19,12 @@ export default function NotFoundPage() {
 
   return (
     <section data-theme="dark" className="relative isolate overflow-hidden bg-navy-950 text-slate-300">
-      <AnimatedGrid className="-z-10" />
-      <LightStreaks className="-z-10 opacity-50" />
       <NOutline className="absolute top-1/2 right-[-10%] -z-10 hidden w-[42rem] -translate-y-1/2 opacity-40 lg:block" />
       <Container className="flex min-h-[72vh] flex-col justify-center py-20">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-gradient-cyan font-display text-[6rem] leading-none font-extrabold tracking-tighter sm:text-[9rem]"
+          className="text-brand-300 font-display text-[6rem] leading-none font-semibold tracking-tighter sm:text-[9rem]"
         >
           404
         </motion.p>
@@ -55,13 +52,13 @@ export default function NotFoundPage() {
             <li key={s.href}>
               <Link
                 to={s.href}
-                className="group flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-sm text-white transition-colors hover:border-cyan/40 hover:bg-white/[0.06]"
+                className="group flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-sm text-white transition-colors hover:border-brand-300/40 hover:bg-white/[0.06]"
               >
                 <span className="flex items-center gap-3">
-                  <s.icon aria-hidden className="size-4 text-cyan" />
+                  <s.icon aria-hidden className="size-4 text-brand-300" />
                   {s.label}
                 </span>
-                <ArrowUpRight aria-hidden className="size-4 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-cyan" />
+                <ArrowUpRight aria-hidden className="size-4 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-brand-300" />
               </Link>
             </li>
           ))}

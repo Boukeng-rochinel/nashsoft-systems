@@ -5,18 +5,15 @@ import { usePageMeta } from '@/hooks/usePageMeta'
 import { pageSeo } from '@/data/seo'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
-import { GradientText } from '@/components/ui/GradientText'
+import { AccentText } from '@/components/ui/AccentText'
 import { ButtonLink } from '@/components/ui/Button'
 import { PageHero } from '@/components/sections/PageHero'
 import { ProjectFilter } from '@/components/sections/ProjectFilter'
-import { HeroImage } from '@/components/sections/HeroImage'
 import { ProcessSteps } from '@/components/sections/ProcessSteps'
 import { CTABand } from '@/components/sections/CTABand'
-import { FloatingCard } from '@/components/visuals/FloatingCard'
 
 export default function ProjectsPage() {
   usePageMeta(pageSeo.projects)
-  const [a, b] = projects
 
   return (
     <>
@@ -25,7 +22,7 @@ export default function ProjectsPage() {
         eyebrow="Nos réalisations"
         title={
           <>
-            Des projets qui font <GradientText>la différence.</GradientText>
+            Des projets qui font <AccentText>la différence.</AccentText>
           </>
         }
         description="Web, mobile, intelligence artificielle, ERP : chaque projet est une réponse concrète à un besoin réel. Découvrez nos études de cas."
@@ -44,12 +41,7 @@ export default function ProjectsPage() {
           { title: '5 catégories', description: 'Web à Cloud', icon: Layers },
           { title: 'Du MVP', description: 'à la production', icon: Rocket },
         ]}
-        visual={
-          <HeroImage src="/images/hero-projects.webp" alt="Développeurs collaborant sur un projet logiciel">
-            <FloatingCard icon={FolderKanban} title={a.title} description={a.type} className="-bottom-6 left-[6%]" delay={0.3} />
-            <FloatingCard icon={Rocket} title={b.title} description={b.type} className="top-[8%] -right-2 hidden sm:block lg:-right-8" delay={0.5} />
-          </HeroImage>
-        }
+        image="/images/hero-projects.webp"
       />
 
       <Section tone="light" id="portfolio" className="scroll-mt-20">
@@ -57,7 +49,7 @@ export default function ProjectsPage() {
           eyebrow="Portfolio"
           title={
             <>
-              Nos <GradientText>études de cas</GradientText>
+              Nos <AccentText>études de cas</AccentText>
             </>
           }
           description="Filtrez par type de projet pour découvrir les réalisations les plus proches de votre besoin."

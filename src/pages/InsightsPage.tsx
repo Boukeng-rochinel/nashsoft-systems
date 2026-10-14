@@ -6,9 +6,8 @@ import { usePageMeta } from '@/hooks/usePageMeta'
 import { pageSeo } from '@/data/seo'
 import { cn } from '@/lib/cn'
 import { Section } from '@/components/ui/Section'
-import { GradientText } from '@/components/ui/GradientText'
+import { AccentText } from '@/components/ui/AccentText'
 import { PageHero } from '@/components/sections/PageHero'
-import { HeroImage } from '@/components/sections/HeroImage'
 import { ArticleCard } from '@/components/sections/ArticleCard'
 import { CTABand } from '@/components/sections/CTABand'
 
@@ -45,11 +44,11 @@ export default function InsightsPage() {
         eyebrow="Insights"
         title={
           <>
-            Idées, analyses et <GradientText>retours d’expérience.</GradientText>
+            Idées, analyses et <AccentText>retours d’expérience.</AccentText>
           </>
         }
         description="Nos ingénieurs partagent ce qu’ils apprennent sur le terrain : transformation digitale des PME, développement, IA, cloud et outils de gestion adaptés au marché camerounais."
-        visual={<HeroImage src="/images/hero-insights.webp" alt="Carnet et ordinateur portable sur un bureau de travail" />}
+        image="/images/hero-insights.webp"
       />
 
       {category === 'Tous' && featured && (

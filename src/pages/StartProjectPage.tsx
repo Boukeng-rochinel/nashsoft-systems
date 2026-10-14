@@ -1,21 +1,20 @@
 import { useSearchParams } from 'react-router-dom'
-import { ArrowRight, ClipboardList, Phone, Zap } from 'lucide-react'
+import { ArrowRight, ClipboardList, Phone } from 'lucide-react'
 import { site } from '@/data/site'
 import { faqs, nextSteps, startProjectHighlights, startProjectReasons } from '@/data/contact'
 import { isProjectType } from '@/lib/validation'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { cn } from '@/lib/cn'
+import { glassButton } from '@/lib/styles'
 import { pageSeo } from '@/data/seo'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
-import { GradientText } from '@/components/ui/GradientText'
+import { AccentText } from '@/components/ui/AccentText'
 import { ButtonLink } from '@/components/ui/Button'
 import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { PageHero } from '@/components/sections/PageHero'
-import { HeroImage } from '@/components/sections/HeroImage'
 import { FaqList } from '@/components/sections/FaqList'
 import { ContactForm } from '@/components/forms/ContactForm'
-import { FloatingCard } from '@/components/visuals/FloatingCard'
-import { AnimatedGrid } from '@/components/visuals/AnimatedGrid'
 
 export default function StartProjectPage() {
   usePageMeta(pageSeo.startProject)
@@ -29,30 +28,26 @@ export default function StartProjectPage() {
         eyebrow="Démarrer un projet"
         title={
           <>
-            Transformons votre idée en <GradientText>solution digitale.</GradientText>
+            Transformons votre idée en <AccentText>solution digitale.</AccentText>
           </>
         }
         description="Vous avez un projet en tête ? Nous sommes là pour vous accompagner de la conception à la mise en production. Remplissez le formulaire ci-dessous et notre équipe vous recontactera rapidement."
         highlights={startProjectHighlights}
-        visual={
-          <HeroImage src="/images/hero-contact.webp" alt="Ordinateur portable affichant du code sur un bureau, à côté d’une tasse Nashsoft">
-            <FloatingCard icon={Zap} title="Réponse sous 24 h" description="Un chef de projet dédié" className="right-0 bottom-[6%]" delay={0.3} />
-          </HeroImage>
-        }
+        image="/images/hero-contact.webp"
       />
 
       {/* Why us + form, side by side (reference design) */}
-      <Section tone="dark" id="formulaire" className="scroll-mt-20" background={<AnimatedGrid tone="dark" />}>
+      <Section tone="dark" id="formulaire" className="scroll-mt-20">
         <div className="grid items-start gap-6 lg:grid-cols-[1fr_1.15fr]">
           <Reveal className="flex h-full flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm sm:p-8">
             <h2 className="text-2xl font-bold text-white sm:text-[1.7rem]">
-              Pourquoi <GradientText tone="dark">nous choisir ?</GradientText>
+              Pourquoi <AccentText tone="dark">nous choisir ?</AccentText>
             </h2>
             <ul className="mt-8 grid gap-7 sm:grid-cols-2">
               {startProjectReasons.map((r) => (
                 <li key={r.title}>
                   {r.icon && (
-                    <span aria-hidden className="inline-flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-violet text-white shadow-glow">
+                    <span aria-hidden className="inline-flex size-11 items-center justify-center rounded-xl bg-brand text-white">
                       <r.icon className="size-5" strokeWidth={1.8} />
                     </span>
                   )}
@@ -63,7 +58,7 @@ export default function StartProjectPage() {
             </ul>
             <a
               href={site.contact.phoneHref}
-              className="group mt-auto flex items-center gap-4 rounded-2xl bg-gradient-to-r from-cyan via-brand to-violet p-5 text-white shadow-[0_20px_40px_-20px_rgb(8_125_255/0.9)] transition-transform hover:-translate-y-0.5 max-lg:mt-10 lg:mt-10"
+              className={cn('group mt-auto flex items-center gap-4 rounded-2xl p-5 transition-colors max-lg:mt-10 lg:mt-10', glassButton)}
             >
               <span aria-hidden className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-white/15">
                 <Phone className="size-5" />
@@ -82,7 +77,7 @@ export default function StartProjectPage() {
 
           <Reveal delay={0.1} className="rounded-3xl border border-white/10 bg-navy-900/70 p-6 shadow-[0_30px_80px_-30px_rgb(0_0_0/0.8)] backdrop-blur-sm sm:p-8">
             <div className="mb-7 flex items-start gap-4">
-              <span aria-hidden className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand/15 text-cyan ring-1 ring-brand/30">
+              <span aria-hidden className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand/15 text-brand-300 ring-1 ring-brand/30">
                 <ClipboardList className="size-5" />
               </span>
               <div>
@@ -101,7 +96,7 @@ export default function StartProjectPage() {
           eyebrow="Et ensuite ?"
           title={
             <>
-              De votre message au <GradientText>lancement</GradientText>
+              De votre message au <AccentText>lancement</AccentText>
             </>
           }
           description="Un processus simple et transparent, sans engagement jusqu’à la validation du devis."

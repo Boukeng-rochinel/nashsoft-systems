@@ -89,7 +89,7 @@ export function MapCard({ className }: { className?: string }) {
       </div>
 
       <div className="flex flex-col justify-center px-5 py-6 sm:px-7">
-        <span aria-hidden className="inline-flex size-9 items-center justify-center rounded-lg bg-brand-50 text-brand on-dark:bg-white/[0.06] on-dark:text-cyan">
+        <span aria-hidden className="inline-flex size-9 items-center justify-center rounded-lg bg-brand-50 text-brand on-dark:bg-white/[0.06] on-dark:text-brand-300">
           <Building2 className="size-[18px]" strokeWidth={1.8} />
         </span>
         <h2 className="mt-4 font-display text-[1.05rem] font-semibold text-navy on-dark:text-white">Notre siège social</h2>
@@ -101,7 +101,7 @@ export function MapCard({ className }: { className?: string }) {
           href={MAPS_URL}
           target="_blank"
           rel="noreferrer"
-          className="group mt-6 inline-flex w-fit items-center gap-2 rounded-lg border border-line-strong px-4 py-2.5 text-[0.82rem] font-semibold text-brand transition-colors hover:border-brand hover:bg-brand-50 on-dark:border-white/15 on-dark:text-cyan on-dark:hover:bg-white/5"
+          className="group mt-6 inline-flex w-fit items-center gap-2 rounded-lg border border-line-strong px-4 py-2.5 text-[0.82rem] font-semibold text-brand transition-colors hover:border-brand hover:bg-brand-50 on-dark:border-white/15 on-dark:text-brand-300 on-dark:hover:bg-white/5"
         >
           <MapPin aria-hidden className="size-4" />
           Voir sur Google Maps

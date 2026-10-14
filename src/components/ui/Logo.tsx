@@ -38,7 +38,7 @@ export function Logo({ tone = 'light', className, asLink = true, size = 'md' }: 
           draggable={false}
         />
         <span className="flex flex-col leading-none">
-          <span className={cn('font-display font-extrabold tracking-tight text-white', size === 'lg' ? 'text-2xl' : 'text-lg sm:text-xl')}>
+          <span className={cn('font-display font-semibold tracking-tight text-white', size === 'lg' ? 'text-2xl' : 'text-lg sm:text-xl')}>
             Nashsoft
           </span>
           <span className={cn('font-display font-semibold text-brand', size === 'lg' ? 'text-xl' : 'text-base sm:text-lg')} style={{ marginTop: '-0.08em' }}>

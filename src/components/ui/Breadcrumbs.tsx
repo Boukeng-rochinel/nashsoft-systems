@@ -16,7 +16,7 @@ export function Breadcrumbs({ items, tone = 'dark', className }: { items: Crumb[
           return (
             <li key={item.label} className="flex items-center gap-1.5">
               {item.href && !last ? (
-                <Link to={item.href} className={cn('transition-colors', tone === 'dark' ? 'text-cyan/90 hover:text-white' : 'text-brand hover:text-navy')}>
+                <Link to={item.href} className={cn('transition-colors', tone === 'dark' ? 'text-brand-300/90 hover:text-white' : 'text-brand hover:text-navy')}>
                   {item.label}
                 </Link>
               ) : (

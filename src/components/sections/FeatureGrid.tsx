@@ -57,7 +57,7 @@ export function FeatureGrid({ items, variant = 'cards', columns = 4, className }
               className={cn(
                 'group h-full rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1',
                 dark
-                  ? 'border border-brand/25 bg-navy-900/70 hover:border-cyan/50 hover:shadow-[0_0_40px_-14px_rgb(0_198_255/0.5)]'
+                  ? 'border border-brand/25 bg-navy-900/70 hover:border-brand-300/50'
                   : 'border border-line bg-white shadow-card hover:border-brand/30 hover:shadow-card-hover',
               )}
             >
@@ -66,7 +66,7 @@ export function FeatureGrid({ items, variant = 'cards', columns = 4, className }
                   aria-hidden
                   className={cn(
                     'inline-flex size-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-105',
-                    dark ? 'bg-gradient-to-br from-brand to-violet text-white shadow-[0_0_24px_-6px_rgb(0_198_255/0.6)]' : 'bg-brand-50 text-brand ring-1 ring-brand/10',
+                    dark ? 'bg-brand text-white' : 'bg-brand-50 text-brand ring-1 ring-brand/10',
                   )}
                 >
                   <Icon className="size-6" strokeWidth={1.7} />

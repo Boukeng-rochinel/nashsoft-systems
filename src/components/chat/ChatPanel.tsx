@@ -127,8 +127,7 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
       className="fixed inset-x-3 top-[84px] bottom-3 z-50 flex origin-bottom-right flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_30px_80px_-20px_rgb(6_20_38/0.45)] sm:inset-x-auto sm:top-auto sm:right-5 sm:bottom-24 sm:h-[min(600px,calc(100dvh-8rem))] sm:w-[390px]"
     >
       {/* Header */}
-      <div className="relative flex items-center gap-3 overflow-hidden bg-gradient-to-r from-navy-950 via-[#06204a] to-[#0a3cc2] px-4 py-3.5 text-white">
-        <div aria-hidden className="absolute inset-0 bg-grid-dark opacity-40" />
+      <div className="relative flex items-center gap-3 overflow-hidden bg-navy-900 px-4 py-3.5 text-white">
         <span className="relative inline-flex size-10 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/20">
           <img src={site.logo.mark} alt="" className="size-7" />
         </span>
@@ -167,7 +166,7 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
             <div
               className={cn(
                 'max-w-[85%] rounded-2xl px-3.5 py-2.5 text-[0.85rem] leading-relaxed',
-                m.role === 'user' ? 'rounded-br-md bg-brand-gradient text-white' : 'rounded-bl-md border border-line bg-white text-ink shadow-card',
+                m.role === 'user' ? 'rounded-br-md bg-brand text-white' : 'rounded-bl-md border border-line bg-white text-ink shadow-card',
               )}
             >
               {m.role === 'assistant' ? <RichText text={m.content} /> : <p className="whitespace-pre-wrap">{m.content}</p>}
@@ -254,7 +253,7 @@ export default function ChatPanel({ onClose }: { onClose: () => void }) {
             type="submit"
             disabled={!input.trim() || pending}
             aria-label="Envoyer"
-            className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand-gradient text-white transition-opacity disabled:opacity-40"
+            className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand text-white transition-opacity disabled:opacity-40"
           >
             <ArrowUp aria-hidden className="size-4" />
           </button>

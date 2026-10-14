@@ -26,7 +26,7 @@ export function SectionTitle({ eyebrow, title, description, tone = 'light', alig
       className={cn('max-w-xl', align === 'center' && 'mx-auto text-center', className)}
     >
       {eyebrow && (
-        <motion.p variants={fadeUp} className={cn('eyebrow mb-3 flex items-center gap-2', align === 'center' && 'justify-center', dark ? 'text-cyan' : 'text-brand')}>
+        <motion.p variants={fadeUp} className={cn('eyebrow mb-3 flex items-center gap-2', align === 'center' && 'justify-center', dark ? 'text-brand-300' : 'text-brand')}>
           {eyebrow}
         </motion.p>
       )}

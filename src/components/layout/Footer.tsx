@@ -1,192 +1,132 @@
+import type { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { ArrowRight, CircleCheck, Lightbulb, Mail, MapPin, Phone, ShieldCheck, Users, type LucideIcon } from 'lucide-react'
+import { Mail, MapPin, Phone } from 'lucide-react'
 import { footerNav } from '@/data/navigation'
 import { site } from '@/data/site'
 import { cn } from '@/lib/cn'
 import { Logo } from '@/components/ui/Logo'
+import { Container } from '@/components/ui/Container'
 import { NewsletterForm } from '@/components/forms/NewsletterForm'
 import { SocialIcons } from './SocialIcons'
 
-/** Slightly wider than the page container so five columns breathe, as in the reference design. */
-const wrap = 'mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8'
-
-const trust: Array<{ title: string; caption: string; icon: LucideIcon }> = [
-  { title: 'Fiabilité', caption: 'de nos solutions', icon: ShieldCheck },
-  { title: 'Innovation', caption: 'au quotidien', icon: Lightbulb },
-  { title: 'Votre succès', caption: 'notre priorité', icon: Users },
-]
-
-function ColumnTitle({ children, dark, to }: { children: string; dark: boolean; to?: string }) {
-  const inner = (
-    <>
-      {children}
-      <ArrowRight aria-hidden className={cn('size-[18px] transition-transform group-hover:translate-x-1', dark ? 'text-cyan' : 'text-brand')} strokeWidth={2.2} />
-    </>
-  )
+function Column({ title, dark, children }: { title: string; dark: boolean; children: ReactNode }) {
   return (
-    <h2 className={cn('font-display text-[1.05rem] font-bold', dark ? 'text-white' : 'text-navy')}>
-      {to ? (
-        <Link to={to} className="group inline-flex items-center gap-2.5">
-          {inner}
-        </Link>
-      ) : (
-        <span className="inline-flex items-center gap-2.5">{inner}</span>
-      )}
-    </h2>
+    <div>
+      <h2 className={cn('text-[0.72rem] font-semibold tracking-[0.14em] uppercase', dark ? 'text-slate-400' : 'text-slate')}>{title}</h2>
+      <div className="mt-5">{children}</div>
+    </div>
   )
 }
 
+/**
+ * Minimal footer: newsletter band, four aligned columns (brand · navigation ·
+ * services · contact) and a slim legal bar. Same container as the header.
+ */
 export function Footer({ tone }: { tone: 'light' | 'dark' }) {
   const dark = tone === 'dark'
   const { pathname } = useLocation()
   const year = new Date().getFullYear()
+
+  const link = cn('text-[0.9rem] transition-colors', dark ? 'text-slate-300 hover:text-white' : 'text-navy/75 hover:text-brand')
   const muted = dark ? 'text-slate-400' : 'text-slate'
-  const body = dark ? 'text-slate-300' : 'text-[#3c4a5f]'
-  const linkHover = dark ? 'hover:text-cyan' : 'hover:text-brand'
-  const iconBubble = cn('inline-flex size-10 shrink-0 items-center justify-center rounded-full', dark ? 'bg-white/[0.06] text-cyan' : 'bg-brand-50 text-navy')
   const divider = dark ? 'border-white/[0.08]' : 'border-line'
+  const icon = cn('size-4 shrink-0', dark ? 'text-brand-300' : 'text-brand')
 
   const isCurrent = (href: string) => (href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`))
 
   return (
-    <footer data-theme={tone} className={cn('relative', dark ? 'bg-navy-950 text-slate-300' : 'border-t border-line bg-[#f9fbfe] text-ink')}>
-      <div className={cn(wrap, 'grid gap-12 pt-16 pb-14 sm:grid-cols-2 lg:grid-cols-[1.75fr_0.7fr_1.1fr_1.1fr_1.45fr] lg:gap-6 lg:pt-20 xl:gap-10')}>
-        {/* Brand */}
-        <div className="sm:col-span-2 lg:col-span-1">
-          <Logo tone={dark ? 'dark' : 'light'} size="lg" />
-          <p className={cn('mt-7 max-w-sm text-[0.95rem] leading-[1.75]', body)}>
+    <footer data-theme={tone} className={cn(dark ? 'bg-navy-950 text-slate-300' : 'border-t border-line bg-white text-ink')}>
+      {/* Newsletter band */}
+      <Container>
+        <div className={cn('flex flex-col gap-6 border-b py-10 md:flex-row md:items-center md:justify-between', divider)}>
+          <div>
+            <p className={cn('font-display text-lg font-semibold', dark ? 'text-white' : 'text-navy')}>Restez informé</p>
+            <p className={cn('mt-1 text-[0.9rem]', muted)}>Nos actualités et dernières réalisations, une fois par mois.</p>
+          </div>
+          <div className="w-full md:max-w-sm">
+            <NewsletterForm tone={tone} />
+          </div>
+        </div>
+      </Container>
+
+      {/* Columns */}
+      <Container className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr] lg:gap-12">
+        <div>
+          <Logo tone={dark ? 'dark' : 'light'} />
+          <p className={cn('mt-5 max-w-xs text-[0.9rem] leading-relaxed', muted)}>
             Entreprise technologique basée à {site.foundedIn}. Nous concevons des logiciels, plateformes et solutions digitales pour les entreprises et
             organisations.
           </p>
-          <ul className="mt-8 flex flex-wrap gap-y-4 sm:flex-nowrap">
-            {trust.map((t, i) => (
-              <li key={t.title} className={cn('flex shrink-0 items-start gap-2 pr-2.5 whitespace-nowrap', i > 0 && cn('border-l pl-2.5', divider))}>
-                <t.icon aria-hidden className={cn('mt-0.5 size-[18px] shrink-0', dark ? 'text-cyan' : 'text-brand')} strokeWidth={1.9} />
-                <span className="text-[0.74rem] leading-snug">
-                  <span className={cn('block font-semibold', dark ? 'text-white' : 'text-navy')}>{t.title}</span>
-                  <span className={muted}>{t.caption}</span>
-                </span>
-              </li>
-            ))}
-          </ul>
+          <SocialIcons tone={tone} className="mt-6" />
         </div>
 
-        {/* Navigation */}
         <nav aria-label="Pied de page">
-          <ColumnTitle dark={dark}>Navigation</ColumnTitle>
-          <ul className="mt-6 space-y-3">
-            {footerNav.navigation.map((l) => {
-              const current = isCurrent(l.href)
-              return (
-                <li key={l.href} className="relative">
-                  {current && <span aria-hidden className={cn('absolute top-1/2 -left-3 h-5 w-0.5 -translate-y-1/2 rounded-full', dark ? 'bg-cyan' : 'bg-brand')} />}
-                  <Link
-                    to={l.href}
-                    aria-current={current ? 'page' : undefined}
-                    className={cn('text-[0.95rem] transition-colors', current ? (dark ? 'text-cyan' : 'text-brand') : cn(body, linkHover))}
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
+          <Column title="Navigation" dark={dark}>
+            <ul className="space-y-2.5">
+              {footerNav.navigation.map((l) => {
+                const current = isCurrent(l.href)
+                return (
+                  <li key={l.href}>
+                    <Link to={l.href} aria-current={current ? 'page' : undefined} className={cn(link, current && (dark ? 'text-brand-300' : 'text-brand'))}>
+                      {l.label}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </Column>
         </nav>
 
-        {/* Services */}
-        <div>
-          <ColumnTitle dark={dark} to="/services">
-            Nos services
-          </ColumnTitle>
-          <ul className="mt-6 space-y-3">
+        <Column title="Services" dark={dark}>
+          <ul className="space-y-2.5">
             {footerNav.services.map((s) => (
               <li key={s.href}>
-                <Link to={s.href} className={cn('text-[0.95rem] transition-colors', body, linkHover)}>
+                <Link to={s.href} className={link}>
                   {s.label}
                 </Link>
               </li>
             ))}
           </ul>
-        </div>
+        </Column>
 
-        {/* Contact */}
-        <div>
-          <ColumnTitle dark={dark} to="/contact">
-            Contact
-          </ColumnTitle>
-          <ul className={cn('mt-6 space-y-4 text-[0.95rem]', body)}>
-            <li className="flex items-center gap-3">
-              <span aria-hidden className={iconBubble}>
-                <MapPin className="size-[18px]" />
-              </span>
+        <Column title="Contact" dark={dark}>
+          <ul className="space-y-3.5 text-[0.9rem]">
+            <li className={cn('flex items-center gap-3', dark ? 'text-slate-300' : 'text-navy/75')}>
+              <MapPin aria-hidden className={icon} />
               {site.contact.city}
             </li>
             <li className="flex items-center gap-3">
-              <span aria-hidden className={iconBubble}>
-                <Mail className="size-[18px]" />
-              </span>
-              <a href={`mailto:${site.contact.email}`} className={cn('whitespace-nowrap transition-colors', linkHover)}>
+              <Mail aria-hidden className={icon} />
+              <a href={`mailto:${site.contact.email}`} className={cn(link, 'break-all')}>
                 {site.contact.email}
               </a>
             </li>
             <li className="flex items-center gap-3">
-              <span aria-hidden className={iconBubble}>
-                <Phone className="size-[18px]" />
-              </span>
-              <a href={site.contact.phoneHref} className={cn('whitespace-nowrap transition-colors', linkHover)}>
+              <Phone aria-hidden className={icon} />
+              <a href={site.contact.phoneHref} className={cn(link, 'whitespace-nowrap')}>
                 {site.contact.phone}
               </a>
             </li>
           </ul>
-          <div className={cn('mt-7 flex items-start gap-3 border-t pt-7', divider)}>
-            <ShieldCheck aria-hidden className={cn('mt-0.5 size-6 shrink-0', dark ? 'text-cyan' : 'text-brand')} strokeWidth={1.9} />
-            <p className="text-[0.82rem] leading-relaxed">
-              <span className={cn('block font-semibold', dark ? 'text-white' : 'text-navy')}>Des solutions fiables</span>
-              <span className={muted}>pour un avenir numérique meilleur.</span>
-            </p>
-          </div>
-        </div>
+          <p className={cn('mt-5 text-[0.8rem]', muted)}>{site.contact.hours}</p>
+        </Column>
+      </Container>
 
-        {/* Newsletter */}
-        <div>
-          <ColumnTitle dark={dark}>Newsletter</ColumnTitle>
-          <p className={cn('mt-6 mb-6 max-w-xs text-[0.95rem] leading-relaxed', body)}>Restez informé de nos actualités et de nos dernières réalisations.</p>
-          <NewsletterForm tone={tone} />
-          <p className={cn('mt-5 flex items-start gap-2.5 text-[0.8rem] leading-relaxed', muted)}>
-            <CircleCheck aria-hidden className={cn('mt-0.5 size-[18px] shrink-0 fill-current', dark ? 'text-cyan [&>path]:stroke-navy-950' : 'text-brand [&>path]:stroke-white')} />
-            <span>
-              En vous inscrivant, vous acceptez notre{' '}
-              <Link to="/confidentialite" className={cn('font-medium', dark ? 'text-cyan hover:text-white' : 'text-brand hover:text-violet')}>
-                politique de confidentialité
-              </Link>
-              .
-            </span>
-          </p>
+      {/* Legal bar — bottom padding leaves room for the floating chat button. */}
+      <Container>
+        <div className={cn('flex flex-col gap-3 border-t pt-6 pb-24 text-[0.8rem] sm:flex-row sm:items-center sm:justify-between lg:pb-8', divider, muted)}>
+          <p>© {year} Nashsoft Systems. Tous droits réservés.</p>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            {footerNav.legal.map((l) => (
+              <li key={l.href}>
+                <Link to={l.href} className={cn('transition-colors', dark ? 'hover:text-white' : 'hover:text-brand')}>
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
-
-      {/* Bottom bar */}
-      <div className={wrap}>
-        <div className={cn('flex flex-col gap-6 border-t pt-8 pb-28 lg:flex-row lg:items-center lg:justify-between', divider)}>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-            <Link to="/" className="inline-flex items-center gap-3" aria-label="Nashsoft Systems — accueil">
-              <img src={site.logo.mark} alt="" width={66} height={66} className="h-10 w-auto" />
-              <span className={cn('font-display text-lg font-bold', dark ? 'text-white' : 'text-navy')}>Nashsoft Systems</span>
-            </Link>
-            <span aria-hidden className={cn('hidden h-10 border-l sm:block', divider)} />
-            <p className={cn('text-[0.82rem]', muted)}>© {year} Nashsoft Systems. Tous droits réservés.</p>
-          </div>
-
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
-            <SocialIcons tone={tone} />
-            <p className={cn('text-[0.82rem] leading-snug sm:border-l sm:pl-8', divider, muted)}>
-              Construisons ensemble
-              <br />
-              un avenir numérique.
-            </p>
-          </div>
-        </div>
-      </div>
+      </Container>
     </footer>
   )
 }

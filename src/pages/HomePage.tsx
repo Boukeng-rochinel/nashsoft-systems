@@ -5,7 +5,7 @@ import { usePageMeta } from '@/hooks/usePageMeta'
 import { pageSeo } from '@/data/seo'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
-import { GradientText } from '@/components/ui/GradientText'
+import { AccentText } from '@/components/ui/AccentText'
 import { ButtonLink } from '@/components/ui/Button'
 import { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { HomeHero } from '@/components/sections/HomeHero'
@@ -16,7 +16,6 @@ import { IndustrySelector } from '@/components/sections/IndustrySelector'
 import { ProjectCard } from '@/components/sections/ProjectCard'
 import { TechnologyCloud } from '@/components/sections/TechnologyCloud'
 import { CTABand } from '@/components/sections/CTABand'
-import { AnimatedGrid } from '@/components/visuals/AnimatedGrid'
 import { Laptop } from '@/components/visuals/Devices'
 import { BrandN } from '@/components/visuals/BrandN'
 import { themes } from '@/data/themes'
@@ -46,7 +45,7 @@ export default function HomePage() {
             eyebrow="Nos services"
             title={
               <>
-                Des services complets pour vos <GradientText>projets digitaux</GradientText>
+                Des services complets pour vos <AccentText>projets digitaux</AccentText>
               </>
             }
             description="Nous vous accompagnons à chaque étape de votre projet, de la conception à la mise en production, avec des solutions sur mesure et des technologies de pointe."
@@ -71,7 +70,7 @@ export default function HomePage() {
             eyebrow="Notre processus"
             title={
               <>
-                Une approche structurée pour des résultats <GradientText>concrets</GradientText>
+                Une approche structurée pour des résultats <AccentText>concrets</AccentText>
               </>
             }
             description="Nous suivons une méthodologie éprouvée pour transformer vos besoins en solutions logicielles fiables et performantes."
@@ -89,7 +88,7 @@ export default function HomePage() {
             eyebrow="Nos solutions"
             title={
               <>
-                Des solutions <GradientText>adaptées</GradientText> à chaque secteur <GradientText>d’activité</GradientText>
+                Des solutions <AccentText>adaptées</AccentText> à chaque secteur <AccentText>d’activité</AccentText>
               </>
             }
             description="Nous développons des solutions sur mesure pour répondre aux besoins spécifiques de chaque industrie et accompagner votre transformation digitale."
@@ -122,7 +121,7 @@ export default function HomePage() {
       </Section>
 
       {/* Technology stack (dark band — rhythm) */}
-      <Section tone="navy" background={<AnimatedGrid tone="dark" />}>
+      <Section tone="navy">
         <div className="grid items-center gap-12 lg:grid-cols-[1.25fr_1fr]">
           <div>
             <SectionTitle
@@ -130,7 +129,7 @@ export default function HomePage() {
               eyebrow="Notre stack tech"
               title={
                 <>
-                  Des technologies modernes pour des solutions <GradientText>durables</GradientText>
+                  Des technologies modernes pour des solutions <AccentText>durables</AccentText>
                 </>
               }
               description="Nous utilisons les meilleures technologies du marché pour garantir des solutions performantes, sécurisées et évolutives."
@@ -140,7 +139,6 @@ export default function HomePage() {
           </div>
           <div className="relative mx-auto hidden w-full max-w-md lg:block">
             <BrandN className="absolute -top-14 right-6 z-10 w-24" />
-            <div aria-hidden className="absolute inset-0 rounded-full bg-brand/25 blur-3xl" />
             <div className="relative [transform:perspective(1200px)_rotateY(-16deg)_rotateX(8deg)]">
               <Laptop variant="analytics" theme={themes.nashsoftDark} title="Nashsoft" />
             </div>

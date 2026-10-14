@@ -52,7 +52,7 @@ export function ProjectFilter({ projects }: { projects: Project[] }) {
               {selected && (
                 <motion.span
                   layoutId={`${groupId}-active`}
-                  className="absolute inset-0 rounded-full bg-brand-gradient shadow-[0_8px_20px_-8px_rgb(8_125_255/0.8)]"
+                  className="absolute inset-0 rounded-full bg-brand"
                   transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                 />
               )}

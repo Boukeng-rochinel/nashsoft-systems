@@ -11,6 +11,7 @@ import { useLockBodyScroll } from '@/hooks/useLockBodyScroll'
 import { Logo } from '@/components/ui/Logo'
 import { ButtonLink } from '@/components/ui/Button'
 import { useLanguage } from '@/hooks/useLanguage'
+import { LanguageSwitcher } from './LanguageSwitcher'
 
 /**
  * Rendered into <body>: the sticky header uses backdrop-filter, which makes it the
@@ -140,7 +141,8 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
             </nav>
 
             <div className="shrink-0 space-y-4 border-t border-line bg-light px-4 py-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:px-6">
-              <ButtonLink to={START_PROJECT_HREF} className="w-full" size="lg">
+              <LanguageSwitcher />
+              <ButtonLink to={START_PROJECT_HREF} className="w-full" size="lg" arrow={false}>
                 {t('Démarrer un projet')}
               </ButtonLink>
               <ul className="space-y-2 text-sm text-slate">

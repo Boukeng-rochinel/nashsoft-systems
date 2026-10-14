@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Bot, BrainCircuit, ChartLine, Cpu, Database, Lightbulb, ScanEye, Sparkles, Target, Workflow } from 'lucide-react'
+import { ArrowRight, BrainCircuit, ChartLine, Cpu, Database, Lightbulb, Sparkles, Target, Workflow } from 'lucide-react'
 import { getServiceBySlug } from '@/data/services'
 import { getProjectBySlug, projectHref } from '@/data/projects'
 import { aiExpertises } from '@/data/expertises'
@@ -8,15 +8,11 @@ import { pageSeo } from '@/data/seo'
 import type { Feature } from '@/types'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
-import { GradientText } from '@/components/ui/GradientText'
+import { AccentText } from '@/components/ui/AccentText'
 import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { ServiceDetailView } from '@/components/sections/ServiceDetailView'
-import { HeroImage } from '@/components/sections/HeroImage'
 import { ExpertiseGrid } from '@/components/sections/ExpertiseGrid'
-import { AnimatedGrid } from '@/components/visuals/AnimatedGrid'
 import { FlowDiagram } from '@/components/visuals/FlowDiagram'
-import { FloatingCard } from '@/components/visuals/FloatingCard'
-import { GlassPanel } from '@/components/visuals/GlassPanel'
 
 const pipeline = [
   { label: 'Données', caption: 'Collecte depuis vos applications, fichiers, capteurs et API.', icon: Database },
@@ -43,32 +39,20 @@ export default function AIDataPage() {
       showFeatures={false}
       heroTitle={
         <>
-          Transformez vos données <GradientText>en intelligence.</GradientText>
+          Transformez vos données <AccentText>en intelligence.</AccentText>
         </>
       }
-      heroVisual={
-        <HeroImage src="/images/hero-ai.webp" alt="Tableau de bord analytique affiché sur un écran">
-          <GlassPanel
-            className="top-[2%] right-0 hidden sm:block"
-            items={[
-              { label: 'Machine Learning', icon: BrainCircuit },
-              { label: 'Vision par ordinateur', icon: ScanEye },
-              { label: 'Analyse prédictive', icon: ChartLine },
-            ]}
-          />
-          <FloatingCard icon={Bot} title="Assistants intelligents" description="Connectés à vos données." className="bottom-[2%] left-0" delay={0.3} />
-        </HeroImage>
-      }
+      heroImage="/images/hero-ai.webp"
     >
       {/* Pipeline */}
-      <Section tone="dark" background={<AnimatedGrid tone="dark" />}>
+      <Section tone="dark">
         <SectionTitle
           tone="dark"
           align="center"
           eyebrow="De la donnée à la décision"
           title={
             <>
-              Un pipeline <GradientText>intelligent</GradientText>, de bout en bout
+              Un pipeline <AccentText>intelligent</AccentText>, de bout en bout
             </>
           }
           description="Nous construisons toute la chaîne : collecte, préparation, modélisation et restitution des résultats là où vos équipes travaillent."
@@ -83,7 +67,7 @@ export default function AIDataPage() {
           eyebrow="Nos expertises IA"
           title={
             <>
-              Des solutions IA <GradientText>concrètes</GradientText> pour votre activité
+              Des solutions IA <AccentText>concrètes</AccentText> pour votre activité
             </>
           }
           description="Six domaines d’intervention, toujours au service d’un objectif mesurable. Cliquez sur une expertise pour en savoir plus."

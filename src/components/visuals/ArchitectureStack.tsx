@@ -33,9 +33,9 @@ export function ArchitectureStack({ layers, icons = [], tone = 'dark', className
           >
             {i > 0 && (
               <span aria-hidden className="relative ml-[1.65rem] block h-6 w-px">
-                <span className={cn('absolute inset-0', dark ? 'bg-gradient-to-b from-cyan/60 to-brand/30' : 'bg-brand/25')} />
+                <span className={cn('absolute inset-0', dark ? 'bg-brand-300/40' : 'bg-brand/25')} />
                 <span
-                  className="absolute left-1/2 size-1.5 -translate-x-1/2 animate-[flow-y_1.8s_linear_infinite] rounded-full bg-cyan shadow-[0_0_10px_2px_rgb(0_198_255/0.7)]"
+                  className="absolute left-1/2 size-1.5 -translate-x-1/2 animate-[flow-y_1.8s_linear_infinite] rounded-full bg-brand-300"
                   style={{ animationDelay: `${i * 0.25}s` }}
                 />
               </span>
@@ -51,14 +51,13 @@ export function ArchitectureStack({ layers, icons = [], tone = 'dark', className
                   aria-hidden
                   className={cn(
                     'inline-flex size-[3.3rem] shrink-0 items-center justify-center rounded-xl text-white',
-                    i === layers.length - 1 ? 'bg-gradient-to-br from-violet to-brand' : 'bg-gradient-to-br from-brand to-cyan/80',
-                    dark && 'shadow-[0_0_24px_-6px_rgb(0_198_255/0.6)]',
+                    i === layers.length - 1 ? 'bg-brand-600' : 'bg-brand',
                   )}
                 >
                   <Icon className="size-6" strokeWidth={1.7} />
                 </span>
                 <div>
-                  <p className={cn('eyebrow text-[0.6rem]', dark ? 'text-cyan/80' : 'text-brand')}>Couche 0{i + 1}</p>
+                  <p className={cn('eyebrow text-[0.6rem]', dark ? 'text-brand-300/80' : 'text-brand')}>Couche 0{i + 1}</p>
                   <p className={cn('font-display font-semibold', dark ? 'text-white' : 'text-navy')}>{layer.layer}</p>
                 </div>
               </div>

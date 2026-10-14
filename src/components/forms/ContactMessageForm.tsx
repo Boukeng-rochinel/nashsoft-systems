@@ -8,6 +8,7 @@ import { CONTACT_SUBJECTS, contactMessageSchema, type ContactMessage, type Conta
 import { submitContactMessage } from '@/lib/api'
 import { site } from '@/data/site'
 import { cn } from '@/lib/cn'
+import { glassButton } from '@/lib/styles'
 import { useCaptcha } from '@/hooks/useCaptcha'
 import { useTheme } from '@/hooks/useTheme'
 import { Turnstile } from './Turnstile'
@@ -19,7 +20,7 @@ const emptyToUndefined = (v: unknown) => (typeof v === 'string' && v.trim() === 
 const field = (invalid: boolean) =>
   cn(
     'w-full rounded-lg border bg-white text-sm text-navy transition-[border-color,box-shadow] outline-none placeholder:text-slate/70 focus:border-brand focus:ring-4 focus:ring-brand/10',
-    'on-dark:border-white/12 on-dark:bg-white/[0.04] on-dark:text-white on-dark:placeholder:text-slate-400 on-dark:focus:border-cyan/70 on-dark:focus:ring-cyan/10',
+    'on-dark:border-white/12 on-dark:bg-white/[0.04] on-dark:text-white on-dark:placeholder:text-slate-400 on-dark:focus:border-brand-300/70 on-dark:focus:ring-brand-300/10',
     invalid ? 'border-red-400' : 'border-line-strong',
   )
 
@@ -86,7 +87,7 @@ export function ContactMessageForm() {
     <AnimatePresence mode="wait" initial={false}>
       {status ? (
         <motion.div key="done" role="status" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="flex flex-col items-center py-12 text-center">
-          <span className="inline-flex size-14 items-center justify-center rounded-full bg-brand-50 text-brand on-dark:bg-cyan/10 on-dark:text-cyan">
+          <span className="inline-flex size-14 items-center justify-center rounded-full bg-brand-50 text-brand on-dark:bg-brand-300/10 on-dark:text-brand-300">
             <CircleCheck aria-hidden className="size-7" />
           </span>
           <h3 className="mt-5 font-display text-xl font-bold text-navy on-dark:text-white">
@@ -98,14 +99,14 @@ export function ContactMessageForm() {
             ) : (
               <>
                 Votre messagerie s’est ouverte avec le message pré-rempli : il vous suffit de l’envoyer. Rien ne s’est ouvert ?{' '}
-                <a href={status.href} className="font-semibold text-brand underline underline-offset-2 on-dark:text-cyan">
+                <a href={status.href} className="font-semibold text-brand underline underline-offset-2 on-dark:text-brand-300">
                   Ouvrir l’e-mail
                 </a>{' '}
                 ou écrivez à {site.contact.email}.
               </>
             )}
           </p>
-          <button type="button" onClick={() => setStatus(null)} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-violet on-dark:text-cyan">
+          <button type="button" onClick={() => setStatus(null)} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand-600 on-dark:text-brand-300">
             <RotateCcw aria-hidden className="size-4" /> Écrire un autre message
           </button>
         </motion.div>
@@ -215,7 +216,7 @@ export function ContactMessageForm() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="group inline-flex h-13 w-full items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-brand via-brand to-violet font-display text-[0.95rem] font-semibold text-white shadow-[0_14px_30px_-14px_rgb(8_125_255/0.9)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-14px_rgb(8_125_255/0.95)] disabled:pointer-events-none disabled:opacity-70"
+              className={cn('group inline-flex h-13 w-full items-center justify-center gap-2.5 rounded-xl font-display text-[0.95rem] font-semibold transition-colors disabled:pointer-events-none disabled:opacity-70', glassButton)}
             >
               {isSubmitting ? <LoaderCircle aria-hidden className="size-4 animate-spin" /> : <Send aria-hidden className="size-4" />}
               {isSubmitting ? 'Envoi en cours…' : 'Envoyer le message'}
@@ -223,7 +224,7 @@ export function ContactMessageForm() {
             </button>
             <p className="mt-3 text-center text-[0.75rem] text-slate on-dark:text-slate-400">
               En envoyant ce message, vous acceptez notre{' '}
-              <Link to="/confidentialite" className="font-medium text-brand hover:text-violet on-dark:text-cyan">
+              <Link to="/confidentialite" className="font-medium text-brand hover:text-brand-600 on-dark:text-brand-300">
                 politique de confidentialité
               </Link>
               .

@@ -1,35 +1,15 @@
-import {
-  Activity,
-  AppWindow,
-  Boxes,
-  CircleCheck,
-  Cloud,
-  CloudUpload,
-  Container,
-  Database,
-  GitBranch,
-  HardDrive,
-  LockKeyhole,
-  Rocket,
-  Server,
-  TestTubeDiagonal,
-  Workflow,
-} from 'lucide-react'
+import { Activity, AppWindow, Boxes, Cloud, CloudUpload, Container, Database, GitBranch, HardDrive, LockKeyhole, Rocket, Server, TestTubeDiagonal, Workflow } from 'lucide-react'
 import { getServiceBySlug } from '@/data/services'
 import { usePageMeta } from '@/hooks/usePageMeta'
 import { pageSeo } from '@/data/seo'
 import type { Feature } from '@/types'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
-import { GradientText } from '@/components/ui/GradientText'
+import { AccentText } from '@/components/ui/AccentText'
 import { Reveal } from '@/components/ui/Reveal'
 import { ServiceDetailView } from '@/components/sections/ServiceDetailView'
-import { HeroImage } from '@/components/sections/HeroImage'
 import { FeatureGrid } from '@/components/sections/FeatureGrid'
-import { AnimatedGrid } from '@/components/visuals/AnimatedGrid'
 import { ArchitectureStack } from '@/components/visuals/ArchitectureStack'
-import { FloatingCard } from '@/components/visuals/FloatingCard'
-import { GlassPanel } from '@/components/visuals/GlassPanel'
 import { FlowDiagram } from '@/components/visuals/FlowDiagram'
 
 const architecture = [
@@ -70,26 +50,13 @@ export default function CloudPage() {
       showFeatures={false}
       heroTitle={
         <>
-          Une infrastructure cloud <GradientText>fiable et sécurisée.</GradientText>
+          Une infrastructure cloud <AccentText>fiable et sécurisée.</AccentText>
         </>
       }
-      heroVisual={
-        <HeroImage src="/images/hero-cloud.webp" alt="Câblage réseau d’une baie de serveurs">
-          <GlassPanel
-            title="État des services"
-            className="top-[2%] right-0 hidden sm:block"
-            items={[
-              { label: 'API · opérationnelle', icon: CircleCheck },
-              { label: 'Base de données · répliquée', icon: Database },
-              { label: 'Sauvegarde · quotidienne', icon: HardDrive },
-            ]}
-          />
-          <FloatingCard icon={Container} title="Conteneurs Docker" description="Du développement à la production." className="bottom-[2%] left-0" delay={0.3} />
-        </HeroImage>
-      }
+      heroImage="/images/hero-cloud.webp"
     >
       {/* Architecture */}
-      <Section tone="dark" background={<AnimatedGrid tone="dark" />}>
+      <Section tone="dark">
         <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.4fr]">
           <div>
             <SectionTitle
@@ -97,7 +64,7 @@ export default function CloudPage() {
               eyebrow="Architecture technique"
               title={
                 <>
-                  De l’application à la <GradientText>supervision</GradientText>
+                  De l’application à la <AccentText>supervision</AccentText>
                 </>
               }
               description="Chaque couche est conçue pour être reproductible, observable et sécurisée. Vos équipes savent ce qui tourne, où, et dans quel état."
@@ -120,7 +87,7 @@ export default function CloudPage() {
           eyebrow="CI/CD"
           title={
             <>
-              Livrer plus souvent, <GradientText>en toute confiance</GradientText>
+              Livrer plus souvent, <AccentText>en toute confiance</AccentText>
             </>
           }
           description="Chaque modification suit le même pipeline automatisé, du commit à la production."
@@ -135,7 +102,7 @@ export default function CloudPage() {
           eyebrow="Nos services cloud"
           title={
             <>
-              Tout ce qu’il faut pour <GradientText>exploiter sereinement</GradientText>
+              Tout ce qu’il faut pour <AccentText>exploiter sereinement</AccentText>
             </>
           }
           className="max-w-2xl"

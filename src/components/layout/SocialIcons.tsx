@@ -60,23 +60,23 @@ export function SocialIcons({ tone = 'light', className }: { tone?: 'light' | 'd
   const profiles: Partial<Record<SocialKey, string>> = site.social
   const entries = (Object.keys(icons) as SocialKey[]).filter((k) => always.includes(k) || profiles[k])
   const chip = cn(
-    'inline-flex size-11 items-center justify-center rounded-full transition-all duration-300',
-    tone === 'dark' ? 'bg-white/[0.06] text-slate-200' : 'bg-[#eef2f8] text-navy',
+    'inline-flex size-9 items-center justify-center rounded-full border transition-colors duration-200',
+    tone === 'dark' ? 'border-white/15 text-slate-300' : 'border-line-strong text-navy/70',
   )
   return (
-    <ul className={cn('flex items-center gap-3', className)}>
+    <ul className={cn('flex items-center gap-2', className)}>
       {entries.map((key) => {
         const Icon = icons[key]
         const href = profiles[key]
         return (
           <li key={key}>
             {href ? (
-              <a href={href} target="_blank" rel="noreferrer" aria-label={`Nashsoft Systems sur ${labels[key]}`} className={cn(chip, 'hover:-translate-y-0.5 hover:bg-brand hover:text-white')}>
-                <Icon className="size-[17px]" aria-hidden />
+              <a href={href} target="_blank" rel="noreferrer" aria-label={`Nashsoft Systems sur ${labels[key]}`} className={cn(chip, 'hover:border-brand hover:bg-brand hover:text-white')}>
+                <Icon className="size-4" aria-hidden />
               </a>
             ) : (
               <span role="img" aria-label={`${labels[key]} — bientôt disponible`} title={`${labels[key]} — bientôt disponible`} className={chip}>
-                <Icon className="size-[17px]" aria-hidden />
+                <Icon className="size-4" aria-hidden />
               </span>
             )}
           </li>

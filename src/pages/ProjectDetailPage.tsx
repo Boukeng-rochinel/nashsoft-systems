@@ -9,47 +9,28 @@ import { usePageMeta } from '@/hooks/usePageMeta'
 import { projectSeo } from '@/data/seo'
 import { Section } from '@/components/ui/Section'
 import { SectionTitle } from '@/components/ui/SectionTitle'
-import { GradientText } from '@/components/ui/GradientText'
+import { AccentText } from '@/components/ui/AccentText'
 import { ButtonLink } from '@/components/ui/Button'
 import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { TechMark } from '@/components/ui/TechTile'
 import { PageHero } from '@/components/sections/PageHero'
-import { HeroImage } from '@/components/sections/HeroImage'
-import { FloatingCard } from '@/components/visuals/FloatingCard'
 import { FeatureGrid } from '@/components/sections/FeatureGrid'
 import { CTABand } from '@/components/sections/CTABand'
 import { Lightbox } from '@/components/sections/Lightbox'
-import { AnimatedGrid } from '@/components/visuals/AnimatedGrid'
 import { ArchitectureStack } from '@/components/visuals/ArchitectureStack'
-import { Laptop, Phone } from '@/components/visuals/Devices'
+import { Phone } from '@/components/visuals/Devices'
 import { Screen } from '@/components/visuals/Screen'
 
 function splitLast(title: string) {
   const words = title.split(' ')
-  if (words.length === 1) return <GradientText>{title}</GradientText>
+  if (words.length === 1) return <AccentText>{title}</AccentText>
   return (
     <>
-      {words.slice(0, -1).join(' ')} <GradientText>{words[words.length - 1]}</GradientText>
+      {words.slice(0, -1).join(' ')} <AccentText>{words[words.length - 1]}</AccentText>
     </>
   )
 }
 
-function HeroVisual({ project }: { project: Project }) {
-  const phoneFirst = project.cover.device === 'phone'
-  return (
-    <HeroImage src={project.image} alt={project.imageAlt}>
-      {/* Product UI layered over the photograph */}
-      <div className={phoneFirst ? 'absolute -bottom-8 -left-4 w-[24%] sm:-left-8' : 'absolute -bottom-8 -left-4 w-[52%] sm:-left-10'}>
-        {phoneFirst ? (
-          <Phone variant="mobile" theme={project.theme} title={project.title} />
-        ) : (
-          <Laptop variant={project.cover.variant} theme={project.theme} title={project.title} />
-        )}
-      </div>
-      <FloatingCard icon={Tag} title={project.type} description={project.industry} className="top-[8%] -right-2 hidden sm:block lg:-right-8" delay={0.3} />
-    </HeroImage>
-  )
-}
 
 function GalleryThumb({ project, index, onOpen, large = false }: { project: Project; index: number; onOpen: (i: number) => void; large?: boolean }) {
   const item = project.gallery[index]
@@ -62,7 +43,7 @@ function GalleryThumb({ project, index, onOpen, large = false }: { project: Proj
     >
       <div className={large ? 'aspect-[16/10]' : 'aspect-[4/3]'}>
         {item.device === 'phone' ? (
-          <div className="flex size-full items-center justify-center" style={{ background: `linear-gradient(160deg, #0a1a33, ${project.theme.accent}55)` }}>
+          <div className="flex size-full items-center justify-center" style={{ background: '#0a1a33' }}>
             <div className="w-[34%] transition-transform duration-500 group-hover:scale-105">
               <Phone variant={item.variant} theme={project.theme} title={project.title} />
             </div>
@@ -73,7 +54,7 @@ function GalleryThumb({ project, index, onOpen, large = false }: { project: Proj
           </div>
         )}
       </div>
-      <span className="absolute inset-0 flex items-end bg-gradient-to-t from-navy-950/80 via-transparent to-transparent p-3 opacity-90 transition-opacity group-hover:opacity-100">
+      <span className="absolute inset-0 flex items-end bg-navy-950/45 p-3 opacity-90 transition-opacity group-hover:opacity-100">
         <span className="flex w-full items-center justify-between text-xs font-semibold text-white">
           {item.title}
           <Expand aria-hidden className="size-4" />
@@ -112,7 +93,7 @@ function ProjectDetail({ project }: { project: Project }) {
           { title: String(project.year), description: 'Année', icon: CalendarDays },
           { title: project.categories.join(' · '), description: 'Catégorie', icon: Images },
         ]}
-        visual={<HeroVisual project={project} />}
+        image={project.image}
       />
 
       {/* Overview — reference design: description | technologies | preview */}
@@ -158,7 +139,7 @@ function ProjectDetail({ project }: { project: Project }) {
             <button
               type="button"
               onClick={() => setLightbox(0)}
-              className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-gradient px-4 py-2 text-xs font-semibold text-white shadow-[0_8px_20px_-10px_rgb(8_125_255/0.8)] transition-transform hover:-translate-y-0.5"
+              className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2 text-xs font-semibold text-white transition-transform hover:-translate-y-0.5"
             >
               Voir plus d’images <ArrowRight aria-hidden className="size-3.5" />
             </button>
@@ -181,11 +162,10 @@ function ProjectDetail({ project }: { project: Project }) {
           </Reveal>
           <Reveal delay={0.1} className="h-full">
             <article className="relative h-full overflow-hidden rounded-2xl bg-navy p-7 text-slate-300 sm:p-8" data-theme="dark">
-              <div aria-hidden className="absolute -top-16 -right-16 size-56 rounded-full bg-brand/30 blur-3xl" />
-              <span aria-hidden className="relative inline-flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-violet text-white">
+              <span aria-hidden className="relative inline-flex size-12 items-center justify-center rounded-xl bg-brand text-white">
                 <Lightbulb className="size-6" strokeWidth={1.8} />
               </span>
-              <p className="eyebrow relative mt-6 text-cyan">La solution</p>
+              <p className="eyebrow relative mt-6 text-brand-300">La solution</p>
               <h2 className="relative mt-2 font-display text-2xl font-bold text-white">Notre réponse</h2>
               <p className="relative mt-4 leading-relaxed">{project.solution}</p>
             </article>
@@ -199,7 +179,7 @@ function ProjectDetail({ project }: { project: Project }) {
           eyebrow="Fonctionnalités"
           title={
             <>
-              Ce que la solution <GradientText>permet</GradientText>
+              Ce que la solution <AccentText>permet</AccentText>
             </>
           }
           className="mb-12"
@@ -208,7 +188,7 @@ function ProjectDetail({ project }: { project: Project }) {
       </Section>
 
       {/* Architecture */}
-      <Section tone="navy" background={<AnimatedGrid tone="dark" />}>
+      <Section tone="navy">
         <div className="grid items-center gap-12 lg:grid-cols-[0.8fr_1.4fr]">
           <div>
             <SectionTitle
@@ -216,14 +196,14 @@ function ProjectDetail({ project }: { project: Project }) {
               eyebrow="Architecture"
               title={
                 <>
-                  Une architecture <GradientText>claire et évolutive</GradientText>
+                  Une architecture <AccentText>claire et évolutive</AccentText>
                 </>
               }
               description="Chaque couche a une responsabilité précise, ce qui rend le produit simple à maintenir et à faire évoluer."
             />
             <ul className="mt-8 flex flex-wrap gap-2">
               {project.technologies.map((t) => (
-                <li key={t} className="rounded-lg bg-white/[0.06] px-3 py-1.5 text-xs font-medium text-cyan ring-1 ring-white/10">
+                <li key={t} className="rounded-lg bg-white/[0.06] px-3 py-1.5 text-xs font-medium text-brand-300 ring-1 ring-white/10">
                   {t}
                 </li>
               ))}
@@ -252,7 +232,7 @@ function ProjectDetail({ project }: { project: Project }) {
           eyebrow="Résultats"
           title={
             <>
-              Ce que le projet a <GradientText>changé</GradientText>
+              Ce que le projet a <AccentText>changé</AccentText>
             </>
           }
           className="mb-12"
@@ -260,7 +240,7 @@ function ProjectDetail({ project }: { project: Project }) {
         <RevealGroup className="grid gap-5 md:grid-cols-3">
           {project.outcomes.map((o) => (
             <RevealItem key={o.title}>
-              <div className="h-full rounded-2xl border border-brand-100 bg-gradient-to-br from-light to-mist p-6">
+              <div className="h-full rounded-2xl border border-brand-100 bg-light p-6">
                 <span aria-hidden className="inline-flex size-9 items-center justify-center rounded-full bg-brand text-white">
                   <Check className="size-4" strokeWidth={3} />
                 </span>

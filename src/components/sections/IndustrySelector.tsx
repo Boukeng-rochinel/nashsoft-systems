@@ -73,14 +73,14 @@ export function IndustrySelector({ industries = allIndustries, tone = 'light', c
                 selected
                   ? 'text-white'
                   : dark
-                    ? 'border border-white/15 text-slate-200 hover:border-cyan/50 hover:text-white'
+                    ? 'border border-white/15 text-slate-200 hover:border-brand-300/50 hover:text-white'
                     : 'border border-line bg-white text-navy hover:border-brand/40 hover:text-brand',
               )}
             >
               {selected && (
                 <motion.span
                   layoutId={`${baseId}-pill`}
-                  className="absolute inset-0 rounded-full bg-brand-gradient shadow-[0_8px_20px_-8px_rgb(8_125_255/0.8)]"
+                  className="absolute inset-0 rounded-full bg-brand"
                   transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                 />
               )}
@@ -97,7 +97,7 @@ export function IndustrySelector({ industries = allIndustries, tone = 'light', c
         tabIndex={0}
         className={cn(
           'mt-5 overflow-hidden rounded-2xl border bg-white',
-          dark ? 'border-cyan/30 shadow-[0_0_60px_-20px_rgb(0_198_255/0.5)]' : 'border-line shadow-[0_24px_50px_-28px_rgb(6_20_38/0.35)]',
+          dark ? 'border-brand-300/30' : 'border-line shadow-[0_24px_50px_-28px_rgb(6_20_38/0.35)]',
         )}
       >
         <AnimatePresence mode="wait" initial={false}>
@@ -111,7 +111,7 @@ export function IndustrySelector({ industries = allIndustries, tone = 'light', c
           >
             <div className="p-6 sm:p-8">
               <div className="flex items-start gap-4">
-                <span aria-hidden className="inline-flex size-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-[#3a5bff] text-white shadow-[0_8px_18px_-8px_rgb(8_125_255/0.8)]">
+                <span aria-hidden className="inline-flex size-12 shrink-0 items-center justify-center rounded-xl bg-brand text-white">
                   <active.icon className="size-6" strokeWidth={1.8} />
                 </span>
                 <div>
@@ -134,9 +134,8 @@ export function IndustrySelector({ industries = allIndustries, tone = 'light', c
             </div>
             <div className="relative min-h-64 overflow-hidden md:min-h-0">
               <SmartImage src={active.image} alt="" width={1000} height={750} wrapperClassName="absolute inset-0" className="size-full object-cover" />
-              <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-white/30 via-transparent to-navy/30 md:from-white/60" />
               <div className="absolute right-4 bottom-4 left-4 flex items-center gap-3 rounded-xl border border-white/60 bg-white/85 p-3 shadow-float backdrop-blur-md sm:left-auto sm:max-w-[16rem]">
-                <span aria-hidden className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand-gradient text-white">
+                <span aria-hidden className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand text-white">
                   <active.icon className="size-[18px]" strokeWidth={1.8} />
                 </span>
                 <p className="text-xs leading-snug font-medium text-navy">{active.solutions[0]}</p>
