@@ -2,6 +2,7 @@ import { lazy, Suspense, useCallback, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { MessageCircle, X } from 'lucide-react'
 import { cn } from '@/lib/cn'
+import { t } from '@/i18n'
 
 // The panel (and its logic) loads only when a visitor opens the chat — nothing extra on first paint.
 const ChatPanel = lazy(() => import('./ChatPanel'))
@@ -34,12 +35,10 @@ export function ChatLauncher() {
               animate={{ opacity: 1, x: 0, transition: { delay: 2.5 } }}
               exit={{ opacity: 0, x: 10 }}
               className="hidden items-center gap-2 rounded-full border border-line bg-white py-2 pr-2 pl-4 text-sm font-medium text-navy shadow-float sm:flex"
-            >
-              Une question ? Demandez à Nash
-              <button
+            >{t('Une question ? Demandez à Nash')}<button
                 type="button"
                 onClick={() => setTeaser(false)}
-                aria-label="Masquer"
+                aria-label={t('Masquer')}
                 className="inline-flex size-6 items-center justify-center rounded-full text-slate hover:bg-light"
               >
                 <X aria-hidden className="size-3.5" />
@@ -52,13 +51,12 @@ export function ChatLauncher() {
           type="button"
           onClick={() => (open ? close() : (setOpen(true), setTeaser(false)))}
           aria-expanded={open}
-          aria-label={open ? 'Fermer l’assistant' : 'Ouvrir l’assistant Nashsoft'}
+          aria-label={t(open ? 'Fermer l’assistant' : 'Ouvrir l’assistant Nashsoft')}
           className={cn(
-            'relative inline-flex size-14 items-center justify-center rounded-full bg-brand text-white transition-transform hover:scale-105',
+            'relative inline-flex size-14 items-center justify-center rounded-full bg-brand text-white shadow-float transition-colors hover:bg-brand-600',
             open && 'max-sm:hidden',
           )}
         >
-          {!open && <span aria-hidden className="absolute inset-0 animate-ping rounded-full bg-brand/30 [animation-duration:3s]" />}
           {open ? <X aria-hidden className="size-6" /> : <MessageCircle aria-hidden className="size-6" />}
         </button>
       </div>
