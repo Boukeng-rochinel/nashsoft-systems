@@ -5,6 +5,7 @@ import { ArrowRight, Check, LoaderCircle } from 'lucide-react'
 import { newsletterSchema, type NewsletterRequest } from '@/lib/validation'
 import { subscribeNewsletter } from '@/lib/api'
 import { cn } from '@/lib/cn'
+import { t } from '@/i18n'
 
 export function NewsletterForm({ tone = 'light' }: { tone?: 'light' | 'dark' }) {
   const id = useId()
@@ -33,15 +34,13 @@ export function NewsletterForm({ tone = 'light' }: { tone?: 'light' | 'dark' }) 
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="w-full">
-      <label htmlFor={`${id}-email`} className="sr-only">
-        Votre adresse e-mail
-      </label>
+      <label htmlFor={`${id}-email`} className="sr-only">{t('Votre adresse e-mail')}</label>
       <div className="relative flex items-center">
         <input
           id={`${id}-email`}
           type="email"
           autoComplete="email"
-          placeholder="Votre adresse email"
+          placeholder={t('Votre adresse email')}
           aria-invalid={errors.email ? 'true' : 'false'}
           aria-describedby={errors.email ? `${id}-error` : done ? `${id}-status` : undefined}
           className={cn(
@@ -56,7 +55,7 @@ export function NewsletterForm({ tone = 'light' }: { tone?: 'light' | 'dark' }) 
         <button
           type="submit"
           disabled={isSubmitting}
-          aria-label="S’inscrire à la newsletter"
+          aria-label={t('S’inscrire à la newsletter')}
           className="absolute right-1.5 inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-brand text-white transition-colors hover:bg-brand-600 disabled:opacity-60"
         >
           {isSubmitting ? <LoaderCircle aria-hidden className="size-4 animate-spin" /> : done ? <Check aria-hidden className="size-4" /> : <ArrowRight aria-hidden className="size-4" />}
@@ -64,12 +63,12 @@ export function NewsletterForm({ tone = 'light' }: { tone?: 'light' | 'dark' }) 
       </div>
       {errors.email && (
         <p id={`${id}-error`} role="alert" className="mt-2 text-xs text-red-500">
-          {errors.email.message}
+          {t(errors.email.message)}
         </p>
       )}
       {done && !errors.email && (
         <p id={`${id}-status`} role="status" className={cn('mt-2 text-xs', dark ? 'text-brand-300' : 'text-brand')}>
-          {done}
+          {t(done)}
         </p>
       )}
     </form>

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/i18n/router'
 import { ArrowRight, BrainCircuit, ChartLine, Cpu, Database, Lightbulb, Sparkles, Target, Workflow } from 'lucide-react'
 import { getServiceBySlug } from '@/data/services'
 import { getProjectBySlug, projectHref } from '@/data/projects'
@@ -13,6 +13,7 @@ import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { ServiceDetailView } from '@/components/sections/ServiceDetailView'
 import { ExpertiseGrid } from '@/components/sections/ExpertiseGrid'
 import { FlowDiagram } from '@/components/visuals/FlowDiagram'
+import { t } from '@/i18n'
 
 const pipeline = [
   { label: 'Données', caption: 'Collecte depuis vos applications, fichiers, capteurs et API.', icon: Database },
@@ -38,8 +39,7 @@ export default function AIDataPage() {
       service={service}
       showFeatures={false}
       heroTitle={
-        <>
-          Transformez vos données <AccentText>en intelligence.</AccentText>
+        <>{t('Transformez vos données')}{' '}<AccentText>{t('en intelligence.')}</AccentText>
         </>
       }
       heroImage="/images/hero-ai.webp"
@@ -49,13 +49,11 @@ export default function AIDataPage() {
         <SectionTitle
           tone="dark"
           align="center"
-          eyebrow="De la donnée à la décision"
+          eyebrow={t('De la donnée à la décision')}
           title={
-            <>
-              Un pipeline <AccentText>intelligent</AccentText>, de bout en bout
-            </>
+            <>{t('Un pipeline')}{' '}<AccentText>{t('intelligent')}</AccentText>{t(', de bout en bout')}</>
           }
-          description="Nous construisons toute la chaîne : collecte, préparation, modélisation et restitution des résultats là où vos équipes travaillent."
+          description={t('Nous construisons toute la chaîne : collecte, préparation, modélisation et restitution des résultats là où vos équipes travaillent.')}
           className="max-w-2xl"
         />
         <FlowDiagram nodes={pipeline} className="mt-14" />
@@ -64,13 +62,11 @@ export default function AIDataPage() {
       {/* Capabilities */}
       <Section tone="white">
         <SectionTitle
-          eyebrow="Nos expertises IA"
+          eyebrow={t('Nos expertises IA')}
           title={
-            <>
-              Des solutions IA <AccentText>concrètes</AccentText> pour votre activité
-            </>
+            <>{t('Des solutions IA')}{' '}<AccentText>{t('concrètes')}</AccentText>{' '}{t('pour votre activité')}</>
           }
-          description="Six domaines d’intervention, toujours au service d’un objectif mesurable. Cliquez sur une expertise pour en savoir plus."
+          description={t('Six domaines d’intervention, toujours au service d’un objectif mesurable. Cliquez sur une expertise pour en savoir plus.')}
           className="max-w-2xl"
         />
         <ExpertiseGrid items={aiExpertises} service={service.slug} className="mt-12" />
@@ -80,7 +76,7 @@ export default function AIDataPage() {
       <Section tone="light">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-12">
           <div className="flex flex-col">
-            <SectionTitle eyebrow="Notre approche" title="Une IA pragmatique, utile et responsable" />
+            <SectionTitle eyebrow={t('Notre approche')} title={t('Une IA pragmatique, utile et responsable')} />
             <RevealGroup className="mt-8 grid flex-1 gap-4 lg:auto-rows-fr">
               {principles.map((p) => (
                 <RevealItem key={p.title} className="h-full">
@@ -91,8 +87,8 @@ export default function AIDataPage() {
                       </span>
                     )}
                     <div>
-                      <h3 className="font-display text-base font-semibold text-navy">{p.title}</h3>
-                      <p className="mt-1 text-sm leading-relaxed text-slate">{p.description}</p>
+                      <h3 className="font-display text-base font-semibold text-navy">{t(p.title)}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-slate">{t(p.description)}</p>
                     </div>
                   </div>
                 </RevealItem>
@@ -108,7 +104,7 @@ export default function AIDataPage() {
                 <div className="aspect-[16/10] overflow-hidden lg:aspect-auto lg:min-h-64 lg:flex-1">
                   <img
                     src={autofix.image}
-                    alt={autofix.imageAlt}
+                    alt={t(autofix.imageAlt)}
                     width={1200}
                     height={750}
                     loading="lazy"
@@ -117,11 +113,10 @@ export default function AIDataPage() {
                   />
                 </div>
                 <div className="p-6">
-                  <p className="eyebrow text-brand">Étude de cas · IA embarquée</p>
-                  <h3 className="mt-2 font-display text-xl font-bold text-navy">{autofix.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate">{autofix.description}</p>
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand">
-                    Lire l’étude de cas <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
+                  <p className="eyebrow text-brand">{t('Étude de cas · IA embarquée')}</p>
+                  <h3 className="mt-2 font-display text-xl font-bold text-navy">{t(autofix.title)}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate">{t(autofix.description)}</p>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand">{t('Lire l’étude de cas')}{' '}<ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
               </Link>

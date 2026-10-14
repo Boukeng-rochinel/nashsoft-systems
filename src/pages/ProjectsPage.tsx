@@ -11,6 +11,7 @@ import { PageHero } from '@/components/sections/PageHero'
 import { ProjectFilter } from '@/components/sections/ProjectFilter'
 import { ProcessSteps } from '@/components/sections/ProcessSteps'
 import { CTABand } from '@/components/sections/CTABand'
+import { t } from '@/i18n'
 
 export default function ProjectsPage() {
   usePageMeta(pageSeo.projects)
@@ -19,21 +20,16 @@ export default function ProjectsPage() {
     <>
       <PageHero
         breadcrumbs={[{ label: 'Accueil', href: '/' }, { label: 'Projets' }]}
-        eyebrow="Nos réalisations"
+        eyebrow={t('Nos réalisations')}
         title={
-          <>
-            Des projets qui font <AccentText>la différence.</AccentText>
+          <>{t('Des projets qui font')}{' '}<AccentText>{t('la différence.')}</AccentText>
           </>
         }
-        description="Web, mobile, intelligence artificielle, ERP : chaque projet est une réponse concrète à un besoin réel. Découvrez nos études de cas."
+        description={t('Web, mobile, intelligence artificielle, ERP : chaque projet est une réponse concrète à un besoin réel. Découvrez nos études de cas.')}
         actions={
           <>
-            <ButtonLink to="#portfolio" size="lg">
-              Explorer le portfolio
-            </ButtonLink>
-            <ButtonLink to={START_PROJECT_HREF} variant="secondary" size="lg">
-              Démarrer un projet
-            </ButtonLink>
+            <ButtonLink to="#portfolio" size="lg">{t('Explorer le portfolio')}</ButtonLink>
+            <ButtonLink to={START_PROJECT_HREF} variant="secondary" size="lg">{t('Démarrer un projet')}</ButtonLink>
           </>
         }
         highlights={[
@@ -46,13 +42,12 @@ export default function ProjectsPage() {
 
       <Section tone="light" id="portfolio" className="scroll-mt-20">
         <SectionTitle
-          eyebrow="Portfolio"
+          eyebrow={t('Portfolio')}
           title={
-            <>
-              Nos <AccentText>études de cas</AccentText>
+            <>{t('Nos')}{' '}<AccentText>{t('études de cas')}</AccentText>
             </>
           }
-          description="Filtrez par type de projet pour découvrir les réalisations les plus proches de votre besoin."
+          description={t('Filtrez par type de projet pour découvrir les réalisations les plus proches de votre besoin.')}
           className="mb-10"
         />
         <ProjectFilter projects={projects} />
@@ -61,15 +56,15 @@ export default function ProjectsPage() {
       <Section tone="white">
         <SectionTitle
           align="center"
-          eyebrow="Comment nous travaillons"
-          title="Chaque projet suit la même exigence"
-          description="Une méthode éprouvée, de la découverte à l’évolution continue du produit."
+          eyebrow={t('Comment nous travaillons')}
+          title={t('Chaque projet suit la même exigence')}
+          description={t('Une méthode éprouvée, de la découverte à l’évolution continue du produit.')}
           className="mb-12"
         />
         <ProcessSteps variant="inline" />
       </Section>
 
-      <CTABand eyebrow="Vous avez un projet en tête ?" title="Votre projet sera notre prochaine étude de cas." />
+      <CTABand eyebrow={t('Vous avez un projet en tête ?')} title={t('Votre projet sera notre prochaine étude de cas.')} />
     </>
   )
 }

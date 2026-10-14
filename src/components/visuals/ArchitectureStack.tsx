@@ -3,6 +3,7 @@ import { Layers, type LucideIcon } from 'lucide-react'
 import type { ArchitectureLayer } from '@/types'
 import { cn } from '@/lib/cn'
 import { revealViewport } from '@/lib/motion'
+import { t } from '@/i18n'
 
 interface ArchitectureStackProps {
   layers: ArchitectureLayer[]
@@ -21,7 +22,7 @@ export function ArchitectureStack({ layers, icons = [], tone = 'dark', className
       viewport={revealViewport}
       variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
       className={cn('relative flex flex-col', className)}
-      aria-label="Schéma d’architecture"
+      aria-label={t('Schéma d’architecture')}
     >
       {layers.map((layer, i) => {
         const Icon = icons[i] ?? Layers
@@ -57,8 +58,8 @@ export function ArchitectureStack({ layers, icons = [], tone = 'dark', className
                   <Icon className="size-6" strokeWidth={1.7} />
                 </span>
                 <div>
-                  <p className={cn('eyebrow text-[0.6rem]', dark ? 'text-brand-300/80' : 'text-brand')}>Couche 0{i + 1}</p>
-                  <p className={cn('font-display font-semibold', dark ? 'text-white' : 'text-navy')}>{layer.layer}</p>
+                  <p className={cn('eyebrow text-[0.6rem]', dark ? 'text-brand-300/80' : 'text-brand')}>{t('Couche 0')}{i + 1}</p>
+                  <p className={cn('font-display font-semibold', dark ? 'text-white' : 'text-navy')}>{t(layer.layer)}</p>
                 </div>
               </div>
               <ul className="flex flex-wrap gap-2">
@@ -70,7 +71,7 @@ export function ArchitectureStack({ layers, icons = [], tone = 'dark', className
                       dark ? 'bg-white/[0.06] text-slate-200 ring-1 ring-white/10' : 'bg-brand-50 text-brand',
                     )}
                   >
-                    {item}
+                    {t(item)}
                   </li>
                 ))}
               </ul>

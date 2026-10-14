@@ -1,4 +1,5 @@
-import { Link, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
+import { Link } from '@/i18n/router'
 import { ArrowRight, MessageSquare, PencilRuler, CodeXml, LifeBuoy, SearchCheck } from 'lucide-react'
 import type { ProcessStep } from '@/types'
 import { solutionCategories } from '@/data/industries'
@@ -13,6 +14,7 @@ import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { PageHero } from '@/components/sections/PageHero'
 import { IndustrySelector } from '@/components/sections/IndustrySelector'
 import { CTABand } from '@/components/sections/CTABand'
+import { t } from '@/i18n'
 
 /**
  * Where each category card leads: the matching sector tab when there is one,
@@ -48,21 +50,16 @@ export default function SolutionsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Nos solutions"
+        eyebrow={t('Nos solutions')}
         title={
-          <>
-            Des solutions digitales pour <AccentText>tous les secteurs.</AccentText>
+          <>{t('Des solutions digitales pour')}{' '}<AccentText>{t('tous les secteurs.')}</AccentText>
           </>
         }
-        description="Nous concevons des solutions sur mesure adaptées aux besoins spécifiques de chaque secteur d’activité. Des outils modernes, flexibles et évolutifs pour accompagner votre croissance."
+        description={t('Nous concevons des solutions sur mesure adaptées aux besoins spécifiques de chaque secteur d’activité. Des outils modernes, flexibles et évolutifs pour accompagner votre croissance.')}
         actions={
           <>
-            <ButtonLink to="#categories" size="lg">
-              Explorer nos solutions
-            </ButtonLink>
-            <ButtonLink to="/contact" variant="secondary" size="lg" icon={MessageSquare} arrow={false}>
-              Parler à notre équipe
-            </ButtonLink>
+            <ButtonLink to="#categories" size="lg">{t('Explorer nos solutions')}</ButtonLink>
+            <ButtonLink to="/contact" variant="secondary" size="lg" icon={MessageSquare} arrow={false}>{t('Parler à notre équipe')}</ButtonLink>
           </>
         }
         image="/images/hero-solutions.webp"
@@ -71,12 +68,9 @@ export default function SolutionsPage() {
       {/* Categories */}
       <Section tone="white" id="categories" className="scroll-mt-20">
         <div className="grid gap-6 lg:grid-cols-2 lg:items-end">
-          <SectionTitle eyebrow="Nos solutions" title="Nos solutions par catégorie" />
+          <SectionTitle eyebrow={t('Nos solutions')} title={t('Nos solutions par catégorie')} />
           <Reveal>
-            <p className="max-w-lg text-[0.95rem] leading-relaxed text-slate lg:border-l lg:border-line lg:pl-8">
-              Découvrez nos solutions adaptées à vos besoins. Chaque solution est conçue pour vous aider à être plus efficace, plus productif et plus
-              compétitif.
-            </p>
+            <p className="max-w-lg text-[0.95rem] leading-relaxed text-slate lg:border-l lg:border-line lg:pl-8">{t('Découvrez nos solutions adaptées à vos besoins. Chaque solution est conçue pour vous aider à être plus efficace, plus productif et plus compétitif.')}</p>
           </Reveal>
         </div>
         <RevealGroup className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -91,8 +85,8 @@ export default function SolutionsPage() {
                     <c.icon className="size-5" strokeWidth={1.8} />
                   </span>
                   <div>
-                    <h3 className="font-display text-[0.95rem] font-semibold text-navy">{c.title}</h3>
-                    <p className="mt-1.5 text-[0.82rem] leading-relaxed text-slate">{c.description}</p>
+                    <h3 className="font-display text-[0.95rem] font-semibold text-navy">{t(c.title)}</h3>
+                    <p className="mt-1.5 text-[0.82rem] leading-relaxed text-slate">{t(c.description)}</p>
                   </div>
                 </div>
                 <span aria-hidden className="mt-auto ml-auto inline-flex size-8 translate-y-1 items-center justify-center rounded-full bg-light text-brand transition-colors group-hover:bg-brand group-hover:text-white">
@@ -109,15 +103,14 @@ export default function SolutionsPage() {
         <div className="grid items-start gap-10 lg:grid-cols-[0.75fr_1.6fr]">
           <SectionTitle
             tone="dark"
-            eyebrow="Focus secteurs"
+            eyebrow={t('Focus secteurs')}
             title={
-              <>
-                Des solutions adaptées à chaque <AccentText tone="dark">secteur d’activité</AccentText>
+              <>{t('Des solutions adaptées à chaque')}{' '}<AccentText tone="dark">{t('secteur d’activité')}</AccentText>
               </>
             }
-            description="Nous comprenons les défis uniques de chaque industrie. C’est pourquoi nous proposons des solutions personnalisées qui répondent aux besoins spécifiques de votre secteur."
+            description={t('Nous comprenons les défis uniques de chaque industrie. C’est pourquoi nous proposons des solutions personnalisées qui répondent aux besoins spécifiques de votre secteur.')}
           >
-            <ButtonLink to={START_PROJECT_HREF}>Parler de votre secteur</ButtonLink>
+            <ButtonLink to={START_PROJECT_HREF}>{t('Parler de votre secteur')}</ButtonLink>
           </SectionTitle>
           <IndustrySelector key={sector ?? 'default'} tone="dark" initialSlug={sector} />
         </div>
@@ -127,11 +120,11 @@ export default function SolutionsPage() {
       <Section tone="light">
         <div className="grid items-center gap-10 lg:grid-cols-[0.8fr_1.6fr]">
           <SectionTitle
-            eyebrow="Nos solutions sur mesure"
-            title="Une solution unique pour votre entreprise"
-            description="Vous avez un besoin spécifique ? Nous développons des solutions sur mesure qui s’adaptent parfaitement à vos objectifs et à votre mode de fonctionnement."
+            eyebrow={t('Nos solutions sur mesure')}
+            title={t('Une solution unique pour votre entreprise')}
+            description={t('Vous avez un besoin spécifique ? Nous développons des solutions sur mesure qui s’adaptent parfaitement à vos objectifs et à votre mode de fonctionnement.')}
           >
-            <ButtonLink to={START_PROJECT_HREF}>Discuter de votre projet</ButtonLink>
+            <ButtonLink to={START_PROJECT_HREF}>{t('Discuter de votre projet')}</ButtonLink>
           </SectionTitle>
           <RevealGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {customSteps.map((s) => (
@@ -140,8 +133,8 @@ export default function SolutionsPage() {
                   <span aria-hidden className="inline-flex size-11 items-center justify-center rounded-xl bg-brand-50 text-brand">
                     <s.icon className="size-5" strokeWidth={1.8} />
                   </span>
-                  <h3 className="mt-5 font-display text-[0.95rem] font-semibold text-navy">{s.title}</h3>
-                  <p className="mt-2 text-[0.82rem] leading-relaxed text-slate">{s.description}</p>
+                  <h3 className="mt-5 font-display text-[0.95rem] font-semibold text-navy">{t(s.title)}</h3>
+                  <p className="mt-2 text-[0.82rem] leading-relaxed text-slate">{t(s.description)}</p>
                 </div>
               </RevealItem>
             ))}
@@ -150,9 +143,9 @@ export default function SolutionsPage() {
       </Section>
 
       <CTABand
-        eyebrow="Prêt à passer à la prochaine étape ?"
-        title="Parlons de votre projet."
-        description="Que ce soit pour une solution standard ou sur mesure, notre équipe est là pour vous accompagner."
+        eyebrow={t('Prêt à passer à la prochaine étape ?')}
+        title={t('Parlons de votre projet.')}
+        description={t('Que ce soit pour une solution standard ou sur mesure, notre équipe est là pour vous accompagner.')}
       />
     </>
   )

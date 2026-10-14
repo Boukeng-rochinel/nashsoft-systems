@@ -3,6 +3,7 @@ import { site } from './site'
 import { services, serviceHref } from './services'
 import { projects, projectHref } from './projects'
 import { articles, articleHref } from './articles'
+import { DEFAULT_LOCALE, LOCALES, localeInfo, localizePath, t, type Locale } from '@/i18n'
 
 /**
  * Page metadata, shared by the pages (usePageMeta) and the build step that
@@ -19,7 +20,17 @@ export interface PageSeo {
 
 export const DEFAULT_OG_IMAGE = '/images/hero-home.webp'
 
-export const formatTitle = (title: string) => (title === site.name ? `${site.name} — Ideas · Code · Solutions` : `${title} | ${site.name}`)
+/** Translated document title in the active locale ("Services | Nashsoft Systems"). */
+export const formatTitle = (title: string) => (title === site.name ? `${site.name} — Ideas · Code · Solutions` : `${t(title)} | ${site.name}`)
+
+/** Absolute URL of a locale-free path in a given locale: `/services` + en → `https://…/en/services`. */
+export const localizedUrl = (path: string, locale: Locale) => `${site.url}${localizePath(path, locale)}`
+
+/** hreflang alternates for a page: one per locale, plus x-default (French). */
+export const alternateUrls = (path: string) => [
+  ...LOCALES.map((locale) => ({ hreflang: localeInfo[locale].htmlLang, href: localizedUrl(path, locale) })),
+  { hreflang: 'x-default', href: localizedUrl(path, DEFAULT_LOCALE) },
+]
 
 export const pageSeo = {
   home: { title: site.name, description: site.description },
@@ -82,9 +93,10 @@ export const pageSeo = {
   notFound: { title: 'Page introuvable', description: 'La page demandée n’existe pas ou a été déplacée.', noindex: true },
 } satisfies Record<string, PageSeo>
 
-export const serviceSeo = (s: Service): PageSeo => ({ title: s.title, description: `${s.tagline} ${s.description}`, image: s.image })
+// Composite strings are translated part by part (call these with the target locale active).
+export const serviceSeo = (s: Service): PageSeo => ({ title: s.title, description: `${t(s.tagline)} ${t(s.description)}`, image: s.image })
 
-export const projectSeo = (p: Project): PageSeo => ({ title: `${p.title} — Étude de cas`, description: p.summary, image: p.image, type: 'article' })
+export const projectSeo = (p: Project): PageSeo => ({ title: t('{0} — Étude de cas', [p.title]), description: p.summary, image: p.image, type: 'article' })
 
 export const articleSeo = (a: Article): PageSeo => ({ title: a.title, description: a.excerpt, image: a.image, type: 'article' })
 

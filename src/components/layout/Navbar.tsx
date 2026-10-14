@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from '@/i18n/router'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronDown, ChevronRight, Mail, MapPin, Menu, Phone } from 'lucide-react'
 import type { NavGroup, NavItem, NavLinkItem, NavMenu } from '@/types'
@@ -12,6 +12,7 @@ import { MobileMenu } from './MobileMenu'
 import { ThemeToggle } from './ThemeToggle'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { useLanguage } from '@/hooks/useLanguage'
+import { t as tr } from '@/i18n'
 
 export type NavTone = 'light' | 'dark'
 
@@ -49,7 +50,7 @@ const panel = 'rounded-xl border border-line bg-white shadow-[0_24px_60px_-24px_
 function MenuLinks({ group, current }: { group: NavGroup; current: string }) {
   return (
     <>
-      <p className="font-display text-[0.92rem] font-semibold text-navy">{group.title}</p>
+      <p className="font-display text-[0.92rem] font-semibold text-navy">{tr(group.title)}</p>
       <ul className={cn('mt-3.5 space-y-2.5', group.split && 'grid grid-cols-2 gap-x-10 gap-y-2.5 space-y-0')}>
         {group.links.map((link) => {
           const here = current === link.href
@@ -63,7 +64,7 @@ function MenuLinks({ group, current }: { group: NavGroup; current: string }) {
                   here ? 'font-medium text-brand' : 'text-slate',
                 )}
               >
-                {link.label}
+                {tr(link.label)}
               </Link>
             </li>
           )
@@ -82,7 +83,7 @@ function MenuCta({ link, className }: { link: NavLinkItem; className?: string })
         className,
       )}
     >
-      {link.label}
+      {tr(link.label)}
       <ChevronRight aria-hidden className="size-3.5 transition-transform group-hover:translate-x-0.5" />
     </Link>
   )
@@ -100,25 +101,23 @@ function MegaMenu({ menu }: { menu: NavMenu }) {
           {menu.products.map((product) => (
             <li key={product.href} className="flex flex-col">
               <p className="flex items-center gap-2 font-display text-[0.95rem] font-semibold text-navy">
-                {product.title}
+                {tr(product.title)}
                 {product.isNew && (
-                  <span className="rounded bg-brand px-1.5 py-0.5 text-[0.6rem] font-bold tracking-wide text-white uppercase">
-                    Nouveau
-                  </span>
+                  <span className="rounded bg-brand px-1.5 py-0.5 text-[0.6rem] font-bold tracking-wide text-white uppercase">{tr('Nouveau')}</span>
                 )}
               </p>
-              <p className="mt-2 flex-1 text-[0.85rem] leading-relaxed text-slate">{product.summary}</p>
+              <p className="mt-2 flex-1 text-[0.85rem] leading-relaxed text-slate">{tr(product.summary)}</p>
               <p className="mt-2.5 text-xs text-slate">
-                <span className="font-semibold text-navy/80">Secteur :</span> {product.meta}
+                <span className="font-semibold text-navy/80">{tr('Secteur :')}</span> {tr(product.meta)}
               </p>
               <MenuCta link={{ label: 'Voir le produit', href: product.href }} className="mt-4 self-start" />
             </li>
           ))}
         </ul>
         <div className="mt-8 flex items-center justify-between border-t border-line pt-5">
-          <p className="text-[0.82rem] text-slate">Des produits conçus, développés et maintenus par nos équipes à Douala.</p>
+          <p className="text-[0.82rem] text-slate">{tr('Des produits conçus, développés et maintenus par nos équipes à Douala.')}</p>
           <Link to={menu.cta.href} className="group inline-flex items-center gap-1 text-[0.82rem] font-semibold text-brand">
-            {menu.cta.label}
+            {tr(menu.cta.label)}
             <ChevronRight aria-hidden className="size-3.5 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
@@ -131,12 +130,12 @@ function MegaMenu({ menu }: { menu: NavMenu }) {
       <div className={cn(panel, 'flex px-8 py-7')}>
         <div className="w-[320px] pr-8">
           <Logo tone="light" asLink={false} />
-          <p className="mt-4 text-[0.85rem] leading-relaxed text-slate">{site.description}</p>
+          <p className="mt-4 text-[0.85rem] leading-relaxed text-slate">{tr(site.description)}</p>
           <ul className="mt-5 flex items-center gap-2.5">
             <li>
               <a
                 href={`mailto:${site.contact.email}`}
-                aria-label={`Écrire à ${site.contact.email}`}
+                aria-label={tr('Écrire à {0}', [site.contact.email])}
                 className="inline-flex size-9 items-center justify-center rounded-full bg-brand-50 text-brand transition-colors hover:bg-brand hover:text-white"
               >
                 <Mail aria-hidden className="size-4" />
@@ -145,7 +144,7 @@ function MegaMenu({ menu }: { menu: NavMenu }) {
             <li>
               <a
                 href={site.contact.phoneHref}
-                aria-label={`Appeler le ${site.contact.phone}`}
+                aria-label={tr('Appeler le {0}', [site.contact.phone])}
                 className="inline-flex size-9 items-center justify-center rounded-full bg-brand-50 text-brand transition-colors hover:bg-brand hover:text-white"
               >
                 <Phone aria-hidden className="size-4" />
@@ -154,7 +153,7 @@ function MegaMenu({ menu }: { menu: NavMenu }) {
             <li>
               <Link
                 to="/contact"
-                aria-label="Nous trouver à Douala"
+                aria-label={tr('Nous trouver à Douala')}
                 className="inline-flex size-9 items-center justify-center rounded-full bg-brand-50 text-brand transition-colors hover:bg-brand hover:text-white"
               >
                 <MapPin aria-hidden className="size-4" />
@@ -307,13 +306,11 @@ export function Navbar({ tone }: { tone: NavTone }) {
       <a
         href="#main"
         className="sr-only z-50 rounded-md bg-brand px-4 py-2 text-white focus:not-sr-only focus:absolute focus:top-3 focus:left-3"
-      >
-        Aller au contenu
-      </a>
+      >{tr('Aller au contenu')}</a>
       <div className="relative mx-auto flex h-[72px] max-w-[1240px] items-center justify-between gap-6 px-4 sm:px-6 lg:h-20 lg:px-8">
         <Logo tone={dark ? 'dark' : 'light'} />
 
-        <nav aria-label="Navigation principale" className="hidden lg:block">
+        <nav aria-label={tr('Navigation principale')} className="hidden lg:block">
           <ul className="flex items-center gap-4 xl:gap-6">
             {primaryNav.map((item) => {
               const active = isActive(pathname, item)
@@ -351,7 +348,7 @@ export function Navbar({ tone }: { tone: NavTone }) {
             onClick={() => setMenuOpen(true)}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            aria-label="Ouvrir le menu"
+            aria-label={tr('Ouvrir le menu')}
             className={cn(
               'inline-flex size-11 items-center justify-center rounded-full transition-colors lg:hidden',
               dark ? 'text-white hover:bg-white/10' : 'text-navy hover:bg-light',

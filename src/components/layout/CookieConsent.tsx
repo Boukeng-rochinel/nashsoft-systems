@@ -1,11 +1,12 @@
 import { useEffect, useId, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from '@/i18n/router'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Cookie } from 'lucide-react'
 import { CONSENT_OPEN_EVENT, readConsent, saveConsent, type ConsentLevel } from '@/lib/consent'
 import { useTheme } from '@/hooks/useTheme'
 import { cn } from '@/lib/cn'
 import { Button } from '@/components/ui/Button'
+import { t } from '@/i18n'
 
 /**
  * Bottom-left consent card in the site's own visual language.
@@ -57,25 +58,15 @@ export function CookieConsent() {
               <Cookie className="size-5" strokeWidth={1.8} />
             </span>
             <div>
-              <h2 id={titleId} className={cn('font-display text-[0.95rem] font-semibold', dark ? 'text-white' : 'text-navy')}>
-                Votre vie privée compte
-              </h2>
-              <p className="mt-1.5 text-[0.82rem] leading-relaxed">
-                Nous utilisons des cookies essentiels au fonctionnement du site et, avec votre accord, des cookies de mesure d’audience pour
-                l’améliorer.{' '}
-                <Link to="/confidentialite" className={cn('font-medium underline underline-offset-2', dark ? 'text-brand-300 hover:text-white' : 'text-brand hover:text-brand-600')}>
-                  En savoir plus
-                </Link>
+              <h2 id={titleId} className={cn('font-display text-[0.95rem] font-semibold', dark ? 'text-white' : 'text-navy')}>{t('Votre vie privée compte')}</h2>
+              <p className="mt-1.5 text-[0.82rem] leading-relaxed">{t('Nous utilisons des cookies essentiels au fonctionnement du site et, avec votre accord, des cookies de mesure d’audience pour l’améliorer.')}{' '}
+                <Link to="/confidentialite" className={cn('font-medium underline underline-offset-2', dark ? 'text-brand-300 hover:text-white' : 'text-brand hover:text-brand-600')}>{t('En savoir plus')}</Link>
               </p>
             </div>
           </div>
           <div className="mt-4 grid grid-cols-2 gap-2.5">
-            <Button variant="secondary" size="sm" arrow={false} onClick={() => decide('essential')}>
-              Essentiels uniquement
-            </Button>
-            <Button size="sm" arrow={false} onClick={() => decide('all')}>
-              Tout accepter
-            </Button>
+            <Button variant="secondary" size="sm" arrow={false} onClick={() => decide('essential')}>{t('Essentiels uniquement')}</Button>
+            <Button size="sm" arrow={false} onClick={() => decide('all')}>{t('Tout accepter')}</Button>
           </div>
         </motion.section>
       )}

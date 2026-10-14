@@ -4,6 +4,7 @@ import { ButtonLink } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { Reveal } from '@/components/ui/Reveal'
 import { BrandN } from '@/components/visuals/BrandN'
+import { t } from '@/i18n'
 
 interface CTABandProps {
   eyebrow?: string
@@ -25,14 +26,14 @@ export function CTABand({
         <Reveal className="flex items-center gap-5 sm:gap-8">
           <BrandN className="relative hidden size-20 shrink-0 sm:block lg:size-24" />
           <div>
-            {eyebrow && <p className="eyebrow mb-2 text-brand-300">{eyebrow}</p>}
+            {eyebrow && <p className="eyebrow mb-2 text-brand-300">{t(eyebrow)}</p>}
             <h2 className="text-2xl font-bold text-white sm:text-[1.7rem]">{title}</h2>
-            {description && <p className="mt-2 max-w-xl text-sm text-slate-300 sm:text-[0.95rem]">{description}</p>}
+            {description && <p className="mt-2 max-w-xl text-sm text-slate-300 sm:text-[0.95rem]">{t(description)}</p>}
           </div>
         </Reveal>
         <Reveal delay={0.1} className="shrink-0">
           <ButtonLink to={cta.href} size="lg" className="ring-1 ring-white/20">
-            {cta.label}
+            {t(cta.label)}
           </ButtonLink>
         </Reveal>
       </Container>

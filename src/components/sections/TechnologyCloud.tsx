@@ -3,6 +3,7 @@ import { coreStack } from '@/data/technologies'
 import { cn } from '@/lib/cn'
 import { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { TechMark, TechTile } from '@/components/ui/TechTile'
+import { t } from '@/i18n'
 
 interface TechnologyCloudProps {
   items?: Technology[]
@@ -28,7 +29,7 @@ export function TechnologyCloud({ items = coreStack, tone = 'light', variant = '
               )}
             >
               <TechMark tech={tech} size="sm" />
-              <span className={cn('text-sm font-medium', tone === 'dark' ? 'text-slate-200' : 'text-navy')}>{tech.name}</span>
+              <span className={cn('text-sm font-medium', tone === 'dark' ? 'text-slate-200' : 'text-navy')}>{t(tech.name)}</span>
             </div>
           </RevealItem>
         ))}
@@ -40,7 +41,7 @@ export function TechnologyCloud({ items = coreStack, tone = 'light', variant = '
     <RevealGroup gap={0.04} className={cn('grid gap-3', cols, className)}>
       {items.map((tech) => (
         <RevealItem key={tech.name}>
-          <TechTile tech={tech} tone={tone} caption={captions?.[tech.name]} />
+          <TechTile tech={tech} tone={tone} caption={t(captions?.[tech.name])} />
         </RevealItem>
       ))}
     </RevealGroup>

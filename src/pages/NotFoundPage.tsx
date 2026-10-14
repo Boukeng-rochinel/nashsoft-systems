@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/i18n/router'
 import { motion } from 'framer-motion'
 import { ArrowLeft, ArrowUpRight, Briefcase, FolderKanban, Layers, Mail } from 'lucide-react'
 import { usePageMeta } from '@/hooks/usePageMeta'
@@ -6,6 +6,7 @@ import { pageSeo } from '@/data/seo'
 import { Container } from '@/components/ui/Container'
 import { ButtonLink } from '@/components/ui/Button'
 import { NOutline } from '@/components/visuals/BrandN'
+import { t } from '@/i18n'
 
 const shortcuts = [
   { label: 'Nos services', href: '/services', icon: Layers },
@@ -29,17 +30,11 @@ export default function NotFoundPage() {
           404
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="max-w-xl">
-          <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl">Cette page s’est perdue dans le code.</h1>
-          <p className="mt-4 leading-relaxed text-slate-300">
-            L’adresse demandée n’existe pas ou a été déplacée. Revenez à l’accueil ou explorez l’une de nos rubriques.
-          </p>
+          <h1 className="mt-4 text-3xl font-bold text-white sm:text-4xl">{t('Cette page s’est perdue dans le code.')}</h1>
+          <p className="mt-4 leading-relaxed text-slate-300">{t('L’adresse demandée n’existe pas ou a été déplacée. Revenez à l’accueil ou explorez l’une de nos rubriques.')}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink to="/" icon={ArrowLeft} arrow={false}>
-              Retour à l’accueil
-            </ButtonLink>
-            <ButtonLink to="/demarrer-un-projet" variant="outline-dark">
-              Démarrer un projet
-            </ButtonLink>
+            <ButtonLink to="/" icon={ArrowLeft} arrow={false}>{t('Retour à l’accueil')}</ButtonLink>
+            <ButtonLink to="/demarrer-un-projet" variant="outline-dark">{t('Démarrer un projet')}</ButtonLink>
           </div>
         </motion.div>
         <motion.ul
@@ -56,7 +51,7 @@ export default function NotFoundPage() {
               >
                 <span className="flex items-center gap-3">
                   <s.icon aria-hidden className="size-4 text-brand-300" />
-                  {s.label}
+                  {t(s.label)}
                 </span>
                 <ArrowUpRight aria-hidden className="size-4 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-brand-300" />
               </Link>

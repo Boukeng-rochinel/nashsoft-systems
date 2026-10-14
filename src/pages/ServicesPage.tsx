@@ -17,6 +17,7 @@ import { TechnologyCloud } from '@/components/sections/TechnologyCloud'
 import { CTABand } from '@/components/sections/CTABand'
 import { Laptop } from '@/components/visuals/Devices'
 import { BrandN } from '@/components/visuals/BrandN'
+import { t as tr } from '@/i18n'
 
 const stack = ['React', 'Next.js', 'Node.js', 'Flutter', 'Python', 'PostgreSQL', 'MongoDB', 'Firebase', 'Docker', 'AWS'].map(getTechnology)
 
@@ -29,21 +30,16 @@ export default function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Nos services"
+        eyebrow={tr('Nos services')}
         title={
-          <>
-            Des solutions technologiques pour un <AccentText>avenir meilleur</AccentText>
+          <>{tr('Des solutions technologiques pour un')}{' '}<AccentText>{tr('avenir meilleur')}</AccentText>
           </>
         }
-        description="Nous offrons une gamme complète de services technologiques pour aider les entreprises et organisations à innover, se digitaliser et atteindre leurs objectifs."
+        description={tr('Nous offrons une gamme complète de services technologiques pour aider les entreprises et organisations à innover, se digitaliser et atteindre leurs objectifs.')}
         actions={
           <>
-            <ButtonLink to="#catalogue" size="lg">
-              Découvrir nos services
-            </ButtonLink>
-            <ButtonLink to="/contact" variant="secondary" size="lg" icon={MessageSquare} arrow={false}>
-              Discuter avec notre équipe
-            </ButtonLink>
+            <ButtonLink to="#catalogue" size="lg">{tr('Découvrir nos services')}</ButtonLink>
+            <ButtonLink to="/contact" variant="secondary" size="lg" icon={MessageSquare} arrow={false}>{tr('Discuter avec notre équipe')}</ButtonLink>
           </>
         }
         image="/images/hero-services.webp"
@@ -53,18 +49,14 @@ export default function ServicesPage() {
       <Section tone="light" id="catalogue" className="scroll-mt-20">
         <div className="grid gap-6 lg:grid-cols-2 lg:items-end">
           <SectionTitle
-            eyebrow="Nos services"
+            eyebrow={tr('Nos services')}
             title={
-              <>
-                Des expertises complètes pour vos <AccentText>projets</AccentText>
+              <>{tr('Des expertises complètes pour vos')}{' '}<AccentText>{tr('projets')}</AccentText>
               </>
             }
           />
           <Reveal>
-            <p className="max-w-lg text-[0.95rem] leading-relaxed text-slate lg:border-l lg:border-line lg:pl-8">
-              Du concept au déploiement, nous vous accompagnons à chaque étape de votre transformation digitale avec des solutions sur mesure,
-              performantes et durables.
-            </p>
+            <p className="max-w-lg text-[0.95rem] leading-relaxed text-slate lg:border-l lg:border-line lg:pl-8">{tr('Du concept au déploiement, nous vous accompagnons à chaque étape de votre transformation digitale avec des solutions sur mesure, performantes et durables.')}</p>
           </Reveal>
         </div>
         <RevealGroup className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -81,16 +73,16 @@ export default function ServicesPage() {
         <div className="grid items-center gap-12 lg:grid-cols-[0.8fr_1.6fr]">
           <Reveal className="relative mx-auto hidden w-full max-w-sm lg:block">
             <div className="relative [transform:perspective(900px)_rotateX(48deg)_rotateZ(-28deg)]">
-              <Laptop variant="dashboard" theme={themes.nashsoftDark} title="Nashsoft" />
+              <Laptop variant="dashboard" theme={themes.nashsoftDark} title={tr('Nashsoft')} />
             </div>
             <BrandN className="absolute -top-10 left-1/2 w-20 -translate-x-1/2" />
           </Reveal>
           <div>
             <SectionTitle
               tone="dark"
-              eyebrow="Notre processus"
-              title="Une méthode éprouvée pour des résultats concrets"
-              description="Nous suivons un processus agile et collaboratif pour garantir la réussite de chaque projet, de l’idée initiale à la mise en production."
+              eyebrow={tr('Notre processus')}
+              title={tr('Une méthode éprouvée pour des résultats concrets')}
+              description={tr('Nous suivons un processus agile et collaboratif pour garantir la réussite de chaque projet, de l’idée initiale à la mise en production.')}
               className="max-w-2xl"
             />
             <ProcessSteps steps={deliverySteps} variant="dark" className="mt-10" />
@@ -102,18 +94,18 @@ export default function ServicesPage() {
       <Section tone="white">
         <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.6fr]">
           <SectionTitle
-            eyebrow="Notre stack technologique"
-            title="Des technologies modernes pour des solutions performantes"
-            description="Nous utilisons les meilleures technologies du marché pour garantir des solutions rapides, sécurisées et évolutives."
+            eyebrow={tr('Notre stack technologique')}
+            title={tr('Des technologies modernes pour des solutions performantes')}
+            description={tr('Nous utilisons les meilleures technologies du marché pour garantir des solutions rapides, sécurisées et évolutives.')}
           >
-            <ButtonLink to="/demarrer-un-projet">Parler de votre projet</ButtonLink>
+            <ButtonLink to="/demarrer-un-projet">{tr('Parler de votre projet')}</ButtonLink>
           </SectionTitle>
           <TechnologyCloud items={stack} tone="light" />
         </div>
-        <p className="sr-only">Technologies maîtrisées : {technologies.map((t) => t.name).join(', ')}.</p>
+        <p className="sr-only">{tr('Technologies maîtrisées :')}{' '}{tr(technologies.map((t) => t.name).join(', '))}.</p>
       </Section>
 
-      <CTABand eyebrow="Prêt à réaliser votre projet ?" title="Transformons vos idées en solutions digitales." description="Parlons de votre projet et trouvons ensemble la meilleure approche." />
+      <CTABand eyebrow={tr('Prêt à réaliser votre projet ?')} title={tr('Transformons vos idées en solutions digitales.')} description={tr('Parlons de votre projet et trouvons ensemble la meilleure approche.')} />
     </>
   )
 }

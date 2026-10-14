@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/i18n/router'
 import { site } from '@/data/site'
 import { cn } from '@/lib/cn'
+import { t } from '@/i18n'
 
 interface LogoProps {
   tone?: 'light' | 'dark'
@@ -21,7 +22,7 @@ export function Logo({ tone = 'light', className, asLink = true, size = 'md' }: 
     tone === 'light' ? (
       <img
         src={site.logo.lockup}
-        alt="Nashsoft Systems — Ideas · Code · Solutions"
+        alt={t('Nashsoft Systems — Ideas · Code · Solutions')}
         width={267}
         height={58}
         className={cn('w-auto select-none', size === 'lg' ? 'h-12' : 'h-9 sm:h-10')}
@@ -38,24 +39,18 @@ export function Logo({ tone = 'light', className, asLink = true, size = 'md' }: 
           draggable={false}
         />
         <span className="flex flex-col leading-none">
-          <span className={cn('font-display font-semibold tracking-tight text-white', size === 'lg' ? 'text-2xl' : 'text-lg sm:text-xl')}>
-            Nashsoft
-          </span>
-          <span className={cn('font-display font-semibold text-brand', size === 'lg' ? 'text-xl' : 'text-base sm:text-lg')} style={{ marginTop: '-0.08em' }}>
-            Systems
-          </span>
-          <span className="mt-1 text-[0.45rem] font-medium tracking-[0.32em] text-slate-300 uppercase sm:text-[0.5rem]">
-            Ideas · Code · Solutions
-          </span>
+          <span className={cn('font-display font-semibold tracking-tight text-white', size === 'lg' ? 'text-2xl' : 'text-lg sm:text-xl')}>{t('Nashsoft')}</span>
+          <span className={cn('font-display font-semibold text-brand', size === 'lg' ? 'text-xl' : 'text-base sm:text-lg')} style={{ marginTop: '-0.08em' }}>{t('Systems')}</span>
+          <span className="mt-1 text-[0.45rem] font-medium tracking-[0.32em] text-slate-300 uppercase sm:text-[0.5rem]">{t('Ideas · Code · Solutions')}</span>
         </span>
-        <span className="sr-only">Nashsoft Systems — Ideas · Code · Solutions</span>
+        <span className="sr-only">{t('Nashsoft Systems — Ideas · Code · Solutions')}</span>
       </span>
     )
 
   if (!asLink) return <span className={cn('inline-flex', className)}>{content}</span>
 
   return (
-    <Link to="/" className={cn('inline-flex shrink-0 rounded-md', className)} aria-label="Nashsoft Systems — accueil">
+    <Link to="/" className={cn('inline-flex shrink-0 rounded-md', className)} aria-label={t('Nashsoft Systems — accueil')}>
       {content}
     </Link>
   )

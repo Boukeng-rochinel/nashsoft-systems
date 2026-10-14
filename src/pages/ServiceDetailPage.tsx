@@ -1,4 +1,5 @@
-import { Navigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { Navigate } from '@/i18n/router'
 import { getServiceBySlug } from '@/data/services'
 import { usePageMeta } from '@/hooks/usePageMeta'
 import { serviceSeo } from '@/data/seo'

@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Plus } from 'lucide-react'
 import type { Faq } from '@/data/contact'
 import { cn } from '@/lib/cn'
+import { t } from '@/i18n'
 
 /** Accessible disclosure list: one answer open at a time, first one open by default. */
 export function FaqList({ items, className }: { items: Faq[]; className?: string }) {
@@ -26,7 +27,7 @@ export function FaqList({ items, className }: { items: Faq[]; className?: string
                 onClick={() => setOpen(expanded ? null : i)}
                 className="flex w-full items-center justify-between gap-6 px-5 py-5 text-left font-display text-[0.95rem] font-semibold text-navy transition-colors hover:text-brand sm:px-6"
               >
-                {faq.question}
+                {t(faq.question)}
                 <span
                   aria-hidden
                   className={cn(
@@ -50,7 +51,7 @@ export function FaqList({ items, className }: { items: Faq[]; className?: string
                   transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                   className="overflow-hidden"
                 >
-                  <p className="px-5 pb-5 text-[0.9rem] leading-relaxed text-slate sm:px-6">{faq.answer}</p>
+                  <p className="px-5 pb-5 text-[0.9rem] leading-relaxed text-slate sm:px-6">{t(faq.answer)}</p>
                 </motion.div>
               )}
             </AnimatePresence>

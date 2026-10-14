@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from '@/i18n/router'
 import { Play } from 'lucide-react'
 
 /** Secondary hero action: outlined play circle + label (white, for photo heroes). */

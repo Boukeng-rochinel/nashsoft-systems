@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/cn'
+import { getActiveLocale, t } from '@/i18n'
 
 /**
  * Cloudflare Turnstile anti-bot check.
@@ -81,7 +82,7 @@ export function Turnstile({ siteKey, onToken, tone = 'light', error, className }
           'expired-callback': () => callback.current(null),
           'error-callback': () => callback.current(null),
           theme: tone,
-          language: 'fr',
+          language: getActiveLocale(),
           size: 'flexible',
           appearance: 'always',
         })
@@ -101,7 +102,7 @@ export function Turnstile({ siteKey, onToken, tone = 'light', error, className }
       <div ref={container} className="min-h-[65px]" aria-describedby={error ? 'turnstile-error' : undefined} />
       {(error || loadFailed) && (
         <p id="turnstile-error" role="alert" className={cn('mt-1.5 text-xs', dark ? 'text-red-300' : 'text-red-600')}>
-          {loadFailed ? 'La vérification anti-robot n’a pas pu se charger. Vérifiez votre connexion ou désactivez un éventuel bloqueur, puis rechargez la page.' : error}
+          {t(loadFailed ? 'La vérification anti-robot n’a pas pu se charger. Vérifiez votre connexion ou désactivez un éventuel bloqueur, puis rechargez la page.' : error)}
         </p>
       )}
     </div>

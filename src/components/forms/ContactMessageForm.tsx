@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, ChevronDown, CircleCheck, LoaderCircle, RotateCcw, Send } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link } from '@/i18n/router'
 import { CONTACT_SUBJECTS, contactMessageSchema, type ContactMessage, type ContactMessageInput } from '@/lib/validation'
 import { submitContactMessage } from '@/lib/api'
 import { site } from '@/data/site'
@@ -12,6 +12,7 @@ import { glassButton } from '@/lib/styles'
 import { useCaptcha } from '@/hooks/useCaptcha'
 import { useTheme } from '@/hooks/useTheme'
 import { Turnstile } from './Turnstile'
+import { t } from '@/i18n'
 
 type Status = { kind: 'sent' } | { kind: 'mailto'; href: string } | null
 
@@ -28,7 +29,7 @@ function Field({ id, label, required, error, children }: { id: string; label: st
   return (
     <div>
       <label htmlFor={id} className="mb-2 block text-[0.85rem] font-medium text-navy on-dark:text-slate-200">
-        {label}
+        {t(label)}
         {required && (
           <span aria-hidden className="text-red-500">
             {' '}
@@ -39,7 +40,7 @@ function Field({ id, label, required, error, children }: { id: string; label: st
       {children}
       {error && (
         <p id={`${id}-error`} role="alert" className="mt-1.5 text-xs text-red-600 on-dark:text-red-300">
-          {error}
+          {t(error)}
         </p>
       )}
     </div>
@@ -91,32 +92,27 @@ export function ContactMessageForm() {
             <CircleCheck aria-hidden className="size-7" />
           </span>
           <h3 className="mt-5 font-display text-xl font-bold text-navy on-dark:text-white">
-            {status.kind === 'sent' ? 'Merci, votre message est envoyé !' : 'Plus qu’un clic pour envoyer votre message'}
+            {t(status.kind === 'sent' ? 'Merci, votre message est envoyé !' : 'Plus qu’un clic pour envoyer votre message')}
           </h3>
           <p className="mt-2 max-w-sm text-sm leading-relaxed text-slate on-dark:text-slate-300">
             {status.kind === 'sent' ? (
               'Nous vous répondons dans les plus brefs délais, généralement sous 24 h ouvrées.'
             ) : (
-              <>
-                Votre messagerie s’est ouverte avec le message pré-rempli : il vous suffit de l’envoyer. Rien ne s’est ouvert ?{' '}
-                <a href={status.href} className="font-semibold text-brand underline underline-offset-2 on-dark:text-brand-300">
-                  Ouvrir l’e-mail
-                </a>{' '}
-                ou écrivez à {site.contact.email}.
+              <>{t('Votre messagerie s’est ouverte avec le message pré-rempli : il vous suffit de l’envoyer. Rien ne s’est ouvert ?')}{' '}
+                <a href={status.href} className="font-semibold text-brand underline underline-offset-2 on-dark:text-brand-300">{t('Ouvrir l’e-mail')}</a>{' '}{t('ou écrivez à')}{' '}{t(site.contact.email)}.
               </>
             )}
           </p>
           <button type="button" onClick={() => setStatus(null)} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand-600 on-dark:text-brand-300">
-            <RotateCcw aria-hidden className="size-4" /> Écrire un autre message
-          </button>
+            <RotateCcw aria-hidden className="size-4" />{' '}{t('Écrire un autre message')}</button>
         </motion.div>
       ) : (
         <motion.form key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onSubmit={handleSubmit(onSubmit)} noValidate className="grid gap-5 sm:grid-cols-2">
-          <Field id={id('fullName')} label="Nom complet" required error={errors.fullName?.message}>
+          <Field id={id('fullName')} label={t('Nom complet')} required error={t(errors.fullName?.message)}>
             <input
               id={id('fullName')}
               autoComplete="name"
-              placeholder="Votre nom"
+              placeholder={t('Votre nom')}
               aria-required
               aria-invalid={!!errors.fullName}
               aria-describedby={describe('fullName')}
@@ -125,13 +121,13 @@ export function ContactMessageForm() {
             />
           </Field>
 
-          <Field id={id('email')} label="Email" required error={errors.email?.message}>
+          <Field id={id('email')} label={t('Email')} required error={t(errors.email?.message)}>
             <input
               id={id('email')}
               type="email"
               inputMode="email"
               autoComplete="email"
-              placeholder="votre@email.com"
+              placeholder={t('votre@email.com')}
               aria-required
               aria-invalid={!!errors.email}
               aria-describedby={describe('email')}
@@ -140,7 +136,7 @@ export function ContactMessageForm() {
             />
           </Field>
 
-          <Field id={id('phone')} label="Téléphone" error={errors.phone?.message}>
+          <Field id={id('phone')} label={t('Téléphone')} error={t(errors.phone?.message)}>
             <input
               id={id('phone')}
               type="tel"
@@ -154,7 +150,7 @@ export function ContactMessageForm() {
             />
           </Field>
 
-          <Field id={id('subject')} label="Sujet" error={errors.subject?.message}>
+          <Field id={id('subject')} label={t('Sujet')} error={t(errors.subject?.message)}>
             <div className="relative">
               <select
                 id={id('subject')}
@@ -163,10 +159,10 @@ export function ContactMessageForm() {
                 className={cn(field(!!errors.subject), 'h-12 appearance-none pr-10 pl-4 [&>option]:bg-white [&>option]:text-navy')}
                 {...register('subject', { setValueAs: emptyToUndefined })}
               >
-                <option value="">Choisissez un sujet</option>
+                <option value="">{t('Choisissez un sujet')}</option>
                 {CONTACT_SUBJECTS.map((s) => (
                   <option key={s} value={s}>
-                    {s}
+                    {t(s)}
                   </option>
                 ))}
               </select>
@@ -175,11 +171,11 @@ export function ContactMessageForm() {
           </Field>
 
           <div className="sm:col-span-2">
-            <Field id={id('message')} label="Message" required error={errors.message?.message}>
+            <Field id={id('message')} label={t('Message')} required error={t(errors.message?.message)}>
               <textarea
                 id={id('message')}
                 rows={5}
-                placeholder="Écrivez votre message ici…"
+                placeholder={t('Écrivez votre message ici…')}
                 aria-required
                 aria-invalid={!!errors.message}
                 aria-describedby={describe('message')}
@@ -191,7 +187,7 @@ export function ContactMessageForm() {
 
           {/* Honeypot — invisible to people and assistive tech. */}
           <div aria-hidden className="absolute -left-[9999px] size-px overflow-hidden">
-            <label htmlFor={id('website')}>Site web</label>
+            <label htmlFor={id('website')}>{t('Site web')}</label>
             <input id={id('website')} tabIndex={-1} autoComplete="off" {...register('website')} />
           </div>
 
@@ -201,14 +197,14 @@ export function ContactMessageForm() {
               siteKey={captcha.siteKey}
               onToken={captcha.setToken}
               tone={theme === 'dark' ? 'dark' : 'light'}
-              error={captcha.error}
+              error={t(captcha.error)}
               className="sm:col-span-2"
             />
           )}
 
           {serverError && (
             <p role="alert" className="rounded-lg border border-red-300/60 bg-red-50 px-4 py-3 text-sm text-red-700 sm:col-span-2">
-              {serverError}
+              {t(serverError)}
             </p>
           )}
 
@@ -219,14 +215,11 @@ export function ContactMessageForm() {
               className={cn('group inline-flex h-13 w-full items-center justify-center gap-2.5 rounded-xl font-display text-[0.95rem] font-semibold transition-colors disabled:pointer-events-none disabled:opacity-70', glassButton)}
             >
               {isSubmitting ? <LoaderCircle aria-hidden className="size-4 animate-spin" /> : <Send aria-hidden className="size-4" />}
-              {isSubmitting ? 'Envoi en cours…' : 'Envoyer le message'}
+              {t(isSubmitting ? 'Envoi en cours…' : 'Envoyer le message')}
               {!isSubmitting && <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />}
             </button>
-            <p className="mt-3 text-center text-[0.75rem] text-slate on-dark:text-slate-400">
-              En envoyant ce message, vous acceptez notre{' '}
-              <Link to="/confidentialite" className="font-medium text-brand hover:text-brand-600 on-dark:text-brand-300">
-                politique de confidentialité
-              </Link>
+            <p className="mt-3 text-center text-[0.75rem] text-slate on-dark:text-slate-400">{t('En envoyant ce message, vous acceptez notre')}{' '}
+              <Link to="/confidentialite" className="font-medium text-brand hover:text-brand-600 on-dark:text-brand-300">{t('politique de confidentialité')}</Link>
               .
             </p>
           </div>

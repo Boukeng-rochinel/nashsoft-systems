@@ -6,6 +6,7 @@ import type { GalleryItem, ProjectTheme } from '@/types'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll'
 import { Laptop, Phone } from '@/components/visuals/Devices'
+import { t } from '@/i18n'
 
 interface LightboxProps {
   items: GalleryItem[]
@@ -59,13 +60,13 @@ export function Lightbox({ items, theme, title, index, onClose, onNavigate }: Li
             ref={dialog}
             role="dialog"
             aria-modal="true"
-            aria-label={`Galerie ${title} — ${item.title}`}
+            aria-label={t('Galerie {0} — {1}', [title, item.title])}
             tabIndex={-1}
             className="relative flex w-full max-w-5xl flex-col items-center outline-none"
           >
             <div className="mb-4 flex w-full items-center justify-between gap-4 text-white">
               <p className="text-sm text-slate-300" aria-live="polite">
-                <span className="font-display font-semibold text-white">{item.title}</span>
+                <span className="font-display font-semibold text-white">{t(item.title)}</span>
                 <span className="ml-2 text-slate-400">
                   {index! + 1} / {items.length}
                 </span>
@@ -73,7 +74,7 @@ export function Lightbox({ items, theme, title, index, onClose, onNavigate }: Li
               <button
                 type="button"
                 onClick={onClose}
-                aria-label="Fermer la galerie"
+                aria-label={t('Fermer la galerie')}
                 className="inline-flex size-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
               >
                 <X aria-hidden className="size-5" />
@@ -92,12 +93,12 @@ export function Lightbox({ items, theme, title, index, onClose, onNavigate }: Li
                 {/* Sized by viewport height as well as width so the device, caption and arrows always fit on screen. */}
                 <div className={item.device === 'phone' ? 'w-[min(60vw,280px,calc((100dvh-15rem)*0.48))]' : 'w-[min(100%,56rem,calc((100dvh-15rem)*1.5))]'}>
                   {item.device === 'phone' ? (
-                    <Phone variant={item.variant} theme={theme} title={title} />
+                    <Phone variant={item.variant} theme={theme} title={t(title)} />
                   ) : (
-                    <Laptop variant={item.variant} theme={theme} title={title} />
+                    <Laptop variant={item.variant} theme={theme} title={t(title)} />
                   )}
                 </div>
-                <figcaption className="mt-6 max-w-xl text-center text-sm text-slate-300">{item.caption}</figcaption>
+                <figcaption className="mt-6 max-w-xl text-center text-sm text-slate-300">{t(item.caption)}</figcaption>
               </motion.figure>
             </AnimatePresence>
 
@@ -105,7 +106,7 @@ export function Lightbox({ items, theme, title, index, onClose, onNavigate }: Li
               <button
                 type="button"
                 onClick={() => go(-1)}
-                aria-label="Image précédente"
+                aria-label={t('Image précédente')}
                 className="inline-flex size-11 items-center justify-center rounded-full border border-white/15 text-white transition-colors hover:border-brand-300/60 hover:bg-white/10"
               >
                 <ChevronLeft aria-hidden className="size-5" />
@@ -113,7 +114,7 @@ export function Lightbox({ items, theme, title, index, onClose, onNavigate }: Li
               <button
                 type="button"
                 onClick={() => go(1)}
-                aria-label="Image suivante"
+                aria-label={t('Image suivante')}
                 className="inline-flex size-11 items-center justify-center rounded-full border border-white/15 text-white transition-colors hover:border-brand-300/60 hover:bg-white/10"
               >
                 <ChevronRight aria-hidden className="size-5" />

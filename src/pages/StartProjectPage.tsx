@@ -15,6 +15,7 @@ import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { PageHero } from '@/components/sections/PageHero'
 import { FaqList } from '@/components/sections/FaqList'
 import { ContactForm } from '@/components/forms/ContactForm'
+import { t } from '@/i18n'
 
 export default function StartProjectPage() {
   usePageMeta(pageSeo.startProject)
@@ -25,13 +26,12 @@ export default function StartProjectPage() {
     <>
       <PageHero
         breadcrumbs={[{ label: 'Accueil', href: '/' }, { label: 'Démarrer un projet' }]}
-        eyebrow="Démarrer un projet"
+        eyebrow={t('Démarrer un projet')}
         title={
-          <>
-            Transformons votre idée en <AccentText>solution digitale.</AccentText>
+          <>{t('Transformons votre idée en')}{' '}<AccentText>{t('solution digitale.')}</AccentText>
           </>
         }
-        description="Vous avez un projet en tête ? Nous sommes là pour vous accompagner de la conception à la mise en production. Remplissez le formulaire ci-dessous et notre équipe vous recontactera rapidement."
+        description={t('Vous avez un projet en tête ? Nous sommes là pour vous accompagner de la conception à la mise en production. Remplissez le formulaire ci-dessous et notre équipe vous recontactera rapidement.')}
         highlights={startProjectHighlights}
         image="/images/hero-contact.webp"
       />
@@ -40,8 +40,7 @@ export default function StartProjectPage() {
       <Section tone="dark" id="formulaire" className="scroll-mt-20">
         <div className="grid items-start gap-6 lg:grid-cols-[1fr_1.15fr]">
           <Reveal className="flex h-full flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm sm:p-8">
-            <h2 className="text-2xl font-bold text-white sm:text-[1.7rem]">
-              Pourquoi <AccentText tone="dark">nous choisir ?</AccentText>
+            <h2 className="text-2xl font-bold text-white sm:text-[1.7rem]">{t('Pourquoi')}{' '}<AccentText tone="dark">{t('nous choisir ?')}</AccentText>
             </h2>
             <ul className="mt-8 grid gap-7 sm:grid-cols-2">
               {startProjectReasons.map((r) => (
@@ -51,8 +50,8 @@ export default function StartProjectPage() {
                       <r.icon className="size-5" strokeWidth={1.8} />
                     </span>
                   )}
-                  <h3 className="mt-4 font-display text-[1.02rem] font-semibold text-white">{r.title}</h3>
-                  <p className="mt-1.5 text-[0.85rem] leading-relaxed text-slate-300">{r.description}</p>
+                  <h3 className="mt-4 font-display text-[1.02rem] font-semibold text-white">{t(r.title)}</h3>
+                  <p className="mt-1.5 text-[0.85rem] leading-relaxed text-slate-300">{t(r.description)}</p>
                 </li>
               ))}
             </ul>
@@ -64,9 +63,8 @@ export default function StartProjectPage() {
                 <Phone className="size-5" />
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block font-display font-semibold">Vous préférez en parler de vive voix ?</span>
-                <span className="block text-[0.82rem] text-white/85">
-                  Appelez-nous au {site.contact.phone} · {site.contact.hours}
+                <span className="block font-display font-semibold">{t('Vous préférez en parler de vive voix ?')}</span>
+                <span className="block text-[0.82rem] text-white/85">{t('Appelez-nous au')}{' '}{t(site.contact.phone)} · {t(site.contact.hours)}
                 </span>
               </span>
               <span aria-hidden className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-white/15 transition-transform group-hover:translate-x-1">
@@ -81,8 +79,8 @@ export default function StartProjectPage() {
                 <ClipboardList className="size-5" />
               </span>
               <div>
-                <h2 className="font-display text-xl font-bold text-white">Formulaire de projet</h2>
-                <p className="mt-1 text-[0.85rem] text-slate-300">Quelques informations suffisent : nous revenons vers vous sous 24 h ouvrées.</p>
+                <h2 className="font-display text-xl font-bold text-white">{t('Formulaire de projet')}</h2>
+                <p className="mt-1 text-[0.85rem] text-slate-300">{t('Quelques informations suffisent : nous revenons vers vous sous 24 h ouvrées.')}</p>
               </div>
             </div>
             <ContactForm tone="dark" defaultProjectType={isProjectType(type) ? type : undefined} />
@@ -93,13 +91,12 @@ export default function StartProjectPage() {
       {/* What happens next */}
       <Section tone="light">
         <SectionTitle
-          eyebrow="Et ensuite ?"
+          eyebrow={t('Et ensuite ?')}
           title={
-            <>
-              De votre message au <AccentText>lancement</AccentText>
+            <>{t('De votre message au')}{' '}<AccentText>{t('lancement')}</AccentText>
             </>
           }
-          description="Un processus simple et transparent, sans engagement jusqu’à la validation du devis."
+          description={t('Un processus simple et transparent, sans engagement jusqu’à la validation du devis.')}
         />
         <RevealGroup className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {nextSteps.map((step, i) => (
@@ -111,8 +108,8 @@ export default function StartProjectPage() {
                   </span>
                   <span className="font-display text-sm font-bold text-brand/40 tabular-nums">0{i + 1}</span>
                 </div>
-                <h3 className="mt-5 font-display text-[1.02rem] font-semibold text-navy">{step.title}</h3>
-                <p className="mt-2 text-[0.85rem] leading-relaxed text-slate">{step.description}</p>
+                <h3 className="mt-5 font-display text-[1.02rem] font-semibold text-navy">{t(step.title)}</h3>
+                <p className="mt-2 text-[0.85rem] leading-relaxed text-slate">{t(step.description)}</p>
               </div>
             </RevealItem>
           ))}
@@ -123,13 +120,11 @@ export default function StartProjectPage() {
       <Section tone="white">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <SectionTitle
-            eyebrow="Questions fréquentes"
-            title="Tout ce qu’il faut savoir avant de démarrer"
-            description="Une autre question ? Notre équipe vous répond directement."
+            eyebrow={t('Questions fréquentes')}
+            title={t('Tout ce qu’il faut savoir avant de démarrer')}
+            description={t('Une autre question ? Notre équipe vous répond directement.')}
           >
-            <ButtonLink to="/contact" variant="secondary">
-              Nous contacter
-            </ButtonLink>
+            <ButtonLink to="/contact" variant="secondary">{t('Nous contacter')}</ButtonLink>
           </SectionTitle>
           <Reveal>
             <FaqList items={faqs} />

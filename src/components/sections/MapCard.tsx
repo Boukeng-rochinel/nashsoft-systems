@@ -3,6 +3,7 @@ import { Building2, MapPin, Navigation } from 'lucide-react'
 import { site } from '@/data/site'
 import { hasConsent, onConsentChange } from '@/lib/consent'
 import { cn } from '@/lib/cn'
+import { t } from '@/i18n'
 
 const query = encodeURIComponent(site.contact.city)
 const EMBED_URL = `https://maps.google.com/maps?q=${query}&z=12&output=embed`
@@ -25,12 +26,10 @@ function MapPlaceholder({ onLoad }: { onLoad: () => void }) {
           <path d="M320 -10 C 310 80 330 160 300 270" strokeWidth="4" />
         </g>
         <g className="fill-navy/60 on-dark:fill-slate-400" fontFamily="Inter, sans-serif">
-          <text x="205" y="44" fontSize="11">Bonabéri</text>
-          <text x="330" y="160" fontSize="11">Bessengue</text>
-          <text x="282" y="236" fontSize="11">Bonapriso</text>
-          <text x="196" y="196" fontSize="20" fontWeight="700" className="fill-navy on-dark:fill-white">
-            Douala
-          </text>
+          <text x="205" y="44" fontSize="11">{t('Bonabéri')}</text>
+          <text x="330" y="160" fontSize="11">{t('Bessengue')}</text>
+          <text x="282" y="236" fontSize="11">{t('Bonapriso')}</text>
+          <text x="196" y="196" fontSize="20" fontWeight="700" className="fill-navy on-dark:fill-white">{t('Douala')}</text>
         </g>
       </svg>
 
@@ -40,9 +39,7 @@ function MapPlaceholder({ onLoad }: { onLoad: () => void }) {
           <span aria-hidden className="absolute -bottom-1 left-1/2 h-2 w-5 -translate-x-1/2 rounded-full bg-navy/20 blur-[2px]" />
           <MapPin aria-hidden className="relative size-9 fill-brand text-white drop-shadow-md" strokeWidth={1.6} />
         </span>
-        <span className="mb-3 rounded-lg bg-white px-3 py-1.5 text-[0.72rem] leading-tight font-semibold text-navy shadow-card">
-          Nashsoft Systems
-          <span className="block font-normal text-slate">Siège social</span>
+        <span className="mb-3 rounded-lg bg-white px-3 py-1.5 text-[0.72rem] leading-tight font-semibold text-navy shadow-card">{t('Nashsoft Systems')}<span className="block font-normal text-slate">{t('Siège social')}</span>
         </span>
       </div>
 
@@ -51,9 +48,7 @@ function MapPlaceholder({ onLoad }: { onLoad: () => void }) {
         onClick={onLoad}
         className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3.5 py-1.5 text-[0.72rem] font-semibold text-brand shadow-card transition-colors hover:bg-brand hover:text-white"
       >
-        <Navigation aria-hidden className="size-3.5" />
-        Afficher la carte interactive
-      </button>
+        <Navigation aria-hidden className="size-3.5" />{t('Afficher la carte interactive')}</button>
     </div>
   )
 }
@@ -77,7 +72,7 @@ export function MapCard({ className }: { className?: string }) {
       <div className="relative aspect-[4/3] overflow-hidden rounded-xl sm:aspect-auto sm:min-h-64">
         {showMap ? (
           <iframe
-            title={`Carte : ${site.name}, ${site.contact.city}`}
+            title={t('Carte : {0}, {1}', [site.name, site.contact.city])}
             src={EMBED_URL}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -92,21 +87,17 @@ export function MapCard({ className }: { className?: string }) {
         <span aria-hidden className="inline-flex size-9 items-center justify-center rounded-lg bg-brand-50 text-brand on-dark:bg-white/[0.06] on-dark:text-brand-300">
           <Building2 className="size-[18px]" strokeWidth={1.8} />
         </span>
-        <h2 className="mt-4 font-display text-[1.05rem] font-semibold text-navy on-dark:text-white">Notre siège social</h2>
-        <p className="mt-1 text-[0.85rem] text-slate on-dark:text-slate-400">{site.contact.city}</p>
-        <p className="mt-4 text-[0.88rem] leading-relaxed text-slate on-dark:text-slate-300">
-          Nous vous accueillons dans nos locaux, sur rendez-vous, pour discuter de vos projets et explorer ensemble les meilleures solutions.
-        </p>
+        <h2 className="mt-4 font-display text-[1.05rem] font-semibold text-navy on-dark:text-white">{t('Notre siège social')}</h2>
+        <p className="mt-1 text-[0.85rem] text-slate on-dark:text-slate-400">{t(site.contact.city)}</p>
+        <p className="mt-4 text-[0.88rem] leading-relaxed text-slate on-dark:text-slate-300">{t('Nous vous accueillons dans nos locaux, sur rendez-vous, pour discuter de vos projets et explorer ensemble les meilleures solutions.')}</p>
         <a
           href={MAPS_URL}
           target="_blank"
           rel="noreferrer"
           className="group mt-6 inline-flex w-fit items-center gap-2 rounded-lg border border-line-strong px-4 py-2.5 text-[0.82rem] font-semibold text-brand transition-colors hover:border-brand hover:bg-brand-50 on-dark:border-white/15 on-dark:text-brand-300 on-dark:hover:bg-white/5"
         >
-          <MapPin aria-hidden className="size-4" />
-          Voir sur Google Maps
-          <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
-          <span className="sr-only">(nouvel onglet)</span>
+          <MapPin aria-hidden className="size-4" />{t('Voir sur Google Maps')}<span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+          <span className="sr-only">{t('(nouvel onglet)')}</span>
         </a>
       </div>
     </div>

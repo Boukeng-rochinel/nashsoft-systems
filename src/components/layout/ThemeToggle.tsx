@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from '@/hooks/useTheme'
 import { cn } from '@/lib/cn'
+import { t } from '@/i18n'
 
 export function ThemeToggle({ className }: { className?: string }) {
   const { theme, toggle } = useTheme()
@@ -10,9 +11,9 @@ export function ThemeToggle({ className }: { className?: string }) {
     <button
       type="button"
       onClick={toggle}
-      aria-label={dark ? 'Activer le thème clair' : 'Activer le thème sombre'}
+      aria-label={t(dark ? 'Activer le thème clair' : 'Activer le thème sombre')}
       aria-pressed={dark}
-      title={dark ? 'Thème clair' : 'Thème sombre'}
+      title={t(dark ? 'Thème clair' : 'Thème sombre')}
       className={cn(
         'relative inline-flex size-10 items-center justify-center overflow-hidden rounded-full transition-colors',
         dark ? 'text-slate-300 hover:bg-white/10 hover:text-white' : 'text-navy/60 hover:bg-light hover:text-navy',

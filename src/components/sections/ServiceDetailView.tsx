@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from '@/i18n/router'
 import { Check, CodeXml, Headphones, LockKeyhole, ShieldCheck, type LucideIcon } from 'lucide-react'
 import type { Project, ProjectCategory, Service } from '@/types'
 import { services, serviceHref } from '@/data/services'
@@ -19,18 +19,19 @@ import { FeatureGrid } from './FeatureGrid'
 import { ProjectCard } from './ProjectCard'
 import { CTABand } from './CTABand'
 import { WhyUs } from './WhyUs'
+import { t as tr } from '@/i18n'
 
 const highlightIcons: LucideIcon[] = [CodeXml, ShieldCheck, LockKeyhole, Headphones]
 
 /** Highlights the last two words of a sentence (design: "Des logiciels sur mesure pour vos ambitions."). */
 function splitTitle(text: string): ReactNode {
   const words = text.split(' ')
-  if (words.length < 4) return <AccentText>{text}</AccentText>
+  if (words.length < 4) return <AccentText>{tr(text)}</AccentText>
   const head = words.slice(0, -2).join(' ')
   const tail = words.slice(-2).join(' ')
   return (
     <>
-      {head} <AccentText>{tail}</AccentText>
+      {tr(head)} <AccentText>{tr(tail)}</AccentText>
     </>
   )
 }
@@ -71,16 +72,14 @@ export function ServiceDetailView({ service, heroTitle, heroImage, children, sho
   return (
     <>
       <PageHero
-        eyebrow={service.title}
+        eyebrow={tr(service.title)}
         eyebrowIcon={service.icon}
-        title={heroTitle ?? splitTitle(service.tagline)}
-        description={service.longDescription}
+        title={heroTitle ?? splitTitle(tr(service.tagline))}
+        description={tr(service.longDescription)}
         actions={
           <>
-            <ButtonLink to={`${START_PROJECT_HREF}?service=${service.slug}`} size="lg" arrow={false} className="w-full sm:w-auto">
-              Démarrer un projet
-            </ButtonLink>
-            <PlayLink to="#processus">Voir notre processus</PlayLink>
+            <ButtonLink to={`${START_PROJECT_HREF}?service=${service.slug}`} size="lg" arrow={false} className="w-full sm:w-auto">{tr('Démarrer un projet')}</ButtonLink>
+            <PlayLink to="#processus">{tr('Voir notre processus')}</PlayLink>
           </>
         }
         highlights={service.highlights.map((h, i) => ({ title: h, description: '', icon: highlightIcons[i % highlightIcons.length] }))}
@@ -93,17 +92,14 @@ export function ServiceDetailView({ service, heroTitle, heroImage, children, sho
       <Section tone="light" id="processus" className="scroll-mt-20">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <SectionTitle
-            eyebrow="Notre processus"
+            eyebrow={tr('Notre processus')}
             title={
-              <>
-                De l’idée à la production en <AccentText>6 étapes</AccentText>
+              <>{tr('De l’idée à la production en')}{' '}<AccentText>{tr('6 étapes')}</AccentText>
               </>
             }
-            description="Nous adoptons une approche méthodique et agile pour garantir la réussite de chaque projet, de la conception à la maintenance."
+            description={tr('Nous adoptons une approche méthodique et agile pour garantir la réussite de chaque projet, de la conception à la maintenance.')}
           />
-          <ButtonLink to={START_PROJECT_HREF} className="self-start lg:self-auto">
-            Parler de votre projet
-          </ButtonLink>
+          <ButtonLink to={START_PROJECT_HREF} className="self-start lg:self-auto">{tr('Parler de votre projet')}</ButtonLink>
         </div>
         <ProcessSteps variant="cards" className="mt-14" />
       </Section>
@@ -113,15 +109,14 @@ export function ServiceDetailView({ service, heroTitle, heroImage, children, sho
         <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.6fr]">
           <SectionTitle
             tone="dark"
-            eyebrow="Nos technologies"
+            eyebrow={tr('Nos technologies')}
             title={
-              <>
-                Un stack moderne pour des solutions <AccentText>performantes</AccentText>
+              <>{tr('Un stack moderne pour des solutions')}{' '}<AccentText>{tr('performantes')}</AccentText>
               </>
             }
-            description="Nous utilisons les technologies les plus fiables et les plus modernes pour construire des applications rapides, sécurisées et évolutives."
+            description={tr('Nous utilisons les technologies les plus fiables et les plus modernes pour construire des applications rapides, sécurisées et évolutives.')}
           >
-            <ButtonLink to="/services">Tous nos services</ButtonLink>
+            <ButtonLink to="/services">{tr('Tous nos services')}</ButtonLink>
           </SectionTitle>
           <TechnologyCloud items={techs} tone="dark" cols="grid-cols-2 sm:grid-cols-3" />
         </div>
@@ -132,26 +127,24 @@ export function ServiceDetailView({ service, heroTitle, heroImage, children, sho
       <Section tone="white">
         <div className="grid gap-10 lg:grid-cols-[1.6fr_1fr] lg:gap-14">
           <div>
-            <SectionTitle eyebrow="Ce que nous faisons" title={`${service.title} : nos domaines d’intervention`} className="max-w-2xl" />
+            <SectionTitle eyebrow={tr('Ce que nous faisons')} title={tr('{0} : nos domaines d’intervention', [service.title])} className="max-w-2xl" />
             <FeatureGrid items={service.features} columns={2} className="mt-10" />
           </div>
           <Reveal className="lg:pt-24">
             <div className="rounded-2xl border border-brand-100 bg-light p-6 sm:p-8">
-              <h3 className="font-display text-lg font-semibold text-navy">Livrables</h3>
-              <p className="mt-1 text-sm text-slate">Ce que vous recevez à chaque projet.</p>
+              <h3 className="font-display text-lg font-semibold text-navy">{tr('Livrables')}</h3>
+              <p className="mt-1 text-sm text-slate">{tr('Ce que vous recevez à chaque projet.')}</p>
               <ul className="mt-6 space-y-3.5">
                 {service.deliverables.map((d) => (
                   <li key={d} className="flex items-start gap-3 text-sm text-navy">
                     <span aria-hidden className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-brand text-white">
                       <Check className="size-3" strokeWidth={3} />
                     </span>
-                    {d}
+                    {tr(d)}
                   </li>
                 ))}
               </ul>
-              <ButtonLink to={`${START_PROJECT_HREF}?service=${service.slug}`} className="mt-8 w-full">
-                Demander un devis
-              </ButtonLink>
+              <ButtonLink to={`${START_PROJECT_HREF}?service=${service.slug}`} className="mt-8 w-full">{tr('Demander un devis')}</ButtonLink>
             </div>
           </Reveal>
         </div>
@@ -163,10 +156,8 @@ export function ServiceDetailView({ service, heroTitle, heroImage, children, sho
       {related.length > 0 && (
         <Section tone="light">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <SectionTitle eyebrow="Exemples de réalisations" title="Des projets qui parlent d’eux-mêmes" />
-            <ButtonLink to="/projets" variant="link">
-              Voir tous les projets
-            </ButtonLink>
+            <SectionTitle eyebrow={tr('Exemples de réalisations')} title={tr('Des projets qui parlent d’eux-mêmes')} />
+            <ButtonLink to="/projets" variant="link">{tr('Voir tous les projets')}</ButtonLink>
           </div>
           <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((p) => (
@@ -186,7 +177,7 @@ export function ServiceDetailView({ service, heroTitle, heroImage, children, sho
       {/* Other services */}
       <Section tone="light" spacing="sm">
         <Reveal>
-          <h2 className="font-display text-sm font-semibold text-navy">Découvrez nos autres expertises</h2>
+          <h2 className="font-display text-sm font-semibold text-navy">{tr('Découvrez nos autres expertises')}</h2>
           <ul className="mt-4 flex flex-wrap gap-2">
             {others.map((s) => (
               <li key={s.slug}>
@@ -195,7 +186,7 @@ export function ServiceDetailView({ service, heroTitle, heroImage, children, sho
                   className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-2 text-sm text-navy transition-colors hover:border-brand/40 hover:text-brand"
                 >
                   <s.icon aria-hidden className="size-4 text-brand" />
-                  {s.title}
+                  {tr(s.title)}
                 </Link>
               </li>
             ))}
@@ -204,9 +195,9 @@ export function ServiceDetailView({ service, heroTitle, heroImage, children, sho
       </Section>
 
       <CTABand
-        eyebrow="Prêt à lancer votre projet ?"
-        title={`Transformons votre idée en solution ${service.shortTitle === 'Mobile' ? 'mobile' : 'digitale'}.`}
-        description="Parlons de votre projet et trouvons ensemble la meilleure approche."
+        eyebrow={tr('Prêt à lancer votre projet ?')}
+        title={tr('Transformons votre idée en solution {0}.', [service.shortTitle === 'Mobile' ? 'mobile' : 'digitale'])}
+        description={tr('Parlons de votre projet et trouvons ensemble la meilleure approche.')}
         cta={{ label: 'Démarrer un projet', href: `${START_PROJECT_HREF}?service=${service.slug}` }}
       />
     </>

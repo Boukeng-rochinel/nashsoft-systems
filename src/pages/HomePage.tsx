@@ -20,6 +20,7 @@ import { Laptop } from '@/components/visuals/Devices'
 import { BrandN } from '@/components/visuals/BrandN'
 import { themes } from '@/data/themes'
 import { industries } from '@/data/industries'
+import { t } from '@/i18n'
 
 /** The homepage design features six sectors; the Solutions page shows all of them. */
 const homeIndustries = industries.filter((i) => ['education', 'finance', 'sante', 'retail', 'logistique', 'gouvernement'].includes(i.slug))
@@ -32,7 +33,7 @@ export default function HomePage() {
       <HomeHero />
 
       {/* Key figures */}
-      <section aria-label="Nashsoft Systems en chiffres" className="bg-white pb-6 md:pb-10">
+      <section aria-label={t('Nashsoft Systems en chiffres')} className="bg-white pb-6 md:pb-10">
         <div className="mx-auto w-full max-w-[1240px] px-4 sm:px-6 lg:px-8">
           <Stats variant="panel" />
         </div>
@@ -42,16 +43,15 @@ export default function HomePage() {
       <Section tone="white" id="services">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.75fr] lg:gap-14">
           <SectionTitle
-            eyebrow="Nos services"
+            eyebrow={t('Nos services')}
             title={
-              <>
-                Des services complets pour vos <AccentText>projets digitaux</AccentText>
+              <>{t('Des services complets pour vos')}{' '}<AccentText>{t('projets digitaux')}</AccentText>
               </>
             }
-            description="Nous vous accompagnons à chaque étape de votre projet, de la conception à la mise en production, avec des solutions sur mesure et des technologies de pointe."
+            description={t('Nous vous accompagnons à chaque étape de votre projet, de la conception à la mise en production, avec des solutions sur mesure et des technologies de pointe.')}
             className="lg:sticky lg:top-28 lg:self-start"
           >
-            <ButtonLink to="/services">Découvrir tous nos services</ButtonLink>
+            <ButtonLink to="/services">{t('Découvrir tous nos services')}</ButtonLink>
           </SectionTitle>
           <RevealGroup className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {featuredServices.map((service) => (
@@ -67,15 +67,14 @@ export default function HomePage() {
       <Section tone="light" id="processus" className="scroll-mt-20">
         <div className="grid gap-10 lg:grid-cols-[1fr_2.1fr] lg:items-center lg:gap-12">
           <SectionTitle
-            eyebrow="Notre processus"
+            eyebrow={t('Notre processus')}
             title={
-              <>
-                Une approche structurée pour des résultats <AccentText>concrets</AccentText>
+              <>{t('Une approche structurée pour des résultats')}{' '}<AccentText>{t('concrets')}</AccentText>
               </>
             }
-            description="Nous suivons une méthodologie éprouvée pour transformer vos besoins en solutions logicielles fiables et performantes."
+            description={t('Nous suivons une méthodologie éprouvée pour transformer vos besoins en solutions logicielles fiables et performantes.')}
           >
-            <ButtonLink to="/services#processus">Découvrir notre processus</ButtonLink>
+            <ButtonLink to="/services#processus">{t('Découvrir notre processus')}</ButtonLink>
           </SectionTitle>
           <ProcessSteps variant="inline" />
         </div>
@@ -85,16 +84,15 @@ export default function HomePage() {
       <Section tone="white" id="solutions">
         <div className="grid gap-10 lg:grid-cols-[1fr_2.1fr] lg:gap-12">
           <SectionTitle
-            eyebrow="Nos solutions"
+            eyebrow={t('Nos solutions')}
             title={
-              <>
-                Des solutions <AccentText>adaptées</AccentText> à chaque secteur <AccentText>d’activité</AccentText>
+              <>{t('Des solutions')}{' '}<AccentText>{t('adaptées')}</AccentText>{' '}{t('à chaque secteur')}{' '}<AccentText>{t('d’activité')}</AccentText>
               </>
             }
-            description="Nous développons des solutions sur mesure pour répondre aux besoins spécifiques de chaque industrie et accompagner votre transformation digitale."
+            description={t('Nous développons des solutions sur mesure pour répondre aux besoins spécifiques de chaque industrie et accompagner votre transformation digitale.')}
             className="lg:pt-2"
           >
-            <ButtonLink to="/solutions">Voir toutes nos solutions</ButtonLink>
+            <ButtonLink to="/solutions">{t('Voir toutes nos solutions')}</ButtonLink>
           </SectionTitle>
           <IndustrySelector industries={homeIndustries} />
         </div>
@@ -104,11 +102,11 @@ export default function HomePage() {
       <Section tone="light" id="projets">
         <div className="grid gap-10 lg:grid-cols-[1fr_2.1fr] lg:gap-12">
           <SectionTitle
-            eyebrow="Nos projets"
-            title="Des réalisations qui font la différence"
-            description="Découvrez quelques-uns de nos projets qui illustrent notre expertise et notre engagement à créer des solutions innovantes."
+            eyebrow={t('Nos projets')}
+            title={t('Des réalisations qui font la différence')}
+            description={t('Découvrez quelques-uns de nos projets qui illustrent notre expertise et notre engagement à créer des solutions innovantes.')}
           >
-            <ButtonLink to="/projets">Voir tous les projets</ButtonLink>
+            <ButtonLink to="/projets">{t('Voir tous les projets')}</ButtonLink>
           </SectionTitle>
           <RevealGroup className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {featuredProjects.slice(0, 3).map((project) => (
@@ -126,13 +124,12 @@ export default function HomePage() {
           <div>
             <SectionTitle
               tone="dark"
-              eyebrow="Notre stack tech"
+              eyebrow={t('Notre stack tech')}
               title={
-                <>
-                  Des technologies modernes pour des solutions <AccentText>durables</AccentText>
+                <>{t('Des technologies modernes pour des solutions')}{' '}<AccentText>{t('durables')}</AccentText>
                 </>
               }
-              description="Nous utilisons les meilleures technologies du marché pour garantir des solutions performantes, sécurisées et évolutives."
+              description={t('Nous utilisons les meilleures technologies du marché pour garantir des solutions performantes, sécurisées et évolutives.')}
               className="max-w-2xl"
             />
             <TechnologyCloud items={coreStack} tone="dark" variant="pills" className="mt-9" />
@@ -140,7 +137,7 @@ export default function HomePage() {
           <div className="relative mx-auto hidden w-full max-w-md lg:block">
             <BrandN className="absolute -top-14 right-6 z-10 w-24" />
             <div className="relative [transform:perspective(1200px)_rotateY(-16deg)_rotateX(8deg)]">
-              <Laptop variant="analytics" theme={themes.nashsoftDark} title="Nashsoft" />
+              <Laptop variant="analytics" theme={themes.nashsoftDark} title={t('Nashsoft')} />
             </div>
           </div>
         </div>

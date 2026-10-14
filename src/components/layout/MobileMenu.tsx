@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { NavLink } from 'react-router-dom'
+import { NavLink } from '@/i18n/router'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronDown, Mail, MapPin, Phone, X } from 'lucide-react'
 import { primaryNav, START_PROJECT_HREF } from '@/data/navigation'
@@ -12,6 +12,7 @@ import { Logo } from '@/components/ui/Logo'
 import { ButtonLink } from '@/components/ui/Button'
 import { useLanguage } from '@/hooks/useLanguage'
 import { LanguageSwitcher } from './LanguageSwitcher'
+import { t as tr } from '@/i18n'
 
 /**
  * Rendered into <body>: the sticky header uses backdrop-filter, which makes it the
@@ -42,7 +43,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
             id="mobile-menu"
             role="dialog"
             aria-modal="true"
-            aria-label="Menu de navigation"
+            aria-label={tr('Menu de navigation')}
             tabIndex={-1}
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
@@ -56,14 +57,14 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
               <button
                 type="button"
                 onClick={onClose}
-                aria-label="Fermer le menu"
+                aria-label={tr('Fermer le menu')}
                 className="inline-flex size-11 items-center justify-center rounded-xl border border-line text-navy hover:bg-light"
               >
                 <X aria-hidden className="size-5" />
               </button>
             </div>
 
-            <nav aria-label="Navigation mobile" className="min-h-0 flex-1 overscroll-contain overflow-y-auto px-4 py-4 sm:px-6">
+            <nav aria-label={tr('Navigation mobile')} className="min-h-0 flex-1 overscroll-contain overflow-y-auto px-4 py-4 sm:px-6">
               <motion.ul
                 initial="hidden"
                 animate="show"
@@ -94,9 +95,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
                                 className="overflow-hidden"
                               >
                                 <li>
-                                  <NavLink to={item.href} end className="block rounded-lg py-2.5 pr-3 pl-6 text-sm font-semibold text-brand">
-                                    Vue d’ensemble
-                                  </NavLink>
+                                  <NavLink to={item.href} end className="block rounded-lg py-2.5 pr-3 pl-6 text-sm font-semibold text-brand">{tr('Vue d’ensemble')}</NavLink>
                                 </li>
                                 {item.children
                                   .filter((c) => c.href !== item.href)
@@ -112,7 +111,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
                                         }
                                       >
                                         <child.icon aria-hidden className="size-4 shrink-0" />
-                                        {child.label}
+                                        {tr(child.label)}
                                       </NavLink>
                                     </li>
                                   ))}
@@ -149,18 +148,18 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
                 <li className="flex items-center gap-2">
                   <Mail aria-hidden className="size-4 text-brand" />
                   <a href={`mailto:${site.contact.email}`} className="hover:text-brand">
-                    {site.contact.email}
+                    {tr(site.contact.email)}
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
                   <Phone aria-hidden className="size-4 text-brand" />
                   <a href={site.contact.phoneHref} className="hover:text-brand">
-                    {site.contact.phone}
+                    {tr(site.contact.phone)}
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
                   <MapPin aria-hidden className="size-4 text-brand" />
-                  {site.contact.city}
+                  {tr(site.contact.city)}
                 </li>
               </ul>
             </div>

@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/cn'
 import { fadeUp, revealViewport, stagger } from '@/lib/motion'
+import { t } from '@/i18n'
 
 interface SectionTitleProps {
   eyebrow?: string
@@ -27,7 +28,7 @@ export function SectionTitle({ eyebrow, title, description, tone = 'light', alig
     >
       {eyebrow && (
         <motion.p variants={fadeUp} className={cn('eyebrow mb-3 flex items-center gap-2', align === 'center' && 'justify-center', dark ? 'text-brand-300' : 'text-brand')}>
-          {eyebrow}
+          {t(eyebrow)}
         </motion.p>
       )}
       <motion.div variants={fadeUp}>

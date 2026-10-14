@@ -10,6 +10,7 @@ import { useLockBodyScroll } from '@/hooks/useLockBodyScroll'
 import { cn } from '@/lib/cn'
 import { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 import { ButtonLink } from '@/components/ui/Button'
+import { t as tr } from '@/i18n'
 
 interface ExpertiseGridProps {
   items: Expertise[]
@@ -37,7 +38,7 @@ export function ExpertiseGrid({ items, service, className }: ExpertiseGridProps)
               <div className="relative aspect-[3/2] w-full overflow-hidden bg-mist">
                 <img
                   src={item.image}
-                  alt={item.imageAlt}
+                  alt={tr(item.imageAlt)}
                   width={1200}
                   height={800}
                   loading="lazy"
@@ -50,10 +51,9 @@ export function ExpertiseGrid({ items, service, className }: ExpertiseGridProps)
                 </span>
               </div>
               <div className="flex flex-1 flex-col p-6">
-                <h3 className="font-display text-lg font-semibold text-navy">{item.title}</h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-slate">{item.description}</p>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand">
-                  En savoir plus <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
+                <h3 className="font-display text-lg font-semibold text-navy">{tr(item.title)}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-slate">{tr(item.description)}</p>
+                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand">{tr('En savoir plus')}{' '}<ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
                 </span>
               </div>
             </button>
@@ -95,20 +95,20 @@ function ExpertiseDialog({ item, service, onClose }: { item: Expertise | null; s
             className="relative flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl outline-none sm:rounded-2xl"
           >
             <div className="relative aspect-[21/9] shrink-0 overflow-hidden bg-mist">
-              <img src={item.image} alt={item.imageAlt} width={1200} height={800} className="size-full object-cover" />
+              <img src={item.image} alt={tr(item.imageAlt)} width={1200} height={800} className="size-full object-cover" />
               <div aria-hidden className="absolute inset-0 bg-navy-950/45" />
               <div className="absolute right-6 bottom-5 left-6 flex items-center gap-3">
                 <span aria-hidden className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-white text-brand">
                   <item.icon className="size-5" strokeWidth={1.8} />
                 </span>
                 <h2 id="expertise-title" className="font-display text-xl font-bold text-white sm:text-2xl">
-                  {item.title}
+                  {tr(item.title)}
                 </h2>
               </div>
               <button
                 type="button"
                 onClick={onClose}
-                aria-label="Fermer"
+                aria-label={tr('Fermer')}
                 className="absolute top-4 right-4 inline-flex size-10 items-center justify-center rounded-full bg-navy-950/50 text-white backdrop-blur transition-colors hover:bg-navy-950/75"
               >
                 <X aria-hidden className="size-5" />
@@ -116,24 +116,24 @@ function ExpertiseDialog({ item, service, onClose }: { item: Expertise | null; s
             </div>
 
             <div className="overflow-y-auto p-6 sm:p-8">
-              <p className="leading-relaxed text-slate">{item.details}</p>
+              <p className="leading-relaxed text-slate">{tr(item.details)}</p>
 
               <div className="mt-8 grid gap-8 sm:grid-cols-2">
                 <div>
-                  <h3 className="eyebrow text-brand">Cas d’usage</h3>
+                  <h3 className="eyebrow text-brand">{tr('Cas d’usage')}</h3>
                   <ul className="mt-4 space-y-3">
                     {item.useCases.map((u) => (
                       <li key={u} className="flex items-start gap-3 text-sm text-navy">
                         <span aria-hidden className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand">
                           <Check className="size-3" strokeWidth={3} />
                         </span>
-                        {u}
+                        {tr(u)}
                       </li>
                     ))}
                   </ul>
                 </div>
                 <div>
-                  <h3 className="eyebrow text-brand">Technologies</h3>
+                  <h3 className="eyebrow text-brand">{tr('Technologies')}</h3>
                   <ul className="mt-4 flex flex-wrap gap-2">
                     {item.technologies.map(getTechnology).map((t) => (
                       <li key={t.name} className="inline-flex items-center gap-2 rounded-full border border-line bg-light py-1 pr-3 pl-1 text-sm text-navy">
@@ -142,9 +142,9 @@ function ExpertiseDialog({ item, service, onClose }: { item: Expertise | null; s
                           className="inline-flex size-6 items-center justify-center rounded-full text-[0.6rem] font-bold"
                           style={{ backgroundColor: t.color, color: t.foreground ?? '#fff' }}
                         >
-                          {t.mono}
+                          {tr(t.mono)}
                         </span>
-                        {t.name}
+                        {tr(t.name)}
                       </li>
                     ))}
                   </ul>
@@ -152,10 +152,8 @@ function ExpertiseDialog({ item, service, onClose }: { item: Expertise | null; s
               </div>
 
               <div className="mt-8 flex flex-col gap-3 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-sm text-slate">Un projet en {item.title.toLowerCase()} ?</p>
-                <ButtonLink to={href} onClick={onClose}>
-                  Démarrer un projet
-                </ButtonLink>
+                <p className="text-sm text-slate">{tr('Un projet en')}{' '}{tr(item.title.toLowerCase())} ?</p>
+                <ButtonLink to={href} onClick={onClose}>{tr('Démarrer un projet')}</ButtonLink>
               </div>
             </div>
           </motion.div>

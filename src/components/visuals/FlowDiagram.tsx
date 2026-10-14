@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { revealViewport } from '@/lib/motion'
+import { t } from '@/i18n'
 
 export interface FlowNode {
   label: string
@@ -23,7 +24,7 @@ export function FlowDiagram({ nodes, tone = 'dark', className }: { nodes: FlowNo
       viewport={revealViewport}
       variants={{ hidden: {}, show: { transition: { staggerChildren: 0.15 } } }}
       className={cn('flex flex-col items-stretch gap-0 lg:flex-row', dark ? 'lg:items-start' : 'lg:items-center', className)}
-      aria-label="Schéma du processus"
+      aria-label={t('Schéma du processus')}
     >
       {nodes.map((node, i) => (
         <Fragment key={node.label}>
@@ -46,8 +47,8 @@ export function FlowDiagram({ nodes, tone = 'dark', className }: { nodes: FlowNo
             </span>
             <div>
               {dark && <p className="eyebrow mb-1 text-[0.6rem] text-brand-300/70">0{i + 1}</p>}
-              <p className={cn('font-display font-semibold', dark ? 'text-white' : 'text-navy')}>{node.label}</p>
-              <p className={cn('mt-1 text-xs leading-relaxed', dark ? 'text-slate-400' : 'text-slate')}>{node.caption}</p>
+              <p className={cn('font-display font-semibold', dark ? 'text-white' : 'text-navy')}>{t(node.label)}</p>
+              <p className={cn('mt-1 text-xs leading-relaxed', dark ? 'text-slate-400' : 'text-slate')}>{t(node.caption)}</p>
             </div>
           </motion.li>
           {i < nodes.length - 1 && (

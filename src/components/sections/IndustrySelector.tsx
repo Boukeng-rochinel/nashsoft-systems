@@ -7,6 +7,7 @@ import { START_PROJECT_HREF } from '@/data/navigation'
 import { cn } from '@/lib/cn'
 import { ButtonLink } from '@/components/ui/Button'
 import { SmartImage } from '@/components/ui/SmartImage'
+import { t } from '@/i18n'
 
 interface IndustrySelectorProps {
   industries?: Industry[]
@@ -51,7 +52,7 @@ export function IndustrySelector({ industries = allIndustries, tone = 'light', c
 
   return (
     <div className={className}>
-      <div role="tablist" aria-label="Secteurs d’activité" className="-mx-4 flex snap-x gap-2 overflow-x-auto px-4 pb-2 scrollbar-none sm:mx-0 sm:flex-wrap sm:px-0">
+      <div role="tablist" aria-label={t('Secteurs d’activité')} className="-mx-4 flex snap-x gap-2 overflow-x-auto px-4 pb-2 scrollbar-none sm:mx-0 sm:flex-wrap sm:px-0">
         {industries.map((industry, i) => {
           const selected = i === index
           return (
@@ -84,7 +85,7 @@ export function IndustrySelector({ industries = allIndustries, tone = 'light', c
                   transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                 />
               )}
-              <span className="relative">{industry.name}</span>
+              <span className="relative">{t(industry.name)}</span>
             </button>
           )
         })}
@@ -115,22 +116,20 @@ export function IndustrySelector({ industries = allIndustries, tone = 'light', c
                   <active.icon className="size-6" strokeWidth={1.8} />
                 </span>
                 <div>
-                  <h3 className="font-display text-xl font-bold text-brand">{active.name}</h3>
-                  <p className="mt-0.5 font-display text-sm font-semibold text-navy">{active.headline}</p>
+                  <h3 className="font-display text-xl font-bold text-brand">{t(active.name)}</h3>
+                  <p className="mt-0.5 font-display text-sm font-semibold text-navy">{t(active.headline)}</p>
                 </div>
               </div>
-              <p className="mt-4 text-sm leading-relaxed text-slate">{active.description}</p>
+              <p className="mt-4 text-sm leading-relaxed text-slate">{t(active.description)}</p>
               <ul className="mt-5 grid gap-2.5 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
                 {active.solutions.map((s) => (
                   <li key={s} className="flex items-start gap-2 text-sm text-navy">
                     <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-brand" strokeWidth={2.4} />
-                    {s}
+                    {t(s)}
                   </li>
                 ))}
               </ul>
-              <ButtonLink to={`${START_PROJECT_HREF}?secteur=${active.slug}`} size="sm" className="mt-7">
-                Découvrir la solution
-              </ButtonLink>
+              <ButtonLink to={`${START_PROJECT_HREF}?secteur=${active.slug}`} size="sm" className="mt-7">{t('Découvrir la solution')}</ButtonLink>
             </div>
             <div className="relative min-h-64 overflow-hidden md:min-h-0">
               <SmartImage src={active.image} alt="" width={1000} height={750} wrapperClassName="absolute inset-0" className="size-full object-cover" />
@@ -138,7 +137,7 @@ export function IndustrySelector({ industries = allIndustries, tone = 'light', c
                 <span aria-hidden className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand text-white">
                   <active.icon className="size-[18px]" strokeWidth={1.8} />
                 </span>
-                <p className="text-xs leading-snug font-medium text-navy">{active.solutions[0]}</p>
+                <p className="text-xs leading-snug font-medium text-navy">{t(active.solutions[0])}</p>
               </div>
             </div>
           </motion.div>

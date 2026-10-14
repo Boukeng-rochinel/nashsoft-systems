@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { Link, Navigate } from '@/i18n/router'
 import { ArrowLeft, ArrowRight, CalendarDays, Check, CircleAlert, Expand, Images, Lightbulb, Tag } from 'lucide-react'
 import type { Project } from '@/types'
 import { getProjectBySlug, projectHref, projects } from '@/data/projects'
@@ -20,13 +21,14 @@ import { Lightbox } from '@/components/sections/Lightbox'
 import { ArchitectureStack } from '@/components/visuals/ArchitectureStack'
 import { Phone } from '@/components/visuals/Devices'
 import { Screen } from '@/components/visuals/Screen'
+import { t as tr } from '@/i18n'
 
 function splitLast(title: string) {
   const words = title.split(' ')
-  if (words.length === 1) return <AccentText>{title}</AccentText>
+  if (words.length === 1) return <AccentText>{tr(title)}</AccentText>
   return (
     <>
-      {words.slice(0, -1).join(' ')} <AccentText>{words[words.length - 1]}</AccentText>
+      {tr(words.slice(0, -1).join(' '))} <AccentText>{tr(words[words.length - 1])}</AccentText>
     </>
   )
 }
@@ -39,24 +41,24 @@ function GalleryThumb({ project, index, onOpen, large = false }: { project: Proj
       type="button"
       onClick={() => onOpen(index)}
       className="group relative block w-full overflow-hidden rounded-xl border border-line bg-navy text-left shadow-card focus-visible:ring-2 focus-visible:ring-brand"
-      aria-label={`Agrandir : ${item.title}`}
+      aria-label={tr('Agrandir : {0}', [item.title])}
     >
       <div className={large ? 'aspect-[16/10]' : 'aspect-[4/3]'}>
         {item.device === 'phone' ? (
           <div className="flex size-full items-center justify-center" style={{ background: '#0a1a33' }}>
             <div className="w-[34%] transition-transform duration-500 group-hover:scale-105">
-              <Phone variant={item.variant} theme={project.theme} title={project.title} />
+              <Phone variant={item.variant} theme={project.theme} title={tr(project.title)} />
             </div>
           </div>
         ) : (
           <div className="@container size-full transition-transform duration-500 group-hover:scale-105">
-            <Screen variant={item.variant} theme={project.theme} title={project.title} />
+            <Screen variant={item.variant} theme={project.theme} title={tr(project.title)} />
           </div>
         )}
       </div>
       <span className="absolute inset-0 flex items-end bg-navy-950/45 p-3 opacity-90 transition-opacity group-hover:opacity-100">
         <span className="flex w-full items-center justify-between text-xs font-semibold text-white">
-          {item.title}
+          {tr(item.title)}
           <Expand aria-hidden className="size-4" />
         </span>
       </span>
@@ -75,17 +77,13 @@ function ProjectDetail({ project }: { project: Project }) {
     <>
       <PageHero
         breadcrumbs={[{ label: 'Accueil', href: '/' }, { label: 'Projets', href: '/projets' }, { label: project.title }]}
-        eyebrow={project.type}
+        eyebrow={tr(project.type)}
         title={splitLast(project.title)}
-        description={project.summary}
+        description={tr(project.summary)}
         actions={
           <>
-            <ButtonLink to={`${START_PROJECT_HREF}?reference=${project.slug}`} size="lg">
-              Démarrer un projet similaire
-            </ButtonLink>
-            <ButtonLink to="#galerie" variant="secondary" size="lg" icon={Images} arrow={false}>
-              Voir la galerie
-            </ButtonLink>
+            <ButtonLink to={`${START_PROJECT_HREF}?reference=${project.slug}`} size="lg">{tr('Démarrer un projet similaire')}</ButtonLink>
+            <ButtonLink to="#galerie" variant="secondary" size="lg" icon={Images} arrow={false}>{tr('Voir la galerie')}</ButtonLink>
           </>
         }
         highlights={[
@@ -100,8 +98,8 @@ function ProjectDetail({ project }: { project: Project }) {
       <Section tone="white">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_1fr] lg:gap-12">
           <Reveal>
-            <h2 className="font-display text-xl font-bold text-navy">Aperçu du projet</h2>
-            <p className="mt-4 text-sm leading-relaxed text-slate">{project.description}</p>
+            <h2 className="font-display text-xl font-bold text-navy">{tr('Aperçu du projet')}</h2>
+            <p className="mt-4 text-sm leading-relaxed text-slate">{tr(project.description)}</p>
             <ul className="mt-6 space-y-3.5">
               {project.features.map((f) => (
                 <li key={f.title} className="flex items-center gap-3 text-sm font-medium text-navy">
@@ -110,27 +108,27 @@ function ProjectDetail({ project }: { project: Project }) {
                       <f.icon className="size-4" strokeWidth={1.8} />
                     </span>
                   )}
-                  {f.title}
+                  {tr(f.title)}
                 </li>
               ))}
             </ul>
           </Reveal>
           <Reveal delay={0.08}>
-            <h2 className="font-display text-xl font-bold text-navy">Technologies utilisées</h2>
+            <h2 className="font-display text-xl font-bold text-navy">{tr('Technologies utilisées')}</h2>
             <ul className="mt-5 grid grid-cols-3 gap-4">
               {project.technologies.map((name) => {
                 const tech = getTechnology(name)
                 return (
                   <li key={name} className="flex flex-col items-center gap-2 text-center">
                     <TechMark tech={tech} size="lg" />
-                    <span className="text-[0.7rem] font-medium text-navy">{tech.name}</span>
+                    <span className="text-[0.7rem] font-medium text-navy">{tr(tech.name)}</span>
                   </li>
                 )
               })}
             </ul>
           </Reveal>
           <Reveal delay={0.16}>
-            <h2 className="font-display text-xl font-bold text-navy">Aperçu visuel</h2>
+            <h2 className="font-display text-xl font-bold text-navy">{tr('Aperçu visuel')}</h2>
             <div className="mt-5 grid grid-cols-2 gap-3">
               {project.gallery.slice(0, 4).map((g, i) => (
                 <GalleryThumb key={g.id} project={project} index={i} onOpen={setLightbox} />
@@ -140,8 +138,7 @@ function ProjectDetail({ project }: { project: Project }) {
               type="button"
               onClick={() => setLightbox(0)}
               className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2 text-xs font-semibold text-white transition-transform hover:-translate-y-0.5"
-            >
-              Voir plus d’images <ArrowRight aria-hidden className="size-3.5" />
+            >{tr('Voir plus d’images')}{' '}<ArrowRight aria-hidden className="size-3.5" />
             </button>
           </Reveal>
         </div>
@@ -155,9 +152,9 @@ function ProjectDetail({ project }: { project: Project }) {
               <span aria-hidden className="inline-flex size-12 items-center justify-center rounded-xl bg-amber-50 text-amber-600 ring-1 ring-amber-100">
                 <CircleAlert className="size-6" strokeWidth={1.8} />
               </span>
-              <p className="eyebrow mt-6 text-amber-600">Le problème</p>
-              <h2 className="mt-2 font-display text-2xl font-bold text-navy">Le défi à relever</h2>
-              <p className="mt-4 leading-relaxed text-slate">{project.problem}</p>
+              <p className="eyebrow mt-6 text-amber-600">{tr('Le problème')}</p>
+              <h2 className="mt-2 font-display text-2xl font-bold text-navy">{tr('Le défi à relever')}</h2>
+              <p className="mt-4 leading-relaxed text-slate">{tr(project.problem)}</p>
             </article>
           </Reveal>
           <Reveal delay={0.1} className="h-full">
@@ -165,9 +162,9 @@ function ProjectDetail({ project }: { project: Project }) {
               <span aria-hidden className="relative inline-flex size-12 items-center justify-center rounded-xl bg-brand text-white">
                 <Lightbulb className="size-6" strokeWidth={1.8} />
               </span>
-              <p className="eyebrow relative mt-6 text-brand-300">La solution</p>
-              <h2 className="relative mt-2 font-display text-2xl font-bold text-white">Notre réponse</h2>
-              <p className="relative mt-4 leading-relaxed">{project.solution}</p>
+              <p className="eyebrow relative mt-6 text-brand-300">{tr('La solution')}</p>
+              <h2 className="relative mt-2 font-display text-2xl font-bold text-white">{tr('Notre réponse')}</h2>
+              <p className="relative mt-4 leading-relaxed">{tr(project.solution)}</p>
             </article>
           </Reveal>
         </div>
@@ -176,10 +173,9 @@ function ProjectDetail({ project }: { project: Project }) {
       {/* Features */}
       <Section tone="white">
         <SectionTitle
-          eyebrow="Fonctionnalités"
+          eyebrow={tr('Fonctionnalités')}
           title={
-            <>
-              Ce que la solution <AccentText>permet</AccentText>
+            <>{tr('Ce que la solution')}{' '}<AccentText>{tr('permet')}</AccentText>
             </>
           }
           className="mb-12"
@@ -193,18 +189,17 @@ function ProjectDetail({ project }: { project: Project }) {
           <div>
             <SectionTitle
               tone="dark"
-              eyebrow="Architecture"
+              eyebrow={tr('Architecture')}
               title={
-                <>
-                  Une architecture <AccentText>claire et évolutive</AccentText>
+                <>{tr('Une architecture')}{' '}<AccentText>{tr('claire et évolutive')}</AccentText>
                 </>
               }
-              description="Chaque couche a une responsabilité précise, ce qui rend le produit simple à maintenir et à faire évoluer."
+              description={tr('Chaque couche a une responsabilité précise, ce qui rend le produit simple à maintenir et à faire évoluer.')}
             />
             <ul className="mt-8 flex flex-wrap gap-2">
               {project.technologies.map((t) => (
                 <li key={t} className="rounded-lg bg-white/[0.06] px-3 py-1.5 text-xs font-medium text-brand-300 ring-1 ring-white/10">
-                  {t}
+                  {tr(t)}
                 </li>
               ))}
             </ul>
@@ -215,12 +210,12 @@ function ProjectDetail({ project }: { project: Project }) {
 
       {/* Screenshots */}
       <Section tone="light" id="galerie" className="scroll-mt-20">
-        <SectionTitle eyebrow="Captures d’écran" title="Les interfaces en détail" description="Cliquez sur une interface pour l’agrandir." className="mb-10" />
+        <SectionTitle eyebrow={tr('Captures d’écran')} title={tr('Les interfaces en détail')} description={tr('Cliquez sur une interface pour l’agrandir.')} className="mb-10" />
         <RevealGroup className="grid gap-4 sm:grid-cols-2">
           {project.gallery.map((g, i) => (
             <RevealItem key={g.id}>
               <GalleryThumb project={project} index={i} onOpen={setLightbox} large />
-              <p className="mt-3 text-sm text-slate">{g.caption}</p>
+              <p className="mt-3 text-sm text-slate">{tr(g.caption)}</p>
             </RevealItem>
           ))}
         </RevealGroup>
@@ -229,10 +224,9 @@ function ProjectDetail({ project }: { project: Project }) {
       {/* Results */}
       <Section tone="white">
         <SectionTitle
-          eyebrow="Résultats"
+          eyebrow={tr('Résultats')}
           title={
-            <>
-              Ce que le projet a <AccentText>changé</AccentText>
+            <>{tr('Ce que le projet a')}{' '}<AccentText>{tr('changé')}</AccentText>
             </>
           }
           className="mb-12"
@@ -244,35 +238,35 @@ function ProjectDetail({ project }: { project: Project }) {
                 <span aria-hidden className="inline-flex size-9 items-center justify-center rounded-full bg-brand text-white">
                   <Check className="size-4" strokeWidth={3} />
                 </span>
-                <h3 className="mt-5 font-display text-lg font-semibold text-navy">{o.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate">{o.description}</p>
+                <h3 className="mt-5 font-display text-lg font-semibold text-navy">{tr(o.title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate">{tr(o.description)}</p>
               </div>
             </RevealItem>
           ))}
         </RevealGroup>
 
         {/* Prev / next */}
-        <nav aria-label="Autres projets" className="mt-16 grid gap-4 border-t border-line pt-8 sm:grid-cols-2">
+        <nav aria-label={tr('Autres projets')} className="mt-16 grid gap-4 border-t border-line pt-8 sm:grid-cols-2">
           <Link to={projectHref(prev.slug)} className="group flex items-center gap-4 rounded-xl p-3 transition-colors hover:bg-light">
             <ArrowLeft aria-hidden className="size-5 text-brand transition-transform group-hover:-translate-x-1" />
             <span>
-              <span className="block text-xs text-slate">Projet précédent</span>
-              <span className="font-display font-semibold text-navy">{prev.title}</span>
+              <span className="block text-xs text-slate">{tr('Projet précédent')}</span>
+              <span className="font-display font-semibold text-navy">{tr(prev.title)}</span>
             </span>
           </Link>
           <Link to={projectHref(next.slug)} className="group flex items-center justify-end gap-4 rounded-xl p-3 text-right transition-colors hover:bg-light">
             <span>
-              <span className="block text-xs text-slate">Projet suivant</span>
-              <span className="font-display font-semibold text-navy">{next.title}</span>
+              <span className="block text-xs text-slate">{tr('Projet suivant')}</span>
+              <span className="font-display font-semibold text-navy">{tr(next.title)}</span>
             </span>
             <ArrowRight aria-hidden className="size-5 text-brand transition-transform group-hover:translate-x-1" />
           </Link>
         </nav>
       </Section>
 
-      <CTABand eyebrow="Vous avez un projet en tête ?" title="Discutons de votre idée." description="Discutons de votre idée et trouvons ensemble la meilleure solution." />
+      <CTABand eyebrow={tr('Vous avez un projet en tête ?')} title={tr('Discutons de votre idée.')} description={tr('Discutons de votre idée et trouvons ensemble la meilleure solution.')} />
 
-      <Lightbox items={project.gallery} theme={project.theme} title={project.title} index={lightbox} onClose={() => setLightbox(null)} onNavigate={setLightbox} />
+      <Lightbox items={project.gallery} theme={project.theme} title={tr(project.title)} index={lightbox} onClose={() => setLightbox(null)} onNavigate={setLightbox} />
     </>
   )
 }

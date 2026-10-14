@@ -247,6 +247,3 @@ export const articles: Article[] = [
 
 export const getArticleBySlug = (slug: string) => articles.find((a) => a.slug === slug)
 export const articleHref = (slug: string) => `/insights/${slug}`
-
-export const formatDate = (iso: string) =>
-  new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(iso))

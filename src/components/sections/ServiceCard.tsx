@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@/i18n/router'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import type { Service } from '@/types'
 import { serviceHref } from '@/data/services'
 import { cn } from '@/lib/cn'
 import { TechChip } from '@/components/ui/TechTile'
+import { t as tr } from '@/i18n'
 
 interface ServiceCardProps {
   service: Service
@@ -33,8 +34,8 @@ export function ServiceCard({ service, variant = 'stacked', showTech = false }: 
           <Icon className="size-[22px]" strokeWidth={1.8} />
         </span>
         <div className="min-w-0 flex-1">
-          <h3 className="pr-6 font-display text-[0.98rem] font-semibold text-navy">{service.title}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-slate">{service.description}</p>
+          <h3 className="pr-6 font-display text-[0.98rem] font-semibold text-navy">{tr(service.title)}</h3>
+          <p className="mt-2 text-sm leading-relaxed text-slate">{tr(service.description)}</p>
           {showTech && (
             <ul className="mt-4 flex flex-wrap gap-1.5">
               {service.technologies.slice(0, 4).map((t) => (
@@ -59,8 +60,8 @@ export function ServiceCard({ service, variant = 'stacked', showTech = false }: 
         <span aria-hidden className="inline-flex size-10 items-center justify-center rounded-lg bg-brand text-white ring-1 ring-white/15">
           <Icon className="size-5" strokeWidth={1.8} />
         </span>
-        <h3 className="mt-4 font-display text-[0.95rem] font-semibold text-white">{service.title}</h3>
-        <p className="mt-1.5 text-sm leading-relaxed text-slate-400">{service.description}</p>
+        <h3 className="mt-4 font-display text-[0.95rem] font-semibold text-white">{tr(service.title)}</h3>
+        <p className="mt-1.5 text-sm leading-relaxed text-slate-400">{tr(service.description)}</p>
         <ArrowUpRight aria-hidden className="absolute top-5 right-5 size-4 text-slate-500 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-brand-300" />
       </Link>
     )
@@ -74,8 +75,8 @@ export function ServiceCard({ service, variant = 'stacked', showTech = false }: 
       >
         <Icon className="size-5" strokeWidth={1.8} />
       </span>
-      <h3 className="mt-5 font-display text-[0.98rem] font-semibold text-navy">{service.title}</h3>
-      <p className="mt-2 flex-1 text-sm leading-relaxed text-slate">{service.description}</p>
+      <h3 className="mt-5 font-display text-[0.98rem] font-semibold text-navy">{tr(service.title)}</h3>
+      <p className="mt-2 flex-1 text-sm leading-relaxed text-slate">{tr(service.description)}</p>
       {showTech && (
         <ul className="mt-4 flex flex-wrap gap-1.5">
           {service.technologies.slice(0, 3).map((t) => (
@@ -92,8 +93,7 @@ export function ServiceCard({ service, variant = 'stacked', showTech = false }: 
           // Stretch the link over the card for a larger click target.
           'after:absolute after:inset-0 after:rounded-2xl',
         )}
-      >
-        En savoir plus <span className="sr-only">sur {service.title}</span>
+      >{tr('En savoir plus')}{' '}<span className="sr-only">{tr('sur')}{' '}{tr(service.title)}</span>
         <ArrowRight aria-hidden className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
       </Link>
     </article>

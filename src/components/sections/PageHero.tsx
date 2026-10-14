@@ -6,6 +6,7 @@ import { cn } from '@/lib/cn'
 import { fadeUp, stagger } from '@/lib/motion'
 import { Container } from '@/components/ui/Container'
 import { Breadcrumbs, type Crumb } from '@/components/ui/Breadcrumbs'
+import { t } from '@/i18n'
 
 interface PageHeroProps {
   breadcrumbs?: Crumb[]
@@ -55,7 +56,7 @@ export function PageHero({ breadcrumbs, eyebrow, eyebrowIcon: EyebrowIcon, title
           {eyebrow && (
             <motion.p variants={fadeUp} className="eyebrow flex items-center gap-2 text-brand-300">
               {EyebrowIcon && <EyebrowIcon aria-hidden className="size-4" strokeWidth={2} />}
-              {eyebrow}
+              {t(eyebrow)}
             </motion.p>
           )}
           <motion.h1
@@ -83,8 +84,8 @@ export function PageHero({ breadcrumbs, eyebrow, eyebrowIcon: EyebrowIcon, title
                 <li key={h.title} className="flex items-center gap-2.5 text-[0.78rem] leading-tight">
                   {h.icon && <h.icon aria-hidden className="size-5 shrink-0 text-brand-300" strokeWidth={1.8} />}
                   <span>
-                    <span className="block font-semibold text-white">{h.title}</span>
-                    {h.description && <span className="text-slate-300">{h.description}</span>}
+                    <span className="block font-semibold text-white">{t(h.title)}</span>
+                    {h.description && <span className="text-slate-300">{t(h.description)}</span>}
                   </span>
                 </li>
               ))}

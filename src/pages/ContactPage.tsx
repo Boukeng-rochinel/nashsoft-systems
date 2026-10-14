@@ -12,6 +12,7 @@ import { Reveal } from '@/components/ui/Reveal'
 import { ContactMessageForm } from '@/components/forms/ContactMessageForm'
 import { MapCard } from '@/components/sections/MapCard'
 import { PageHero } from '@/components/sections/PageHero'
+import { t } from '@/i18n'
 
 interface InfoItem {
   title: string
@@ -36,14 +37,13 @@ export default function ContactPage() {
     <>
     <PageHero
       breadcrumbs={[{ label: 'Accueil', href: '/' }, { label: 'Contact' }]}
-      eyebrow="Contactez-nous"
+      eyebrow={t('Contactez-nous')}
       image="/images/hero-contact.webp"
       title={
-        <>
-          Nous sommes là pour vous <AccentText>accompagner</AccentText>
+        <>{t('Nous sommes là pour vous')}{' '}<AccentText>{t('accompagner')}</AccentText>
         </>
       }
-      description="Une question, un projet ou simplement envie d’échanger ? Notre équipe est à votre écoute. Remplissez le formulaire ou utilisez nos coordonnées ci-dessous."
+      description={t('Une question, un projet ou simplement envie d’échanger ? Notre équipe est à votre écoute. Remplissez le formulaire ou utilisez nos coordonnées ci-dessous.')}
     />
     <section data-theme={theme} className={cn('relative isolate overflow-hidden', dark ? 'bg-navy-950' : 'bg-[#f7f9fc]')}>
       <Container className="grid items-start gap-10 py-14 md:py-20 lg:grid-cols-[1.2fr_1fr] lg:gap-10 xl:gap-14">
@@ -56,7 +56,7 @@ export default function ContactPage() {
                   <span aria-hidden className="inline-flex size-11 items-center justify-center rounded-xl bg-brand-50 text-brand on-dark:bg-white/[0.06] on-dark:text-brand-300">
                     <item.icon className="size-5" strokeWidth={1.9} />
                   </span>
-                  <h2 className="mt-4 font-display text-[1rem] font-semibold text-navy on-dark:text-white">{item.title}</h2>
+                  <h2 className="mt-4 font-display text-[1rem] font-semibold text-navy on-dark:text-white">{t(item.title)}</h2>
                   {item.href ? (
                     <a
                       href={item.href}
@@ -65,12 +65,12 @@ export default function ContactPage() {
                         item.title === 'Email' ? 'font-semibold text-navy sm:whitespace-nowrap on-dark:text-white' : 'text-slate on-dark:text-slate-300',
                       )}
                     >
-                      {item.lines[0]}
+                      {t(item.lines[0])}
                     </a>
                   ) : (
-                    <p className="mt-1.5 text-[0.85rem] text-slate on-dark:text-slate-300">{item.lines[0]}</p>
+                    <p className="mt-1.5 text-[0.85rem] text-slate on-dark:text-slate-300">{t(item.lines[0])}</p>
                   )}
-                  <p className="mt-0.5 text-[0.8rem] text-slate/80 on-dark:text-slate-400">{item.lines[1]}</p>
+                  <p className="mt-0.5 text-[0.8rem] text-slate/80 on-dark:text-slate-400">{t(item.lines[1])}</p>
                 </li>
               ))}
             </motion.ul>
@@ -86,11 +86,9 @@ export default function ContactPage() {
           delay={0.15}
           className="rounded-2xl border border-line bg-white p-6 shadow-[0_30px_70px_-40px_rgb(6_20_38/0.3)] sm:p-9 lg:sticky lg:top-28 on-dark:border-white/10 on-dark:bg-navy-900/70 on-dark:shadow-none"
         >
-          <p className="inline-flex rounded-md bg-brand-50 px-2 py-1 text-[0.65rem] font-bold tracking-[0.14em] text-navy/80 uppercase on-dark:bg-white/[0.06] on-dark:text-brand-300">
-            Écrivez-nous
-          </p>
-          <h2 className="mt-3 font-display text-2xl font-bold text-navy on-dark:text-white">Envoyez-nous un message</h2>
-          <p className="mt-2 mb-8 text-[0.88rem] text-slate on-dark:text-slate-300">Nous serons ravis de vous répondre dans les plus brefs délais.</p>
+          <p className="inline-flex rounded-md bg-brand-50 px-2 py-1 text-[0.65rem] font-bold tracking-[0.14em] text-navy/80 uppercase on-dark:bg-white/[0.06] on-dark:text-brand-300">{t('Écrivez-nous')}</p>
+          <h2 className="mt-3 font-display text-2xl font-bold text-navy on-dark:text-white">{t('Envoyez-nous un message')}</h2>
+          <p className="mt-2 mb-8 text-[0.88rem] text-slate on-dark:text-slate-300">{t('Nous serons ravis de vous répondre dans les plus brefs délais.')}</p>
           <ContactMessageForm />
         </Reveal>
       </Container>

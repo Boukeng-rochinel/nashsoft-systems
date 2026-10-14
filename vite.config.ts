@@ -60,7 +60,8 @@ const alias = { '@': fileURLToPath(new URL('./src', import.meta.url)) }
 const escapeAttr = (value: string) => value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
 
 /**
- * After the client build, writes one HTML file per route (dist/<route>/index.html)
+ * After the client build, writes one HTML file per route and per locale
+ * (dist/<route>/index.html, dist/en/<route>/index.html, …)
  * whose <head> already carries that page's title, description, canonical URL and
  * Open Graph tags, plus dist/sitemap.xml. Crawlers and link previews (WhatsApp,
  * LinkedIn, Facebook) then see the right metadata without running JavaScript.
@@ -78,58 +79,61 @@ function seo(): Plugin {
     },
     async closeBundle() {
       if (skip) return
-      const { module } = await runnerImport<typeof import('./src/data/seo')>(fileURLToPath(new URL('./src/data/seo.ts', import.meta.url)), {
+      // One module graph for i18n + metadata, so the active locale applies to both.
+      const { module } = await runnerImport<typeof import('./src/data/seoBuild')>(fileURLToPath(new URL('./src/data/seoBuild.ts', import.meta.url)), {
         configFile: false,
         resolve: { alias },
       })
-      const { seoRoutes, formatTitle, DEFAULT_OG_IMAGE } = module
-      const { site } = await runnerImport<typeof import('./src/data/site')>(fileURLToPath(new URL('./src/data/site.ts', import.meta.url)), {
-        configFile: false,
-        resolve: { alias },
-      }).then((r) => r.module)
-
+      const pages = await module.buildPages()
       const template = await readFile(join(outDir, 'index.html'), 'utf8')
-      const routes = seoRoutes()
 
-      for (const route of routes) {
-        const url = `${site.url}${route.path}`
-        const title = escapeAttr(formatTitle(route.title))
-        const description = escapeAttr(route.description)
-        const image = `${site.url}${route.image ?? DEFAULT_OG_IMAGE}`
+      for (const page of pages) {
+        const title = escapeAttr(page.title)
+        const description = escapeAttr(page.description)
+        const alternates = page.noindex ? '' : page.alternates.map((a) => `<link rel="alternate" hreflang="${a.hreflang}" href="${a.href}" />`).join('\n    ')
         const tags: Array<[RegExp, string]> = [
+          [/<html lang="[^"]*">/, `<html lang="${page.htmlLang}">`],
           [/<title>[^<]*<\/title>/, `<title>${title}</title>`],
           [/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${description}" />`],
-          [/<meta name="robots" content="[^"]*" \/>/, `<meta name="robots" content="${route.noindex ? 'noindex, nofollow' : 'index, follow'}" />`],
-          [/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${url}" />`],
-          [/<meta property="og:type" content="[^"]*" \/>/, `<meta property="og:type" content="${route.type ?? 'website'}" />`],
+          [/<meta name="robots" content="[^"]*" \/>/, `<meta name="robots" content="${page.noindex ? 'noindex, nofollow' : 'index, follow'}" />`],
+          [/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${page.url}" />\n    ${alternates}`],
+          [/<meta property="og:type" content="[^"]*" \/>/, `<meta property="og:type" content="${page.type}" />`],
+          [/<meta property="og:locale" content="[^"]*" \/>/, `<meta property="og:locale" content="${page.ogLocale}" />`],
           [/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${title}" />`],
           [/<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${description}" />`],
-          [/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${url}" />`],
-          [/<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="${image}" />`],
+          [/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${page.url}" />`],
+          [/<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="${page.image}" />`],
           [/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${title}" />`],
           [/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${description}" />`],
-          [/<meta name="twitter:image" content="[^"]*" \/>/, `<meta name="twitter:image" content="${image}" />`],
+          [/<meta name="twitter:image" content="[^"]*" \/>/, `<meta name="twitter:image" content="${page.image}" />`],
         ]
         let html = template
         for (const [pattern, replacement] of tags) {
           if (!pattern.test(html)) throw new Error(`[seo] index.html is missing ${pattern}`)
           html = html.replace(pattern, () => replacement)
         }
-        const dir = join(outDir, route.path)
+        const dir = join(outDir, page.outPath)
         await mkdir(dir, { recursive: true })
         await writeFile(join(dir, 'index.html'), html)
       }
 
+      // Multilingual sitemap: every URL lists its language alternates (xhtml:link).
       const today = new Date().toISOString().slice(0, 10)
-      const urls = routes
-        .filter((r) => !r.noindex)
-        .map(
-          (r) =>
-            `  <url>\n    <loc>${site.url}${r.path}</loc>\n    <lastmod>${r.lastmod ?? today}</lastmod>\n    <changefreq>${r.changefreq}</changefreq>\n    <priority>${r.priority.toFixed(1)}</priority>\n  </url>`,
-        )
-      const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`
+      const indexable = pages.filter((p) => !p.noindex)
+      const urls = indexable.map((p) =>
+        [
+          '  <url>',
+          `    <loc>${p.url}</loc>`,
+          ...p.alternates.map((a) => `    <xhtml:link rel="alternate" hreflang="${a.hreflang}" href="${a.href}" />`),
+          `    <lastmod>${p.lastmod ?? today}</lastmod>`,
+          `    <changefreq>${p.changefreq}</changefreq>`,
+          `    <priority>${p.priority.toFixed(1)}</priority>`,
+          '  </url>',
+        ].join('\n'),
+      )
+      const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>\n`
       await writeFile(join(outDir, 'sitemap.xml'), sitemap)
-      console.log(`[seo] wrote ${routes.length} route heads and sitemap.xml (${urls.length} URLs)`)
+      console.log(`[seo] wrote ${pages.length} route heads and sitemap.xml (${indexable.length} URLs)`)
     },
   }
 }

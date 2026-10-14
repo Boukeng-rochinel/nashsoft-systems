@@ -4,6 +4,7 @@ import { processSteps } from '@/data/site'
 import { cn } from '@/lib/cn'
 import { motion } from 'framer-motion'
 import { fadeUp, revealViewport, stagger } from '@/lib/motion'
+import { t } from '@/i18n'
 
 interface ProcessStepsProps {
   steps?: ProcessStep[]
@@ -51,8 +52,8 @@ export function ProcessSteps({ steps = processSteps, variant = 'inline', cols: c
               </span>
             </span>
             <div className="pt-2 lg:mt-5 lg:pt-0">
-              <h3 className="font-display text-base font-semibold text-navy">{step.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-slate lg:mx-auto lg:max-w-[12rem] lg:text-[0.8rem]">{step.description}</p>
+              <h3 className="font-display text-base font-semibold text-navy">{t(step.title)}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-slate lg:mx-auto lg:max-w-[12rem] lg:text-[0.8rem]">{t(step.description)}</p>
             </div>
           </motion.li>
         ))}
@@ -82,7 +83,7 @@ export function ProcessSteps({ steps = processSteps, variant = 'inline', cols: c
                 <div className="flex shrink-0 items-center lg:w-full">
                   {dark ? (
                     <span className="inline-flex size-11 items-center justify-center rounded-full border border-brand-300/40 bg-navy-900 font-display text-sm font-bold text-brand-300">
-                      {String(i + 1).padStart(2, '0')}
+                      {t(String(i + 1).padStart(2, '0'))}
                     </span>
                   ) : (
                     <span
@@ -103,9 +104,9 @@ export function ProcessSteps({ steps = processSteps, variant = 'inline', cols: c
                   )}
                 </div>
                 <div className="lg:mt-5">
-                  {!dark && <p className="font-display text-xs font-bold text-brand">{String(i + 1).padStart(2, '0')}</p>}
-                  <h3 className={cn('mt-1 font-display text-[0.95rem] font-semibold', dark ? 'text-white' : 'text-navy')}>{step.title}</h3>
-                  <p className={cn('mt-1.5 text-[0.8rem] leading-relaxed', dark ? 'text-slate-400' : 'text-slate')}>{step.description}</p>
+                  {!dark && <p className="font-display text-xs font-bold text-brand">{t(String(i + 1).padStart(2, '0'))}</p>}
+                  <h3 className={cn('mt-1 font-display text-[0.95rem] font-semibold', dark ? 'text-white' : 'text-navy')}>{t(step.title)}</h3>
+                  <p className={cn('mt-1.5 text-[0.8rem] leading-relaxed', dark ? 'text-slate-400' : 'text-slate')}>{t(step.description)}</p>
                 </div>
             </motion.li>
           )

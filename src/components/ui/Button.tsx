@@ -1,5 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from '@/i18n/router'
 import { ArrowRight, type LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { glassButton } from '@/lib/styles'

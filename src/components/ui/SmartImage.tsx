@@ -1,6 +1,7 @@
 import { useState, type ImgHTMLAttributes } from 'react'
 import { ImageOff } from 'lucide-react'
 import { cn } from '@/lib/cn'
+import { t } from '@/i18n'
 
 type Status = 'loading' | 'loaded' | 'error'
 
@@ -21,13 +22,13 @@ export function SmartImage({ wrapperClassName, className, tone = 'light', alt = 
   return (
     <div className={cn('relative overflow-hidden', status === 'loading' && cn('skeleton', tone === 'dark' && 'skeleton-dark'), wrapperClassName)}>
       {status === 'error' ? (
-        <div role="img" aria-label={alt} className={cn('flex size-full items-center justify-center', tone === 'dark' ? 'bg-navy-900 text-slate-500' : 'bg-mist text-slate/60')}>
+        <div role="img" aria-label={t(alt)} className={cn('flex size-full items-center justify-center', tone === 'dark' ? 'bg-navy-900 text-slate-500' : 'bg-mist text-slate/60')}>
           <ImageOff aria-hidden className="size-6" />
         </div>
       ) : (
         <img
           {...img}
-          alt={alt}
+          alt={t(alt)}
           loading={loading}
           decoding={decoding}
           // Cached images can finish before React attaches onLoad: check `complete` on mount.

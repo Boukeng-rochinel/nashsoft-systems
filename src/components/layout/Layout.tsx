@@ -1,5 +1,6 @@
 import { Suspense, useEffect } from 'react'
-import { useLocation, useOutlet } from 'react-router-dom'
+import { useOutlet } from 'react-router-dom'
+import { useLocation } from '@/i18n/router'
 import { AnimatePresence, motion } from 'framer-motion'
 import { pageTransition } from '@/lib/motion'
 import { useTheme } from '@/hooks/useTheme'
@@ -9,6 +10,7 @@ import { ChatLauncher } from '@/components/chat/ChatLauncher'
 import { Navbar } from './Navbar'
 import { Footer } from './Footer'
 import { CookieConsent } from './CookieConsent'
+import { t } from '@/i18n'
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
@@ -45,7 +47,7 @@ function PageFallback({ tone }: { tone: 'light' | 'dark' }) {
   const block = cn('skeleton rounded-md', dark && 'skeleton-dark')
   return (
     <div data-theme={tone} className={dark ? 'bg-navy-950' : 'bg-white'}>
-      <div className="mx-auto w-full max-w-[1240px] px-4 pt-14 pb-16 sm:px-6 lg:px-8" role="status" aria-live="polite" aria-label="Chargement de la page…">
+      <div className="mx-auto w-full max-w-[1240px] px-4 pt-14 pb-16 sm:px-6 lg:px-8" role="status" aria-live="polite" aria-label={t('Chargement de la page…')}>
         <div aria-hidden className="max-w-xl space-y-4">
           <div className={cn(block, 'h-3 w-32')} />
           <div className={cn(block, 'h-10 w-full sm:h-12')} />

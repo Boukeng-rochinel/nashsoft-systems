@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { languages, useLanguage } from '@/hooks/useLanguage'
 import { cn } from '@/lib/cn'
+import { t as tr } from '@/i18n'
 
 /** Minimal inline language switch: "FR | EN | PT", the current one in brand blue. */
 export function LanguageSwitcher({ tone = 'light', className }: { tone?: 'light' | 'dark'; className?: string }) {
@@ -21,7 +22,7 @@ export function LanguageSwitcher({ tone = 'light', className }: { tone?: 'light'
             <button
               type="button"
               lang={l.code}
-              aria-label={l.label}
+              aria-label={tr(l.label)}
               aria-pressed={selected}
               onClick={() => setLanguage(l.code)}
               className={cn(
@@ -29,7 +30,7 @@ export function LanguageSwitcher({ tone = 'light', className }: { tone?: 'light'
                 selected ? (dark ? 'text-brand-300' : 'text-brand') : dark ? 'text-slate-400 hover:text-white' : 'text-navy/60 hover:text-navy',
               )}
             >
-              {l.short}
+              {tr(l.short)}
             </button>
           </Fragment>
         )

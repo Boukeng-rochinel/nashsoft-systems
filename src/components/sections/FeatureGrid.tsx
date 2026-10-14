@@ -1,6 +1,7 @@
 import type { Feature } from '@/types'
 import { cn } from '@/lib/cn'
 import { RevealGroup, RevealItem } from '@/components/ui/Reveal'
+import { t } from '@/i18n'
 
 interface FeatureGridProps {
   items: Feature[]
@@ -28,8 +29,8 @@ export function FeatureGrid({ items, variant = 'cards', columns = 4, className }
               className={cn('relative px-1 py-5 sm:px-6 sm:py-0', i > 0 && 'border-t border-line sm:border-t-0', i % columns !== 0 && 'lg:border-l lg:border-line')}
             >
               {Icon && <Icon aria-hidden className="size-8 text-brand" strokeWidth={1.5} />}
-              <h3 className="mt-4 font-display text-base font-semibold text-navy">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate">{item.description}</p>
+              <h3 className="mt-4 font-display text-base font-semibold text-navy">{t(item.title)}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate">{t(item.description)}</p>
             </RevealItem>
           )
         }
@@ -43,8 +44,8 @@ export function FeatureGrid({ items, variant = 'cards', columns = 4, className }
                   </span>
                 )}
                 <div>
-                  <h3 className="font-display text-sm font-semibold text-navy">{item.title}</h3>
-                  <p className="mt-1 text-xs leading-relaxed text-slate">{item.description}</p>
+                  <h3 className="font-display text-sm font-semibold text-navy">{t(item.title)}</h3>
+                  <p className="mt-1 text-xs leading-relaxed text-slate">{t(item.description)}</p>
                 </div>
               </div>
             </RevealItem>
@@ -72,8 +73,8 @@ export function FeatureGrid({ items, variant = 'cards', columns = 4, className }
                   <Icon className="size-6" strokeWidth={1.7} />
                 </span>
               )}
-              <h3 className={cn('mt-5 font-display text-base font-semibold', dark ? 'text-white' : 'text-navy')}>{item.title}</h3>
-              <p className={cn('mt-2 text-sm leading-relaxed', dark ? 'text-slate-400' : 'text-slate')}>{item.description}</p>
+              <h3 className={cn('mt-5 font-display text-base font-semibold', dark ? 'text-white' : 'text-navy')}>{t(item.title)}</h3>
+              <p className={cn('mt-2 text-sm leading-relaxed', dark ? 'text-slate-400' : 'text-slate')}>{t(item.description)}</p>
             </div>
           </RevealItem>
         )

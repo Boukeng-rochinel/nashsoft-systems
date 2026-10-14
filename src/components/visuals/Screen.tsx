@@ -1,5 +1,6 @@
 import { memo, type CSSProperties } from 'react'
 import type { ProjectTheme, ScreenVariant } from '@/types'
+import { t } from '@/i18n'
 
 /**
  * Code-rendered product interface.
@@ -92,7 +93,7 @@ function Header({ theme, title }: { theme: ProjectTheme; title?: string }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1em' }}>
       {title ? (
-        <span style={{ fontWeight: 700, color: theme.text, fontSize: '1.15em', whiteSpace: 'nowrap', letterSpacing: '-0.01em' }}>{title}</span>
+        <span style={{ fontWeight: 700, color: theme.text, fontSize: '1.15em', whiteSpace: 'nowrap', letterSpacing: '-0.01em' }}>{t(title)}</span>
       ) : (
         <div style={bar('22%', theme.text, '0.7em', { opacity: 0.85 })} />
       )}
@@ -150,7 +151,7 @@ function DashboardLayout({ theme, title }: { theme: ProjectTheme; title?: string
     <div style={{ display: 'flex', height: '100%' }}>
       <Sidebar theme={theme} />
       <div style={{ flex: 1, padding: '1.1em', display: 'flex', flexDirection: 'column', gap: '0.9em', minWidth: 0 }}>
-        <Header theme={theme} title={title} />
+        <Header theme={theme} title={t(title)} />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.7em' }}>
           {[theme.accent, theme.accent2, theme.accent, theme.accent2].map((c, i) => (
             <div key={i} style={card(theme, { display: 'flex', flexDirection: 'column', gap: '0.5em' })}>
@@ -200,7 +201,7 @@ function LandingLayout({ theme, title }: { theme: ProjectTheme; title?: string }
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.45em' }}>
           <div style={{ width: '1.3em', height: '1.3em', borderRadius: '0.35em', background: theme.accent }} />
           {title ? (
-            <span style={{ fontWeight: 700, color: theme.text, fontSize: '1em', whiteSpace: 'nowrap' }}>{title}</span>
+            <span style={{ fontWeight: 700, color: theme.text, fontSize: '1em', whiteSpace: 'nowrap' }}>{t(title)}</span>
           ) : (
             <div style={bar('5em', theme.text, '0.55em')} />
           )}
@@ -257,7 +258,7 @@ function TableLayout({ theme, title }: { theme: ProjectTheme; title?: string }) 
     <div style={{ display: 'flex', height: '100%' }}>
       <Sidebar theme={theme} active={3} />
       <div style={{ flex: 1, padding: '1.1em', display: 'flex', flexDirection: 'column', gap: '0.8em', minWidth: 0 }}>
-        <Header theme={theme} title={title} />
+        <Header theme={theme} title={t(title)} />
         <div style={{ display: 'flex', gap: '0.5em' }}>
           {['4.5em', '4em', '5em', '3.5em'].map((w, i) => (
             <div key={i} style={bar(w, i === 0 ? theme.accent : `${theme.muted}`, '1.5em', { opacity: i === 0 ? 1 : 0.7 })} />
@@ -293,7 +294,7 @@ function TableLayout({ theme, title }: { theme: ProjectTheme; title?: string }) 
 function AnalyticsLayout({ theme, title }: { theme: ProjectTheme; title?: string }) {
   return (
     <div style={{ height: '100%', padding: '1.1em', display: 'flex', flexDirection: 'column', gap: '0.8em' }}>
-      <Header theme={theme} title={title} />
+      <Header theme={theme} title={t(title)} />
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.7em' }}>
         {[theme.accent, theme.accent2, theme.accent].map((c, i) => (
           <div key={i} style={card(theme, { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5em' })}>
@@ -337,7 +338,7 @@ function AnalyticsLayout({ theme, title }: { theme: ProjectTheme; title?: string
 function CatalogLayout({ theme, title }: { theme: ProjectTheme; title?: string }) {
   return (
     <div style={{ height: '100%', padding: '1.1em 1.3em', display: 'flex', flexDirection: 'column', gap: '0.9em' }}>
-      <Header theme={theme} title={title} />
+      <Header theme={theme} title={t(title)} />
       <div style={{ display: 'flex', gap: '0.5em' }}>
         {['4em', '5em', '4.5em', '3.5em', '4em'].map((w, i) => (
           <div key={i} style={bar(w, i === 0 ? theme.accent : 'transparent', '1.5em', { border: i === 0 ? 'none' : `1px solid ${theme.muted}` })} />
@@ -370,7 +371,7 @@ function LearningLayout({ theme, title }: { theme: ProjectTheme; title?: string 
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <div style={{ padding: '0.9em 1.3em', borderBottom: `1px solid ${theme.muted}88` }}>
-        <Header theme={theme} title={title} />
+        <Header theme={theme} title={t(title)} />
       </div>
       <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: '0.9em', padding: '1em 1.3em', minHeight: 0 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8em', minHeight: 0 }}>
@@ -426,7 +427,7 @@ function ChatLayout({ theme, title }: { theme: ProjectTheme; title?: string }) {
   return (
     <div style={{ display: 'flex', height: '100%' }}>
       <div style={{ width: '32%', borderRight: `1px solid ${theme.muted}88`, padding: '1em 0.8em', display: 'flex', flexDirection: 'column', gap: '0.6em', background: theme.surface }}>
-        {title ? <span style={{ fontWeight: 700, color: theme.text, fontSize: '1.05em' }}>{title}</span> : <div style={bar('50%', theme.text, '0.6em')} />}
+        {title ? <span style={{ fontWeight: 700, color: theme.text, fontSize: '1.05em' }}>{t(title)}</span> : <div style={bar('50%', theme.text, '0.6em')} />}
         <div style={bar('100%', theme.muted, '1.6em', { opacity: 0.6 })} />
         {Array.from({ length: 5 }).map((_, i) => (
           <div key={i} style={{ display: 'flex', gap: '0.5em', alignItems: 'center', padding: '0.4em', borderRadius: '0.5em', background: i === 0 ? `${theme.accent}18` : 'transparent' }}>
@@ -489,7 +490,7 @@ function CodeLayout({ theme, title }: { theme: ProjectTheme; title?: string }) {
   return (
     <div style={{ display: 'flex', height: '100%', background: '#0B1220' }}>
       <div style={{ width: '18%', background: '#070D18', padding: '1em 0.8em', display: 'flex', flexDirection: 'column', gap: '0.7em', borderRight: '1px solid #ffffff14' }}>
-        {title ? <span style={{ color: '#E6EDF7', fontWeight: 700, fontSize: '0.95em' }}>{title}</span> : null}
+        {title ? <span style={{ color: '#E6EDF7', fontWeight: 700, fontSize: '0.95em' }}>{t(title)}</span> : null}
         {[60, 75, 50, 80, 65, 55, 70].map((w, i) => (
           <div key={i} style={{ display: 'flex', gap: '0.4em', alignItems: 'center', paddingLeft: i > 1 && i < 5 ? '0.8em' : 0 }}>
             <div style={{ width: '0.7em', height: '0.7em', borderRadius: '0.15em', background: i === 3 ? theme.accent : '#ffffff30' }} />
@@ -541,7 +542,7 @@ function PhoneLayout({ theme, variant, title }: { theme: ProjectTheme; variant: 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35em' }}>
           <div style={bar('4em', soft, '0.4em')} />
           {title ? (
-            <span style={{ fontWeight: 700, color: theme.text, fontSize: '1.1em', whiteSpace: 'nowrap' }}>{title}</span>
+            <span style={{ fontWeight: 700, color: theme.text, fontSize: '1.1em', whiteSpace: 'nowrap' }}>{t(title)}</span>
           ) : (
             <div style={bar('6em', theme.text, '0.7em')} />
           )}
@@ -663,7 +664,7 @@ function ScreenImpl({ variant, theme, device = 'laptop', title, className }: Scr
       }}
       aria-hidden
     >
-      {device === 'phone' ? <PhoneLayout theme={theme} variant={variant} title={title} /> : <Layout theme={theme} title={title} />}
+      {device === 'phone' ? <PhoneLayout theme={theme} variant={variant} title={t(title)} /> : <Layout theme={theme} title={t(title)} />}
     </div>
   )
 }

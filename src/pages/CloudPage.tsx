@@ -11,6 +11,7 @@ import { ServiceDetailView } from '@/components/sections/ServiceDetailView'
 import { FeatureGrid } from '@/components/sections/FeatureGrid'
 import { ArchitectureStack } from '@/components/visuals/ArchitectureStack'
 import { FlowDiagram } from '@/components/visuals/FlowDiagram'
+import { t } from '@/i18n'
 
 const architecture = [
   { layer: 'Applications', items: ['Web', 'Mobile', 'API REST', 'Back-offices'] },
@@ -49,8 +50,7 @@ export default function CloudPage() {
       service={service}
       showFeatures={false}
       heroTitle={
-        <>
-          Une infrastructure cloud <AccentText>fiable et sécurisée.</AccentText>
+        <>{t('Une infrastructure cloud')}{' '}<AccentText>{t('fiable et sécurisée.')}</AccentText>
         </>
       }
       heroImage="/images/hero-cloud.webp"
@@ -61,19 +61,16 @@ export default function CloudPage() {
           <div>
             <SectionTitle
               tone="dark"
-              eyebrow="Architecture technique"
+              eyebrow={t('Architecture technique')}
               title={
-                <>
-                  De l’application à la <AccentText>supervision</AccentText>
+                <>{t('De l’application à la')}{' '}<AccentText>{t('supervision')}</AccentText>
                 </>
               }
-              description="Chaque couche est conçue pour être reproductible, observable et sécurisée. Vos équipes savent ce qui tourne, où, et dans quel état."
+              description={t('Chaque couche est conçue pour être reproductible, observable et sécurisée. Vos équipes savent ce qui tourne, où, et dans quel état.')}
             />
             <Reveal className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-              <p className="font-display text-sm font-semibold text-white">Haute disponibilité</p>
-              <p className="mt-1.5 text-sm leading-relaxed text-slate-400">
-                Réplication des données, sauvegardes hors site et supervision continue pour réduire les interruptions de service.
-              </p>
+              <p className="font-display text-sm font-semibold text-white">{t('Haute disponibilité')}</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-slate-400">{t('Réplication des données, sauvegardes hors site et supervision continue pour réduire les interruptions de service.')}</p>
             </Reveal>
           </div>
           <ArchitectureStack layers={architecture} icons={architectureIcons} />
@@ -84,13 +81,12 @@ export default function CloudPage() {
       <Section tone="light">
         <SectionTitle
           align="center"
-          eyebrow="CI/CD"
+          eyebrow={t('CI/CD')}
           title={
-            <>
-              Livrer plus souvent, <AccentText>en toute confiance</AccentText>
+            <>{t('Livrer plus souvent,')}{' '}<AccentText>{t('en toute confiance')}</AccentText>
             </>
           }
-          description="Chaque modification suit le même pipeline automatisé, du commit à la production."
+          description={t('Chaque modification suit le même pipeline automatisé, du commit à la production.')}
           className="max-w-2xl"
         />
         <FlowDiagram nodes={pipeline} tone="light" className="mt-12" />
@@ -99,10 +95,9 @@ export default function CloudPage() {
       {/* Services */}
       <Section tone="white">
         <SectionTitle
-          eyebrow="Nos services cloud"
+          eyebrow={t('Nos services cloud')}
           title={
-            <>
-              Tout ce qu’il faut pour <AccentText>exploiter sereinement</AccentText>
+            <>{t('Tout ce qu’il faut pour')}{' '}<AccentText>{t('exploiter sereinement')}</AccentText>
             </>
           }
           className="max-w-2xl"

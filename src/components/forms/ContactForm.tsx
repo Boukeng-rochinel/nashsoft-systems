@@ -16,9 +16,10 @@ import { submitContactRequest } from '@/lib/api'
 import { site } from '@/data/site'
 import { cn } from '@/lib/cn'
 import { glassButton } from '@/lib/styles'
-import { Link } from 'react-router-dom'
+import { Link } from '@/i18n/router'
 import { useCaptcha } from '@/hooks/useCaptcha'
 import { Turnstile } from './Turnstile'
+import { t as tr } from '@/i18n'
 
 type Tone = 'light' | 'dark'
 
@@ -57,14 +58,14 @@ function Field({
     <div>
       <div className="mb-1.5 flex items-baseline justify-between gap-3">
         <label htmlFor={id} className={cn('text-[0.8rem] font-medium', dark ? 'text-slate-200' : 'text-navy')}>
-          {label}
+          {tr(label)}
           {required ? (
             <span aria-hidden className={dark ? 'text-brand-300' : 'text-brand'}>
               {' '}
               *
             </span>
           ) : (
-            <span className={cn('font-normal', dark ? 'text-slate-400' : 'text-slate')}> (optionnel)</span>
+            <span className={cn('font-normal', dark ? 'text-slate-400' : 'text-slate')}>{' '}{tr('(optionnel)')}</span>
           )}
         </label>
         {hint}
@@ -72,7 +73,7 @@ function Field({
       {children}
       {error && (
         <p id={`${id}-error`} role="alert" className={cn('mt-1.5 text-xs', dark ? 'text-red-300' : 'text-red-600')}>
-          {error}
+          {tr(error)}
         </p>
       )}
     </div>
@@ -164,18 +165,14 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
             <CircleCheck aria-hidden className="size-7" />
           </span>
           <h3 className={cn('mt-5 font-display text-xl font-bold', dark ? 'text-white' : 'text-navy')}>
-            {status.kind === 'sent' ? 'Merci, votre demande est envoyée !' : 'Plus qu’un clic pour envoyer votre demande'}
+            {tr(status.kind === 'sent' ? 'Merci, votre demande est envoyée !' : 'Plus qu’un clic pour envoyer votre demande')}
           </h3>
           <p className={cn('mt-2 max-w-sm text-sm leading-relaxed', dark ? 'text-slate-300' : 'text-slate')}>
             {status.kind === 'sent' ? (
-              <>Un chef de projet vous recontacte sous 24 h ouvrées. Pensez à vérifier vos courriers indésirables.</>
+              <>{tr('Un chef de projet vous recontacte sous 24 h ouvrées. Pensez à vérifier vos courriers indésirables.')}</>
             ) : (
-              <>
-                Votre messagerie s’est ouverte avec un e-mail pré-rempli : il vous suffit de l’envoyer. Rien ne s’est ouvert ?{' '}
-                <a href={status.href} className={cn('font-semibold underline underline-offset-2', dark ? 'text-brand-300' : 'text-brand')}>
-                  Ouvrir l’e-mail
-                </a>{' '}
-                ou écrivez-nous à {site.contact.email}.
+              <>{tr('Votre messagerie s’est ouverte avec un e-mail pré-rempli : il vous suffit de l’envoyer. Rien ne s’est ouvert ?')}{' '}
+                <a href={status.href} className={cn('font-semibold underline underline-offset-2', dark ? 'text-brand-300' : 'text-brand')}>{tr('Ouvrir l’e-mail')}</a>{' '}{tr('ou écrivez-nous à')}{' '}{tr(site.contact.email)}.
               </>
             )}
           </p>
@@ -184,8 +181,7 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
             onClick={() => setStatus(null)}
             className={cn('mt-6 inline-flex items-center gap-2 text-sm font-semibold', dark ? 'text-brand-300 hover:text-white' : 'text-brand hover:text-brand-600')}
           >
-            <RotateCcw aria-hidden className="size-4" /> Envoyer une autre demande
-          </button>
+            <RotateCcw aria-hidden className="size-4" />{' '}{tr('Envoyer une autre demande')}</button>
         </motion.div>
       ) : (
         <motion.form
@@ -198,16 +194,14 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
           aria-describedby={`${uid}-required`}
           className="grid gap-5 sm:grid-cols-2"
         >
-          <p id={`${uid}-required`} className="sr-only">
-            Les champs marqués d’un astérisque sont obligatoires.
-          </p>
+          <p id={`${uid}-required`} className="sr-only">{tr('Les champs marqués d’un astérisque sont obligatoires.')}</p>
 
-          <Field id={id('fullName')} label="Nom complet" required error={errors.fullName?.message} tone={tone}>
+          <Field id={id('fullName')} label={tr('Nom complet')} required error={tr(errors.fullName?.message)} tone={tone}>
             <IconInput icon={User} tone={tone}>
               <input
                 id={id('fullName')}
                 autoComplete="name"
-                placeholder="Votre nom"
+                placeholder={tr('Votre nom')}
                 aria-invalid={!!errors.fullName}
                 aria-describedby={describe('fullName')}
                 className={cn(fieldClass(tone, !!errors.fullName), 'h-12 pr-4 pl-10')}
@@ -216,14 +210,14 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
             </IconInput>
           </Field>
 
-          <Field id={id('email')} label="E-mail" required error={errors.email?.message} tone={tone}>
+          <Field id={id('email')} label={tr('E-mail')} required error={tr(errors.email?.message)} tone={tone}>
             <IconInput icon={Mail} tone={tone}>
               <input
                 id={id('email')}
                 type="email"
                 autoComplete="email"
                 inputMode="email"
-                placeholder="votre@email.com"
+                placeholder={tr('votre@email.com')}
                 aria-invalid={!!errors.email}
                 aria-describedby={describe('email')}
                 className={cn(fieldClass(tone, !!errors.email), 'h-12 pr-4 pl-10')}
@@ -232,7 +226,7 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
             </IconInput>
           </Field>
 
-          <Field id={id('phone')} label="Téléphone" required error={errors.phone?.message} tone={tone}>
+          <Field id={id('phone')} label={tr('Téléphone')} required error={tr(errors.phone?.message)} tone={tone}>
             <IconInput icon={Phone} tone={tone}>
               <input
                 id={id('phone')}
@@ -249,12 +243,12 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
           </Field>
 
           {withCompany && (
-            <Field id={id('company')} label="Entreprise / organisation" error={errors.company?.message} tone={tone}>
+            <Field id={id('company')} label={tr('Entreprise / organisation')} error={tr(errors.company?.message)} tone={tone}>
               <IconInput icon={Building2} tone={tone}>
                 <input
                   id={id('company')}
                   autoComplete="organization"
-                  placeholder="Nom de votre structure"
+                  placeholder={tr('Nom de votre structure')}
                   aria-invalid={!!errors.company}
                   aria-describedby={describe('company')}
                   className={cn(fieldClass(tone, !!errors.company), 'h-12 pr-4 pl-10')}
@@ -264,7 +258,7 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
             </Field>
           )}
 
-          <Field id={id('projectType')} label="Type de projet" required error={errors.projectType?.message} tone={tone}>
+          <Field id={id('projectType')} label={tr('Type de projet')} required error={tr(errors.projectType?.message)} tone={tone}>
             <SelectWrap tone={tone}>
               <select
                 id={id('projectType')}
@@ -273,17 +267,17 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
                 className={cn(fieldClass(tone, !!errors.projectType), 'h-12 appearance-none pr-10 pl-4')}
                 {...register('projectType', { setValueAs: emptyToUndefined })}
               >
-                <option value="">Sélectionnez</option>
+                <option value="">{tr('Sélectionnez')}</option>
                 {PROJECT_TYPES.map((t) => (
                   <option key={t} value={t}>
-                    {t}
+                    {tr(t)}
                   </option>
                 ))}
               </select>
             </SelectWrap>
           </Field>
 
-          <Field id={id('budget')} label="Budget estimé" error={errors.budget?.message} tone={tone}>
+          <Field id={id('budget')} label={tr('Budget estimé')} error={tr(errors.budget?.message)} tone={tone}>
             <SelectWrap tone={tone}>
               <select
                 id={id('budget')}
@@ -291,10 +285,10 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
                 className={cn(fieldClass(tone, !!errors.budget), 'h-12 appearance-none pr-10 pl-4')}
                 {...register('budget', { setValueAs: emptyToUndefined })}
               >
-                <option value="">Sélectionnez</option>
+                <option value="">{tr('Sélectionnez')}</option>
                 {BUDGET_RANGES.map((b) => (
                   <option key={b} value={b}>
-                    {b}
+                    {tr(b)}
                   </option>
                 ))}
               </select>
@@ -304,9 +298,9 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
           <div className="sm:col-span-2">
             <Field
               id={id('description')}
-              label="Description de votre projet"
+              label={tr('Description de votre projet')}
               required
-              error={errors.description?.message}
+              error={tr(errors.description?.message)}
               tone={tone}
               hint={
                 <span
@@ -320,7 +314,7 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
               <textarea
                 id={id('description')}
                 rows={5}
-                placeholder="Décrivez brièvement votre projet, vos objectifs et vos attentes…"
+                placeholder={tr('Décrivez brièvement votre projet, vos objectifs et vos attentes…')}
                 aria-invalid={!!errors.description}
                 aria-describedby={describe('description')}
                 className={cn(fieldClass(tone, !!errors.description), 'min-h-32 resize-y px-4 py-3 leading-relaxed')}
@@ -338,27 +332,24 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
                 className="mt-0.5 size-4 shrink-0 cursor-pointer rounded accent-brand"
                 {...register('consent')}
               />
-              <span>
-                J’accepte que Nashsoft Systems utilise ces informations pour me recontacter au sujet de mon projet.{' '}
-                <Link to="/confidentialite" className={cn('font-medium underline underline-offset-2', dark ? 'text-brand-300' : 'text-brand')}>
-                  Politique de confidentialité
-                </Link>
+              <span>{tr('J’accepte que Nashsoft Systems utilise ces informations pour me recontacter au sujet de mon projet.')}{' '}
+                <Link to="/confidentialite" className={cn('font-medium underline underline-offset-2', dark ? 'text-brand-300' : 'text-brand')}>{tr('Politique de confidentialité')}</Link>
               </span>
             </label>
             {errors.consent && (
               <p id={`${id('consent')}-error`} role="alert" className={cn('mt-1.5 text-xs', dark ? 'text-red-300' : 'text-red-600')}>
-                {errors.consent.message}
+                {tr(errors.consent.message)}
               </p>
             )}
           </div>
 
           {captcha.siteKey && (
-            <Turnstile key={captcha.widgetKey} siteKey={captcha.siteKey} onToken={captcha.setToken} tone={tone} error={captcha.error} className="sm:col-span-2" />
+            <Turnstile key={captcha.widgetKey} siteKey={captcha.siteKey} onToken={captcha.setToken} tone={tone} error={tr(captcha.error)} className="sm:col-span-2" />
           )}
 
           {serverError && (
             <p role="alert" className="rounded-xl border border-red-300/60 bg-red-50 px-4 py-3 text-sm text-red-700 sm:col-span-2">
-              {serverError}
+              {tr(serverError)}
             </p>
           )}
 
@@ -368,7 +359,7 @@ export function ContactForm({ tone = 'light', defaultProjectType, withCompany = 
             className={cn('group inline-flex h-13 items-center justify-center gap-2.5 rounded-full font-display text-[0.95rem] font-semibold transition-colors disabled:pointer-events-none disabled:opacity-70 sm:col-span-2', glassButton)}
           >
             {isSubmitting ? <LoaderCircle aria-hidden className="size-4 animate-spin" /> : <Send aria-hidden className="size-4" />}
-            {isSubmitting ? 'Envoi en cours…' : submitLabel}
+            {tr(isSubmitting ? 'Envoi en cours…' : submitLabel)}
           </button>
         </motion.form>
       )}

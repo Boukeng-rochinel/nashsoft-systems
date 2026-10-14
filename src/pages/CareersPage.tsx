@@ -16,6 +16,7 @@ import { PageHero } from '@/components/sections/PageHero'
 import { FeatureGrid } from '@/components/sections/FeatureGrid'
 import { ProcessSteps } from '@/components/sections/ProcessSteps'
 import { CTABand } from '@/components/sections/CTABand'
+import { t } from '@/i18n'
 
 const hiringSteps = [
   { title: 'Candidature', description: 'Envoyez votre CV et quelques mots sur vos projets.', icon: FileText },
@@ -42,17 +43,17 @@ function JobItem({ job }: { job: Job }) {
           className="flex w-full flex-col gap-3 p-5 text-left sm:flex-row sm:items-center sm:justify-between sm:p-6"
         >
           <span>
-            <span className="block font-display text-lg font-semibold text-navy">{job.title}</span>
-            <span className="mt-1 block text-sm text-slate">{job.summary}</span>
+            <span className="block font-display text-lg font-semibold text-navy">{t(job.title)}</span>
+            <span className="mt-1 block text-sm text-slate">{t(job.summary)}</span>
           </span>
           <span className="flex shrink-0 flex-wrap items-center gap-2 text-xs">
             <span className="inline-flex items-center gap-1 rounded-full bg-brand-50 px-2.5 py-1 font-semibold text-brand">
               <Briefcase aria-hidden className="size-3.5" />
-              {job.type}
+              {t(job.type)}
             </span>
             <span className="inline-flex items-center gap-1 rounded-full bg-light px-2.5 py-1 text-navy">
               <MapPin aria-hidden className="size-3.5" />
-              {job.location} · {job.mode}
+              {t(job.location)} · {t(job.mode)}
             </span>
             <ChevronDown aria-hidden className={cn('ml-1 size-5 text-slate transition-transform duration-300', open && 'rotate-180')} />
           </span>
@@ -75,12 +76,12 @@ function JobItem({ job }: { job: Job }) {
                 { title: 'Un plus', items: job.niceToHave },
               ].map((block) => (
                 <div key={block.title}>
-                  <h4 className="eyebrow text-brand">{block.title}</h4>
+                  <h4 className="eyebrow text-brand">{t(block.title)}</h4>
                   <ul className="mt-3 space-y-2.5">
                     {block.items.map((item) => (
                       <li key={item} className="flex gap-2.5 text-sm leading-relaxed text-navy/85">
                         <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-brand" strokeWidth={2.5} />
-                        {item}
+                        {t(item)}
                       </li>
                     ))}
                   </ul>
@@ -89,12 +90,9 @@ function JobItem({ job }: { job: Job }) {
             </div>
             <div className="flex flex-col gap-3 border-t border-line p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
               <p className="inline-flex items-center gap-2 text-sm text-slate">
-                <Clock aria-hidden className="size-4" />
-                Niveau : {job.level}
+                <Clock aria-hidden className="size-4" />{t('Niveau :')}{' '}{t(job.level)}
               </p>
-              <ButtonLink to={applyHref(job)} external icon={Mail} arrow={false}>
-                Postuler
-              </ButtonLink>
+              <ButtonLink to={applyHref(job)} external icon={Mail} arrow={false}>{t('Postuler')}</ButtonLink>
             </div>
           </motion.div>
         )}
@@ -111,21 +109,16 @@ export default function CareersPage() {
     <>
       <PageHero
         breadcrumbs={[{ label: 'Accueil', href: '/' }, { label: 'Carrières' }]}
-        eyebrow="Carrières"
+        eyebrow={t('Carrières')}
         title={
-          <>
-            Construisons ensemble l’avenir <AccentText>numérique.</AccentText>
+          <>{t('Construisons ensemble l’avenir')}{' '}<AccentText>{t('numérique.')}</AccentText>
           </>
         }
-        description="Nous recherchons des esprits curieux et exigeants pour concevoir des produits utilisés par de vraies entreprises au Cameroun et au-delà."
+        description={t('Nous recherchons des esprits curieux et exigeants pour concevoir des produits utilisés par de vraies entreprises au Cameroun et au-delà.')}
         actions={
           <>
-            <ButtonLink to="#postes" size="lg">
-              Voir les postes ouverts
-            </ButtonLink>
-            <ButtonLink to={applyHref()} external variant="secondary" size="lg" icon={Mail} arrow={false}>
-              Candidature spontanée
-            </ButtonLink>
+            <ButtonLink to="#postes" size="lg">{t('Voir les postes ouverts')}</ButtonLink>
+            <ButtonLink to={applyHref()} external variant="secondary" size="lg" icon={Mail} arrow={false}>{t('Candidature spontanée')}</ButtonLink>
           </>
         }
         image="/images/hero-careers.webp"
@@ -133,16 +126,16 @@ export default function CareersPage() {
 
       <Section tone="white">
         <SectionTitle
-          eyebrow="Pourquoi nous rejoindre"
-          title="Un cadre pour apprendre, livrer et grandir"
-          description="Chez Nashsoft Systems, chaque membre de l’équipe a un impact visible sur les produits que nous livrons."
+          eyebrow={t('Pourquoi nous rejoindre')}
+          title={t('Un cadre pour apprendre, livrer et grandir')}
+          description={t('Chez Nashsoft Systems, chaque membre de l’équipe a un impact visible sur les produits que nous livrons.')}
           className="max-w-2xl"
         />
         <FeatureGrid items={perks} columns={3} className="mt-10" />
       </Section>
 
       <Section tone="light" id="postes" className="scroll-mt-20">
-        <SectionTitle eyebrow="Postes ouverts" title="Trouvez votre place dans l’équipe" description="Cliquez sur un poste pour voir le détail des missions et du profil recherché." className="max-w-2xl" />
+        <SectionTitle eyebrow={t('Postes ouverts')} title={t('Trouvez votre place dans l’équipe')} description={t('Cliquez sur un poste pour voir le détail des missions et du profil recherché.')} className="max-w-2xl" />
         <RevealGroup className="mt-10 space-y-4">
           {jobs.map((job) => (
             <RevealItem key={job.slug}>
@@ -153,14 +146,14 @@ export default function CareersPage() {
       </Section>
 
       <Section tone="white">
-        <SectionTitle eyebrow="Recrutement" title="Un processus simple et transparent" description="Nous répondons à chaque candidature, en général sous une semaine." className="max-w-2xl" />
+        <SectionTitle eyebrow={t('Recrutement')} title={t('Un processus simple et transparent')} description={t('Nous répondons à chaque candidature, en général sous une semaine.')} className="max-w-2xl" />
         <ProcessSteps steps={hiringSteps} variant="inline" cols="lg:grid-cols-4" className="mt-12" />
       </Section>
 
       <CTABand
-        eyebrow="Pas de poste pour vous ?"
-        title="Envoyez-nous une candidature spontanée."
-        description="Nous gardons chaque profil en tête pour nos prochains projets."
+        eyebrow={t('Pas de poste pour vous ?')}
+        title={t('Envoyez-nous une candidature spontanée.')}
+        description={t('Nous gardons chaque profil en tête pour nos prochains projets.')}
         cta={{ label: 'Écrire à l’équipe', href: applyHref() }}
       />
     </>

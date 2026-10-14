@@ -1,6 +1,7 @@
 import type { SVGProps } from 'react'
 import { site } from '@/data/site'
 import { cn } from '@/lib/cn'
+import { t } from '@/i18n'
 
 /** Brand glyphs (lucide-react v1 no longer ships brand icons). Order = display order. */
 const icons = {
@@ -71,11 +72,11 @@ export function SocialIcons({ tone = 'light', className }: { tone?: 'light' | 'd
         return (
           <li key={key}>
             {href ? (
-              <a href={href} target="_blank" rel="noreferrer" aria-label={`Nashsoft Systems sur ${labels[key]}`} className={cn(chip, 'hover:border-brand hover:bg-brand hover:text-white')}>
+              <a href={href} target="_blank" rel="noreferrer" aria-label={t('Nashsoft Systems sur {0}', [labels[key]])} className={cn(chip, 'hover:border-brand hover:bg-brand hover:text-white')}>
                 <Icon className="size-4" aria-hidden />
               </a>
             ) : (
-              <span role="img" aria-label={`${labels[key]} — bientôt disponible`} title={`${labels[key]} — bientôt disponible`} className={chip}>
+              <span role="img" aria-label={t('{0} — bientôt disponible', [labels[key]])} title={t('{0} — bientôt disponible', [labels[key]])} className={chip}>
                 <Icon className="size-4" aria-hidden />
               </span>
             )}

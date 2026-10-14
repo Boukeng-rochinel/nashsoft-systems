@@ -9,11 +9,12 @@ export function App() {
     // "user": Framer Motion disables transform/layout animations when the OS asks for reduced motion.
     <MotionConfig reducedMotion="user">
       <ThemeProvider>
-        <LanguageProvider>
-          <BrowserRouter>
+        <BrowserRouter>
+          {/* Inside the router: the language is read from the URL. */}
+          <LanguageProvider>
             <AppRoutes />
-          </BrowserRouter>
-        </LanguageProvider>
+          </LanguageProvider>
+        </BrowserRouter>
       </ThemeProvider>
     </MotionConfig>
   )

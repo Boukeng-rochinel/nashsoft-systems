@@ -1,5 +1,6 @@
 import type { Technology } from '@/types'
 import { cn } from '@/lib/cn'
+import { t } from '@/i18n'
 
 /** Monogram badge in the technology's brand color. */
 export function TechMark({ tech, size = 'md' }: { tech: Technology; size?: 'sm' | 'md' | 'lg' }) {
@@ -14,7 +15,7 @@ export function TechMark({ tech, size = 'md' }: { tech: Technology; size?: 'sm' 
       )}
       style={{ background: tech.color, color: tech.foreground ?? '#fff', boxShadow: `0 6px 16px -8px ${tech.color}` }}
     >
-      {tech.mono}
+      {t(tech.mono)}
     </span>
   )
 }
@@ -32,8 +33,8 @@ export function TechTile({ tech, tone = 'light', caption }: { tech: Technology; 
     >
       <TechMark tech={tech} />
       <div>
-        <p className={cn('font-display text-sm font-semibold', tone === 'light' ? 'text-navy' : 'text-white')}>{tech.name}</p>
-        <p className={cn('mt-0.5 text-xs', tone === 'light' ? 'text-slate' : 'text-slate-400')}>{caption ?? tech.category}</p>
+        <p className={cn('font-display text-sm font-semibold', tone === 'light' ? 'text-navy' : 'text-white')}>{t(tech.name)}</p>
+        <p className={cn('mt-0.5 text-xs', tone === 'light' ? 'text-slate' : 'text-slate-400')}>{t(caption ?? tech.category)}</p>
       </div>
     </div>
   )
@@ -48,7 +49,7 @@ export function TechChip({ name, tone = 'light' }: { name: string; tone?: 'light
         tone === 'light' ? 'bg-brand-50 text-brand' : 'bg-white/8 text-brand-300 ring-1 ring-white/10',
       )}
     >
-      {name}
+      {t(name)}
     </span>
   )
 }

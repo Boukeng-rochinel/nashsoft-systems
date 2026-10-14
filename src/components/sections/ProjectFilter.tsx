@@ -5,6 +5,7 @@ import type { Project, ProjectCategory } from '@/types'
 import { projectCategories } from '@/data/projects'
 import { cn } from '@/lib/cn'
 import { ProjectCard } from './ProjectCard'
+import { t } from '@/i18n'
 
 type Filter = (typeof projectCategories)[number]
 
@@ -33,9 +34,7 @@ export function ProjectFilter({ projects }: { projects: Project[] }) {
   return (
     <div>
       <div role="group" aria-labelledby={`${groupId}-label`} className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 scrollbar-none sm:mx-0 sm:flex-wrap sm:px-0">
-        <span id={`${groupId}-label`} className="sr-only">
-          Filtrer les projets par catégorie
-        </span>
+        <span id={`${groupId}-label`} className="sr-only">{t('Filtrer les projets par catégorie')}</span>
         {projectCategories.map((f) => {
           const selected = f === active
           return (
@@ -56,7 +55,7 @@ export function ProjectFilter({ projects }: { projects: Project[] }) {
                   transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                 />
               )}
-              <span className="relative">{f}</span>
+              <span className="relative">{t(f)}</span>
               <span className={cn('relative rounded-full px-1.5 text-[0.7rem]', selected ? 'bg-white/20' : 'bg-light text-slate')}>{count(f)}</span>
             </button>
           )
@@ -64,7 +63,7 @@ export function ProjectFilter({ projects }: { projects: Project[] }) {
       </div>
 
       <p className="sr-only" aria-live="polite">
-        {visible.length} projet{visible.length > 1 ? 's' : ''} affiché{visible.length > 1 ? 's' : ''}
+        {visible.length}{' '}{t('projet')}{t(visible.length > 1 ? 's' : '')}{' '}{t('affiché')}{t(visible.length > 1 ? 's' : '')}
       </p>
 
       <motion.ul layout className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

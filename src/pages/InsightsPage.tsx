@@ -10,6 +10,7 @@ import { AccentText } from '@/components/ui/AccentText'
 import { PageHero } from '@/components/sections/PageHero'
 import { ArticleCard } from '@/components/sections/ArticleCard'
 import { CTABand } from '@/components/sections/CTABand'
+import { t } from '@/i18n'
 
 type Category = (typeof articleCategories)[number]
 
@@ -41,25 +42,24 @@ export default function InsightsPage() {
     <>
       <PageHero
         breadcrumbs={[{ label: 'Accueil', href: '/' }, { label: 'Insights' }]}
-        eyebrow="Insights"
+        eyebrow={t('Insights')}
         title={
-          <>
-            Idées, analyses et <AccentText>retours d’expérience.</AccentText>
+          <>{t('Idées, analyses et')}{' '}<AccentText>{t('retours d’expérience.')}</AccentText>
           </>
         }
-        description="Nos ingénieurs partagent ce qu’ils apprennent sur le terrain : transformation digitale des PME, développement, IA, cloud et outils de gestion adaptés au marché camerounais."
+        description={t('Nos ingénieurs partagent ce qu’ils apprennent sur le terrain : transformation digitale des PME, développement, IA, cloud et outils de gestion adaptés au marché camerounais.')}
         image="/images/hero-insights.webp"
       />
 
       {category === 'Tous' && featured && (
         <Section tone="white" spacing="sm">
-          <p className="eyebrow mb-5 text-brand">À la une</p>
+          <p className="eyebrow mb-5 text-brand">{t('À la une')}</p>
           <ArticleCard article={featured} featured />
         </Section>
       )}
 
       <Section tone="light" id="articles" className="scroll-mt-20">
-        <div role="tablist" aria-label="Filtrer par catégorie" className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:px-0">
+        <div role="tablist" aria-label={t('Filtrer par catégorie')} className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:px-0">
           {articleCategories.map((c) => {
             const active = c === category
             return (
@@ -74,7 +74,7 @@ export default function InsightsPage() {
                   active ? 'border-brand bg-brand text-white' : 'border-line bg-white text-navy hover:border-brand/40 hover:text-brand',
                 )}
               >
-                {c}
+                {t(c)}
               </button>
             )
           })}
@@ -96,13 +96,13 @@ export default function InsightsPage() {
             ))}
           </AnimatePresence>
         </motion.ul>
-        {list.length === 0 && <p className="mt-8 text-center text-slate">Aucun article dans cette catégorie pour le moment.</p>}
+        {list.length === 0 && <p className="mt-8 text-center text-slate">{t('Aucun article dans cette catégorie pour le moment.')}</p>}
       </Section>
 
       <CTABand
-        eyebrow="Un sujet en tête ?"
-        title="Parlons de votre projet digital."
-        description="Nos équipes vous conseillent sur la meilleure approche technique pour votre activité."
+        eyebrow={t('Un sujet en tête ?')}
+        title={t('Parlons de votre projet digital.')}
+        description={t('Nos équipes vous conseillent sur la meilleure approche technique pour votre activité.')}
       />
     </>
   )

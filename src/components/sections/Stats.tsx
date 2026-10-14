@@ -5,14 +5,15 @@ import { stats as defaultStats } from '@/data/site'
 import { cn } from '@/lib/cn'
 import { useCountUp } from '@/hooks/useCountUp'
 import { RevealGroup, RevealItem } from '@/components/ui/Reveal'
+import { t } from '@/i18n'
 
 function StatValue({ stat, start }: { stat: Stat; start: boolean }) {
   const value = useCountUp(stat.value, start)
-  if (stat.display) return <>{stat.display}</>
+  if (stat.display) return <>{t(stat.display)}</>
   return (
     <>
       {value}
-      {stat.suffix}
+      {t(stat.suffix)}
     </>
   )
 }
@@ -57,8 +58,8 @@ export function Stats({ items = defaultStats, variant = 'panel', className }: { 
               <p className={cn('font-display text-3xl font-semibold tracking-tight tabular-nums sm:text-[2rem]', dark ? 'text-white' : 'text-navy')}>
                 <StatValue stat={stat} start={inView} />
               </p>
-              <p className={cn('mt-0.5 font-display text-sm font-semibold', dark ? 'text-brand-300' : 'text-navy')}>{stat.label}</p>
-              <p className={cn('mt-1 text-xs leading-relaxed', dark ? 'text-slate-400' : 'text-slate')}>{stat.caption}</p>
+              <p className={cn('mt-0.5 font-display text-sm font-semibold', dark ? 'text-brand-300' : 'text-navy')}>{t(stat.label)}</p>
+              <p className={cn('mt-1 text-xs leading-relaxed', dark ? 'text-slate-400' : 'text-slate')}>{t(stat.caption)}</p>
             </div>
           </RevealItem>
         ))}
