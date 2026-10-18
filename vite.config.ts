@@ -106,6 +106,7 @@ function seo(): Plugin {
           [/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${title}" />`],
           [/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${description}" />`],
           [/<meta name="twitter:image" content="[^"]*" \/>/, `<meta name="twitter:image" content="${page.image}" />`],
+          [/<div id="root"><\/div>/, `<div id="root">${page.shell}</div>`],
         ]
         let html = template
         for (const [pattern, replacement] of tags) {

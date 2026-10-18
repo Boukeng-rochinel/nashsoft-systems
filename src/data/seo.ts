@@ -33,7 +33,11 @@ export const alternateUrls = (path: string) => [
 ]
 
 export const pageSeo = {
-  home: { title: site.name, description: site.description },
+  home: {
+    title: site.name,
+    // Kept under ~155 characters so search results show it in full.
+    description: 'Entreprise technologique à Douala : développement logiciel, web et mobile, IA, cloud et data sur mesure pour les entreprises et organisations.',
+  },
   services: {
     title: 'Services',
     description:
