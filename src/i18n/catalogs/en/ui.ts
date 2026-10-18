@@ -7,6 +7,9 @@ export default {
   'Ouvrir l’assistant Nashsoft': 'Open the Nashsoft assistant',
   'Assistant Nashsoft': 'Nashsoft assistant',
   'Assistant Nashsoft · en ligne': 'Nashsoft assistant · online',
+  'Nash · Assistant Nashsoft': 'Nash · Nashsoft assistant',
+  'Aujourd’hui, {0}': 'Today, {0}',
+  'Écrivez votre message…': 'Type your message…',
   'Bonjour 👋 Je suis **Nash**, l’assistant de Nashsoft Systems. Posez-moi vos questions sur nos services, nos réalisations ou la façon de démarrer votre projet.':
     'Hello 👋 I’m **Nash**, the Nashsoft Systems assistant. Ask me about our services, our work or how to start your project.',
   'Quels services proposez-vous ?': 'What services do you offer?',
