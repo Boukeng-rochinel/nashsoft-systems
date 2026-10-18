@@ -12,12 +12,15 @@ interface ServiceCardProps {
    * `stacked`: icon on top + "En savoir plus" (homepage).
    * `row`: icon left, arrow right (services catalogue).
    * `dark`: glowing card for dark sections.
+   * `cell`: flat numbered cell for a hairline grid (homepage).
    */
-  variant?: 'stacked' | 'row' | 'dark'
+  variant?: 'stacked' | 'row' | 'dark' | 'cell'
   showTech?: boolean
+  /** Position in the list, shown as "01", "02"… by `cell`. */
+  index?: number
 }
 
-export function ServiceCard({ service, variant = 'stacked', showTech = false }: ServiceCardProps) {
+export function ServiceCard({ service, variant = 'stacked', showTech = false, index }: ServiceCardProps) {
   const Icon = service.icon
   const href = serviceHref(service.slug)
 
@@ -47,6 +50,25 @@ export function ServiceCard({ service, variant = 'stacked', showTech = false }: 
           )}
         </div>
         <ArrowRight aria-hidden className="absolute top-6 right-5 size-4 text-slate/60 transition-all duration-300 group-hover:translate-x-1 group-hover:text-brand" />
+      </Link>
+    )
+  }
+
+  if (variant === 'cell') {
+    return (
+      <Link to={href} className="group relative flex h-full flex-col bg-white p-6 transition-colors duration-200 hover:bg-[#f7f9fc] sm:p-7">
+        <div className="flex items-center justify-between">
+          <Icon aria-hidden className="size-6 text-brand" strokeWidth={1.6} />
+          {index !== undefined && <span className="font-display text-xs font-semibold text-slate/60 tabular-nums">{String(index + 1).padStart(2, '0')}</span>}
+        </div>
+        <h3 className="mt-6 font-display text-base font-semibold text-navy">{tr(service.title)}</h3>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-slate">{tr(service.description)}</p>
+        <span className="mt-6 inline-flex items-center gap-1.5 text-[0.8rem] font-semibold text-navy transition-colors group-hover:text-brand">
+          {tr('En savoir plus')}
+          <ArrowRight aria-hidden className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+        </span>
+        {/* Sharp accent line on hover */}
+        <span aria-hidden className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-brand transition-transform duration-300 group-hover:scale-x-100" />
       </Link>
     )
   }

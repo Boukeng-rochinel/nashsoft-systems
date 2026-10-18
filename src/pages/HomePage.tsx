@@ -53,10 +53,11 @@ export default function HomePage() {
           >
             <ButtonLink to="/services">{t('Découvrir tous nos services')}</ButtonLink>
           </SectionTitle>
-          <RevealGroup className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {featuredServices.map((service) => (
-              <RevealItem key={service.slug}>
-                <ServiceCard service={service} />
+          {/* Hairline grid: 1px gaps over a line-coloured background draw the dividers. */}
+          <RevealGroup className="grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 xl:grid-cols-3">
+            {featuredServices.map((service, i) => (
+              <RevealItem key={service.slug} className="bg-white">
+                <ServiceCard service={service} variant="cell" index={i} />
               </RevealItem>
             ))}
           </RevealGroup>
@@ -65,7 +66,7 @@ export default function HomePage() {
 
       {/* Process */}
       <Section tone="light" id="processus" className="scroll-mt-20">
-        <div className="grid gap-10 lg:grid-cols-[1fr_2.1fr] lg:items-center lg:gap-12">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
           <SectionTitle
             eyebrow={t('Notre processus')}
             title={
@@ -73,11 +74,11 @@ export default function HomePage() {
               </>
             }
             description={t('Nous suivons une méthodologie éprouvée pour transformer vos besoins en solutions logicielles fiables et performantes.')}
-          >
-            <ButtonLink to="/services#processus">{t('Découvrir notre processus')}</ButtonLink>
-          </SectionTitle>
-          <ProcessSteps variant="inline" />
+            className="max-w-2xl"
+          />
+          <ButtonLink to="/services#processus" className="shrink-0 self-start lg:self-end">{t('Découvrir notre processus')}</ButtonLink>
         </div>
+        <ProcessSteps variant="inline" className="mt-12 lg:mt-16" />
       </Section>
 
       {/* Industry solutions */}

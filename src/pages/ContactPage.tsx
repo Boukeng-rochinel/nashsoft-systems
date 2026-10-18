@@ -45,51 +45,56 @@ export default function ContactPage() {
       }
       description={t('Une question, un projet ou simplement envie d’échanger ? Notre équipe est à votre écoute. Remplissez le formulaire ou utilisez nos coordonnées ci-dessous.')}
     />
-    <section data-theme={theme} className={cn('relative isolate overflow-hidden', dark ? 'bg-navy-950' : 'bg-[#f7f9fc]')}>
-      <Container className="grid items-start gap-10 py-14 md:py-20 lg:grid-cols-[1.2fr_1fr] lg:gap-10 xl:gap-14">
-        {/* Left: coordinates, map */}
-        <div>
-          <motion.div variants={stagger(0.08, 0.05)} initial="hidden" animate="show">
-            <motion.ul variants={fadeUp} className="grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-[1fr_1fr_1.3fr_1fr]">
+    <section data-theme={theme} className={cn('relative isolate overflow-hidden', dark ? 'bg-navy-950' : 'bg-white')}>
+      <Container className="py-14 md:py-20">
+        {/* One card: coordinates + map on the left, message form on the right */}
+        <Reveal className="grid overflow-hidden rounded-2xl border border-line bg-white shadow-card lg:grid-cols-[5fr_7fr] on-dark:border-white/10 on-dark:bg-navy-900/70 on-dark:shadow-none">
+          <motion.div
+            variants={stagger(0.06, 0.05)}
+            initial="hidden"
+            animate="show"
+            className="flex min-w-0 flex-col border-b border-line bg-[#f7f9fc] p-6 sm:p-8 lg:border-r lg:border-b-0 on-dark:border-white/10 on-dark:bg-white/[0.02]"
+          >
+            <motion.div variants={fadeUp}>
+              <h2 className="font-display text-xl font-bold text-navy sm:text-2xl on-dark:text-white">{t('Parlez à notre équipe')}</h2>
+              <p className="mt-2 text-[0.9rem] leading-relaxed text-slate on-dark:text-slate-300">
+                {t('Choisissez le canal qui vous convient : nous répondons à chaque demande sous 24 heures ouvrées.')}
+              </p>
+            </motion.div>
+
+            <motion.dl variants={fadeUp} className="mt-8 space-y-5">
               {info.map((item) => (
-                <li key={item.title} className="min-w-0">
-                  <span aria-hidden className="inline-flex size-11 items-center justify-center rounded-xl bg-brand-50 text-brand on-dark:bg-white/[0.06] on-dark:text-brand-300">
-                    <item.icon className="size-5" strokeWidth={1.9} />
+                <div key={item.title} className="flex gap-4">
+                  <span aria-hidden className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-white text-brand ring-1 ring-line on-dark:bg-white/[0.06] on-dark:text-brand-300 on-dark:ring-white/10">
+                    <item.icon className="size-[18px]" strokeWidth={1.9} />
                   </span>
-                  <h2 className="mt-4 font-display text-[1rem] font-semibold text-navy on-dark:text-white">{t(item.title)}</h2>
-                  {item.href ? (
-                    <a
-                      href={item.href}
-                      className={cn(
-                        'mt-1.5 block text-[0.85rem] transition-colors hover:text-brand max-sm:break-all on-dark:hover:text-brand-300',
-                        item.title === 'Email' ? 'font-semibold text-navy sm:whitespace-nowrap on-dark:text-white' : 'text-slate on-dark:text-slate-300',
+                  <div className="min-w-0">
+                    <dt className="text-[0.75rem] font-medium text-slate on-dark:text-slate-400">{t(item.title)}</dt>
+                    <dd className="mt-0.5 text-[0.92rem] font-semibold break-words text-navy on-dark:text-white">
+                      {item.href ? (
+                        <a href={item.href} className="transition-colors hover:text-brand on-dark:hover:text-brand-300">
+                          {t(item.lines[0])}
+                        </a>
+                      ) : (
+                        t(item.lines[0])
                       )}
-                    >
-                      {t(item.lines[0])}
-                    </a>
-                  ) : (
-                    <p className="mt-1.5 text-[0.85rem] text-slate on-dark:text-slate-300">{t(item.lines[0])}</p>
-                  )}
-                  <p className="mt-0.5 text-[0.8rem] text-slate/80 on-dark:text-slate-400">{t(item.lines[1])}</p>
-                </li>
+                    </dd>
+                    <dd className="text-[0.78rem] text-slate on-dark:text-slate-400">{t(item.lines[1])}</dd>
+                  </div>
+                </div>
               ))}
-            </motion.ul>
+            </motion.dl>
+
+            <motion.div variants={fadeUp} className="mt-8 lg:mt-auto lg:pt-8">
+              <MapCard />
+            </motion.div>
           </motion.div>
 
-          <Reveal delay={0.1}>
-            <MapCard className="mt-10" />
-          </Reveal>
-        </div>
-
-        {/* Right: message form */}
-        <Reveal
-          delay={0.15}
-          className="rounded-2xl border border-line bg-white p-6 shadow-[0_30px_70px_-40px_rgb(6_20_38/0.3)] sm:p-9 lg:sticky lg:top-28 on-dark:border-white/10 on-dark:bg-navy-900/70 on-dark:shadow-none"
-        >
-          <p className="inline-flex rounded-md bg-brand-50 px-2 py-1 text-[0.65rem] font-bold tracking-[0.14em] text-navy/80 uppercase on-dark:bg-white/[0.06] on-dark:text-brand-300">{t('Écrivez-nous')}</p>
-          <h2 className="mt-3 font-display text-2xl font-bold text-navy on-dark:text-white">{t('Envoyez-nous un message')}</h2>
-          <p className="mt-2 mb-8 text-[0.88rem] text-slate on-dark:text-slate-300">{t('Nous serons ravis de vous répondre dans les plus brefs délais.')}</p>
-          <ContactMessageForm />
+          <div className="p-6 sm:p-8 lg:p-10">
+            <h2 className="font-display text-xl font-bold text-navy sm:text-2xl on-dark:text-white">{t('Envoyez-nous un message')}</h2>
+            <p className="mt-2 mb-7 text-[0.9rem] text-slate on-dark:text-slate-300">{t('Nous serons ravis de vous répondre dans les plus brefs délais.')}</p>
+            <ContactMessageForm />
+          </div>
         </Reveal>
       </Container>
     </section>

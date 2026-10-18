@@ -64,12 +64,12 @@ export function MapCard({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        'grid overflow-hidden rounded-2xl border border-line bg-white p-2 shadow-card sm:grid-cols-[1.15fr_1fr]',
-        'on-dark:border-white/10 on-dark:bg-white/[0.03] on-dark:shadow-none',
+        'overflow-hidden rounded-2xl border border-line bg-white',
+        'on-dark:border-white/10 on-dark:bg-white/[0.03]',
         className,
       )}
     >
-      <div className="relative aspect-[4/3] overflow-hidden rounded-xl sm:aspect-auto sm:min-h-64">
+      <div className="relative aspect-[16/9] overflow-hidden">
         {showMap ? (
           <iframe
             title={t('Carte : {0}, {1}', [site.name, site.contact.city])}
@@ -83,20 +83,19 @@ export function MapCard({ className }: { className?: string }) {
         )}
       </div>
 
-      <div className="flex flex-col justify-center px-5 py-6 sm:px-7">
-        <span aria-hidden className="inline-flex size-9 items-center justify-center rounded-lg bg-brand-50 text-brand on-dark:bg-white/[0.06] on-dark:text-brand-300">
-          <Building2 className="size-[18px]" strokeWidth={1.8} />
-        </span>
-        <h2 className="mt-4 font-display text-[1.05rem] font-semibold text-navy on-dark:text-white">{t('Notre siège social')}</h2>
-        <p className="mt-1 text-[0.85rem] text-slate on-dark:text-slate-400">{t(site.contact.city)}</p>
-        <p className="mt-4 text-[0.88rem] leading-relaxed text-slate on-dark:text-slate-300">{t('Nous vous accueillons dans nos locaux, sur rendez-vous, pour discuter de vos projets et explorer ensemble les meilleures solutions.')}</p>
+      <div className="flex items-center gap-3 border-t border-line px-5 py-4 on-dark:border-white/10">
+        <Building2 aria-hidden className="size-[18px] shrink-0 text-brand on-dark:text-brand-300" strokeWidth={1.8} />
+        <p className="min-w-0 flex-1 text-[0.88rem] text-slate on-dark:text-slate-300">
+          <span className="font-semibold text-navy on-dark:text-white">{t('Notre siège social')}</span> · {t(site.contact.city)}
+        </p>
         <a
           href={MAPS_URL}
           target="_blank"
           rel="noreferrer"
-          className="group mt-6 inline-flex w-fit items-center gap-2 rounded-lg border border-line-strong px-4 py-2.5 text-[0.82rem] font-semibold text-brand transition-colors hover:border-brand hover:bg-brand-50 on-dark:border-white/15 on-dark:text-brand-300 on-dark:hover:bg-white/5"
+          className="group inline-flex shrink-0 items-center gap-1 text-[0.82rem] font-semibold text-brand transition-colors hover:text-brand-600 on-dark:text-brand-300"
         >
-          <MapPin aria-hidden className="size-4" />{t('Voir sur Google Maps')}<span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+          {t('Itinéraire')}
+          <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
           <span className="sr-only">{t('(nouvel onglet)')}</span>
         </a>
       </div>

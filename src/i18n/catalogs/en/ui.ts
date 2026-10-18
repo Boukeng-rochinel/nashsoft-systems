@@ -144,6 +144,12 @@ export default {
   'Afficher la carte interactive': 'Show the interactive map',
   'Carte : {0}, {1}': 'Map: {0}, {1}',
   'Notre siège social': 'Our head office',
+  'Itinéraire': 'Directions',
+  'Entreprise technologique à Douala : développement logiciel, web et mobile, IA, cloud et data sur mesure pour les entreprises et organisations.':
+    'Technology company in Douala: custom software, web and mobile development, AI, cloud and data for businesses and organizations.',
+  'Parlez à notre équipe': 'Talk to our team',
+  'Choisissez le canal qui vous convient : nous répondons à chaque demande sous 24 heures ouvrées.':
+    'Pick the channel that suits you: we answer every request within one business day.',
   'Nous vous accueillons dans nos locaux, sur rendez-vous, pour discuter de vos projets et explorer ensemble les meilleures solutions.':
     'We welcome you at our offices, by appointment, to discuss your projects and explore the best solutions together.',
   'Voir sur Google Maps': 'View on Google Maps',

@@ -61,6 +61,31 @@ export function ProcessSteps({ steps = processSteps, variant = 'inline', cols: c
     )
   }
 
+  if (!dark) {
+    // Editorial list: a hairline rule per step, short brand tick, number + quiet icon.
+    return (
+      <motion.ol
+        initial="hidden"
+        whileInView="show"
+        viewport={revealViewport}
+        variants={stagger(0.07)}
+        className={cn('grid gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3', cols, className)}
+      >
+        {steps.map((step, i) => (
+          <motion.li key={step.title} variants={fadeUp} className="relative border-t border-line-strong pt-5">
+            <span aria-hidden className="absolute -top-px left-0 h-0.5 w-10 bg-brand" />
+            <div className="flex items-center justify-between">
+              <span className="font-display text-sm font-semibold text-brand tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+              <step.icon aria-hidden className="size-[18px] text-slate/70" strokeWidth={1.6} />
+            </div>
+            <h3 className="mt-4 font-display text-base font-semibold text-navy">{t(step.title)}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate">{t(step.description)}</p>
+          </motion.li>
+        ))}
+      </motion.ol>
+    )
+  }
+
   return (
     <motion.ol
       initial="hidden"
